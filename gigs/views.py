@@ -5,6 +5,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from .forms import TaskForm  # We'll create GigForm next
 from .models import Task, Gig
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # ==================== EXISTING TASK VIEWS (Keep working) ====================
 
@@ -75,12 +76,12 @@ class GigDetailView(DetailView):
     template_name = "gigs/gig_detail.html"
     context_object_name = "gig"
 
-class GigCreateView(CreateView):
+class GigCreateView(LoginRequiredMixin, CreateView):
     model = Gig
     fields = ['title', 'description', 'budget', 'location', 'category', 'deadline']
     template_name = "gigs/gig_form.html"
     success_url = reverse_lazy("gigs:gig_list")
-
+    
     def form_valid(self, form):
         # Automatically set the employer to the current user
         form.instance.employer = self.request.user
