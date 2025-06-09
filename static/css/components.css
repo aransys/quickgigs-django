@@ -1,0 +1,83 @@
+/* Navigation Components */
+.nav-link {
+  @apply text-gray-600 hover:text-brand-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+}
+
+.dropdown-menu {
+  @apply absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200 hidden;
+}
+
+.dropdown-menu.show {
+  @apply block;
+}
+
+.dropdown-item {
+  @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150;
+}
+
+.mobile-menu {
+  @apply md:hidden bg-white border-t border-gray-200 hidden;
+}
+
+.mobile-menu.show {
+  @apply block;
+}
+
+.mobile-nav-link {
+  @apply block px-3 py-2 text-base font-medium text-gray-600 hover:text-brand-500 hover:bg-gray-50;
+}
+
+/* Button Components */
+.btn-primary {
+  @apply bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+}
+
+.btn-secondary {
+  @apply bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+}
+
+.btn-success {
+  @apply bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+}
+
+.btn-warning {
+  @apply bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+}
+
+/* Alert Components */
+.alert {
+  @apply p-4 rounded-lg mb-4 flex items-center justify-between;
+}
+
+.alert-success {
+  @apply bg-green-100 border border-green-400 text-green-700;
+}
+
+.alert-error {
+  @apply bg-red-100 border border-red-400 text-red-700;
+}
+
+.alert-warning {
+  @apply bg-yellow-100 border border-yellow-400 text-yellow-700;
+}
+
+.alert-info {
+  @apply bg-blue-100 border border-blue-400 text-blue-700;
+}
+
+/* Card Components */
+.card {
+  @apply bg-white rounded-xl shadow-lg overflow-hidden;
+}
+
+.card-body {
+  @apply p-6;
+}
+
+.card-header {
+  @apply px-6 py-4 bg-gray-50 border-b border-gray-200;
+}
