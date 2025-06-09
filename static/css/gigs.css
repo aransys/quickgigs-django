@@ -40,17 +40,22 @@
   @apply text-xl text-brand-100 mb-8 max-w-2xl;
 }
 
-/* Stats Cards */
+/* Stats Cards - Better Alignment */
 .stat-card {
-  @apply bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300;
+  @apply bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col justify-center items-center;
 }
 
 .stat-number {
-  @apply text-3xl font-bold text-gray-800 mb-2;
+  @apply text-4xl font-bold text-gray-800 mb-2;
 }
 
 .stat-label {
-  @apply text-gray-600 text-sm;
+  @apply text-gray-600 text-sm font-medium uppercase tracking-wide;
+}
+
+/* Ensure consistent height for stat cards */
+.stats-grid {
+  @apply grid md:grid-cols-3 gap-8 items-stretch;
 }
 
 /* Form Styles */
