@@ -1,0 +1,48 @@
+{% extends 'gigs/base.html' %}
+
+{% block title %}{{ gig.title }} - QuickGigs{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'gigs:gig_list' %}" class="btn btn-outline-secondary mb-3">← Back to Gigs</a>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ gig.title }}</h1>
+                    <p class="lead">{{ gig.description }}</p>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Budget:</strong> ${{ gig.budget }}</p>
+                            <p><strong>Location:</strong> {{ gig.location }}</p>
+                            <p><strong>Category:</strong> {{ gig.get_category_display }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Posted by:</strong> {{ gig.employer.username }}</p>
+                            <p><strong>Posted on:</strong> {{ gig.created_at|date:"F d, Y" }}</p>
+                            {% if gig.deadline %}
+                                <p><strong>Deadline:</strong> {{ gig.deadline|date:"F d, Y" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if user == gig.employer %}
+                        <hr>
+                        <div class="btn-group">
+                            <a href="{% url 'gigs:gig_update' gig.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'gigs:toggle_gig_status' gig.pk %}" class="btn btn-info">
+                                {% if gig.is_active %}Deactivate{% else %}Activate{% endif %}
+                            </a>
+                            <a href="{% url 'gigs:gig_delete' gig.pk %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
