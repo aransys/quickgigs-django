@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .task { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+        .completed { background-color: #f0f8f0; }
+    </style>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <a href="{% url 'gigs:task_create' %}">Add New Task</a>
+    
+    {% for task in tasks %}
+        <div class="task {% if task.completed %}completed{% endif %}">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <p>Created: {{ task.created_at|date:"M d, Y" }}</p>
+            {% if task.due_date %}
+                <p>Due: {{ task.due_date|date:"M d, Y" }}</p>
+            {% endif %}
+            <p>Status: {% if task.completed %}✅ Complete{% else %}⏳ Pending{% endif %}</p>
+            
+            <a href="{% url 'gigs:task_detail' task.pk %}">View</a> |
+            <a href="{% url 'gigs:task_update' task.pk %}">Edit</a> |
+            <a href="{% url 'gigs:toggle_complete' task.pk %}">
+                {% if task.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+            </a> |
+            <a href="{% url 'gigs:task_delete' task.pk %}">Delete</a>
+        </div>
+    {% empty %}
+        <p>No tasks yet. <a href="{% url 'gigs:task_create' %}">Create your first task!</a></p>
+    {% endfor %}
+</body>
+</html>
