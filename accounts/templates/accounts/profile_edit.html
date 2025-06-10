@@ -1,0 +1,128 @@
+{% extends 'gigs/base.html' %} {% block title %}Edit Profile - QuickGigs{% endblock %} {% block content %}
+<div class="bg-gray-50 min-h-screen py-8">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Edit Your Profile</h1>
+      <p class="text-gray-600">Update your information to showcase your skills and experience</p>
+    </div>
+
+    <!-- Profile Edit Form -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <!-- Current Role Display -->
+      <div class="bg-brand-50 rounded-xl p-6 mb-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            {% if user.userprofile.is_employer %}
+            <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-briefcase text-white"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">You're an Employer</h3>
+              <p class="text-gray-600 text-sm">You can post gigs and hire freelancers</p>
+            </div>
+            {% else %}
+            <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-user-tie text-white"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">You're a Freelancer</h3>
+              <p class="text-gray-600 text-sm">You can browse and apply to gigs</p>
+            </div>
+            {% endif %}
+          </div>
+          <a href="{% url 'accounts:choose_role' %}" class="text-brand-500 hover:text-brand-600 text-sm font-medium"> Change Role </a>
+        </div>
+      </div>
+
+      <!-- Show Form Errors -->
+      {% if form.errors %}
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+        <h3 class="text-red-800 font-medium mb-2">Please fix the following errors:</h3>
+        {% for field, errors in form.errors.items %} {% for error in errors %}
+        <p class="text-red-600 text-sm">{{ field }}: {{ error }}</p>
+        {% endfor %} {% endfor %}
+      </div>
+      {% endif %}
+
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Bio Section -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-user mr-2"></i>About You </label>
+          {{ form.bio }}
+          <p class="text-sm text-gray-500 mt-1">Tell others about your background, experience, and what makes you unique.</p>
+        </div>
+
+        <!-- Skills Section -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-tools mr-2"></i>Skills & Expertise </label>
+          {{ form.skills }}
+          <p class="text-sm text-gray-500 mt-1">List your skills separated by commas (e.g., Python, Django, JavaScript, React, Design)</p>
+        </div>
+
+        <!-- Role-specific fields -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Freelancer fields -->
+          {% if user.userprofile.is_freelancer %}
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-dollar-sign mr-2"></i>Hourly Rate (USD) </label>
+            {{ form.hourly_rate }}
+            <p class="text-sm text-gray-500 mt-1">Your preferred hourly rate for freelance work</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-phone mr-2"></i>Phone Number </label>
+            {{ form.phone }}
+            <p class="text-sm text-gray-500 mt-1">Optional contact number</p>
+          </div>
+          {% else %}
+          <!-- Employer fields -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-building mr-2"></i>Company Name </label>
+            {{ form.company_name }}
+            <p class="text-sm text-gray-500 mt-1">Your company or organization name</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"> <i class="fas fa-phone mr-2"></i>Phone Number </label>
+            {{ form.phone }}
+            <p class="text-sm text-gray-500 mt-1">Business contact number</p>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Form Actions -->
+        <div class="border-t border-gray-200 pt-6">
+          <div class="flex flex-col sm:flex-row gap-4 justify-end">
+            <a href="{% url 'accounts:profile' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center"> <i class="fas fa-times mr-2"></i>Cancel </a>
+            <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"><i class="fas fa-save mr-2"></i>Save Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 mt-8">
+      <h3 class="text-lg font-semibold text-gray-800 mb-3"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Profile Tips</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <h4 class="font-medium text-gray-700 mb-2">For a Great Bio:</h4>
+          <ul class="text-gray-600 space-y-1">
+            <li>• Highlight your experience and expertise</li>
+            <li>• Mention your specialties and interests</li>
+            <li>• Keep it professional but personable</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium text-gray-700 mb-2">Skills Best Practices:</h4>
+          <ul class="text-gray-600 space-y-1">
+            <li>• List specific technologies and tools</li>
+            <li>• Include both technical and soft skills</li>
+            <li>• Use industry-standard terms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
