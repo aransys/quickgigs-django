@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "gigs",
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -194,6 +195,6 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Authentication settings
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'gigs:gig_list'
+LOGOUT_REDIRECT_URL = 'gigs:gig_list'
