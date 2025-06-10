@@ -1,0 +1,68 @@
+{% extends 'gigs/base.html' %} {% block title %}Choose Your Role - QuickGigs{% endblock %} {% block content %}
+<div class="bg-gray-50 min-h-screen py-16">
+  <div class="max-w-2xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="bg-brand-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="fas fa-users text-white text-3xl"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to QuickGigs!</h1>
+      <p class="text-gray-600 text-lg">Choose your role to get started</p>
+    </div>
+
+    <!-- Role Selection -->
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Employer Option -->
+        <label class="cursor-pointer">
+          <input type="radio" name="role" value="employer" class="sr-only peer" required />
+          <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-brand-500 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all duration-200 hover:shadow-lg">
+            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-briefcase text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">I'm an Employer</h3>
+            <p class="text-gray-600 mb-4">I want to post jobs and hire freelancers</p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Post unlimited gigs</li>
+              <li>• Manage applications</li>
+              <li>• Find skilled freelancers</li>
+              <li>• Build your company profile</li>
+            </ul>
+          </div>
+        </label>
+
+        <!-- Freelancer Option -->
+        <label class="cursor-pointer">
+          <input type="radio" name="role" value="freelancer" class="sr-only peer" required />
+          <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-brand-500 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all duration-200 hover:shadow-lg">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-user-tie text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">I'm a Freelancer</h3>
+            <p class="text-gray-600 mb-4">I want to find work and build my career</p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Browse job opportunities</li>
+              <li>• Apply to gigs</li>
+              <li>• Showcase your skills</li>
+              <li>• Set your hourly rate</li>
+            </ul>
+          </div>
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center pt-6">
+        <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"><i class="fas fa-arrow-right mr-2"></i>Continue to QuickGigs</button>
+      </div>
+    </form>
+
+    <!-- Help Text -->
+    <div class="bg-blue-50 rounded-xl p-6 mt-8">
+      <h4 class="text-blue-800 font-medium mb-2"><i class="fas fa-info-circle mr-2"></i>Don't worry!</h4>
+      <p class="text-blue-700 text-sm">You can always change your role later in your profile settings. Choose what best describes your primary goal right now.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
