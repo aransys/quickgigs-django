@@ -39,7 +39,15 @@ def choose_role(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'accounts/profile.html')
+    # Process skills for display as individual badges
+    skills_list = []
+    if request.user.userprofile.skills:
+        skills_list = [skill.strip() for skill in request.user.userprofile.skills.split(',') if skill.strip()]
+    
+    context = {
+        'skills_list': skills_list
+    }
+    return render(request, 'accounts/profile.html', context)
 
 class ProfileUpdateView(UpdateView):
     model = UserProfile
