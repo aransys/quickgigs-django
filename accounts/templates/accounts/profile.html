@@ -1,0 +1,149 @@
+{% extends 'gigs/base.html' %} {% block title %}{{ user.username }}'s Profile - QuickGigs{% endblock %} {% block content %}
+<div class="bg-gray-50 min-h-screen py-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Profile Header -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
+      <div class="bg-gradient-to-r from-brand-500 to-brand-600 px-8 py-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mr-6">
+              <i class="fas fa-user text-brand-500 text-3xl"></i>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold text-white mb-2">{{ user.get_full_name|default:user.username }}</h1>
+              <div class="flex items-center text-brand-100">
+                {% if user.userprofile.is_employer %}
+                <i class="fas fa-briefcase mr-2"></i>
+                <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">Employer</span>
+                {% else %}
+                <i class="fas fa-user-tie mr-2"></i>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">Freelancer</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <a href="{% url 'accounts:profile_edit' %}" class="bg-white text-brand-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors duration-200"> <i class="fas fa-edit mr-2"></i>Edit Profile </a>
+        </div>
+      </div>
+
+      <!-- Profile Content -->
+      <div class="p-8">
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Main Info -->
+          <div class="lg:col-span-2">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">About</h2>
+
+            {% if user.userprofile.bio %}
+            <p class="text-gray-700 leading-relaxed mb-6">{{ user.userprofile.bio|linebreaks }}</p>
+            {% else %}
+            <div class="bg-gray-50 rounded-lg p-6 text-center">
+              <i class="fas fa-user-edit text-gray-400 text-3xl mb-3"></i>
+              <p class="text-gray-500 mb-4">Your bio is empty</p>
+              <a href="{% url 'accounts:profile_edit' %}" class="text-brand-500 hover:text-brand-600 font-medium"> Add your bio to tell others about yourself </a>
+            </div>
+            {% endif %}
+
+            <!-- Skills Section -->
+            {% if skills_list %}
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills & Expertise</h3>
+            <div class="flex flex-wrap gap-2 mb-6">
+              {% for skill in skills_list %}
+              <span class="bg-brand-100 text-brand-700 px-3 py-1 rounded-full text-sm font-medium"> {{ skill }} </span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Sidebar Info -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Profile Details</h3>
+
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-gray-500">Member Since</p>
+                <p class="font-medium">{{ user.userprofile.created_at|date:"F Y" }}</p>
+              </div>
+
+              <div>
+                <p class="text-sm text-gray-500">Account Type</p>
+                <p class="font-medium">{{ user.userprofile.get_user_type_display }}</p>
+              </div>
+
+              {% if user.userprofile.is_freelancer and user.userprofile.hourly_rate %}
+              <div>
+                <p class="text-sm text-gray-500">Hourly Rate</p>
+                <p class="font-medium text-green-600">${{ user.userprofile.hourly_rate }}/hour</p>
+              </div>
+              {% endif %} {% if user.userprofile.is_employer and user.userprofile.company_name %}
+              <div>
+                <p class="text-sm text-gray-500">Company</p>
+                <p class="font-medium">{{ user.userprofile.company_name }}</p>
+              </div>
+              {% endif %} {% if user.userprofile.phone %}
+              <div>
+                <p class="text-sm text-gray-500">Phone</p>
+                <p class="font-medium">{{ user.userprofile.phone }}</p>
+              </div>
+              {% endif %}
+
+              <div>
+                <p class="text-sm text-gray-500">Email</p>
+                <p class="font-medium">{{ user.email|default:"Not provided" }}</p>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mt-8 space-y-3">
+              {% if user.userprofile.is_employer %}
+              <a href="{% url 'gigs:gig_create' %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-4 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center"> <i class="fas fa-plus mr-2"></i>Post a New Gig </a>
+              {% else %}
+              <a href="{% url 'gigs:gig_list' %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-4 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center"> <i class="fas fa-search mr-2"></i>Browse Gigs </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Section -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Recent Activity</h2>
+
+      {% if user.userprofile.is_employer %}
+      <!-- Show posted gigs -->
+      {% if user.posted_gigs.all %}
+      <div class="space-y-4">
+        {% for gig in user.posted_gigs.all|slice:":3" %}
+        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-semibold text-gray-800">{{ gig.title }}</h3>
+              <p class="text-gray-600 text-sm">{{ gig.description|truncatewords:15 }}</p>
+              <p class="text-sm text-gray-500 mt-2">Posted {{ gig.created_at|timesince }} ago</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-green-600">${{ gig.budget }}</p>
+              <a href="{% url 'gigs:gig_detail' gig.pk %}" class="text-brand-500 hover:text-brand-600 text-sm"> View Details → </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="text-center py-8">
+        <i class="fas fa-briefcase text-gray-300 text-4xl mb-4"></i>
+        <p class="text-gray-500 mb-4">You haven't posted any gigs yet</p>
+        <a href="{% url 'gigs:gig_create' %}" class="text-brand-500 hover:text-brand-600 font-medium"> Post your first gig → </a>
+      </div>
+      {% endif %} {% else %}
+      <!-- Freelancer activity placeholder -->
+      <div class="text-center py-8">
+        <i class="fas fa-clipboard-list text-gray-300 text-4xl mb-4"></i>
+        <p class="text-gray-500 mb-4">Your application history will appear here</p>
+        <a href="{% url 'gigs:gig_list' %}" class="text-brand-500 hover:text-brand-600 font-medium"> Browse available gigs → </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
