@@ -20,6 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('', include('gigs.urls')),
+    path('', include('core.urls')),                    # Homepage and site-wide pages
+    path('accounts/', include('accounts.urls')),       # User management
+    path('gigs/', include('gigs.urls')),              # Job board functionality
+    path('payments/', include('payments.urls')),       # Payment processing
 ]
