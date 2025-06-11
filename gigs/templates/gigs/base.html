@@ -45,30 +45,36 @@
         <div class="flex justify-between h-20">
           <!-- Logo Section -->
           <div class="flex items-center">
-            <a href="{% url 'gigs:gig_list' %}" class="flex items-center space-x-3">
-              <div class="bg-brand-500 p-2 rounded-lg">
-                <i class="fas fa-briefcase text-white text-xl"></i>
-              </div>
-              <span class="text-3xl font-bold text-brand-500">QuickGigs</span>
-            </a>
+            <a href="{% url 'core:home' %}" class="flex items-center space-x-3">
+  <div class="bg-brand-500 p-2 rounded-lg">
+    <i class="fas fa-briefcase text-white text-xl"></i>
+  </div>
+  <span class="text-3xl font-bold text-brand-500">QuickGigs</span>
+          </a>
           </div>
 
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center">
-            <div class="flex space-x-8 mr-8">
-              <a href="{% url 'gigs:gig_list' %}" class="nav-link-improved">
-                <i class="fas fa-home mr-2"></i>
-                <span>Browse Gigs</span>
-              </a>
-              <a href="{% url 'gigs:gig_create' %}" class="nav-link-improved">
-                <i class="fas fa-plus mr-2"></i>
-                <span>Post a Gig</span>
-              </a>
-              <a href="#" class="nav-link-improved">
-                <i class="fas fa-search mr-2"></i>
-                <span>Search</span>
-              </a>
-            </div>
+<div class="hidden md:flex items-center">
+  <div class="flex space-x-8 mr-8">
+    <a href="{% url 'core:home' %}" class="nav-link-improved">
+      <i class="fas fa-home mr-2"></i>
+      <span>Home</span>
+    </a>
+    <a href="{% url 'gigs:gig_list' %}" class="nav-link-improved">
+      <i class="fas fa-briefcase mr-2"></i>
+      <span>Browse Gigs</span>
+    </a>
+    {% if user.is_authenticated and user.userprofile.is_employer %}
+      <a href="{% url 'gigs:gig_create' %}" class="nav-link-improved">
+        <i class="fas fa-plus mr-2"></i>
+        <span>Post a Gig</span>
+      </a>
+    {% endif %}
+    <a href="{% url 'core:about' %}" class="nav-link-improved">
+      <i class="fas fa-info-circle mr-2"></i>
+      <span>About</span>
+    </a>
+  </div>
 
             <!-- User Section -->
             <div class="border-l border-gray-300 pl-8">
@@ -119,17 +125,23 @@
       <!-- Mobile Navigation -->
 <div id="mobileMenu" class="mobile-menu">
   <div class="px-4 pt-2 pb-4 space-y-2">
+    <a href="{% url 'core:home' %}" class="mobile-nav-link">
+      <i class="fas fa-home mr-3"></i>Home
+    </a>
     <a href="{% url 'gigs:gig_list' %}" class="mobile-nav-link">
-      <i class="fas fa-home mr-3"></i>Browse Gigs
+      <i class="fas fa-briefcase mr-3"></i>Browse Gigs
     </a>
-    <a href="{% url 'gigs:gig_create' %}" class="mobile-nav-link">
-      <i class="fas fa-plus mr-3"></i>Post a Gig
-    </a>
-    <a href="#" class="mobile-nav-link">
-      <i class="fas fa-search mr-3"></i>Search
+    {% if user.is_authenticated and user.userprofile.is_employer %}
+      <a href="{% url 'gigs:gig_create' %}" class="mobile-nav-link">
+        <i class="fas fa-plus mr-3"></i>Post a Gig
+      </a>
+    {% endif %}
+    <a href="{% url 'core:about' %}" class="mobile-nav-link">
+      <i class="fas fa-info-circle mr-3"></i>About
     </a>
   </div>
 </div>
+
     <!-- Messages -->
     {% if messages %}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
