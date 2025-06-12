@@ -1,0 +1,161 @@
+{% extends 'gigs/base.html' %}
+
+{% block title %}Payment History - QuickGigs{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Payment History</h1>
+        <p class="text-gray-600">Track your payments and featured gig purchases</p>
+    </div>
+
+    {% if payments %}
+        <!-- Payment Cards -->
+        <div class="space-y-4">
+            {% for payment in payments %}
+            <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                    <!-- Payment Info -->
+                    <div class="flex-1">
+                        <div class="flex items-center mb-2">
+                            <!-- Status Badge -->
+                            {% if payment.status == 'completed' %}
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium mr-3">
+                                    <i class="fas fa-check mr-1"></i>Completed
+                                </span>
+                            {% elif payment.status == 'pending' %}
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium mr-3">
+                                    <i class="fas fa-clock mr-1"></i>Pending
+                                </span>
+                            {% elif payment.status == 'failed' %}
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium mr-3">
+                                    <i class="fas fa-times mr-1"></i>Failed
+                                </span>
+                            {% else %}
+                                <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium mr-3">
+                                    {{ payment.status|title }}
+                                </span>
+                            {% endif %}
+
+                            <!-- Payment Type -->
+                            {% if payment.payment_type == 'featured_gig' %}
+                                <span class="text-purple-600 font-medium">
+                                    <i class="fas fa-star mr-1"></i>Featured Gig
+                                </span>
+                            {% else %}
+                                <span class="text-gray-600 font-medium">
+                                    {{ payment.get_payment_type_display }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Description -->
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">
+                            {% if payment.gig %}
+                                {{ payment.gig.title }}
+                            {% else %}
+                                {{ payment.description|default:"Payment" }}
+                            {% endif %}
+                        </h3>
+
+                        <!-- Payment Details -->
+                        <div class="text-gray-600 text-sm">
+                            <div class="flex items-center mb-1">
+                                <i class="fas fa-calendar mr-2"></i>
+                                {{ payment.created_at|date:"F j, Y \a\t g:i A" }}
+                            </div>
+                            {% if payment.stripe_payment_id %}
+                            <div class="flex items-center">
+                                <i class="fas fa-credit-card mr-2"></i>
+                                Payment ID: {{ payment.stripe_payment_id|truncatechars:20 }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Amount and Actions -->
+                    <div class="lg:text-right mt-4 lg:mt-0">
+                        <div class="text-2xl font-bold text-gray-800 mb-2">
+                            ${{ payment.amount }}
+                        </div>
+                        
+                        {% if payment.gig %}
+                        <div class="flex flex-col sm:flex-row lg:flex-col gap-2">
+                            <a href="{% url 'gigs:gig_detail' payment.gig.pk %}" 
+                               class="text-brand-600 hover:text-brand-700 font-medium text-sm">
+                                <i class="fas fa-external-link-alt mr-1"></i>View Gig
+                            </a>
+                            {% if payment.status == 'completed' and payment.gig.is_featured %}
+                            <span class="text-green-600 font-medium text-sm">
+                                <i class="fas fa-star mr-1"></i>Currently Featured
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if payment.description %}
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-gray-600 text-sm">{{ payment.description }}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl font-bold text-brand-600 mb-2">
+                    {{ payments|length }}
+                </div>
+                <div class="text-gray-600">Total Payments</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl font-bold text-green-600 mb-2">
+                    {% widthratio payments|length 1 payments.count %}
+                </div>
+                <div class="text-gray-600">Successful</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl font-bold text-purple-600 mb-2">
+                    ${% for payment in payments %}{% if payment.status == 'completed' %}{{ payment.amount|add:0 }}{% endif %}{% endfor %}
+                </div>
+                <div class="text-gray-600">Total Spent</div>
+            </div>
+        </div>
+
+    {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-12">
+            <div class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-credit-card text-gray-400 text-3xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-600 mb-4">No Payments Yet</h2>
+            <p class="text-gray-500 mb-8 max-w-md mx-auto">
+                You haven't made any payments yet. Feature your gigs to get more visibility and applications!
+            </p>
+            
+            {% if user.userprofile.is_employer %}
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'gigs:gig_list' %}" class="btn-primary">
+                    <i class="fas fa-plus mr-2"></i>Post a Gig
+                </a>
+                <a href="{% url 'gigs:gig_list' %}" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
+                    <i class="fas fa-list mr-2"></i>View My Gigs
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- Back Button -->
+    <div class="mt-8 text-center">
+        <a href="{% url 'accounts:profile' %}" class="text-brand-600 hover:text-brand-700 font-medium">
+            <i class="fas fa-arrow-left mr-2"></i>Back to Profile
+        </a>
+    </div>
+</div>
+{% endblock %}
