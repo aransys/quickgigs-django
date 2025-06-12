@@ -58,7 +58,7 @@
 
     <!-- Actions -->
     {% if user == gig.employer %}
-    <div class="bg-blue-50 rounded-lg p-6">
+    <div class="bg-blue-50 rounded-lg p-6 mb-6">
       <h3 class="text-lg font-semibold text-blue-800 mb-4">Manage Your Gig</h3>
       <div class="flex flex-wrap gap-3">
         <a href="{% url 'gigs:gig_update' gig.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg"> <i class="fas fa-edit mr-2"></i>Edit </a>
@@ -66,6 +66,68 @@
         <a href="{% url 'gigs:gig_delete' gig.pk %}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"> <i class="fas fa-trash mr-2"></i>Delete </a>
       </div>
     </div>
+
+    <!-- Feature Gig Section -->
+    {% if not gig.is_featured %}
+    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-6 mb-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center">
+            <i class="fas fa-star text-yellow-500 mr-2"></i>
+            Boost Your Gig's Visibility
+          </h3>
+          <p class="text-gray-700 mb-4">Feature your gig to get more visibility and applications. Featured gigs appear at the top of search results with a special badge.</p>
+          
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+            <div class="flex items-center text-sm text-gray-700">
+              <i class="fas fa-check text-green-500 mr-2"></i>
+              Top placement
+            </div>
+            <div class="flex items-center text-sm text-gray-700">
+              <i class="fas fa-check text-green-500 mr-2"></i>
+              Featured badge
+            </div>
+            <div class="flex items-center text-sm text-gray-700">
+              <i class="fas fa-check text-green-500 mr-2"></i>
+              More visibility
+            </div>
+            <div class="flex items-center text-sm text-gray-700">
+              <i class="fas fa-check text-green-500 mr-2"></i>
+              Better results
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center lg:text-right lg:ml-6 mt-4 lg:mt-0">
+          <div class="text-3xl font-bold text-yellow-600 mb-1">${{ "9.99" }}</div>
+          <div class="text-sm text-gray-600 mb-4">One-time payment</div>
+          
+          <a href="{% url 'payments:feature_gig_checkout' gig.pk %}" 
+             class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 inline-flex items-center shadow-lg hover:shadow-xl">
+            <i class="fas fa-star mr-2"></i>
+            Feature This Gig
+          </a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <!-- Already Featured -->
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+      <div class="flex items-start">
+        <i class="fas fa-star text-yellow-500 mr-3 mt-1"></i>
+        <div>
+          <h4 class="font-bold text-yellow-800 mb-2">This gig is featured! 🎉</h4>
+          <p class="text-yellow-700 mb-3">Your gig is currently featured and appearing at the top of listings with increased visibility.</p>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <span class="text-yellow-700"><i class="fas fa-eye mr-1"></i>Premium placement</span>
+            <span class="text-yellow-700"><i class="fas fa-badge-check mr-1"></i>Featured badge</span>
+            <span class="text-yellow-700"><i class="fas fa-chart-line mr-1"></i>Increased views</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     {% else %}
     <div class="bg-green-50 rounded-lg p-6 text-center">
       <h3 class="text-lg font-semibold text-green-800 mb-2">Interested in this gig?</h3>
