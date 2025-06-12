@@ -200,3 +200,15 @@ if not DEBUG:
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'gigs:gig_list'
 LOGOUT_REDIRECT_URL = 'gigs:gig_list'
+
+# Stripe Configuration
+STRIPE_PUBLISHABLE_KEY = 'pk_test_...'  # get this from Stripe
+STRIPE_SECRET_KEY = 'sk_test_...'       # get this from Stripe
+STRIPE_WEBHOOK_SECRET = 'whsec_...'     # For webhooks 
+
+# Stripe Configuration
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51RZ7VMRs6d4JPNXljcJ3n69DeGMBM0zCsBXq1YH4gkL5FJAumPhuWfL8V9JjaYif7tDZNb2iAKvycmuhhHt7Qx5Q00ToIA4xHp'
+STRIPE_SECRET_KEY = 'sk_test_51RZ7VMRs6d4JPNXlKzYpQmqlRtyRCnhlCvm3OwXEQWmVleI39YrpI7BMb3TLX9xfpPmBQ701HUwMEnUwNTGo8v6z0028rnjNbd'
+
+# Payment Configuration
+FEATURED_GIG_PRICE = 9.99  # Price in USD for featuring a gig
