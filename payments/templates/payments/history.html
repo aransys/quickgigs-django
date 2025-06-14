@@ -104,29 +104,6 @@
             </div>
             {% endfor %}
         </div>
-
-        <!-- Summary Stats -->
-        <div class="mt-8 grid md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                <div class="text-3xl font-bold text-brand-600 mb-2">
-                    {{ payments|length }}
-                </div>
-                <div class="text-gray-600">Total Payments</div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                <div class="text-3xl font-bold text-green-600 mb-2">
-                    {% widthratio payments|length 1 payments.count %}
-                </div>
-                <div class="text-gray-600">Successful</div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                <div class="text-3xl font-bold text-purple-600 mb-2">
-                    ${% for payment in payments %}{% if payment.status == 'completed' %}{{ payment.amount|add:0 }}{% endif %}{% endfor %}
-                </div>
-                <div class="text-gray-600">Total Spent</div>
-            </div>
-        </div>
-
     {% else %}
         <!-- Empty State -->
         <div class="text-center py-12">
@@ -140,11 +117,11 @@
             
             {% if user.userprofile.is_employer %}
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{% url 'gigs:gig_list' %}" class="btn-primary">
+                <a href="{% url 'gigs:gig_create' %}" class="btn-primary">
                     <i class="fas fa-plus mr-2"></i>Post a Gig
                 </a>
                 <a href="{% url 'gigs:gig_list' %}" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
-                    <i class="fas fa-list mr-2"></i>View My Gigs
+                    <i class="fas fa-list mr-2"></i>View All Gigs
                 </a>
             </div>
             {% endif %}
