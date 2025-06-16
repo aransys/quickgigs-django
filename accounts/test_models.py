@@ -92,13 +92,13 @@ class UserProfileModelTest(TestCase):
     def test_user_profile_string_representation(self):
         """Test UserProfile string representation"""
         profile = self.user.userprofile
-        expected_str = f"{self.user.username} - freelancer"
+        expected_str = f"{self.user.username} - Freelancer"
         self.assertEqual(str(profile), expected_str)
         
         # Test with employer
         profile.user_type = 'employer'
         profile.save()
-        expected_str = f"{self.user.username} - employer"
+        expected_str = f"{self.user.username} - Employer"
         self.assertEqual(str(profile), expected_str)
     
     def test_skills_processing(self):
