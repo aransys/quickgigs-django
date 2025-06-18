@@ -1,15 +1,16 @@
-{% extends 'todo_app/base.html' %} 
-{% block title %}Task: {{ task.title }}{% endblock %} 
-
-{% block content %}
+<!DOCTYPE html>
+{% extends 'gigs/base.html' %} {% block title %}Task: {{ task.title }}{%
+endblock %} {% block content %}
 <div class="container-fluid px-3 px-md-4">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
-      
       <!-- Back button - separate row for better mobile layout -->
       <div class="row mb-3">
         <div class="col-12">
-          <a href="{% url 'todo_app:task_list' %}" class="btn btn-outline-secondary btn-sm">
+          <a
+            href="{% url 'todo_app:task_list' %}"
+            class="btn btn-outline-secondary btn-sm"
+          >
             <i class="bi bi-arrow-left me-2"></i>Back to List
           </a>
         </div>
@@ -20,10 +21,12 @@
         <div class="card-header">
           <h2 class="mb-0 h4">Task Details</h2>
         </div>
-        
+
         <div class="card-body">
           <!-- Task title - responsive heading -->
-          <h3 class="card-title h5 h-md-4 {% if task.completed %}completed{% endif %} mb-3">
+          <h3
+            class="card-title h5 h-md-4 {% if task.completed %}completed{% endif %} mb-3"
+          >
             {{ task.title }}
           </h3>
 
@@ -67,8 +70,7 @@
             <strong>Due Date:</strong>
             <div class="mt-1">
               <span class="{% if task.is_overdue %}text-danger{% endif %}">
-                {{ task.due_date|date:"F d, Y" }}
-                {% if task.is_overdue %}
+                {{ task.due_date|date:"F d, Y" }} {% if task.is_overdue %}
                 <span class="badge bg-danger ms-2">Overdue</span>
                 {% endif %}
               </span>
@@ -80,7 +82,10 @@
           <div class="row g-2 mt-4">
             <!-- Edit button -->
             <div class="col-12 col-sm-6 col-md-4">
-              <a href="{% url 'todo_app:task_update' task.pk %}" class="btn btn-primary w-100">
+              <a
+                href="{% url 'todo_app:task_update' task.pk %}"
+                class="btn btn-primary w-100"
+              >
                 <i class="bi bi-pencil me-2"></i>
                 <span>Edit Task</span>
               </a>
@@ -88,9 +93,12 @@
 
             <!-- Complete/Incomplete toggle -->
             <div class="col-12 col-sm-6 col-md-4">
-              <form method="post" action="{% url 'todo_app:toggle_complete' task.pk %}" class="w-100">
-                {% csrf_token %}
-                {% if task.completed %}
+              <form
+                method="post"
+                action="{% url 'todo_app:toggle_complete' task.pk %}"
+                class="w-100"
+              >
+                {% csrf_token %} {% if task.completed %}
                 <button type="submit" class="btn btn-warning w-100">
                   <i class="bi bi-arrow-counterclockwise me-2"></i>
                   <span class="d-none d-sm-inline">Mark as </span>Incomplete
@@ -106,13 +114,15 @@
 
             <!-- Delete button -->
             <div class="col-12 col-sm-12 col-md-4">
-              <a href="{% url 'todo_app:task_delete' task.pk %}" class="btn btn-danger w-100">
+              <a
+                href="{% url 'todo_app:task_delete' task.pk %}"
+                class="btn btn-danger w-100"
+              >
                 <i class="bi bi-trash me-2"></i>
                 <span>Delete</span>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </div>

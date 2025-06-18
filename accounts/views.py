@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from django.http import Http404
 from .models import UserProfile
 from .forms import SignUpForm, UserProfileForm
 
@@ -49,14 +50,20 @@ def profile_view(request):
     }
     return render(request, 'accounts/profile.html', context)
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = UserProfileForm
     template_name = 'accounts/profile_edit.html'
     success_url = reverse_lazy('accounts:profile')
     
-    def get_object(self):
-        return self.request.user.userprofile
+    def get_object(self, queryset=None):
+        if not self.request.user.is_authenticated:
+            raise Http404("User not authenticated")
+        
+        try:
+            return self.request.user.userprofile
+        except UserProfile.DoesNotExist:
+            return UserProfile.objects.create(user=self.request.user)
     
     def form_valid(self, form):
         messages.success(self.request, "Your profile has been updated successfully!")
