@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from accounts.forms import SignUpForm, ProfileUpdateForm
+from accounts.forms import SignUpForm, UserProfileForm
 from decimal import Decimal
 
 
@@ -120,7 +120,7 @@ class SignUpFormTest(TestCase):
         self.assertIn('password2', form.errors)
 
 
-class ProfileUpdateFormTest(TestCase):
+class UserProfileFormTest(TestCase):
     """Test suite for profile update form"""
 
     def setUp(self):
@@ -141,7 +141,7 @@ class ProfileUpdateFormTest(TestCase):
 
     def test_valid_profile_form(self):
         """Test form with valid data"""
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=self.valid_data,
             instance=self.user.userprofile
         )
@@ -149,7 +149,7 @@ class ProfileUpdateFormTest(TestCase):
 
     def test_profile_form_saves_data(self):
         """Test that form saves profile data correctly"""
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=self.valid_data,
             instance=self.user.userprofile
         )
@@ -172,7 +172,7 @@ class ProfileUpdateFormTest(TestCase):
             'phone': ''
         }
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=minimal_data,
             instance=self.user.userprofile
         )
@@ -183,7 +183,7 @@ class ProfileUpdateFormTest(TestCase):
         form_data = self.valid_data.copy()
         form_data['hourly_rate'] = 'invalid'
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=form_data,
             instance=self.user.userprofile
         )
@@ -195,7 +195,7 @@ class ProfileUpdateFormTest(TestCase):
         form_data = self.valid_data.copy()
         form_data['hourly_rate'] = '-10.00'
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=form_data,
             instance=self.user.userprofile
         )
@@ -208,7 +208,7 @@ class ProfileUpdateFormTest(TestCase):
         form_data = self.valid_data.copy()
         form_data['hourly_rate'] = '9999.99'
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=form_data,
             instance=self.user.userprofile
         )
@@ -219,7 +219,7 @@ class ProfileUpdateFormTest(TestCase):
         form_data = self.valid_data.copy()
         form_data['bio'] = 'A' * 1000  # Very long bio
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=form_data,
             instance=self.user.userprofile
         )
@@ -230,7 +230,7 @@ class ProfileUpdateFormTest(TestCase):
         form_data = self.valid_data.copy()
         form_data['skills'] = 'Python, Django, C++, C#, Node.js, Vue.js'
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=form_data,
             instance=self.user.userprofile
         )
@@ -250,7 +250,7 @@ class ProfileUpdateFormTest(TestCase):
             form_data = self.valid_data.copy()
             form_data['phone'] = phone
             
-            form = ProfileUpdateForm(
+            form = UserProfileForm(
                 data=form_data,
                 instance=self.user.userprofile
             )
@@ -258,7 +258,7 @@ class ProfileUpdateFormTest(TestCase):
 
     def test_profile_form_widget_classes(self):
         """Test that form widgets have correct CSS classes"""
-        form = ProfileUpdateForm(instance=self.user.userprofile)
+        form = UserProfileForm(instance=self.user.userprofile)
         
         # Check that textarea widgets have correct classes
         bio_widget = form.fields['bio'].widget
@@ -270,7 +270,7 @@ class ProfileUpdateFormTest(TestCase):
 
     def test_profile_form_help_texts(self):
         """Test form field help texts"""
-        form = ProfileUpdateForm(instance=self.user.userprofile)
+        form = UserProfileForm(instance=self.user.userprofile)
         
         self.assertEqual(
             form.fields['bio'].help_text,
@@ -283,7 +283,7 @@ class ProfileUpdateFormTest(TestCase):
 
     def test_profile_form_placeholders(self):
         """Test form field placeholders"""
-        form = ProfileUpdateForm(instance=self.user.userprofile)
+        form = UserProfileForm(instance=self.user.userprofile)
         
         self.assertIn('placeholder', form.fields['bio'].widget.attrs)
         self.assertIn('placeholder', form.fields['skills'].widget.attrs)
@@ -306,7 +306,7 @@ class ProfileUpdateFormTest(TestCase):
             'phone': ''
         }
         
-        form = ProfileUpdateForm(
+        form = UserProfileForm(
             data=partial_data,
             instance=profile
         )
