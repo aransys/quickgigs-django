@@ -101,7 +101,7 @@ class AuthenticationViewTest(TestCase):
         
         # Should redirect to homepage
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/')
+        self.assertEqual(response.url, '/gigs/')
         
         # User should be logged in
         logged_in_user = get_user(self.client)
@@ -120,7 +120,7 @@ class AuthenticationViewTest(TestCase):
         
         # Should not redirect
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Please enter a correct username and password')
+        self.assertContains(response, 'Please check your username and password and try again.')
         
         # User should not be logged in
         logged_in_user = get_user(self.client)
@@ -141,7 +141,7 @@ class AuthenticationViewTest(TestCase):
         
         # Should redirect to homepage
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/')
+        self.assertEqual(response.url, '/gigs/')
         
         # User should be logged out
         logged_in_user = get_user(self.client)
@@ -402,9 +402,13 @@ class SecurityTest(TestCase):
 
     def test_csrf_protection(self):
         """Test CSRF protection on forms"""
+        # Create a client that enforces CSRF checks
+        from django.test import Client
+        csrf_client = Client(enforce_csrf_checks=True)
+        
         # Attempt to post without CSRF token should fail
         url = reverse('accounts:signup')
-        response = self.client.post(url, {
+        response = csrf_client.post(url, {
             'username': 'testuser',
             'email': 'test@test.com',
             'password1': 'testpass123',
