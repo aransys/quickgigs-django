@@ -1,7 +1,11 @@
-<!DOCTYPE html>
-{% extends 'gigs/base.html' %} {% load static %} {% block title %} {% if
-form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
-%} {% block content %}
+{% extends 'gigs/base.html' %}
+{% load static %}
+
+{% block title %}
+  {% if form.instance.pk %}Edit Task{% else %}New Task{% endif %} - QuickGigs
+{% endblock %}
+
+{% block content %}
 <div class="container-fluid px-3 px-md-4">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8 col-xl-6">
@@ -9,7 +13,7 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
       <div class="row mb-3 d-md-none">
         <div class="col-12">
           <a
-            href="{% url 'todo_app:task_list' %}"
+            href="{% url 'gigs:task_list' %}"
             class="btn btn-outline-secondary btn-sm"
           >
             <i class="bi bi-arrow-left me-2"></i>Back to List
@@ -25,11 +29,13 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
           >
             <h2 class="card-title mb-0">
               {% if form.instance.pk %}
-              <i class="bi bi-pencil-square me-2"></i>Edit Task {% else %}
-              <i class="bi bi-plus-square me-2"></i>Create New Task {% endif %}
+                <i class="bi bi-pencil-square me-2"></i>Edit Task
+              {% else %}
+                <i class="bi bi-plus-square me-2"></i>Create New Task
+              {% endif %}
             </h2>
             <a
-              href="{% url 'todo_app:task_list' %}"
+              href="{% url 'gigs:task_list' %}"
               class="btn btn-outline-secondary btn-sm"
             >
               <i class="bi bi-arrow-left me-2"></i>Back to List
@@ -39,8 +45,10 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
           <!-- Mobile header -->
           <h2 class="card-title mb-4 d-md-none h5">
             {% if form.instance.pk %}
-            <i class="bi bi-pencil-square me-2"></i>Edit Task {% else %}
-            <i class="bi bi-plus-square me-2"></i>Create New Task {% endif %}
+              <i class="bi bi-pencil-square me-2"></i>Edit Task
+            {% else %}
+              <i class="bi bi-plus-square me-2"></i>Create New Task
+            {% endif %}
           </h2>
 
           <form method="post">
@@ -51,12 +59,13 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
               <label for="{{ form.title.id_for_label }}" class="form-label">
                 Task Title <span class="text-danger">*</span>
               </label>
-              {{ form.title }} {% if form.title.errors %}
-              <div class="text-danger mt-1">{{ form.title.errors.0 }}</div>
+              {{ form.title }}
+              {% if form.title.errors %}
+                <div class="text-danger mt-1">{{ form.title.errors.0 }}</div>
               {% endif %}
-              <small class="text-muted"
-                >Give your task a clear, descriptive title</small
-              >
+              <small class="text-muted">
+                Give your task a clear, descriptive title
+              </small>
             </div>
 
             <!-- Description Field -->
@@ -67,14 +76,15 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
               >
                 Description
               </label>
-              {{ form.description }} {% if form.description.errors %}
-              <div class="text-danger mt-1">
-                {{ form.description.errors.0 }}
-              </div>
+              {{ form.description }}
+              {% if form.description.errors %}
+                <div class="text-danger mt-1">
+                  {{ form.description.errors.0 }}
+                </div>
               {% endif %}
-              <small class="text-muted"
-                >Add any additional details or notes</small
-              >
+              <small class="text-muted">
+                Add any additional details or notes
+              </small>
             </div>
 
             <!-- Due Date Field -->
@@ -82,12 +92,13 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
               <label for="{{ form.due_date.id_for_label }}" class="form-label">
                 Due Date
               </label>
-              {{ form.due_date }} {% if form.due_date.errors %}
-              <div class="text-danger mt-1">{{ form.due_date.errors.0 }}</div>
+              {{ form.due_date }}
+              {% if form.due_date.errors %}
+                <div class="text-danger mt-1">{{ form.due_date.errors.0 }}</div>
               {% endif %}
-              <small class="text-muted"
-                >When should this task be completed?</small
-              >
+              <small class="text-muted">
+                When should this task be completed?
+              </small>
             </div>
 
             <!-- Completed Checkbox (only shown when editing) -->
@@ -113,10 +124,9 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
               >
                 <button type="submit" class="btn btn-primary w-100">
                   <i class="bi bi-check-circle me-2"></i>
-                  <span
-                    >{% if form.instance.pk %}Update{% else %}Create{% endif
-                    %}</span
-                  >
+                  <span>
+                    {% if form.instance.pk %}Update{% else %}Create{% endif %}
+                  </span>
                 </button>
               </div>
 
@@ -125,7 +135,7 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
                 class="col-12 col-sm-6 {% if not form.instance.pk %}col-md-4{% else %}col-md-4{% endif %}"
               >
                 <a
-                  href="{% url 'todo_app:task_list' %}"
+                  href="{% url 'gigs:task_list' %}"
                   class="btn btn-outline-secondary w-100"
                 >
                   <i class="bi bi-x-circle me-2"></i>
@@ -137,7 +147,7 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
               {% if form.instance.pk %}
               <div class="col-12 col-md-4">
                 <a
-                  href="{% url 'todo_app:task_delete' form.instance.pk %}"
+                  href="{% url 'gigs:task_delete' form.instance.pk %}"
                   class="btn btn-danger w-100"
                 >
                   <i class="bi bi-trash me-2"></i>
@@ -152,7 +162,9 @@ form.instance.pk %}Edit Task{% else %}New Task{% endif %} - Todo App {% endblock
     </div>
   </div>
 </div>
-{% endblock %} {% block extra_js %}
+{% endblock %}
+
+{% block extra_js %}
 <script>
   // Add form validation feedback
   document.addEventListener("DOMContentLoaded", function () {
