@@ -506,6 +506,6 @@ class PerformanceTest(TestCase):
         url = reverse('gigs:gig_list')
         
         # Should not create excessive queries even with many gigs
-        with self.assertNumQueries(3):  # Adjust based on actual query count
+        with self.assertNumQueries(2):  # Adjusted to match actual query count
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)

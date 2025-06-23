@@ -6,6 +6,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from .forms import TaskForm  # We'll create GigForm next
 from .models import Task, Gig
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # ==================== EXISTING TASK VIEWS (Keep working) ====================
 
@@ -66,62 +67,75 @@ class GigListView(ListView):
     template_name = "gigs/gig_list.html"
     context_object_name = "gigs"
     ordering = ["-is_featured", "-created_at"]  # Featured first, then newest
+    paginate_by = 12  # Add pagination for better performance
 
     def get_queryset(self):
-        # Only show active gigs
-        return Gig.objects.filter(is_active=True)
+        # Only show active gigs with employer data (prevents N+1 queries)
+        return Gig.objects.select_related('employer').filter(is_active=True)
 
 class GigDetailView(DetailView):
     model = Gig
     template_name = "gigs/gig_detail.html"
     context_object_name = "gig"
+    
+    def get_queryset(self):
+        # Optimize employer data fetching
+        return Gig.objects.select_related('employer')
 
 class GigCreateView(LoginRequiredMixin, CreateView):
     model = Gig
     fields = ['title', 'description', 'budget', 'location', 'category', 'deadline']
     template_name = "gigs/gig_form.html"
     success_url = reverse_lazy("gigs:gig_list")
-    
+
     def form_valid(self, form):
         # Automatically set the employer to the current user
         form.instance.employer = self.request.user
         messages.success(self.request, "Gig posted successfully!")
         return super().form_valid(form)
 
-class GigUpdateView(UpdateView):
+class GigUpdateView(LoginRequiredMixin, UpdateView):
     model = Gig
     fields = ['title', 'description', 'budget', 'location', 'category', 'deadline', 'is_active']
     template_name = "gigs/gig_form.html"
     success_url = reverse_lazy("gigs:gig_list")
 
     def get_queryset(self):
-        # Only allow employers to edit their own gigs
-        return Gig.objects.filter(employer=self.request.user)
+        # Only allow employers to edit their own gigs (with optimization)
+        return Gig.objects.select_related('employer').filter(employer=self.request.user)
 
     def form_valid(self, form):
         messages.success(self.request, "Gig updated successfully!")
         return super().form_valid(form)
 
-class GigDeleteView(DeleteView):
+class GigDeleteView(LoginRequiredMixin, DeleteView):
     model = Gig
     template_name = "gigs/gig_confirm_delete.html"
     success_url = reverse_lazy("gigs:gig_list")
 
     def get_queryset(self):
-        # Only allow employers to delete their own gigs
-        return Gig.objects.filter(employer=self.request.user)
+        # Only allow employers to delete their own gigs (with optimization)
+        return Gig.objects.select_related('employer').filter(employer=self.request.user)
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "Gig deleted successfully!")
         return super().delete(request, *args, **kwargs)
-
+    
+@login_required
 def toggle_gig_status(request, pk):
     """Toggle gig between active and inactive"""
-    gig = get_object_or_404(Gig, pk=pk, employer=request.user)
+    # Optimized: Use select_related for consistency (though not critical here since it's just one gig)
+    gig = get_object_or_404(
+        Gig.objects.select_related('employer'), 
+        pk=pk, 
+        employer=request.user
+    )
     gig.is_active = not gig.is_active
     gig.save()
+    
     if gig.is_active:
         messages.success(request, f'Gig "{gig.title}" is now active!')
     else:
         messages.info(request, f'Gig "{gig.title}" is now inactive.')
+    
     return redirect("gigs:gig_list")
