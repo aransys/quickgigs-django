@@ -1,19 +1,50 @@
-{% extends 'gigs/base.html' %} {% block title %}QuickGigs - Find Your Next Gig{% endblock %} {% block content %}
+{% extends 'gigs/base.html' %}
+<!-- -->
+{% block title %}QuickGigs - Find Your Next Gig{% endblock %}
+<!-- -->
+{% block content %}
 <!-- Hero Section -->
 <section class="bg-gradient-to-br from-brand-500 to-brand-700 text-white py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Find Your Perfect <span class="text-yellow-300">Gig</span></h1>
-        <p class="text-xl text-brand-100 mb-8 leading-relaxed">Connect with employers for short-term projects and freelance work. Join thousands of professionals already earning on QuickGigs.</p>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+        >
+          Find Your Perfect <span class="text-yellow-300">Gig</span>
+        </h1>
+        <p class="text-xl text-brand-100 mb-8 leading-relaxed">
+          Connect with employers for short-term projects and freelance work.
+          Join thousands of professionals already earning on QuickGigs.
+        </p>
         <div class="flex flex-col sm:flex-row gap-4">
           {% if user.is_authenticated %} {% if user.userprofile.is_employer %}
-          <a href="{% url 'gigs:gig_create' %}" class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"> <i class="fas fa-plus mr-2"></i>Post Your First Gig </a>
+          <a
+            href="{% url 'gigs:gig_create' %}"
+            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+          >
+            <i class="fas fa-plus mr-2"></i>Post Your First Gig
+          </a>
           {% else %}
-          <a href="{% url 'gigs:gig_list' %}" class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"> <i class="fas fa-search mr-2"></i>Browse Available Gigs </a>
+          <a
+            href="{% url 'gigs:gig_list' %}"
+            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+          >
+            <i class="fas fa-search mr-2"></i>Browse Available Gigs
+          </a>
           {% endif %} {% else %}
-          <a href="{% url 'accounts:signup' %}" class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"> <i class="fas fa-rocket mr-2"></i>Get Started Free </a>
-          <a href="{% url 'accounts:login' %}" class="border-2 border-white text-white hover:bg-white hover:text-brand-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 text-center"> <i class="fas fa-sign-in-alt mr-2"></i>Login </a>
+          <a
+            href="{% url 'accounts:signup' %}"
+            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+          >
+            <i class="fas fa-rocket mr-2"></i>Get Started Free
+          </a>
+          <a
+            href="{% url 'accounts:login' %}"
+            class="border-2 border-white text-white hover:bg-white hover:text-brand-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 text-center"
+          >
+            <i class="fas fa-sign-in-alt mr-2"></i>Login
+          </a>
           {% endif %}
         </div>
       </div>
@@ -32,24 +63,34 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center">
-        <div class="bg-brand-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-brand-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-briefcase text-brand-500 text-3xl"></i>
         </div>
         <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ total_gigs }}</h3>
         <p class="text-gray-600 font-medium">Active Gigs</p>
       </div>
       <div class="text-center">
-        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-building text-blue-500 text-3xl"></i>
         </div>
-        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ total_employers }}</h3>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">
+          {{ total_employers }}
+        </h3>
         <p class="text-gray-600 font-medium">Employers</p>
       </div>
       <div class="text-center">
-        <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-users text-green-500 text-3xl"></i>
         </div>
-        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ total_freelancers }}</h3>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">
+          {{ total_freelancers }}
+        </h3>
         <p class="text-gray-600 font-medium">Freelancers</p>
       </div>
     </div>
@@ -62,11 +103,15 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Featured Gigs</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">Premium opportunities from top employers</p>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Premium opportunities from top employers
+      </p>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
       {% for gig in featured_gigs %}
-      <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-yellow-200">
+      <div
+        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-yellow-200"
+      >
         <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3">
           <div class="flex items-center text-yellow-900">
             <i class="fas fa-star mr-2"></i>
@@ -74,13 +119,27 @@
           </div>
         </div>
         <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-3">{{ gig.title }}</h3>
-          <p class="text-gray-600 mb-4">{{ gig.description|truncatewords:20 }}</p>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">
+            {{ gig.title }}
+          </h3>
+          <p class="text-gray-600 mb-4">
+            {{ gig.description|truncatewords:20 }}
+          </p>
           <div class="flex justify-between items-center mb-4">
-            <span class="text-2xl font-bold text-green-600">${{ gig.budget }}</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{{ gig.get_category_display }}</span>
+            <span class="text-2xl font-bold text-green-600"
+              >${{ gig.budget }}</span
+            >
+            <span
+              class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+              >{{ gig.get_category_display }}</span
+            >
           </div>
-          <a href="{% url 'gigs:gig_detail' gig.pk %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center block"> View Details </a>
+          <a
+            href="{% url 'gigs:gig_detail' gig.pk %}"
+            class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center block"
+          >
+            View Details
+          </a>
         </div>
       </div>
       {% endfor %}
@@ -93,27 +152,48 @@
 <section class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Latest Opportunities</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">Fresh gigs posted by employers looking for talent</p>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">
+        Latest Opportunities
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Fresh gigs posted by employers looking for talent
+      </p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {% for gig in recent_gigs %}
-      <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100">
-        <h3 class="text-lg font-semibold text-gray-800 mb-3">{{ gig.title }}</h3>
+      <div
+        class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100"
+      >
+        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+          {{ gig.title }}
+        </h3>
         <p class="text-gray-600 mb-4">{{ gig.description|truncatewords:15 }}</p>
         <div class="flex items-center justify-between mb-4">
-          <span class="text-xl font-bold text-green-600">${{ gig.budget }}</span>
-          <span class="text-sm text-gray-500">{{ gig.created_at|timesince }} ago</span>
+          <span class="text-xl font-bold text-green-600"
+            >${{ gig.budget }}</span
+          >
+          <span class="text-sm text-gray-500"
+            >{{ gig.created_at|timesince }} ago</span
+          >
         </div>
         <div class="flex justify-between items-center">
-          <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">{{ gig.location }}</span>
-          <a href="{% url 'gigs:gig_detail' gig.pk %}" class="text-brand-500 hover:text-brand-600 font-medium"> View Details → </a>
+          <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+            >{{ gig.location }}</span
+          >
+          <a
+            href="{% url 'gigs:gig_detail' gig.pk %}"
+            class="text-brand-500 hover:text-brand-600 font-medium"
+          >
+            View Details →
+          </a>
         </div>
       </div>
       {% empty %}
       <div class="col-span-full text-center py-12">
         <i class="fas fa-briefcase text-gray-300 text-6xl mb-4"></i>
-        <h3 class="text-xl font-semibold text-gray-600 mb-2">No gigs available yet</h3>
+        <h3 class="text-xl font-semibold text-gray-600 mb-2">
+          No gigs available yet
+        </h3>
         <p class="text-gray-500">Be the first to post a gig on QuickGigs!</p>
       </div>
       {% endfor %}
@@ -121,7 +201,12 @@
 
     {% if recent_gigs %}
     <div class="text-center mt-12">
-      <a href="{% url 'gigs:gig_list' %}" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"> <i class="fas fa-eye mr-2"></i>View All Gigs </a>
+      <a
+        href="{% url 'gigs:gig_list' %}"
+        class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+      >
+        <i class="fas fa-eye mr-2"></i>View All Gigs
+      </a>
     </div>
     {% endif %}
   </div>
@@ -132,29 +217,50 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">How QuickGigs Works</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">Getting started is simple and fast</p>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Getting started is simple and fast
+      </p>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center">
-        <div class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <span class="text-white text-2xl font-bold">1</span>
         </div>
+        {% if not user.is_authenticated %}
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Sign Up</h3>
-        <p class="text-gray-600">Create your account and choose whether you're an employer or freelancer</p>
+        <p class="text-gray-600">
+          Create your account and choose whether you're an employer or
+          freelancer
+        </p>
+        {% else %}
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Welcome Back!</h3>
+        <p class="text-gray-600">Ready to continue your freelancing journey?</p>
+        {% endif %}
       </div>
       <div class="text-center">
-        <div class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <span class="text-white text-2xl font-bold">2</span>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Post or Browse</h3>
-        <p class="text-gray-600">Employers post gigs, freelancers browse and find opportunities that match their skills</p>
+        <p class="text-gray-600">
+          Employers post gigs, freelancers browse and find opportunities that
+          match their skills
+        </p>
       </div>
       <div class="text-center">
-        <div class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <span class="text-white text-2xl font-bold">3</span>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Get Work Done</h3>
-        <p class="text-gray-600">Connect, collaborate, and complete projects successfully</p>
+        <p class="text-gray-600">
+          Connect, collaborate, and complete projects successfully
+        </p>
       </div>
     </div>
   </div>
