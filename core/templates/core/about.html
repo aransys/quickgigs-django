@@ -1,10 +1,14 @@
-{% extends 'gigs/base.html' %} {% block title %}About Us - QuickGigs{% endblock %} {% block content %}
+{% extends 'gigs/base.html' %} {% load currency_filters %} {% block title
+%}QuickGigs - Find Your Next Gig{% endblock %} {% block content %}
 <div class="bg-gray-50 min-h-screen py-16">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="text-center mb-16">
       <h1 class="text-4xl font-bold text-gray-800 mb-6">About QuickGigs</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Connecting talented freelancers with employers who need quality work done quickly and efficiently.</p>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Connecting talented freelancers with employers who need quality work
+        done quickly and efficiently.
+      </p>
     </div>
 
     <!-- Mission Section -->
@@ -12,11 +16,22 @@
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
-          <p class="text-gray-700 leading-relaxed mb-6">QuickGigs was created to solve the challenge of finding reliable freelancers for short-term projects. We believe that great work shouldn't be hard to find, and talented professionals shouldn't struggle to find meaningful opportunities.</p>
-          <p class="text-gray-700 leading-relaxed">Our platform focuses on micro-jobs and quick turnaround projects, making it easy for employers to get work done and for freelancers to build their careers one gig at a time.</p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            QuickGigs was created to solve the challenge of finding reliable
+            freelancers for short-term projects. We believe that great work
+            shouldn't be hard to find, and talented professionals shouldn't
+            struggle to find meaningful opportunities.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            Our platform focuses on micro-jobs and quick turnaround projects,
+            making it easy for employers to get work done and for freelancers to
+            build their careers one gig at a time.
+          </p>
         </div>
         <div class="text-center">
-          <div class="bg-brand-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto">
+          <div
+            class="bg-brand-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto"
+          >
             <i class="fas fa-handshake text-brand-500 text-5xl"></i>
           </div>
         </div>
@@ -26,35 +41,58 @@
     <!-- Features Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
       <div class="bg-white rounded-xl shadow-lg p-8 text-center">
-        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-bolt text-blue-500 text-2xl"></i>
         </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-3">Fast & Efficient</h3>
-        <p class="text-gray-600">Quick project matching and streamlined communication</p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">
+          Fast & Efficient
+        </h3>
+        <p class="text-gray-600">
+          Quick project matching and streamlined communication
+        </p>
       </div>
 
       <div class="bg-white rounded-xl shadow-lg p-8 text-center">
-        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-shield-alt text-green-500 text-2xl"></i>
         </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-3">Secure & Trusted</h3>
-        <p class="text-gray-600">Verified users and secure payment processing</p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">
+          Secure & Trusted
+        </h3>
+        <p class="text-gray-600">
+          Verified users and secure payment processing
+        </p>
       </div>
 
       <div class="bg-white rounded-xl shadow-lg p-8 text-center">
-        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
           <i class="fas fa-star text-purple-500 text-2xl"></i>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Quality Work</h3>
-        <p class="text-gray-600">Skilled professionals delivering excellent results</p>
+        <p class="text-gray-600">
+          Skilled professionals delivering excellent results
+        </p>
       </div>
     </div>
 
     <!-- Team Section -->
-    <div class="bg-gradient-to-r from-brand-50 to-blue-50 rounded-2xl p-8 text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-6">Built by Developers, for Everyone</h2>
+    <div
+      class="bg-gradient-to-r from-brand-50 to-blue-50 rounded-2xl p-8 text-center"
+    >
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">
+        Built by Developers, for Everyone
+      </h2>
       <p class="text-gray-700 text-lg max-w-3xl mx-auto">
-        QuickGigs was developed as part of the L5 Diploma in Web Application Development, demonstrating modern web development practices and user-centered design. We're committed to creating tools that make freelance work more accessible and efficient.
+        QuickGigs was developed as part of the L5 Diploma in Web Application
+        Development, demonstrating modern web development practices and
+        user-centered design. We're committed to creating tools that make
+        freelance work more accessible and efficient.
       </p>
     </div>
   </div>

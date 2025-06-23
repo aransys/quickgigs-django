@@ -1,14 +1,37 @@
-{% extends 'gigs/base.html' %} {% block title %}QuickGigs - Find Your Next Gig{% endblock %} {% block content %}
+{% extends 'gigs/base.html' %}
+<!-- -->
+{% load currency_filters %}
+<!-- -->
+{% block title %}QuickGigs - Find Your Next Gig{% endblock %}
+<!-- -->
+{% block content %}
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-center py-8">
       <div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Find Your Perfect <span class="text-yellow-300">Gig</span></h1>
-        <p class="text-xl text-brand-100 mb-8 max-w-xl leading-relaxed">Connect with employers posting micro jobs, freelance work, and quick gigs. Start earning today with opportunities that fit your schedule.</p>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+        >
+          Find Your Perfect <span class="text-yellow-300">Gig</span>
+        </h1>
+        <p class="text-xl text-brand-100 mb-8 max-w-xl leading-relaxed">
+          Connect with employers posting micro jobs, freelance work, and quick
+          gigs. Start earning today with opportunities that fit your schedule.
+        </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#gigs" class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition-all duration-200 inline-flex items-center justify-center text-lg shadow-lg hover:shadow-xl"> <i class="fas fa-search mr-3"></i>Browse Gigs </a>
-          <a href="{% url 'gigs:gig_create' %}" class="border-2 border-white text-white hover:bg-white hover:text-brand-600 px-8 py-4 rounded-xl font-semibold transition-all duration-200 inline-flex items-center justify-center text-lg"> <i class="fas fa-plus mr-3"></i>Post a Gig </a>
+          <a
+            href="#gigs"
+            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition-all duration-200 inline-flex items-center justify-center text-lg shadow-lg hover:shadow-xl"
+          >
+            <i class="fas fa-search mr-3"></i>Browse Gigs
+          </a>
+          <a
+            href="{% url 'gigs:gig_create' %}"
+            class="border-2 border-white text-white hover:bg-white hover:text-brand-600 px-8 py-4 rounded-xl font-semibold transition-all duration-200 inline-flex items-center justify-center text-lg"
+          >
+            <i class="fas fa-plus mr-3"></i>Post a Gig
+          </a>
         </div>
       </div>
       <div class="hidden lg:flex justify-center items-center">
@@ -27,7 +50,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Active Gigs Stat -->
       <div class="text-center">
-        <div class="bg-brand-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+        <div
+          class="bg-brand-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+        >
           <i class="fas fa-briefcase text-white text-2xl"></i>
         </div>
         <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ gigs|length }}</h3>
@@ -36,19 +61,27 @@
 
       <!-- Employers Stat -->
       <div class="text-center">
-        <div class="bg-blue-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+        <div
+          class="bg-blue-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+        >
           <i class="fas fa-users text-white text-2xl"></i>
         </div>
-        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ employers_count|default:"12" }}</h3>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">
+          {{ employers_count|default:"12" }}
+        </h3>
         <p class="text-gray-600 font-medium">Employers</p>
       </div>
 
       <!-- Featured Gigs Stat -->
       <div class="text-center">
-        <div class="bg-yellow-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+        <div
+          class="bg-yellow-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+        >
           <i class="fas fa-star text-white text-2xl"></i>
         </div>
-        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ featured_count|default:"3" }}</h3>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">
+          {{ featured_count|default:"3" }}
+        </h3>
         <p class="text-gray-600 font-medium">Featured Gigs</p>
       </div>
     </div>
@@ -58,17 +91,30 @@
 <!-- Gig Listings Section -->
 <section class="bg-gray-50 py-16" id="gigs">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+    <div
+      class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4"
+    >
       <div>
-        <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-2"><i class="fas fa-list mr-4 text-brand-500"></i>Available Gigs</h2>
-        <p class="text-gray-600">Find the perfect opportunity for your skills</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
+          <i class="fas fa-list mr-4 text-brand-500"></i>Available Gigs
+        </h2>
+        <p class="text-gray-600">
+          Find the perfect opportunity for your skills
+        </p>
       </div>
-      <a href="{% url 'gigs:gig_create' %}" class="btn-success text-lg px-8 py-3 shadow-lg hover:shadow-xl"> <i class="fas fa-plus mr-2"></i>Post a Gig </a>
+      <a
+        href="{% url 'gigs:gig_create' %}"
+        class="btn-success text-lg px-8 py-3 shadow-lg hover:shadow-xl"
+      >
+        <i class="fas fa-plus mr-2"></i>Post a Gig
+      </a>
     </div>
 
     <div class="space-y-6">
       {% for gig in gigs %}
-      <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden {% if gig.is_featured %}ring-2 ring-yellow-400{% endif %}">
+      <div
+        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden {% if gig.is_featured %}ring-2 ring-yellow-400{% endif %}"
+      >
         {% if gig.is_featured %}
         <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3">
           <div class="flex items-center text-yellow-900">
@@ -81,40 +127,72 @@
         <div class="p-8">
           <div class="grid lg:grid-cols-4 gap-8">
             <div class="lg:col-span-3">
-              <h3 class="text-2xl font-bold text-gray-800 mb-3 hover:text-brand-500 transition-colors duration-200">
+              <h3
+                class="text-2xl font-bold text-gray-800 mb-3 hover:text-brand-500 transition-colors duration-200"
+              >
                 <a href="{% url 'gigs:gig_detail' gig.pk %}">{{ gig.title }}</a>
               </h3>
-              <p class="text-gray-600 mb-6 leading-relaxed">{{ gig.description|truncatewords:25 }}</p>
+              <p class="text-gray-600 mb-6 leading-relaxed">
+                {{ gig.description|truncatewords:25 }}
+              </p>
 
               <div class="flex flex-wrap gap-4 text-sm">
-                <span class="flex items-center bg-gray-100 px-3 py-2 rounded-full">
+                <span
+                  class="flex items-center bg-gray-100 px-3 py-2 rounded-full"
+                >
                   <i class="fas fa-map-marker-alt mr-2 text-gray-500"></i>
                   <span class="font-medium">{{ gig.location }}</span>
                 </span>
-                <span class="bg-blue-100 text-blue-800 px-3 py-2 rounded-full font-medium"> {{ gig.get_category_display }} </span>
-                <span class="flex items-center bg-gray-100 px-3 py-2 rounded-full">
+                <span
+                  class="bg-blue-100 text-blue-800 px-3 py-2 rounded-full font-medium"
+                >
+                  {{ gig.get_category_display }}
+                </span>
+                <span
+                  class="flex items-center bg-gray-100 px-3 py-2 rounded-full"
+                >
                   <i class="fas fa-user mr-2 text-gray-500"></i>
                   <span class="font-medium">{{ gig.employer.username }}</span>
                 </span>
-                <span class="flex items-center bg-gray-100 px-3 py-2 rounded-full">
+                <span
+                  class="flex items-center bg-gray-100 px-3 py-2 rounded-full"
+                >
                   <i class="fas fa-calendar mr-2 text-gray-500"></i>
-                  <span class="font-medium">{{ gig.created_at|date:"M d, Y" }}</span>
+                  <span class="font-medium"
+                    >{{ gig.created_at|date:"M d, Y" }}</span
+                  >
                 </span>
                 {% if gig.deadline %}
-                <span class="flex items-center {% if gig.is_overdue %}bg-red-100 text-red-700{% else %}bg-gray-100{% endif %} px-3 py-2 rounded-full">
+                <span
+                  class="flex items-center {% if gig.is_overdue %}bg-red-100 text-red-700{% else %}bg-gray-100{% endif %} px-3 py-2 rounded-full"
+                >
                   <i class="fas fa-clock mr-2"></i>
-                  <span class="font-medium">Due: {{ gig.deadline|date:"M d" }}</span>
+                  <span class="font-medium"
+                    >Due: {{ gig.deadline|date:"M d" }}</span
+                  >
                 </span>
                 {% endif %}
               </div>
             </div>
 
             <div class="text-center lg:text-right">
-              <div class="text-3xl font-bold text-green-600 mb-6">${{ gig.budget }}</div>
+              <div class="text-3xl font-bold text-green-600 mb-6">
+                {{ gig.budget|currency }}
+              </div>
               <div class="space-y-3">
-                <a href="{% url 'gigs:gig_detail' gig.pk %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 inline-flex items-center justify-center"> <i class="fas fa-eye mr-2"></i>View Details </a>
+                <a
+                  href="{% url 'gigs:gig_detail' gig.pk %}"
+                  class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 inline-flex items-center justify-center"
+                >
+                  <i class="fas fa-eye mr-2"></i>View Details
+                </a>
                 {% if user == gig.employer %}
-                <a href="{% url 'gigs:gig_update' gig.pk %}" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 inline-flex items-center justify-center"> <i class="fas fa-edit mr-2"></i>Edit </a>
+                <a
+                  href="{% url 'gigs:gig_update' gig.pk %}"
+                  class="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 inline-flex items-center justify-center"
+                >
+                  <i class="fas fa-edit mr-2"></i>Edit
+                </a>
                 {% endif %}
               </div>
             </div>
@@ -123,12 +201,23 @@
       </div>
       {% empty %}
       <div class="text-center py-20">
-        <div class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <i class="fas fa-briefcase text-4xl text-gray-400"></i>
         </div>
-        <h3 class="text-2xl font-semibold text-gray-600 mb-4">No gigs posted yet!</h3>
-        <p class="text-gray-500 mb-8 max-w-md mx-auto">Be the first to post a gig and connect with talented freelancers.</p>
-        <a href="{% url 'gigs:gig_create' %}" class="btn-success text-lg px-8 py-4 shadow-lg hover:shadow-xl"> <i class="fas fa-plus mr-2"></i>Post Your First Gig </a>
+        <h3 class="text-2xl font-semibold text-gray-600 mb-4">
+          No gigs posted yet!
+        </h3>
+        <p class="text-gray-500 mb-8 max-w-md mx-auto">
+          Be the first to post a gig and connect with talented freelancers.
+        </p>
+        <a
+          href="{% url 'gigs:gig_create' %}"
+          class="btn-success text-lg px-8 py-4 shadow-lg hover:shadow-xl"
+        >
+          <i class="fas fa-plus mr-2"></i>Post Your First Gig
+        </a>
       </div>
       {% endfor %}
     </div>
@@ -139,33 +228,53 @@
 <section class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Choose QuickGigs?</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">The easiest way to connect employers with freelancers for quick jobs and gig work.</p>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">
+        Why Choose QuickGigs?
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        The easiest way to connect employers with freelancers for quick jobs and
+        gig work.
+      </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center">
-        <div class="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <i class="fas fa-rocket text-2xl text-white"></i>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Quick & Easy</h3>
-        <p class="text-gray-600">Post your gig in minutes and start receiving applications from qualified freelancers.</p>
+        <p class="text-gray-600">
+          Post your gig in minutes and start receiving applications from
+          qualified freelancers.
+        </p>
       </div>
 
       <div class="text-center">
-        <div class="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <i class="fas fa-shield-alt text-2xl text-white"></i>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Safe & Secure</h3>
-        <p class="text-gray-600">All transactions are protected and freelancers are verified for your peace of mind.</p>
+        <p class="text-gray-600">
+          All transactions are protected and freelancers are verified for your
+          peace of mind.
+        </p>
       </div>
 
       <div class="text-center">
-        <div class="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div
+          class="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
           <i class="fas fa-star text-2xl text-white"></i>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Quality Work</h3>
-        <p class="text-gray-600">Get high-quality work from talented freelancers rated by our community.</p>
+        <p class="text-gray-600">
+          Get high-quality work from talented freelancers rated by our
+          community.
+        </p>
       </div>
     </div>
   </div>
