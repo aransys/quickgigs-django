@@ -278,7 +278,7 @@ class UserProfileFormTest(TestCase):
         )
         self.assertEqual(
             form.fields['skills'].help_text,
-            'Comma-separated skills'
+            'Comma-separated skills (e.g., Python, Django, JavaScript)'
         )
 
     def test_profile_form_placeholders(self):

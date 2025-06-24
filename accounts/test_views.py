@@ -188,9 +188,9 @@ class RoleSelectionViewTest(TestCase):
         url = reverse('accounts:choose_role')
         response = self.client.post(url, {'role': 'employer'})
         
-        # Should redirect to homepage
+        # Should redirect to gigs page
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/')
+        self.assertEqual(response.url, '/gigs/')
         
         # User profile should be updated
         self.user.refresh_from_db()

@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-{% extends 'gigs/base.html' %} {% block content %}
+{% extends 'gigs/base.html' %}
+<!-- -->
+{% block content %}
 <h1>Tasks</h1>
 <a href="{% url 'gigs:task_create' %}">Add New Task</a>
-
+<!-- -->
 {% for task in tasks %}
 <div class="task {% if task.completed %}completed{% endif %}">
   <h3>{{ task.title }}</h3>
