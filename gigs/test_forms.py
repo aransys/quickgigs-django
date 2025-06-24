@@ -433,7 +433,8 @@ class GigFormSecurityTest(TestCase):
             'title': 'Security Test Gig',
             'description': 'Test employer assignment',
             'budget': '500.00',
-            'category': 'web_dev'
+            'category': 'web_dev',
+            'location': 'New York',
         }
         
         response = client.post(url, form_data)

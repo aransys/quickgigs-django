@@ -580,15 +580,16 @@ class GigResponseTest(TestCase):
             'title': 'Redirect Test Gig',
             'description': 'Test gig for redirect',
             'budget': '800.00',
-            'category': 'design'
+            'category': 'design',
+            'location': 'Remote',
         }
         
         response = self.client.post(url, gig_data)
         
-        # Should redirect to detail page
+        # Should redirect to gig list page (not detail page)
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('gigs:gig_list'))
         
-        # Get the created gig and check redirect URL
+        # Verify the gig was created
         new_gig = Gig.objects.get(title='Redirect Test Gig')
-        expected_url = reverse('gigs:gig_detail', kwargs={'pk': new_gig.pk})
-        self.assertEqual(response.url, expected_url)
+        self.assertEqual(new_gig.employer.username, 'employer')
