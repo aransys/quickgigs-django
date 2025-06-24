@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-{% extends 'gigs/base.html' %} {% block title %}Task: {{ task.title }}{%
-endblock %} {% block content %}
+{% extends 'gigs/base.html' %}
+<!-- -->
+{% block title %}Task: {{ task.title }}{% endblock %}
+<!-- -->
+{% block content %}
 <div class="container-fluid px-3 px-md-4">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
@@ -8,7 +10,7 @@ endblock %} {% block content %}
       <div class="row mb-3">
         <div class="col-12">
           <a
-            href="{% url 'todo_app:task_list' %}"
+            href="{% url 'gigs:task_list' %}"
             class="btn btn-outline-secondary btn-sm"
           >
             <i class="bi bi-arrow-left me-2"></i>Back to List
@@ -83,7 +85,7 @@ endblock %} {% block content %}
             <!-- Edit button -->
             <div class="col-12 col-sm-6 col-md-4">
               <a
-                href="{% url 'todo_app:task_update' task.pk %}"
+                href="{% url 'gigs:task_update' task.pk %}"
                 class="btn btn-primary w-100"
               >
                 <i class="bi bi-pencil me-2"></i>
@@ -95,7 +97,7 @@ endblock %} {% block content %}
             <div class="col-12 col-sm-6 col-md-4">
               <form
                 method="post"
-                action="{% url 'todo_app:toggle_complete' task.pk %}"
+                action="{% url 'gigs:toggle_complete' task.pk %}"
                 class="w-100"
               >
                 {% csrf_token %} {% if task.completed %}
@@ -115,7 +117,7 @@ endblock %} {% block content %}
             <!-- Delete button -->
             <div class="col-12 col-sm-12 col-md-4">
               <a
-                href="{% url 'todo_app:task_delete' task.pk %}"
+                href="{% url 'gigs:task_delete' task.pk %}"
                 class="btn btn-danger w-100"
               >
                 <i class="bi bi-trash me-2"></i>
