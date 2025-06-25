@@ -198,14 +198,14 @@ STRIPE_SECRET_KEY = 'sk_test_51RZ7VMRs6d4JPNXlKzYpQmqlRtyRCnhlCvm3OwXEQWmVleI39Y
 # Payment Configuration
 FEATURED_GIG_PRICE = 9.99  # Price in USD for featuring a gig
 
-# --- Railway/Production deployment settings ---
 import os
+import dj_database_url
 
-DEBUG = False  # For production
-ALLOWED_HOSTS = ['*']  # Change to your domain(s) for real production
-
-if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.parse(os.environ['DATABASE_URL'])
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Database
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
