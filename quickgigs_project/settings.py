@@ -187,31 +187,9 @@ LOGIN_REDIRECT_URL = '/gigs/'
 LOGOUT_REDIRECT_URL = '/gigs/'
 
 # Stripe Configuration
-STRIPE_PUBLISHABLE_KEY = 'pk_test_...'  # get this from Stripe
-STRIPE_SECRET_KEY = 'sk_test_...'       # get this from Stripe
-STRIPE_WEBHOOK_SECRET = 'whsec_...'     # For webhooks 
-
-# Stripe Configuration
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51RZ7VMRs6d4JPNXljcJ3n69DeGMBM0zCsBXq1YH4gkL5FJAumPhuWfL8V9JjaYif7tDZNb2iAKvycmuhhHt7Qx5Q00ToIA4xHp'
 STRIPE_SECRET_KEY = 'sk_test_51RZ7VMRs6d4JPNXlKzYpQmqlRtyRCnhlCvm3OwXEQWmVleI39YrpI7BMb3TLX9xfpPmBQ701HUwMEnUwNTGo8v6z0028rnjNbd'
+STRIPE_WEBHOOK_SECRET = 'whsec_...'
 
 # Payment Configuration
 FEATURED_GIG_PRICE = 9.99  # Price in USD for featuring a gig
-
-import os
-import dj_database_url
-
-DATABASE_URL = os.environ.get('DATABASE_URL')
-
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
-    }
-else:
-    # Your local database settings
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
