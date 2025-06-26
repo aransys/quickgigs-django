@@ -1,2 +1,2 @@
-web: python manage.py migrate && gunicorn quickgigs.wsgi --bind 0.0.0.0:$PORT
+web: gunicorn quickgigs_project.wsgi
 release: python manage.py migrate
