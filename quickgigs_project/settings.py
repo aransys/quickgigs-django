@@ -201,7 +201,6 @@ FEATURED_GIG_PRICE = 9.99  # Price in USD for featuring a gig
 import os
 import dj_database_url
 
-# At the top of settings.py
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
