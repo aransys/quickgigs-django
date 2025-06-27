@@ -22,20 +22,31 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "your-development-key-here")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY environment variable is required")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['*']  # For production, set to your domain(s)
+# Determine if we're in production (Heroku sets this automatically)
+IS_PRODUCTION = 'DYNO' in os.environ or not DEBUG
+
+# ALLOWED_HOSTS configuration
+if IS_PRODUCTION:
+    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+    if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
+        # Default to .herokuapp.com for Heroku
+        app_name = os.environ.get('HEROKU_APP_NAME', '')
+        if app_name:
+            ALLOWED_HOSTS = [f"{app_name}.herokuapp.com"]
+        else:
+            raise ValueError("ALLOWED_HOSTS must be set in production")
+else:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -44,14 +55,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "gigs",
-    'accounts',
-    'payments',
-    'core',
+    "accounts",
+    "payments",
+    "core",
 ]
 
 MIDDLEWARE = [
-    "django.middleware.gzip.GZipMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # For static files in production
+    "django.middleware.gzip.GZipMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -65,7 +77,7 @@ ROOT_URLCONF = "quickgigs_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],  # Add global templates directory
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -80,10 +92,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "quickgigs_project.wsgi.application"
 
+# Database configuration
+if "DATABASE_URL" in os.environ:
+    # Production database (Heroku provides this automatically with Postgres add-on)
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    # Local development database
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
@@ -101,100 +129,90 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
-
-
-# Database configuration for Heroku
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
-            ssl_require=True
-        )
-    }
-else:
-    # Local development database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
 
 # Static files configuration
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Additional directories where Django looks for static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # Project-level static directory
+    BASE_DIR / "static",  # Project-level static directory
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Railway deployment settings
-if "RAILWAY_ENVIRONMENT" in os.environ:
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']
-
-    # Static file caching configuration
+# WhiteNoise configuration for static files in production
+if IS_PRODUCTION:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     WHITENOISE_MAX_AGE = 31536000  # 1 year cache
     WHITENOISE_USE_FINDERS = True
-    WHITENOISE_AUTOREFRESH = True
 
-    # Security headers for production
+# Default primary key field type
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Security settings for production
+if IS_PRODUCTION:
+    # HTTPS settings
+    SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "True").lower() == "true"
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # Cookie security
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # Content security
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = "DENY"
-
-    # CSRF settings for Railway
-    CSRF_TRUSTED_ORIGINS = []  # Add your production domain(s) here later
-
-    # Static files for production
-    STATIC_ROOT = "/app/staticfiles"  # Use absolute path for Railway
-
-    # Add whitenoise middleware
-    MIDDLEWARE = [
-        "django.middleware.security.SecurityMiddleware",
-        "whitenoise.middleware.WhiteNoiseMiddleware",
-    ] + [
-        mw for mw in MIDDLEWARE if mw != "django.middleware.security.SecurityMiddleware"
-    ]
-
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# Security settings for production
-if not DEBUG:
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_SSL_REDIRECT = False
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
+    
+    # CSRF settings for Heroku
+    CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if not CSRF_TRUSTED_ORIGINS or CSRF_TRUSTED_ORIGINS == [""]:
+        # Auto-generate from ALLOWED_HOSTS for Heroku
+        CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host]
 
 # Authentication settings
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/gigs/'
-LOGOUT_REDIRECT_URL = '/gigs/'
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/gigs/"
+LOGOUT_REDIRECT_URL = "/gigs/"
 
-# Stripe Configuration
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51RZ7VMRs6d4JPNXljcJ3n69DeGMBM0zCsBXq1YH4gkL5FJAumPhuWfL8V9JjaYif7tDZNb2iAKvycmuhhHt7Qx5Q00ToIA4xHp'
-STRIPE_SECRET_KEY = 'sk_test_51RZ7VMRs6d4JPNXlKzYpQmqlRtyRCnhlCvm3OwXEQWmVleI39YrpI7BMb3TLX9xfpPmBQ701HUwMEnUwNTGo8v6z0028rnjNbd'
-STRIPE_WEBHOOK_SECRET = 'whsec_...'
+# Stripe Configuration - SECURE with environment variables
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
+
+# Validate Stripe keys are present
+if not STRIPE_PUBLISHABLE_KEY or not STRIPE_SECRET_KEY:
+    if IS_PRODUCTION:
+        raise ValueError("Stripe keys must be set in production")
+    else:
+        print("⚠️  Warning: Stripe keys not configured. Payment features will not work.")
 
 # Payment Configuration
-FEATURED_GIG_PRICE = 9.99  # Price in USD for featuring a gig
+FEATURED_GIG_PRICE = float(os.environ.get("FEATURED_GIG_PRICE", "9.99"))
+
+# Logging configuration
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO" if IS_PRODUCTION else "DEBUG",
+            "propagate": False,
+        },
+    },
+}
