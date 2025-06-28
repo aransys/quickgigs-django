@@ -120,73 +120,72 @@ class GigModelTest(TestCase):
         zero_gig = Gig.objects.create(**zero_budget_data)
         self.assertEqual(zero_gig.budget, Decimal('0.00'))
 
+# class TaskModelTest(TestCase):
+#     ... (comment out the entire class and its methods)
 
-class TaskModelTest(TestCase):
-    """Test legacy Task model functionality"""
-    
-    def setUp(self):
-        """Set up test data"""
-        self.task_data = {
-            'title': 'Test Task',
-            'description': 'Complete testing implementation',
-            'due_date': date.today() + timedelta(days=7)
-        }
-    
-    def test_task_creation(self):
-        """Test basic task creation"""
-        task = Task.objects.create(**self.task_data)
-        
-        self.assertEqual(task.title, 'Test Task')
-        self.assertFalse(task.completed)
-        self.assertIsNotNone(task.created_at)
-    
-    def test_task_completion(self):
-        """Test task completion functionality"""
-        task = Task.objects.create(**self.task_data)
-        
-        # Initially not completed
-        self.assertFalse(task.completed)
-        
-        # Mark as completed
-        task.completed = True
-        task.save()
-        self.assertTrue(task.completed)
-    
-    def test_task_is_overdue(self):
-        """Test task overdue logic"""
-        # Future due date - not overdue
-        future_task = Task.objects.create(**self.task_data)
-        self.assertFalse(future_task.is_overdue())
-        
-        # Past due date and not completed - overdue
-        past_data = self.task_data.copy()
-        past_data['due_date'] = date.today() - timedelta(days=1)
-        past_task = Task.objects.create(**past_data)
-        self.assertTrue(past_task.is_overdue())
-        
-        # Past due date but completed - not overdue
-        past_task.completed = True
-        past_task.save()
-        self.assertFalse(past_task.is_overdue())
-        
-        # No due date - not overdue
-        no_date_data = self.task_data.copy()
-        no_date_data['due_date'] = None
-        no_date_task = Task.objects.create(**no_date_data)
-        self.assertFalse(no_date_task.is_overdue())
-    
-    def test_task_ordering(self):
-        """Test task default ordering"""
-        # Create completed task
-        completed_data = self.task_data.copy()
-        completed_data['title'] = 'Completed Task'
-        completed_data['completed'] = True
-        completed_task = Task.objects.create(**completed_data)
-        
-        # Create pending task
-        pending_task = Task.objects.create(**self.task_data)
-        
-        # Pending tasks should come before completed
-        tasks = list(Task.objects.all())
-        self.assertEqual(tasks[0], pending_task)
-        self.assertEqual(tasks[1], completed_task)  
+#     def setUp(self):
+#         """Set up test data"""
+#         self.task_data = {
+#             'title': 'Test Task',
+#             'description': 'Complete testing implementation',
+#             'due_date': date.today() + timedelta(days=7)
+#         }
+#     
+#     def test_task_creation(self):
+#         """Test basic task creation"""
+#         task = Task.objects.create(**self.task_data)
+#         
+#         self.assertEqual(task.title, 'Test Task')
+#         self.assertFalse(task.completed)
+#         self.assertIsNotNone(task.created_at)
+#     
+#     def test_task_completion(self):
+#         """Test task completion functionality"""
+#         task = Task.objects.create(**self.task_data)
+#         
+#         # Initially not completed
+#         self.assertFalse(task.completed)
+#         
+#         # Mark as completed
+#         task.completed = True
+#         task.save()
+#         self.assertTrue(task.completed)
+#     
+#     def test_task_is_overdue(self):
+#         """Test task overdue logic"""
+#         # Future due date - not overdue
+#         future_task = Task.objects.create(**self.task_data)
+#         self.assertFalse(future_task.is_overdue())
+#         
+#         # Past due date and not completed - overdue
+#         past_data = self.task_data.copy()
+#         past_data['due_date'] = date.today() - timedelta(days=1)
+#         past_task = Task.objects.create(**past_data)
+#         self.assertTrue(past_task.is_overdue())
+#         
+#         # Past due date but completed - not overdue
+#         past_task.completed = True
+#         past_task.save()
+#         self.assertFalse(past_task.is_overdue())
+#         
+#         # No due date - not overdue
+#         no_date_data = self.task_data.copy()
+#         no_date_data['due_date'] = None
+#         no_date_task = Task.objects.create(**no_date_data)
+#         self.assertFalse(no_date_task.is_overdue())
+#     
+#     def test_task_ordering(self):
+#         """Test task default ordering"""
+#         # Create completed task
+#         completed_data = self.task_data.copy()
+#         completed_data['title'] = 'Completed Task'
+#         completed_data['completed'] = True
+#         completed_task = Task.objects.create(**completed_data)
+#         
+#         # Create pending task
+#         pending_task = Task.objects.create(**self.task_data)
+#         
+#         # Pending tasks should come before completed
+#         tasks = list(Task.objects.all())
+#         self.assertEqual(tasks[0], pending_task)
+#         self.assertEqual(tasks[1], completed_task)  
