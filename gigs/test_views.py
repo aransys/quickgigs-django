@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from decimal import Decimal
 from datetime import date, timedelta
-from gigs.models import Gig, Task
+# from .models import Task
 
 
 class GigViewTest(TestCase):
@@ -320,81 +320,6 @@ class GigViewTest(TestCase):
         # Gig should be activated
         self.gig.refresh_from_db()
         self.assertTrue(self.gig.is_active)
-
-
-class TaskViewTest(TestCase):
-    """Test suite for legacy Task views"""
-
-    def setUp(self):
-        """Set up test data"""
-        self.client = Client()
-        self.user = User.objects.create_user(
-            username='testuser',
-            email='test@test.com',
-            password='testpass123'
-        )
-        
-        self.task = Task.objects.create(
-            title='Test Task',
-            description='Complete this test task',
-            due_date=date.today() + timedelta(days=7)
-        )
-
-    def test_task_list_view(self):
-        """Test task listing page"""
-        url = reverse('gigs:task_list')
-        response = self.client.get(url)
-        
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Test Task')
-        self.assertContains(response, 'Complete this test task')
-
-    def test_task_detail_view(self):
-        """Test task detail page"""
-        url = reverse('gigs:task_detail', kwargs={'pk': self.task.pk})
-        response = self.client.get(url)
-        
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Test Task')
-        self.assertContains(response, 'Complete this test task')
-
-    def test_task_create_view(self):
-        """Test task creation"""
-        url = reverse('gigs:task_create')
-        task_data = {
-            'title': 'New Task',
-            'description': 'New task description',
-            'due_date': (date.today() + timedelta(days=14)).strftime('%Y-%m-%d')
-        }
-        
-        response = self.client.post(url, task_data)
-        
-        # Should redirect
-        self.assertEqual(response.status_code, 302)
-        
-        # Task should be created
-        new_task = Task.objects.get(title='New Task')
-        self.assertEqual(new_task.description, 'New task description')
-
-    def test_toggle_complete_function(self):
-        """Test task completion toggle"""
-        # Initially not completed
-        self.assertFalse(self.task.completed)
-        
-        url = reverse('gigs:toggle_complete', kwargs={'pk': self.task.pk})
-        response = self.client.post(url)
-        
-        # Should redirect
-        self.assertEqual(response.status_code, 302)
-        
-        # Task should be completed
-        self.task.refresh_from_db()
-        self.assertTrue(self.task.completed)
-        
-        # Toggle again
-        response = self.client.post(url)
-        self.task.refresh_from_db()
-        self.assertFalse(self.task.completed)
 
 
 class GigSecurityTest(TestCase):

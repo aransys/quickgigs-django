@@ -15,14 +15,6 @@
   @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150;
 }
 
-.mobile-menu {
-  @apply md:hidden bg-white border-t border-gray-200 hidden;
-}
-
-.mobile-menu.show {
-  @apply block;
-}
-
 .mobile-nav-link {
   @apply block px-3 py-2 text-base font-medium text-gray-600 hover:text-brand-500 hover:bg-gray-50;
 }

@@ -3,62 +3,63 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
-from .forms import TaskForm  # We'll create GigForm next
-from .models import Task, Gig
+# from .forms import TaskForm  # We'll create GigForm next
+# from .models import Task, Gig
+from .models import Gig
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 # ==================== EXISTING TASK VIEWS (Keep working) ====================
 
-class TaskListView(ListView):
-    model = Task
-    template_name = "gigs/task_list.html"  # Updated path
-    context_object_name = "tasks"
-    ordering = ["-created_at"]
+# class TaskListView(ListView):
+#     model = Task
+#     template_name = "gigs/task_list.html"  # Updated path
+#     context_object_name = "tasks"
+#     ordering = ["-created_at"]
 
-class TaskDetailView(DetailView):
-    model = Task
-    template_name = "gigs/task_detail.html"  # Updated path
-    context_object_name = "task"
+# class TaskDetailView(DetailView):
+#     model = Task
+#     template_name = "gigs/task_detail.html"  # Updated path
+#     context_object_name = "task"
 
-class TaskCreateView(CreateView):
-    model = Task
-    form_class = TaskForm
-    template_name = "gigs/task_form.html"  # Updated path
-    success_url = reverse_lazy("gigs:task_list")  # Updated namespace
+# class TaskCreateView(CreateView):
+#     model = Task
+#     form_class = TaskForm
+#     template_name = "gigs/task_form.html"  # Updated path
+#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
 
-    def form_valid(self, form):
-        messages.success(self.request, "Task created successfully!")
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         messages.success(self.request, "Task created successfully!")
+#         return super().form_valid(form)
 
-class TaskUpdateView(UpdateView):
-    model = Task
-    form_class = TaskForm
-    template_name = "gigs/task_form.html"  # Updated path
-    success_url = reverse_lazy("gigs:task_list")  # Updated namespace
+# class TaskUpdateView(UpdateView):
+#     model = Task
+#     form_class = TaskForm
+#     template_name = "gigs/task_form.html"  # Updated path
+#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
 
-    def form_valid(self, form):
-        messages.success(self.request, "Task updated successfully!")
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         messages.success(self.request, "Task updated successfully!")
+#         return super().form_valid(form)
 
-class TaskDeleteView(DeleteView):
-    model = Task
-    template_name = "gigs/task_confirm_delete.html"  # Updated path
-    success_url = reverse_lazy("gigs:task_list")  # Updated namespace
+# class TaskDeleteView(DeleteView):
+#     model = Task
+#     template_name = "gigs/task_confirm_delete.html"  # Updated path
+#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "Task deleted successfully!")
-        return super().delete(request, *args, **kwargs)
+#     def delete(self, request, *args, **kwargs):
+#         messages.success(self.request, "Task deleted successfully!")
+#         return super().delete(request, *args, **kwargs)
 
-def toggle_complete(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.completed = not task.completed
-    task.save()
-    if task.completed:
-        messages.success(request, f'Task "{task.title}" marked as complete!')
-    else:
-        messages.info(request, f'Task "{task.title}" marked as incomplete.')
-    return redirect("gigs:task_list")  # Updated namespace
+# def toggle_complete(request, pk):
+#     task = get_object_or_404(Task, pk=pk)
+#     task.completed = not task.completed
+#     task.save()
+#     if task.completed:
+#         messages.success(request, f'Task "{task.title}" marked as complete!')
+#     else:
+#         messages.info(request, f'Task "{task.title}" marked as incomplete.')
+#     return redirect("gigs:task_list")  # Updated namespace
 
 # ==================== NEW GIG VIEWS (Job Board) ====================
 

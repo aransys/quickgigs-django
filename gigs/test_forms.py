@@ -326,81 +326,8 @@ class FormIntegrationTest(TestCase):
         self.assertEqual(response.status_code, 200)  # Form error, no redirect
 
 
-class TaskFormTest(TestCase):
-    """Test suite for Task model forms (legacy functionality)"""
-
-    def setUp(self):
-        """Set up test data"""
-        self.user = User.objects.create_user(
-            username='testuser',
-            email='test@test.com',
-            password='testpass123'
-        )
-
-    def test_task_model_validation(self):
-        """Test Task model field validation"""
-        # Valid task should save
-        task = Task(
-            title='Valid Task',
-            description='Valid task description',
-            due_date=date.today() + timedelta(days=7)
-        )
-        task.full_clean()
-        task.save()
-        
-        self.assertEqual(task.title, 'Valid Task')
-        self.assertFalse(task.completed)  # Default value
-
-    def test_task_creation_through_view(self):
-        """Test task creation through view"""
-        from django.test import Client
-        from django.urls import reverse
-        
-        client = Client()
-        
-        url = reverse('gigs:task_create')
-        form_data = {
-            'title': 'View Integration Task',
-            'description': 'Created through view test',
-            'due_date': (date.today() + timedelta(days=14)).strftime('%Y-%m-%d')
-        }
-        
-        response = client.post(url, form_data)
-        
-        # Should redirect (successful creation)
-        self.assertEqual(response.status_code, 302)
-        
-        # Task should be created
-        task = Task.objects.get(title='View Integration Task')
-        self.assertEqual(task.description, 'Created through view test')
-
-    def test_task_required_fields(self):
-        """Test task required field validation"""
-        # Missing title should fail
-        task = Task(
-            description='Task without title',
-            due_date=date.today() + timedelta(days=7)
-        )
-        
-        with self.assertRaises(ValidationError):
-            task.full_clean()
-
-    def test_task_completion_toggle(self):
-        """Test task completion functionality"""
-        task = Task.objects.create(
-            title='Completion Test Task',
-            description='Test task completion'
-        )
-        
-        # Initially not completed
-        self.assertFalse(task.completed)
-        
-        # Toggle completion
-        task.completed = True
-        task.save()
-        
-        task.refresh_from_db()
-        self.assertTrue(task.completed)
+# class TaskFormTest(TestCase):
+#     ... (comment out the entire class and its methods)
 
 
 class GigFormSecurityTest(TestCase):

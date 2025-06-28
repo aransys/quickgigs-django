@@ -1,14 +1,12 @@
 from django.test import TestCase
 
-from .models import Task
-
-
-class TaskModelTest(TestCase):
-    def test_task_creation(self):
-        """Test creating a task"""
-        task = Task.objects.create(title="Test Task", description="Test Description")
-        self.assertEqual(task.title, "Test Task")
-        self.assertFalse(task.completed)
+# from .models import Task
+# class TaskModelTest(TestCase):
+#     def test_task_creation(self):
+#         """Test creating a task"""
+#         task = Task.objects.create(title="Test Task", description="Test Description")
+#         self.assertEqual(task.title, "Test Task")
+#         self.assertFalse(task.completed)
 
 
 class TaskViewTest(TestCase):
