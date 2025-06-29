@@ -27,16 +27,10 @@
             Application Details
           </h1>
           <div class="flex items-center gap-4 text-sm text-gray-600">
-            <span
-            ><i class="fas fa-calendar mr-1"></i>Applied {{
-              application.created_at|date:"F d, Y" }}</span
-              >
-              <span
-              ><i class="fas fa-clock mr-1"></i>{{
-                application.created_at|timesince }} ago</span
-                >
-              </div>
-            </div>
+            <span><i class="fas fa-calendar mr-1"></i>Applied {{ application.created_at|date:"F d, Y" }}</span>
+            <span><i class="fas fa-clock mr-1"></i>{{ application.created_at|timesince }} ago</span>
+          </div>
+        </div>
 
       <!-- Status Badge -->
             <div class="mt-4 lg:mt-0">
