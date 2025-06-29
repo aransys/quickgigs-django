@@ -8,6 +8,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from .models import Gig
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # ==================== EXISTING TASK VIEWS (Keep working) ====================
 
@@ -73,6 +74,13 @@ class GigListView(ListView):
     def get_queryset(self):
         # Only show active gigs with employer data (prevents N+1 queries)
         return Gig.objects.select_related('employer').filter(is_active=True)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add statistics for the template
+        context['featured_count'] = Gig.objects.filter(is_featured=True, is_active=True).count()
+        context['employers_count'] = User.objects.filter(posted_gigs__is_active=True).distinct().count()
+        return context
 
 class GigDetailView(DetailView):
     model = Gig

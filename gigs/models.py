@@ -67,3 +67,10 @@ class Gig(models.Model):
             delta = self.deadline - timezone.now().date()
             return max(0, delta.days)
         return None
+    
+    @property
+    def is_overdue(self):
+        """Check if gig is overdue"""
+        if self.deadline and self.deadline < timezone.now().date():
+            return True
+        return False
