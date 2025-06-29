@@ -1,0 +1,222 @@
+{% extends 'gigs/base.html' %} {% load currency_filters %} {% block title %}My
+Applications - QuickGigs{% endblock %} {% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">My Applications</h1>
+    <p class="text-gray-600">Track all your job applications in one place</p>
+  </div>
+
+  {% if applications %}
+  <div class="space-y-6">
+    {% for application in applications %}
+    <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between">
+        <!-- Application Info -->
+        <div class="flex-1">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-1">
+                <a
+                  href="{% url 'gigs:gig_detail' application.gig.pk %}"
+                  class="hover:text-brand-600 transition-colors duration-200"
+                >
+                  {{ application.gig.title }}
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Posted by {{ application.gig.employer.username }}
+              </p>
+            </div>
+
+            <!-- Status Badge -->
+            <div class="ml-4">
+              {% if application.status == 'pending' %}
+              <span
+                class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-clock mr-1"></i>Pending Review
+              </span>
+              {% elif application.status == 'reviewed' %}
+              <span
+                class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-eye mr-1"></i>Under Review
+              </span>
+              {% elif application.status == 'accepted' %}
+              <span
+                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-check mr-1"></i>Accepted 🎉
+              </span>
+              {% elif application.status == 'rejected' %}
+              <span
+                class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-times mr-1"></i>Not Selected
+              </span>
+              {% elif application.status == 'withdrawn' %}
+              <span
+                class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-undo mr-1"></i>Withdrawn
+              </span>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Gig Details -->
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <p class="text-sm text-gray-600">Gig Budget</p>
+              <p class="font-medium text-green-600">
+                {{ application.gig.budget|currency }}
+              </p>
+            </div>
+            {% if application.proposed_rate %}
+            <div>
+              <p class="text-sm text-gray-600">Your Proposed Rate</p>
+              <p class="font-medium text-blue-600">
+                {{ application.proposed_rate|currency }}
+              </p>
+            </div>
+            {% endif %}
+            <div>
+              <p class="text-sm text-gray-600">Applied</p>
+              <p class="font-medium">
+                {{ application.created_at|date:"M d, Y" }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Gig Description -->
+          <div class="bg-gray-50 rounded-lg p-4 mb-4">
+            <h4 class="font-medium text-gray-800 mb-2">Gig Description</h4>
+            <p class="text-gray-700 text-sm">
+              {{ application.gig.description|truncatewords:30|linebreaks }}
+            </p>
+          </div>
+
+          <!-- Your Cover Letter Preview -->
+          <div class="bg-blue-50 rounded-lg p-4">
+            <h4 class="font-medium text-blue-800 mb-2">Your Cover Letter</h4>
+            <p class="text-blue-700 text-sm leading-relaxed">
+              {{ application.cover_letter|truncatewords:30|linebreaks }}
+            </p>
+            {% if application.cover_letter|wordcount > 30 %}
+            <a
+              href="{% url 'gigs:application_detail' application.pk %}"
+              class="text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 inline-block"
+            >
+              Read full application →
+            </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="lg:ml-6 mt-4 lg:mt-0 flex flex-col gap-2 lg:min-w-[200px]">
+          <a
+            href="{% url 'gigs:application_detail' application.pk %}"
+            class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+          >
+            <i class="fas fa-eye mr-2"></i>View Details
+          </a>
+
+          <a
+            href="{% url 'gigs:gig_detail' application.gig.pk %}"
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+          >
+            <i class="fas fa-external-link-alt mr-2"></i>View Gig
+          </a>
+
+          {% if application.status == 'pending' %}
+          <a
+            href="{% url 'gigs:withdraw_application' application.pk %}"
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+          >
+            <i class="fas fa-times mr-2"></i>Withdraw
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if is_paginated %}
+  <div class="mt-8 flex justify-center">
+    <nav class="flex space-x-2">
+      {% if page_obj.has_previous %}
+      <a href="?page=1" class="px-3 py-2 text-gray-500 hover:text-gray-700"
+        >First</a
+      >
+      <a
+        href="?page={{ page_obj.previous_page_number }}"
+        class="px-3 py-2 text-gray-500 hover:text-gray-700"
+        >Previous</a
+      >
+      {% endif %}
+
+      <span class="px-3 py-2 bg-brand-500 text-white rounded">
+        {{ page_obj.number }}
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        href="?page={{ page_obj.next_page_number }}"
+        class="px-3 py-2 text-gray-500 hover:text-gray-700"
+        >Next</a
+      >
+      <a
+        href="?page={{ page_obj.paginator.num_pages }}"
+        class="px-3 py-2 text-gray-500 hover:text-gray-700"
+        >Last</a
+      >
+      {% endif %}
+    </nav>
+  </div>
+  {% endif %}
+
+  <!-- Summary Stats -->
+  <div class="mt-8 bg-gray-50 rounded-xl p-6">
+    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+      Application Summary
+    </h3>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {% regroup applications by status as status_groups %} {% for status_group
+      in status_groups %}
+      <div class="text-center">
+        <div class="text-2xl font-bold text-gray-800">
+          {{ status_group.list|length }}
+        </div>
+        <div class="text-sm text-gray-600 capitalize">
+          {{ status_group.grouper|title }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% else %}
+  <!-- Empty State -->
+  <div class="text-center py-12">
+    <div
+      class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
+    >
+      <i class="fas fa-search text-gray-400 text-3xl"></i>
+    </div>
+    <h2 class="text-2xl font-bold text-gray-600 mb-4">No Applications Yet</h2>
+    <p class="text-gray-500 mb-8 max-w-md mx-auto">
+      You haven't applied to any gigs yet. Browse available opportunities and
+      start applying to find your next project.
+    </p>
+
+    <a href="{% url 'gigs:gig_list' %}" class="btn-primary">
+      <i class="fas fa-search mr-2"></i>Browse Gigs
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
