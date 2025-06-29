@@ -79,45 +79,41 @@
             <div class="border-l border-gray-300 pl-8">
               {% if user.is_authenticated %}
               <div class="relative">
-                <button class="user-menu-button" onclick="toggleDropdown()">
-                  <div
-                    class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3"
-                  >
-                    <i class="fas fa-user text-sm"></i>
+                <button class="user-menu-button" onclick="toggleDropdown()" aria-label="User menu">
+                  <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-brand-500 to-brand-600 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm">
+                      <i class="fas fa-user text-sm"></i>
+                    </div>
+                    <div class="hidden lg:block text-left">
+                      <p class="text-sm font-medium text-gray-900">{{ user.username }}</p>
+                      <p class="text-xs text-gray-500">{{ user.userprofile.get_user_type_display }}</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200"></i>
                   </div>
-                  <span class="font-medium text-gray-700"
-                    >{{ user.username }}</span
-                  >
-                  <i class="fas fa-chevron-down ml-2 text-gray-400"></i>
                 </button>
                 <div id="userDropdown" class="dropdown-menu">
-                  <a href="{% url 'accounts:profile' %}" class="dropdown-item">
-                    <i class="fas fa-user-circle mr-3"></i>Profile
-                  </a>
-                  <a
-                    href="{% url 'accounts:profile_edit' %}"
-                    class="dropdown-item"
-                  >
-                    <i class="fas fa-cog mr-3"></i>Edit Profile
-                  </a>
-
-                  <!-- payment history link -->
-                  {% if user.userprofile.is_employer %}
-                  <a
-                    href="{% url 'payments:payment_history' %}"
-                    class="dropdown-item"
-                  >
-                    <i class="fas fa-credit-card mr-3"></i>Payment History
-                  </a>
-                  {% endif %}
-
-                  <div class="border-t border-gray-200 my-1"></div>
-                  <a
-                    href="{% url 'accounts:logout' %}"
-                    class="dropdown-item text-red-600"
-                  >
-                    <i class="fas fa-sign-out-alt mr-3"></i>Logout
-                  </a>
+                  <div class="px-4 py-3 border-b border-gray-100">
+                    <p class="text-sm font-medium text-gray-900">{{ user.username }}</p>
+                    <p class="text-xs text-gray-500">{{ user.email }}</p>
+                  </div>
+                  <div class="py-2">
+                    <a href="{% url 'accounts:profile' %}" class="dropdown-item">
+                      <i class="fas fa-user-circle mr-3 text-gray-400"></i>Profile
+                    </a>
+                    <a href="{% url 'accounts:profile_edit' %}" class="dropdown-item">
+                      <i class="fas fa-cog mr-3 text-gray-400"></i>Edit Profile
+                    </a>
+                    {% if user.userprofile.is_employer %}
+                    <a href="{% url 'payments:payment_history' %}" class="dropdown-item">
+                      <i class="fas fa-credit-card mr-3 text-gray-400"></i>Payment History
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="border-t border-gray-100 py-2">
+                    <a href="{% url 'accounts:logout' %}" class="dropdown-item text-red-600 hover:bg-red-50">
+                      <i class="fas fa-sign-out-alt mr-3"></i>Logout
+                    </a>
+                  </div>
                 </div>
               </div>
               {% else %}
@@ -224,7 +220,17 @@
     <script>
       function toggleDropdown() {
         const dropdown = document.getElementById("userDropdown");
-        dropdown.classList.toggle("show");
+        const button = document.querySelector(".user-menu-button");
+        
+        if (dropdown.classList.contains("show")) {
+          dropdown.classList.remove("show");
+        } else {
+          // Close any other open dropdowns first
+          document.querySelectorAll(".dropdown-menu.show").forEach(menu => {
+            menu.classList.remove("show");
+          });
+          dropdown.classList.add("show");
+        }
       }
 
       function toggleMobileMenu() {
@@ -233,14 +239,24 @@
       }
 
       // Close dropdown when clicking outside
-      window.onclick = function (event) {
-        if (!event.target.matches(".nav-link")) {
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById("userDropdown");
+        const button = document.querySelector(".user-menu-button");
+        
+        if (dropdown && !button.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.remove("show");
+        }
+      });
+
+      // Close dropdown on escape key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
           const dropdown = document.getElementById("userDropdown");
           if (dropdown && dropdown.classList.contains("show")) {
             dropdown.classList.remove("show");
           }
         }
-      };
+      });
     </script>
     {% block extra_js %} {% endblock %}
   </body>

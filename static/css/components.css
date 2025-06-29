@@ -80,23 +80,31 @@
 }
 
 .user-menu-button {
-  @apply flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200;
+  @apply flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-opacity-50;
+}
+
+.user-menu-button:hover .fas.fa-chevron-down {
+  transform: rotate(180deg);
 }
 
 .dropdown-menu {
-  @apply absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl py-2 z-50 border border-gray-100 hidden;
+  @apply absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl py-2 z-50 border border-gray-100 opacity-0 invisible transform scale-95 origin-top-right transition-all duration-200;
 }
 
 .dropdown-menu.show {
-  @apply block;
+  @apply opacity-100 visible transform scale-100;
 }
 
 .dropdown-item {
-  @apply flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150;
+  @apply flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150 mx-2 rounded-lg;
+}
+
+.dropdown-item:hover {
+  @apply text-gray-900;
 }
 
 .mobile-nav-link {
-  @apply flex items-center px-4 py-3 text-base font-medium text-gray-600 hover:text-brand-500 hover:bg-brand-50 rounded-lg;
+  @apply flex items-center px-4 py-3 text-base font-medium text-gray-600 hover:text-brand-500 hover:bg-brand-50 rounded-lg transition-colors duration-200;
 }
 
 /* Fix Mobile Menu Visibility */
