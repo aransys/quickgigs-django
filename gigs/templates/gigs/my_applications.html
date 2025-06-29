@@ -190,8 +190,10 @@
       Application Summary
     </h3>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {% regroup applications by status as status_groups %} {% for status_group
-      in status_groups %}
+      {% regroup applications by status as status_groups %}
+      <!-- -->
+      {% for status_group in status_groups %}
+      <!-- -->
       <div class="text-center">
         <div class="text-2xl font-bold text-gray-800">
           {{ status_group.list|length }}
