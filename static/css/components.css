@@ -97,7 +97,24 @@
 
 /* Button Components */
 .btn-primary {
-  @apply bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+  background: #10b981;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  box-shadow: 0 2px 8px 0 rgba(16,185,129,0.08);
+  transition: background 0.15s, box-shadow 0.15s;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background: #059669;
+  color: #fff;
+  box-shadow: 0 4px 16px 0 rgba(16,185,129,0.15);
 }
 
 .btn-secondary {
@@ -152,7 +169,34 @@
 
 /* Improved Navigation Components */
 .nav-link-improved {
-  @apply flex items-center px-4 py-2 text-gray-600 hover:text-brand-500 hover:bg-brand-50 rounded-lg font-medium transition-all duration-200;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  color: #374151;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+  margin-right: 0.5rem;
+}
+.nav-link-improved:last-child {
+  margin-right: 0;
+}
+.nav-link-improved:not(.nav-link-active):hover, .nav-link-improved:not(.nav-link-active):focus {
+  background: #f0fdf4;
+  color: #059669;
+  outline: none;
+}
+.nav-link-active {
+  background: #10b981;
+  color: #fff !important;
+  box-shadow: 0 2px 8px 0 rgba(16,185,129,0.08);
+}
+
+.nav-link-active:hover, .nav-link-active:focus {
+  color: #fff !important;
+  background: #10b981;
 }
 
 .user-menu-button {
