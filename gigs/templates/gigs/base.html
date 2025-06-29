@@ -178,6 +178,20 @@
                       </div>
                     </a>
                     <a
+                      href="{% url 'gigs:my_gigs' %}"
+                      class="dropdown-item"
+                    >
+                      <div class="dropdown-item-icon bg-indigo-100">
+                        <i class="fas fa-briefcase text-indigo-600 text-sm"></i>
+                      </div>
+                      <div class="dropdown-item-content">
+                        <div class="dropdown-item-title">My Gigs</div>
+                        <div class="dropdown-item-description">
+                          Manage your posted gigs
+                        </div>
+                      </div>
+                    </a>
+                    <a
                       href="{% url 'payments:payment_history' %}"
                       class="dropdown-item"
                     >
@@ -301,6 +315,13 @@
               onclick="closeMobileMenu()"
             >
               <i class="fas fa-file-alt mr-2"></i>My Applications
+            </a>
+            <a
+              href="{% url 'gigs:my_gigs' %}"
+              class="nav-link-improved"
+              onclick="closeMobileMenu()"
+            >
+              <i class="fas fa-briefcase mr-2"></i>My Gigs
             </a>
             <div class="border-t border-gray-200 my-4"></div>
             <a
