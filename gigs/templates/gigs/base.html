@@ -332,9 +332,9 @@
       </div>
       <!-- Messages -->
       {% if messages %}
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4" id="messagesContainer">
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
+        <div class="alert alert-{{ message.tags }} message-alert" style="transform: translateY(-20px); opacity: 0;">
           <div class="flex items-center">
             {% if message.tags == 'success' %}
             <i class="fas fa-check-circle mr-3"></i>
@@ -345,7 +345,7 @@
             {% endif %}
             <span>{{ message }}</span>
           </div>
-          <button onclick="this.parentElement.remove()" class="ml-auto">
+          <button onclick="dismissAlert(this.parentElement)" class="ml-auto hover:opacity-70 transition-opacity duration-200">
             <i class="fas fa-times"></i>
           </button>
         </div>
@@ -460,37 +460,72 @@
         }
       });
 
-      // Auto-dismiss alerts after 5 seconds
+      // Smooth message animations and auto-dismiss
       document.addEventListener("DOMContentLoaded", function () {
-        const alerts = document.querySelectorAll(".alert");
-        alerts.forEach(function (alert) {
+        const alerts = document.querySelectorAll(".message-alert");
+        
+        // Animate messages in smoothly
+        alerts.forEach(function (alert, index) {
+          // Stagger the animations slightly for multiple messages
+          setTimeout(function() {
+            alert.style.transition = "opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+            alert.style.opacity = "1";
+            alert.style.transform = "translateY(0)";
+          }, index * 100); // 100ms delay between each message
+          
           // Add progress bar for visual countdown
           const progressBar = document.createElement("div");
           progressBar.className =
-            "absolute bottom-0 left-0 h-1 bg-current opacity-30 transition-all duration-5000 ease-linear";
+            "absolute bottom-0 left-0 h-1 bg-current opacity-30 transition-all duration-[7000ms] ease-linear";
           progressBar.style.width = "100%";
           alert.style.position = "relative";
+          alert.style.overflow = "hidden";
           alert.appendChild(progressBar);
 
-          // Start countdown immediately
+          // Start countdown after entrance animation
           setTimeout(function () {
             progressBar.style.width = "0%";
-          }, 100);
+          }, 500 + (index * 100)); // Start after entrance animation
 
-          // Auto-dismiss after 5 seconds
+          // Auto-dismiss after 7 seconds (longer for better UX)
           setTimeout(function () {
-            if (alert.parentElement) {
-              alert.style.transition =
-                "opacity 0.3s ease-out, transform 0.3s ease-out";
-              alert.style.opacity = "0";
-              alert.style.transform = "translateY(-10px)";
-              setTimeout(function () {
-                alert.remove();
-              }, 300);
-            }
-          }, 5000);
+            dismissAlert(alert);
+          }, 7500 + (index * 100));
         });
       });
+      
+      // Smooth alert dismissal function
+      function dismissAlert(alert) {
+        if (alert && alert.parentElement) {
+          alert.style.transition = "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+          alert.style.opacity = "0";
+          alert.style.transform = "translateY(-10px)";
+          alert.style.maxHeight = alert.offsetHeight + "px";
+          
+          // Collapse the alert smoothly
+          setTimeout(function () {
+            alert.style.maxHeight = "0";
+            alert.style.marginBottom = "0";
+            alert.style.paddingTop = "0";
+            alert.style.paddingBottom = "0";
+          }, 100);
+          
+          // Remove from DOM after animation
+          setTimeout(function () {
+            if (alert.parentElement) {
+              alert.remove();
+              
+              // Check if this was the last message and hide container
+              const container = document.getElementById("messagesContainer");
+              if (container && container.querySelectorAll(".message-alert").length === 0) {
+                container.style.transition = "opacity 0.2s ease-out";
+                container.style.opacity = "0";
+                setTimeout(() => container.remove(), 200);
+              }
+            }
+          }, 400);
+        }
+      }
     </script>
     {% block extra_js %} {% endblock %}
   </body>
