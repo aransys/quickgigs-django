@@ -24,6 +24,7 @@ urlpatterns = [
     path('<int:pk>/apply/', views.apply_to_gig, name='apply_to_gig'),
     path('<int:pk>/applications/', views.gig_applications, name='gig_applications'),
     path('my-applications/', views.my_applications, name='my_applications'),
+    path('my-gigs/', views.my_gigs, name='my_gigs'),
     path('application/<int:pk>/', views.ApplicationDetailView.as_view(), name='application_detail'),
     path('application/<int:pk>/update-status/', views.update_application_status, name='update_application_status'),
     path('application/<int:pk>/withdraw/', views.withdraw_application, name='withdraw_application'),

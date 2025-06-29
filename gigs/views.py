@@ -132,7 +132,7 @@ class GigCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # Automatically set the employer to the current user
         form.instance.employer = self.request.user
-        messages.success(self.request, "Gig posted successfully!")
+        messages.success(self.request, "Gig posted successfully! You can manage it from your 'My Gigs' page.")
         return super().form_valid(form)
 
 class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -242,6 +242,33 @@ def my_applications(request):
         'applications': applications,
     }
     return render(request, 'gigs/my_applications.html', context)
+
+@login_required
+def my_gigs(request):
+    """View for employers to see all their posted gigs"""
+    gigs = Gig.objects.filter(
+        employer=request.user
+    ).prefetch_related('applications').order_by('-created_at')
+    
+    # Calculate summary statistics
+    total_gigs = gigs.count()
+    active_gigs = gigs.filter(is_active=True).count()
+    total_applications = sum(gig.applications.count() for gig in gigs)
+    pending_applications = sum(gig.applications.filter(status='pending').count() for gig in gigs)
+    
+    # Add application counts to each gig
+    for gig in gigs:
+        gig.application_count = gig.applications.count()
+        gig.pending_applications = gig.applications.filter(status='pending').count()
+    
+    context = {
+        'gigs': gigs,
+        'total_gigs': total_gigs,
+        'active_gigs': active_gigs,
+        'total_applications': total_applications,
+        'pending_applications': pending_applications,
+    }
+    return render(request, 'gigs/my_gigs.html', context)
 
 @login_required
 def gig_applications(request, pk):
