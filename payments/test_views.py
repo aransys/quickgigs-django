@@ -219,8 +219,8 @@ class PaymentViewTest(TestCase):
         self.assertContains(response, 'Payment History')
         self.assertContains(response, payment1.description)
         self.assertContains(response, payment2.description)
-        self.assertContains(response, '$9.99')
-        self.assertContains(response, '$19.99')
+        self.assertContains(response, '£9.99')
+        self.assertContains(response, '£19.99')
     
     def test_payment_history_view_empty_state(self):
         """Test payment history with no payments"""
@@ -263,8 +263,8 @@ class PaymentViewTest(TestCase):
         response = self.client.get(url)
         
         # Should only see own payment
-        self.assertContains(response, '$9.99')
-        self.assertNotContains(response, '$19.99')
+        self.assertContains(response, '£9.99')
+        self.assertNotContains(response, '£19.99')
 
 
 class PaymentIntegrationTest(TestCase):
@@ -299,7 +299,7 @@ class PaymentIntegrationTest(TestCase):
         
         # Should show feature button for non-featured gig
         self.assertContains(response, 'Feature This Gig')
-        self.assertContains(response, '$9.99')
+        self.assertContains(response, '£9.99')
     
     def test_gig_detail_page_hides_feature_button_for_featured(self):
         """Test that featured gigs don't show feature button"""
