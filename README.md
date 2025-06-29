@@ -334,10 +334,11 @@ class Payment(models.Model):
 ```
 
 **2.2 ✅ Multiple Original Custom Django Models**:
-- **Gig Model**: Complete job posting system with categories, budgets, deadlines, and status management
-- **Application Model**: Job application system with cover letters, proposed rates, and status tracking
-- **UserProfile Model**: Extended user functionality with roles, skills, and company information
-- **Payment Model**: E-commerce transaction tracking with Stripe integration
+- **Gig Model**: Complete job posting system with 8 categories, budget validation, deadlines, and status management
+- **Application Model**: Job application system with cover letters, proposed rates, 5-state status workflow, and unique constraints
+- **UserProfile Model**: Extended user functionality with employer/freelancer roles, skills, and company information
+- **Payment Model**: E-commerce transaction tracking with Stripe integration and 4 payment types
+- **PaymentHistory Model**: Complete audit trail for payment status changes
 
 **2.3 ✅ Form Validation for Database Records**:
 - **GigForm**: Creates Gig records with validation (budget > 0, required fields)
@@ -348,28 +349,28 @@ class Payment(models.Model):
 **2.4 ✅ Complete CRUD Functionality Implementation**:
 
 **Create Operations**:
-- User registration and profile creation
-- Gig posting with category and budget selection
-- Job applications with cover letters
-- Payment processing for featured gigs
+- User registration and automatic profile creation via Django signals
+- Gig posting with 8-category selection and budget validation
+- Job applications with cover letters and proposed rates
+- Payment processing for featured gigs with Stripe integration
 
 **Read Operations**:
-- Gig listings with filtering and search
+- Gig listings with filtering, search, and featured prioritization
 - User profiles with role-based information display
-- Application management for employers
-- Payment history and transaction tracking
+- Application management dashboard for employers with status grouping
+- Payment history and transaction tracking with audit trail
 
 **Update Operations**:
-- Gig editing with ownership verification
-- Profile updates with form validation
-- Application status updates by employers
-- Gig activation/deactivation toggle
+- Gig editing with ownership verification and field validation
+- Profile updates with role-specific form validation
+- Application status updates by employers (5-state workflow)
+- Gig activation/deactivation toggle with business logic
 
 **Delete Operations**:
-- Gig deletion with ownership checks
-- Application withdrawal by applicants
-- Profile information removal
-- Secure data deletion with CASCADE relationships
+- Gig deletion with ownership checks and related data cleanup
+- Application withdrawal by applicants with status tracking
+- Profile information removal with user consent
+- Secure data deletion with CASCADE relationships and audit preservation
 
 ### Learning Outcome 3: Authentication & Authorization ✅
 
@@ -654,8 +655,9 @@ quickgigs_project/
 erDiagram
     User ||--|| UserProfile : "1:1 auto-created via signals"
     User ||--o{ Gig : "posts (employer)"
+    User ||--o{ Application : "applies (freelancer)"
     User ||--o{ Payment : "makes payments"
-    User ||--o{ Task : "legacy relationship"
+    Gig ||--o{ Application : "receives applications"
     Gig ||--o{ Payment : "can be featured"
     Payment ||--o{ PaymentHistory : "audit trail"
 
@@ -664,6 +666,8 @@ erDiagram
         string username "unique"
         string email "unique"
         string password "hashed PBKDF2"
+        string first_name "optional"
+        string last_name "optional"
         datetime date_joined
         boolean is_active
         boolean is_staff
@@ -675,7 +679,7 @@ erDiagram
         string user_type "employer/freelancer"
         text bio "optional"
         text skills "comma-separated"
-        decimal hourly_rate "nullable"
+        decimal hourly_rate "nullable for employers"
         string company_name "employers only"
         string phone "optional"
         datetime created_at
@@ -686,23 +690,37 @@ erDiagram
         int employer_id FK "User"
         string title "max 200 chars"
         text description "detailed requirements"
-        decimal budget "max 8 digits, 2 decimal"
-        string location "default Remote"
-        string category "choice field"
+        decimal budget "max 10 digits, 2 decimal"
+        string location "max 100 chars"
+        string category "8 category choices"
         date deadline "nullable"
         boolean is_active "default true"
         boolean is_featured "premium placement"
         datetime created_at "auto timestamp"
+        datetime updated_at "auto timestamp"
+    }
+
+    Application {
+        int id PK
+        int gig_id FK "Gig"
+        int applicant_id FK "User"
+        text cover_letter "required explanation"
+        decimal proposed_rate "optional counter-offer"
+        string status "pending/reviewed/accepted/rejected/withdrawn"
+        text employer_notes "internal notes"
+        datetime created_at
+        datetime updated_at
+        unique_constraint "gig_applicant" "prevents duplicate applications"
     }
 
     Payment {
         int id PK
         int user_id FK "User who paid"
         int gig_id FK "nullable, gig being featured"
-        decimal amount "payment amount"
+        decimal amount "max 10 digits, 2 decimal"
         string stripe_payment_id "unique, Stripe reference"
-        string payment_type "featured_gig etc"
-        string status "pending/completed/failed"
+        string payment_type "4 payment types"
+        string status "pending/completed/failed/refunded"
         text description "payment description"
         datetime created_at
         datetime updated_at
@@ -716,15 +734,6 @@ erDiagram
         string new_status "current status"
         text notes "change reason"
         datetime created_at "audit timestamp"
-    }
-
-    Task {
-        int id PK "LEGACY MODEL"
-        string title "preserved functionality"
-        text description
-        boolean completed "task status"
-        date due_date "nullable"
-        datetime created_at
     }
 ```
 
@@ -994,25 +1003,51 @@ class UserProfile(models.Model):
 class Gig(models.Model):
     CATEGORY_CHOICES = [
         ('web_dev', 'Web Development'),
-        ('design', 'Design & Graphics'),
-        ('writing', 'Writing & Content'),
-        ('marketing', 'Marketing & Social Media'),
+        ('design', 'Graphic Design'),
+        ('writing', 'Content Writing'),
+        ('marketing', 'Digital Marketing'),
         ('data_entry', 'Data Entry'),
-        ('admin', 'Administrative'),
-        ('tech_support', 'Tech Support'),
+        ('translation', 'Translation'),
+        ('video_editing', 'Video Editing'),
         ('other', 'Other'),
     ]
 
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    employer = models.ForeignKey(User, on_delete=models.CASCADE)
-    budget = models.DecimalField(max_digits=8, decimal_places=2)
-    location = models.CharField(max_length=100, default='Remote')
+    description = models.TextField()
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posted_gigs')
+    budget = models.DecimalField(max_digits=10, decimal_places=2)
+    location = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     deadline = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)  # Premium feature
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+```
+
+#### Application Model (Job Application System)
+
+```python
+class Application(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('reviewed', 'Reviewed'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('withdrawn', 'Withdrawn'),
+    ]
+    
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='applications')
+    applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications')
+    cover_letter = models.TextField(help_text="Explain why you're the right fit for this gig")
+    proposed_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    employer_notes = models.TextField(blank=True, help_text="Internal notes from employer")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ['gig', 'applicant']  # Prevent duplicate applications
 ```
 
 #### Payment Model

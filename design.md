@@ -411,7 +411,9 @@ QuickGigs Platform/
 erDiagram
     USER ||--o{ GIG : "posts"
     USER ||--|| USERPROFILE : "has"
+    USER ||--o{ APPLICATION : "applies"
     USER ||--o{ PAYMENT : "makes"
+    GIG ||--o{ APPLICATION : "receives"
     GIG ||--o{ PAYMENT : "for"
     PAYMENT ||--o{ PAYMENTHISTORY : "tracks"
 
@@ -420,6 +422,8 @@ erDiagram
         string username
         string email
         string password_hash
+        string first_name
+        string last_name
         datetime date_joined
         boolean is_active
     }
@@ -442,12 +446,26 @@ erDiagram
         string title
         text description
         decimal budget
-        string location "default:Remote"
-        string category
+        string location
+        string category "8 choices"
         date deadline
         boolean is_active
         boolean is_featured
         datetime created_at
+        datetime updated_at
+    }
+
+    APPLICATION {
+        int id PK
+        int gig_id FK
+        int applicant_id FK
+        text cover_letter
+        decimal proposed_rate "nullable"
+        string status "5 states"
+        text employer_notes
+        datetime created_at
+        datetime updated_at
+        unique_constraint "gig_applicant"
     }
 
     PAYMENT {
@@ -456,8 +474,8 @@ erDiagram
         int gig_id FK "nullable"
         decimal amount
         string stripe_payment_id "unique"
-        string payment_type
-        string status "default:pending"
+        string payment_type "4 types"
+        string status "4 states"
         text description
         datetime created_at
         datetime updated_at
@@ -477,26 +495,38 @@ erDiagram
 ### Data Relationships Explained
 
 1. **User → UserProfile** (1:1)
-
    - Every User has exactly one UserProfile
-   - Profile created automatically on registration
-   - Stores role-specific information
+   - Profile created automatically on registration via Django signals
+   - Stores role-specific information (employer/freelancer)
 
 2. **User → Gig** (1:Many)
-
    - Employers can post multiple gigs
    - Each gig belongs to one employer
    - Cascade delete for data integrity
 
-3. **User → Payment** (1:Many)
+3. **User → Application** (1:Many)
+   - Freelancers can apply to multiple gigs
+   - Each application belongs to one freelancer
+   - Unique constraint prevents duplicate applications per gig
 
+4. **Gig → Application** (1:Many)
+   - Each gig can receive multiple applications
+   - Applications linked to specific gigs
+   - Status workflow: pending → reviewed → accepted/rejected
+
+5. **User → Payment** (1:Many)
    - Users can make multiple payments
    - Track payment history per user
-   - Supports various payment types
+   - Supports 4 payment types (gig posting, featured gig, premium profile, application boost)
 
-4. **Gig → Payment** (1:Many)
+6. **Gig → Payment** (1:Many)
    - Gigs can have associated payments (featured upgrades)
    - Nullable relationship for non-gig payments
+
+7. **Payment → PaymentHistory** (1:Many)
+   - Complete audit trail for all payment status changes
+   - Tracks who made changes and when
+   - Preserves payment history for compliance
 
 ### Navigation Design Strategy
 
