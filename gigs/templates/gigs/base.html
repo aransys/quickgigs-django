@@ -42,7 +42,7 @@
   <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
     <nav
-      class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container"
+      class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container md:relative sticky top-0 z-50"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -353,6 +353,17 @@
         </div>
       </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button
+      id="scrollToTop"
+      class="fixed bottom-6 right-6 bg-brand-500 hover:bg-brand-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 invisible z-40"
+      onclick="scrollToTop()"
+      aria-label="Scroll to top"
+    >
+      <i class="fas fa-chevron-up text-lg"></i>
+    </button>
+
     <!-- JavaScript -->
     <script>
       function toggleDropdown() {
@@ -397,6 +408,26 @@
           !button.contains(event.target)
         ) {
           dropdown.classList.remove("show");
+        }
+      });
+
+      // Scroll to Top functionality
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Show/hide scroll to top button based on scroll position
+      window.addEventListener("scroll", function () {
+        const scrollButton = document.getElementById("scrollToTop");
+        if (window.pageYOffset > 300) {
+          scrollButton.classList.remove("opacity-0", "invisible");
+          scrollButton.classList.add("opacity-100", "visible");
+        } else {
+          scrollButton.classList.add("opacity-0", "invisible");
+          scrollButton.classList.remove("opacity-100", "visible");
         }
       });
     </script>
