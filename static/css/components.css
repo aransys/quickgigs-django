@@ -214,15 +214,37 @@
 
 /* Mobile menu improvements */
 .mobile-menu {
-  @apply fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
-
+.mobile-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
 .mobile-menu-content {
-  @apply fixed top-0 right-0 h-full w-64 bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 18rem;
+  background: #fff;
+  border-radius: 0 0 0 2rem;
+  box-shadow: 0 8px 32px 0 rgba(60, 72, 88, 0.18), 0 2px 8px 0 rgba(60, 72, 88, 0.10);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
-
-.mobile-menu-content.show {
-  @apply translate-x-0;
+.mobile-menu.show .mobile-menu-content {
+  transform: translateX(0);
 }
 
 /* Ensure mobile menu is never shown on desktop */
