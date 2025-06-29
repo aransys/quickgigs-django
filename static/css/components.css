@@ -279,6 +279,39 @@ footer .text-left {
   text-align: center !important;
 }
 
+/* Desktop footer layout */
+@media (min-width: 768px) {
+  footer.bg-gray-800 .max-w-7xl {
+    display: block !important;
+    text-align: left !important;
+  }
+  footer.bg-gray-800 .flex.items-center.mb-4 {
+    justify-content: flex-start !important;
+  }
+  footer.bg-gray-800 .text-right {
+    text-align: right !important;
+  }
+  footer.bg-gray-800 .text-left {
+    text-align: left !important;
+  }
+  footer.bg-gray-800 .grid.md\\:grid-cols-2 > div:first-child {
+    text-align: left !important;
+  }
+  footer.bg-gray-800 .grid.md\\:grid-cols-2 > div:last-child {
+    text-align: right !important;
+  }
+  /* Force left alignment for logo section */
+  footer.bg-gray-800 .grid > div:first-child {
+    text-align: left !important;
+  }
+  footer.bg-gray-800 .grid > div:first-child .flex {
+    justify-content: flex-start !important;
+  }
+  footer.bg-gray-800 .grid > div:first-child p {
+    text-align: left !important;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
   .nav-link-improved {
     font-size: 0.5rem !important;
