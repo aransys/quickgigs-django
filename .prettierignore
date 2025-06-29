@@ -1,0 +1,11 @@
+# Django templates
+**/templates/**/*.html
+*.html
+
+# Static files
+static/
+staticfiles/
+
+# Other files to ignore
+*.md
+*.txt 
