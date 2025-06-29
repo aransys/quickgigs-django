@@ -112,7 +112,7 @@
     <div class="grid md:grid-cols-3 gap-8">
       {% for gig in featured_gigs %}
       <div
-        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-yellow-200"
+        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-yellow-200 flex flex-col h-full"
       >
         <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3">
           <div class="flex items-center text-yellow-900">
@@ -120,28 +120,33 @@
             <span class="font-semibold">Featured Gig</span>
           </div>
         </div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-xl font-semibold text-gray-800 mb-3">
             {{ gig.title }}
           </h3>
-          <p class="text-gray-600 mb-4">
+          <p class="text-gray-600 mb-4 flex-grow">
             {{ gig.description|truncatewords:20 }}
           </p>
-          <div class="flex justify-between items-center mb-4">
-            <span class="text-2xl font-bold text-green-600"
-              >{{ gig.budget|currency }}</span
+          <div class="mt-auto">
+            <div class="space-y-2 mb-4">
+              <div class="text-2xl font-bold text-green-600">
+                {{ gig.budget|currency }}
+              </div>
+              <div>
+                <span
+                  class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-md text-xs font-medium border"
+                >
+                  {{ gig.get_category_display }}
+                </span>
+              </div>
+            </div>
+            <a
+              href="{% url 'gigs:gig_detail' gig.pk %}"
+              class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center block"
             >
-            <span
-              class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
-              >{{ gig.get_category_display }}</span
-            >
+              View Details
+            </a>
           </div>
-          <a
-            href="{% url 'gigs:gig_detail' gig.pk %}"
-            class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center block"
-          >
-            View Details
-          </a>
         </div>
       </div>
       {% endfor %}
@@ -164,30 +169,35 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {% for gig in recent_gigs %}
       <div
-        class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100"
+        class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100 flex flex-col h-full"
       >
         <h3 class="text-lg font-semibold text-gray-800 mb-3">
           {{ gig.title }}
         </h3>
-        <p class="text-gray-600 mb-4">{{ gig.description|truncatewords:15 }}</p>
-        <div class="flex items-center justify-between mb-4">
-          <span class="text-xl font-bold text-green-600"
-            >{{ gig.budget|currency }}</span
-          >
-          <span class="text-sm text-gray-500"
-            >{{ gig.created_at|timesince }} ago</span
-          >
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
-            >{{ gig.location }}</span
-          >
-          <a
-            href="{% url 'gigs:gig_detail' gig.pk %}"
-            class="text-brand-500 hover:text-brand-600 font-medium"
-          >
-            View Details →
-          </a>
+        <p class="text-gray-600 mb-4 flex-grow">
+          {{ gig.description|truncatewords:15 }}
+        </p>
+        <div class="mt-auto">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xl font-bold text-green-600"
+              >{{ gig.budget|currency }}</span
+            >
+            <span class="text-sm text-gray-500"
+              >{{ gig.created_at|timesince }} ago</span
+            >
+          </div>
+          <div class="flex justify-between items-center">
+            <span
+              class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+              >{{ gig.location }}</span
+            >
+            <a
+              href="{% url 'gigs:gig_detail' gig.pk %}"
+              class="text-brand-500 hover:text-brand-600 font-medium"
+            >
+              View Details →
+            </a>
+          </div>
         </div>
       </div>
       {% empty %}

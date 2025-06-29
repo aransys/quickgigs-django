@@ -41,36 +41,58 @@
   </head>
   <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container">
+    <nav
+      class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
           <!-- Logo Section -->
           <div class="flex items-center">
             <a href="{% url 'core:home' %}" class="flex items-center space-x-3">
-              <div class="bg-brand-500 p-2 rounded-lg">
-                <i class="fas fa-briefcase text-white text-xl"></i>
+              <div class="bg-brand-500 p-1 rounded-lg">
+                <i
+                  class="fas fa-briefcase text-white text-lg md:text-lg lg:text-xl xl:text-2xl"
+                ></i>
               </div>
-              <span class="text-3xl font-bold text-brand-500">QuickGigs</span>
+              <span
+                class="text-lg md:text-lg lg:text-xl xl:text-2xl font-bold text-brand-500"
+                >QuickGigs</span
+              >
             </a>
           </div>
           <!-- Desktop Navigation -->
           <div class="hidden md:flex items-center">
             <div class="flex space-x-2 mr-6">
-              <a href="{% url 'core:home' %}" class="nav-link-improved{% if request.path == '/' %} nav-link-active{% endif %}">
+              <a
+                href="{% url 'core:home' %}"
+                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/' %} nav-link-active{% endif %}"
+              >
                 <i class="fas fa-home mr-2"></i>Home
               </a>
-              <a href="{% url 'gigs:gig_list' %}" class="nav-link-improved{% if request.path == '/gigs/' %} nav-link-active{% endif %}">
+              <a
+                href="{% url 'gigs:gig_list' %}"
+                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/' %} nav-link-active{% endif %}"
+              >
                 <i class="fas fa-search mr-2"></i>Browse Gigs
               </a>
               {% if user.is_authenticated %}
-              <a href="{% url 'gigs:gig_create' %}" class="nav-link-improved{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}">
+              <a
+                href="{% url 'gigs:gig_create' %}"
+                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}"
+              >
                 <i class="fas fa-plus mr-2"></i>Post Gig
               </a>
               {% endif %}
-              <a href="{% url 'core:about' %}" class="nav-link-improved{% if request.path == '/about/' %} nav-link-active{% endif %}">
+              <a
+                href="{% url 'core:about' %}"
+                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/about/' %} nav-link-active{% endif %}"
+              >
                 <i class="fas fa-info-circle mr-2"></i>About
               </a>
-              <a href="{% url 'core:contact' %}" class="nav-link-improved{% if request.path == '/contact/' %} nav-link-active{% endif %}">
+              <a
+                href="{% url 'core:contact' %}"
+                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/contact/' %} nav-link-active{% endif %}"
+              >
                 <i class="fas fa-envelope mr-2"></i>Contact
               </a>
             </div>
@@ -78,52 +100,81 @@
             <div class="border-l border-gray-300 pl-6">
               {% if user.is_authenticated %}
               <div class="relative flex items-center" style="height: 100%">
-                <button class="user-menu-button" onclick="toggleDropdown()" aria-label="User menu">
+                <button
+                  class="user-menu-button"
+                  onclick="toggleDropdown()"
+                  aria-label="User menu"
+                >
                   <div class="flex items-center space-x-3">
-                    <div class="bg-gradient-to-r from-brand-500 to-brand-600 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm">
+                    <div
+                      class="bg-gradient-to-r from-brand-500 to-brand-600 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm"
+                    >
                       <i class="fas fa-user text-sm"></i>
                     </div>
                     <div class="hidden lg:block text-left">
-                      <p class="text-sm font-medium text-gray-900">{{ user.username }}</p>
-                      <p class="text-xs text-gray-500">{{ user.userprofile.get_user_type_display }}</p>
+                      <p class="text-sm font-medium text-gray-900">
+                        {{ user.username }}
+                      </p>
+                      <p class="text-xs text-gray-500">
+                        {{ user.userprofile.get_user_type_display }}
+                      </p>
                     </div>
-                    <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200"></i>
+                    <i
+                      class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200"
+                    ></i>
                   </div>
                 </button>
                 <!-- Dropdown Menu -->
                 <div id="userDropdown" class="dropdown-menu">
                   <!-- User Header -->
                   <div class="px-4 py-3 border-b border-gray-100">
-                    <p class="text-sm font-medium text-gray-900">{{ user.username }}</p>
+                    <p class="text-sm font-medium text-gray-900">
+                      {{ user.username }}
+                    </p>
                     <p class="text-xs text-gray-500">{{ user.email }}</p>
                   </div>
                   <!-- Menu Items -->
                   <div class="py-2">
-                    <a href="{% url 'accounts:profile' %}" class="dropdown-item">
+                    <a
+                      href="{% url 'accounts:profile' %}"
+                      class="dropdown-item"
+                    >
                       <div class="dropdown-item-icon bg-blue-100">
                         <i class="fas fa-user text-blue-600 text-sm"></i>
                       </div>
                       <div class="dropdown-item-content">
                         <div class="dropdown-item-title">View Profile</div>
-                        <div class="dropdown-item-description">See your public profile</div>
+                        <div class="dropdown-item-description">
+                          See your public profile
+                        </div>
                       </div>
                     </a>
-                    <a href="{% url 'accounts:profile_edit' %}" class="dropdown-item">
+                    <a
+                      href="{% url 'accounts:profile_edit' %}"
+                      class="dropdown-item"
+                    >
                       <div class="dropdown-item-icon bg-purple-100">
                         <i class="fas fa-edit text-purple-600 text-sm"></i>
                       </div>
                       <div class="dropdown-item-content">
                         <div class="dropdown-item-title">Edit Profile</div>
-                        <div class="dropdown-item-description">Update your information</div>
+                        <div class="dropdown-item-description">
+                          Update your information
+                        </div>
                       </div>
                     </a>
-                    <a href="{% url 'payments:payment_history' %}" class="dropdown-item">
+                    <a
+                      href="{% url 'payments:payment_history' %}"
+                      class="dropdown-item"
+                    >
                       <div class="dropdown-item-icon bg-green-100">
                         <i class="fas fa-history text-green-600 text-sm"></i>
                       </div>
                       <div class="dropdown-item-content">
                         <div class="dropdown-item-title">Payment History</div>
-                        <div class="dropdown-item-description">View transaction history</div>
+                        <div class="dropdown-item-description">
+                          View transaction history
+                        </div>
                       </div>
                     </a>
                   </div>
@@ -136,7 +187,9 @@
                       </div>
                       <div class="dropdown-item-content">
                         <div class="dropdown-item-title">Sign Out</div>
-                        <div class="dropdown-item-description">Log out of your account</div>
+                        <div class="dropdown-item-description">
+                          Log out of your account
+                        </div>
                       </div>
                     </a>
                   </div>
@@ -144,10 +197,16 @@
               </div>
               {% else %}
               <div class="flex items-center space-x-4">
-                <a href="{% url 'accounts:login' %}" class="text-gray-600 hover:text-brand-500 font-medium transition-colors duration-200">
+                <a
+                  href="{% url 'accounts:login' %}"
+                  class="text-gray-600 hover:text-brand-500 font-medium transition-colors duration-200"
+                >
                   Sign In
                 </a>
-                <a href="{% url 'accounts:signup' %}" class="bg-brand-500 text-white px-4 py-2 rounded-lg hover:bg-brand-600 transition-colors duration-200 font-medium">
+                <a
+                  href="{% url 'accounts:signup' %}"
+                  class="bg-brand-500 text-white px-4 py-2 rounded-lg hover:bg-brand-600 transition-colors duration-200 font-medium"
+                >
                   Sign Up
                 </a>
               </div>
@@ -156,7 +215,11 @@
           </div>
           <!-- Mobile menu button -->
           <div class="md:hidden flex items-center">
-            <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-500 p-2">
+            <button
+              id="mobileMenuButton"
+              onclick="toggleMobileMenu()"
+              class="text-gray-600 hover:text-brand-500 p-2"
+            >
               <i class="fas fa-bars text-xl"></i>
             </button>
           </div>
@@ -165,38 +228,73 @@
       <!-- Mobile Navigation -->
       <div id="mobileMenu" class="mobile-menu">
         <div class="mobile-menu-content p-6">
-          <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none">
+          <button
+            onclick="toggleMobileMenu()"
+            class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none"
+          >
             <i class="fas fa-times"></i>
           </button>
           <nav class="flex flex-col gap-3 mt-8">
-            <a href="{% url 'core:home' %}" class="nav-link-improved{% if request.path == '/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'core:home' %}"
+              class="nav-link-improved{% if request.path == '/' %} nav-link-active{% endif %}"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-home mr-2"></i>Home
             </a>
-            <a href="{% url 'gigs:gig_list' %}" class="nav-link-improved{% if request.path == '/gigs/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'gigs:gig_list' %}"
+              class="nav-link-improved{% if request.path == '/gigs/' %} nav-link-active{% endif %}"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-search mr-2"></i>Browse Gigs
             </a>
             {% if user.is_authenticated %}
-            <a href="{% url 'gigs:gig_create' %}" class="nav-link-improved{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'gigs:gig_create' %}"
+              class="nav-link-improved{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-plus mr-2"></i>Post Gig
             </a>
             {% endif %}
-            <a href="{% url 'core:about' %}" class="nav-link-improved{% if request.path == '/about/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'core:about' %}"
+              class="nav-link-improved{% if request.path == '/about/' %} nav-link-active{% endif %}"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-info-circle mr-2"></i>About
             </a>
-            <a href="{% url 'core:contact' %}" class="nav-link-improved{% if request.path == '/contact/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'core:contact' %}"
+              class="nav-link-improved{% if request.path == '/contact/' %} nav-link-active{% endif %}"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-envelope mr-2"></i>Contact
             </a>
             {% if user.is_authenticated %}
             <div class="border-t border-gray-200 my-4"></div>
-            <a href="{% url 'accounts:logout' %}" class="nav-link-improved text-red-600" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'accounts:logout' %}"
+              class="nav-link-improved text-red-600"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
             </a>
             {% else %}
             <div class="border-t border-gray-200 my-4"></div>
-            <a href="{% url 'accounts:login' %}" class="nav-link-improved" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'accounts:login' %}"
+              class="nav-link-improved"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-sign-in-alt mr-2"></i>Sign In
             </a>
-            <a href="{% url 'accounts:signup' %}" class="nav-link-improved bg-brand-500 text-white" onclick="closeMobileMenu()">
+            <a
+              href="{% url 'accounts:signup' %}"
+              class="nav-link-improved bg-brand-500 text-white"
+              onclick="closeMobileMenu()"
+            >
               <i class="fas fa-user-plus mr-2"></i>Sign Up
             </a>
             {% endif %}
@@ -262,7 +360,7 @@
         if (dropdown.classList.contains("show")) {
           dropdown.classList.remove("show");
         } else {
-          document.querySelectorAll(".dropdown-menu.show").forEach(menu => {
+          document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
             menu.classList.remove("show");
           });
           dropdown.classList.add("show");
@@ -270,7 +368,7 @@
       }
 
       function toggleMobileMenu() {
-        console.log('toggleMobileMenu called');
+        console.log("toggleMobileMenu called");
         const menu = document.getElementById("mobileMenu");
         const button = document.getElementById("mobileMenuButton");
         if (!menu.classList.contains("show")) {
@@ -290,10 +388,14 @@
       }
 
       // Close dropdown when clicking outside
-      document.addEventListener("click", function(event) {
+      document.addEventListener("click", function (event) {
         const dropdown = document.getElementById("userDropdown");
         const button = document.querySelector(".user-menu-button");
-        if (dropdown && !dropdown.contains(event.target) && !button.contains(event.target)) {
+        if (
+          dropdown &&
+          !dropdown.contains(event.target) &&
+          !button.contains(event.target)
+        ) {
           dropdown.classList.remove("show");
         }
       });
