@@ -430,6 +430,38 @@
           scrollButton.classList.remove("opacity-100", "visible");
         }
       });
+
+      // Auto-dismiss alerts after 5 seconds
+      document.addEventListener("DOMContentLoaded", function () {
+        const alerts = document.querySelectorAll(".alert");
+        alerts.forEach(function (alert) {
+          // Add progress bar for visual countdown
+          const progressBar = document.createElement("div");
+          progressBar.className =
+            "absolute bottom-0 left-0 h-1 bg-current opacity-30 transition-all duration-5000 ease-linear";
+          progressBar.style.width = "100%";
+          alert.style.position = "relative";
+          alert.appendChild(progressBar);
+
+          // Start countdown immediately
+          setTimeout(function () {
+            progressBar.style.width = "0%";
+          }, 100);
+
+          // Auto-dismiss after 5 seconds
+          setTimeout(function () {
+            if (alert.parentElement) {
+              alert.style.transition =
+                "opacity 0.3s ease-out, transform 0.3s ease-out";
+              alert.style.opacity = "0";
+              alert.style.transform = "translateY(-10px)";
+              setTimeout(function () {
+                alert.remove();
+              }, 300);
+            }
+          }, 5000);
+        });
+      });
     </script>
     {% block extra_js %} {% endblock %}
   </body>
