@@ -156,7 +156,7 @@
           </div>
           <!-- Mobile menu button -->
           <div class="md:hidden flex items-center">
-            <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-500 p-2">
+            <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-500 p-2">
               <i class="fas fa-bars text-xl"></i>
             </button>
           </div>
@@ -164,21 +164,43 @@
       </div>
       <!-- Mobile Navigation -->
       <div id="mobileMenu" class="mobile-menu">
-        <div class="px-4 pt-2 pb-4 space-y-2">
-          <a href="{% url 'core:home' %}" class="mobile-nav-link">
-            <i class="fas fa-home mr-3"></i>Home
-          </a>
-          <a href="{% url 'gigs:gig_list' %}" class="mobile-nav-link">
-            <i class="fas fa-briefcase mr-3"></i>Browse Gigs
-          </a>
-          {% if user.is_authenticated and user.userprofile.is_employer %}
-          <a href="{% url 'gigs:gig_create' %}" class="mobile-nav-link">
-            <i class="fas fa-plus mr-3"></i>Post a Gig
-          </a>
-          {% endif %}
-          <a href="{% url 'core:about' %}" class="mobile-nav-link">
-            <i class="fas fa-info-circle mr-3"></i>About
-          </a>
+        <div class="mobile-menu-content p-6">
+          <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none">
+            <i class="fas fa-times"></i>
+          </button>
+          <nav class="flex flex-col gap-3 mt-8">
+            <a href="{% url 'core:home' %}" class="nav-link-improved{% if request.path == '/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+              <i class="fas fa-home mr-2"></i>Home
+            </a>
+            <a href="{% url 'gigs:gig_list' %}" class="nav-link-improved{% if request.path == '/gigs/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+              <i class="fas fa-search mr-2"></i>Browse Gigs
+            </a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'gigs:gig_create' %}" class="nav-link-improved{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+              <i class="fas fa-plus mr-2"></i>Post Gig
+            </a>
+            {% endif %}
+            <a href="{% url 'core:about' %}" class="nav-link-improved{% if request.path == '/about/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+              <i class="fas fa-info-circle mr-2"></i>About
+            </a>
+            <a href="{% url 'core:contact' %}" class="nav-link-improved{% if request.path == '/contact/' %} nav-link-active{% endif %}" onclick="closeMobileMenu()">
+              <i class="fas fa-envelope mr-2"></i>Contact
+            </a>
+            {% if user.is_authenticated %}
+            <div class="border-t border-gray-200 my-4"></div>
+            <a href="{% url 'accounts:logout' %}" class="nav-link-improved text-red-600" onclick="closeMobileMenu()">
+              <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
+            </a>
+            {% else %}
+            <div class="border-t border-gray-200 my-4"></div>
+            <a href="{% url 'accounts:login' %}" class="nav-link-improved" onclick="closeMobileMenu()">
+              <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+            </a>
+            <a href="{% url 'accounts:signup' %}" class="nav-link-improved bg-brand-500 text-white" onclick="closeMobileMenu()">
+              <i class="fas fa-user-plus mr-2"></i>Sign Up
+            </a>
+            {% endif %}
+          </nav>
         </div>
       </div>
       <!-- Messages -->
@@ -240,7 +262,6 @@
         if (dropdown.classList.contains("show")) {
           dropdown.classList.remove("show");
         } else {
-          // Close any other open dropdowns first
           document.querySelectorAll(".dropdown-menu.show").forEach(menu => {
             menu.classList.remove("show");
           });
@@ -249,26 +270,31 @@
       }
 
       function toggleMobileMenu() {
+        console.log('toggleMobileMenu called');
         const menu = document.getElementById("mobileMenu");
-        menu.classList.toggle("show");
+        const button = document.getElementById("mobileMenuButton");
+        if (!menu.classList.contains("show")) {
+          menu.classList.add("show");
+          if (button) button.style.display = "none";
+        } else {
+          menu.classList.remove("show");
+          if (button) button.style.display = "inline-flex";
+        }
+      }
+
+      function closeMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        const button = document.getElementById("mobileMenuButton");
+        menu.classList.remove("show");
+        if (button) button.style.display = "inline-flex";
       }
 
       // Close dropdown when clicking outside
       document.addEventListener("click", function(event) {
         const dropdown = document.getElementById("userDropdown");
         const button = document.querySelector(".user-menu-button");
-        if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+        if (dropdown && !dropdown.contains(event.target) && !button.contains(event.target)) {
           dropdown.classList.remove("show");
-        }
-      });
-
-      // Close dropdown on escape key
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          const dropdown = document.getElementById("userDropdown");
-          if (dropdown && dropdown.classList.contains("show")) {
-            dropdown.classList.remove("show");
-          }
         }
       });
     </script>
