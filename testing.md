@@ -442,7 +442,7 @@ def feature_gig_checkout(request, gig_id):
                 'price_data': {
                     'currency': 'usd',
                     'product_data': {'name': f'Feature Gig: {gig.title}'},
-                    'unit_amount': 999,  # $9.99
+                    'unit_amount': 999,  # £9.99
                 },
                 'quantity': 1,
             }],
@@ -532,7 +532,7 @@ class PaymentIntegrationTest(TestCase):
 | ---- | ------------------------------------ | --------------------------- | -------------------- | ------ |
 | 1    | Login as gig owner                   | Authentication successful   | Session established  | ✅     |
 | 2    | Navigate to own non-featured gig     | Feature promotion visible   | UI component present | ✅     |
-| 3    | Click "Feature This Gig" ($9.99)     | Redirect to Stripe checkout | URL inspection       | ✅     |
+| 3    | Click "Feature This Gig" (£9.99)     | Redirect to Stripe checkout | URL inspection       | ✅     |
 | 4    | Enter test card: 4242 4242 4242 4242 | Card accepted               | Stripe validation    | ✅     |
 | 5    | Complete payment                     | Success page displays       | Confirmation shown   | ✅     |
 | 6    | Check gig status                     | Featured badge appears      | Visual verification  | ✅     |
@@ -1001,7 +1001,7 @@ class StripeIntegrationTest(TestCase):
         self.assertEqual(call_args['line_items'][0]['quantity'], 1)
         self.assertEqual(
             call_args['line_items'][0]['price_data']['unit_amount'],
-            999  # $9.99 in cents
+            999  # £9.99 in cents
         )
 
         # Verify redirect to Stripe

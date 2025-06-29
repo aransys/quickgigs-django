@@ -41,16 +41,18 @@ QuickGigs is a professional job board platform designed to connect employers wit
 ### Target Audience
 
 **Primary Users:**
+
 - **Employers**: Small businesses, startups, and entrepreneurs needing quick, reliable freelance work
 - **Freelancers**: Skilled professionals seeking flexible, well-paying opportunities
 
 **Secondary Users:**
+
 - **Platform Administrators**: Content moderation and payment management
 - **Potential Investors**: Demonstrating scalable SaaS business model
 
 ### Value Proposition
 
-- **For Employers**: Post jobs easily, feature listings for maximum visibility ($9.99), find quality freelancers
+- **For Employers**: Post jobs easily, feature listings for maximum visibility (£9.99), find quality freelancers
 - **For Freelancers**: Discover vetted opportunities, build professional profiles, transparent pricing
 - **Platform Benefits**: Secure Stripe payments, role-based access, mobile-responsive design
 
@@ -72,7 +74,7 @@ This project showcases a remarkable 6-day evolution from a basic todo applicatio
 
 - **🎯 Zero Test Failures**: Achieved 169/169 passing tests through systematic debugging
 - **⚡ 700% Performance Boost**: Optimized database queries from 21 to 3 through proper joins
-- **💳 Production Payment System**: Full Stripe integration with $9.99 featured gig monetization
+- **💳 Production Payment System**: Full Stripe integration with £9.99 featured gig monetization
 - **🏗️ Scalable Architecture**: Professional multi-app Django structure
 - **🔒 Security Implementation**: CSRF protection, authentication decorators, secure payment processing
 
@@ -86,7 +88,7 @@ This project showcases a remarkable 6-day evolution from a basic todo applicatio
 
 ### Business Model Implementation
 
-- **Revenue Generation**: $9.99 featured gig upgrades with immediate ROI for users
+- **Revenue Generation**: £9.99 featured gig upgrades with immediate ROI for users
 - **User Experience**: Professional onboarding flow with role selection
 - **Platform Metrics**: Real-time statistics dashboard with actual platform data
 - **Trust Building**: Complete about/contact pages, professional branding
@@ -95,22 +97,26 @@ This project showcases a remarkable 6-day evolution from a basic todo applicatio
 
 ### Learning Outcome 1: Full Stack Django Application ✅
 
-**1.1 Django Framework Design**: 
+**1.1 Django Framework Design**:
+
 - ✅ Multi-app architecture (core, gigs, accounts, payments)
 - ✅ Relational database with multiple models
 - ✅ Professional Django conventions
 
 **1.2 Front-end Design**:
+
 - ✅ Responsive Tailwind CSS implementation
 - ✅ Accessibility guidelines compliance
 - ✅ Professional UX design principles
 
 **1.3 Full Stack Implementation**:
+
 - ✅ Complete Django MVC pattern
 - ✅ Interactive frontend with CRUD operations
 - ✅ Multiple apps with reusable components
 
 **1.4-1.11 Technical Requirements**:
+
 - ✅ Form validation (user registration, gig creation)
 - ✅ Logical file structure following Django conventions
 - ✅ Clean code principles throughout
@@ -121,48 +127,57 @@ This project showcases a remarkable 6-day evolution from a basic todo applicatio
 
 ### Learning Outcome 2: Database Design ✅
 
-**2.1 Relational Database Schema**: 
+**2.1 Relational Database Schema**:
+
 - ✅ Clear relationships between User, UserProfile, Gig, and Payment models
 - ✅ Proper foreign key relationships and constraints
 
-**2.2 Custom Django Models**: 
+**2.2 Custom Django Models**:
+
 - ✅ Gig model (evolved from Task)
 - ✅ UserProfile model with roles
 - ✅ Payment model with status tracking
 
-**2.3 Form Validation**: 
+**2.3 Form Validation**:
+
 - ✅ User registration forms
 - ✅ Gig creation with validation
 - ✅ Profile update forms
 
-**2.4 CRUD Functionality**: 
+**2.4 CRUD Functionality**:
+
 - ✅ Complete Create, Read, Update, Delete for all models
 - ✅ Real-time UI updates
 
 ### Learning Outcome 3: Authentication & Authorization ✅
 
-**3.1 Authentication Mechanism**: 
+**3.1 Authentication Mechanism**:
+
 - ✅ User registration and login system
 - ✅ Clear user roles (Employer/Freelancer)
 - ✅ Automatic profile creation via Django signals
 
-**3.2 Access Control**: 
+**3.2 Access Control**:
+
 - ✅ Role-based page access
 - ✅ Anonymous vs authenticated user handling
 
-**3.3 Security Implementation**: 
+**3.3 Security Implementation**:
+
 - ✅ LoginRequiredMixin for protected views
 - ✅ User ownership verification for gig management
 - ✅ CSRF protection throughout
 
 ### Learning Outcome 4: E-commerce Payment System ✅
 
-**4.1 E-commerce Functionality**: 
+**4.1 E-commerce Functionality**:
+
 - ✅ Complete Stripe payment integration
-- ✅ Featured gig upgrade system ($9.99)
+- ✅ Featured gig upgrade system (£9.99)
 - ✅ Professional checkout flow
 
-**4.2 Feedback System**: 
+**4.2 Feedback System**:
+
 - ✅ Beautiful payment success pages
 - ✅ Helpful payment cancellation handling
 - ✅ Payment history tracking
@@ -170,24 +185,29 @@ This project showcases a remarkable 6-day evolution from a basic todo applicatio
 
 ### Learning Outcome 5: Version Control & Deployment ✅
 
-**5.1 Cloud Deployment**: 
+**5.1 Cloud Deployment**:
+
 - ✅ Live deployment on Heroku with PostgreSQL
 - ✅ Production vs development configuration
 
-**5.2 Code Quality**: 
+**5.2 Code Quality**:
+
 - ✅ No commented-out code in production
 - ✅ Clean, working deployment
 
-**5.3 Security**: 
+**5.3 Security**:
+
 - ✅ Environment variables for sensitive data
 - ✅ DEBUG=False in production
 - ✅ Secure secret key management
 
-**5.4 Version Control**: 
+**5.4 Version Control**:
+
 - ✅ Complete Git workflow with descriptive commits
 - ✅ Professional development documentation
 
-**5.5-5.6 Documentation**: 
+**5.5-5.6 Documentation**:
+
 - ✅ Comprehensive README with markdown formatting
 - ✅ Complete deployment procedures
 - ✅ Testing documentation
@@ -323,19 +343,21 @@ erDiagram
 ### Database Design Principles
 
 #### **1. User-Centric Architecture**
+
 - **Single User Model**: Django's built-in User for authentication
 - **Profile Extension**: UserProfile for business-specific data
 - **Role-Based Design**: Employer vs Freelancer distinction
 - **Signal-Based Creation**: Automatic profile creation on user registration
 
 #### **2. Business Logic Implementation**
+
 ```sql
 -- Role-based access control
-SELECT g.* FROM gigs_gig g 
+SELECT g.* FROM gigs_gig g
 WHERE g.employer_id = %user_id%  -- Only own gigs editable
 
--- Featured gig prioritization  
-SELECT g.* FROM gigs_gig g 
+-- Featured gig prioritization
+SELECT g.* FROM gigs_gig g
 ORDER BY g.is_featured DESC, g.created_at DESC
 
 -- Payment audit trail
@@ -345,6 +367,7 @@ WHERE p.user_id = %user_id%
 ```
 
 #### **3. Performance Optimizations**
+
 - **Strategic Indexing**: Foreign keys and frequently queried fields
 - **Query Optimization**: select_related() for JOIN operations
 - **Ordering Defaults**: Model Meta ordering for consistent results
@@ -364,6 +387,7 @@ class Gig(models.Model):
 ### Schema Evolution Strategy
 
 #### **Legacy Preservation**
+
 ```mermaid
 graph LR
     A[Original Task Model] --> B[Preserved for Compatibility]
@@ -373,12 +397,14 @@ graph LR
 ```
 
 **Evolution Benefits**:
+
 - **Backward Compatibility**: Original todo functionality preserved
 - **Zero Downtime**: Gradual migration without data loss
 - **Feature Enhancement**: Business-specific fields added incrementally
 - **User Experience**: Seamless transition for existing users
 
 #### **Data Migration Path**
+
 ```python
 # Future migration strategy (if needed)
 def migrate_tasks_to_gigs():
@@ -399,6 +425,7 @@ def migrate_tasks_to_gigs():
 ### Business Rules Implementation
 
 #### **Payment Processing Logic**
+
 ```mermaid
 flowchart TD
     A[User Clicks Feature Gig] --> B{User is Gig Owner?}
@@ -415,6 +442,7 @@ flowchart TD
 ```
 
 #### **User Profile Automation**
+
 ```python
 # Signal-based profile creation
 @receiver(post_save, sender=User)
@@ -426,19 +454,21 @@ def create_user_profile(sender, instance, created, **kwargs):
 ### Data Integrity Constraints
 
 #### **Database Level Constraints**
+
 - **Unique Constraints**: stripe_payment_id prevents duplicate payments
 - **Foreign Key Constraints**: Ensure referential integrity
 - **Check Constraints**: Validate enum choices (user_type, payment_status)
 - **Not Null Constraints**: Required fields enforced at database level
 
 #### **Application Level Validation**
+
 ```python
 # Model validation examples
 class Gig(models.Model):
     def clean(self):
         if self.deadline and self.deadline < timezone.now().date():
             raise ValidationError("Deadline cannot be in the past")
-        
+
         if self.budget <= 0:
             raise ValidationError("Budget must be positive")
 
@@ -451,12 +481,14 @@ class UserProfile(models.Model):
 ### Security Implementation
 
 #### **Data Protection Measures**
+
 - **Password Hashing**: PBKDF2 with salt (Django default)
 - **Payment Security**: Sensitive data stored in Stripe, not locally
 - **Access Control**: Row-level security through Django ORM filters
 - **Audit Trail**: Complete payment history tracking
 
 #### **Query Security**
+
 ```python
 # Secure query patterns used throughout
 # Prevents unauthorized data access
@@ -470,13 +502,15 @@ def get_user_payments(user):
 ### Performance Characteristics
 
 #### **Query Optimization Results**
-| Operation | Before Optimization | After Optimization | Improvement |
-|-----------|--------------------|--------------------|-------------|
-| **Gig List with Employers** | 21 queries | 3 queries | 700% faster |
-| **Homepage Load** | 15 queries | 4 queries | 375% faster |
-| **User Profile Access** | 8 queries | 2 queries | 400% faster |
+
+| Operation                   | Before Optimization | After Optimization | Improvement |
+| --------------------------- | ------------------- | ------------------ | ----------- |
+| **Gig List with Employers** | 21 queries          | 3 queries          | 700% faster |
+| **Homepage Load**           | 15 queries          | 4 queries          | 375% faster |
+| **User Profile Access**     | 8 queries           | 2 queries          | 400% faster |
 
 #### **Scalability Considerations**
+
 - **Horizontal Scaling**: Models designed for database sharding
 - **Caching Strategy**: Key queries identified for Redis caching
 - **Archive Strategy**: Soft deletes and data retention policies ready
@@ -485,13 +519,14 @@ def get_user_payments(user):
 ### Future Schema Enhancements
 
 #### **Planned Extensions**
+
 ```mermaid
 erDiagram
     Gig ||--o{ Application : "freelancer applies"
     Application ||--o{ Message : "communication"
     User ||--o{ Review : "gives/receives"
     UserProfile ||--o{ Portfolio : "showcases work"
-    
+
     Application {
         int id PK
         int gig_id FK
@@ -501,7 +536,7 @@ erDiagram
         string status
         datetime applied_at
     }
-    
+
     Message {
         int id PK
         int application_id FK
@@ -512,6 +547,7 @@ erDiagram
 ```
 
 **Expansion Ready**:
+
 - Job application system
 - User messaging platform
 - Rating and review system
@@ -547,6 +583,7 @@ Legacy: Task model (preserved for backward compatibility)
 ### Model Specifications
 
 #### UserProfile Model
+
 ```python
 class UserProfile(models.Model):
     USER_TYPE_CHOICES = [
@@ -564,6 +601,7 @@ class UserProfile(models.Model):
 ```
 
 #### Gig Model (Evolved from Task)
+
 ```python
 class Gig(models.Model):
     CATEGORY_CHOICES = [
@@ -576,7 +614,7 @@ class Gig(models.Model):
         ('tech_support', 'Tech Support'),
         ('other', 'Other'),
     ]
-    
+
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     employer = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -590,6 +628,7 @@ class Gig(models.Model):
 ```
 
 #### Payment Model
+
 ```python
 class Payment(models.Model):
     PAYMENT_TYPE_CHOICES = [
@@ -598,7 +637,7 @@ class Payment(models.Model):
         ('premium_profile', 'Premium Profile'),
         ('application_boost', 'Application Boost'),
     ]
-    
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     gig = models.ForeignKey(Gig, on_delete=models.SET_NULL, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -620,44 +659,51 @@ class Payment(models.Model):
 ### Core Platform Features
 
 #### 🏠 **Homepage & Discovery**
+
 - **Dynamic Content**: Real-time platform statistics (active gigs, users)
 - **Featured Gigs**: Premium placement with special badges
 - **Recent Opportunities**: Latest gigs with category filtering
 - **Responsive Design**: Mobile-first with Tailwind CSS
 
 #### 👤 **User Management**
+
 - **Multi-Step Registration**: Account creation → Role selection → Profile completion
 - **Role-Based Profiles**: Employer vs Freelancer with appropriate fields
 - **Authentication Flow**: Secure login/logout with proper redirects
 - **Profile Management**: Rich profiles with skills, rates, and company info
 
 #### 💼 **Job Board Functionality**
+
 - **Gig CRUD Operations**: Create, read, update, delete with ownership verification
 - **Category System**: 8 predefined categories for easy discovery
 - **Location Flexibility**: Remote work and location-specific opportunities
 - **Status Management**: Active/inactive gig control
 
 #### 💳 **Payment & Monetization**
+
 - **Stripe Integration**: Professional payment processing
-- **Featured Gig Upgrades**: $9.99 premium placement system
+- **Featured Gig Upgrades**: £9.99 premium placement system
 - **Payment History**: Complete transaction tracking
 - **Success/Cancel Handling**: Beautiful user feedback pages
 
 ### Advanced Features
 
 #### 🔍 **Search & Discovery**
+
 - **Category Filtering**: Browse by work type
 - **Budget Transparency**: Clear pricing displayed upfront
 - **Featured Highlighting**: Premium gigs prominently displayed
 - **Responsive Listings**: Mobile-optimized job cards
 
 #### 🛡️ **Security & Trust**
+
 - **User Ownership**: Users can only edit their own content
 - **CSRF Protection**: Secure form submissions
 - **Payment Security**: Stripe-secured transaction processing
 - **Role-Based Access**: Appropriate permissions for user types
 
 #### 📊 **Analytics & Insights**
+
 - **Platform Statistics**: Real-time user and gig counts
 - **Payment Tracking**: Revenue and transaction monitoring
 - **User Activity**: Registration and engagement metrics
@@ -667,12 +713,14 @@ class Payment(models.Model):
 ### Design System
 
 #### Visual Identity
+
 - **Primary Color**: Professional green (#10b981) representing growth and money
 - **Typography**: Clear hierarchy with readable fonts
 - **Iconography**: Font Awesome icons for consistent visual language
 - **Layout**: Card-based design for scannable content
 
 #### Responsive Design Strategy
+
 ```css
 /* Mobile-first approach */
 .hero-title {
@@ -690,22 +738,24 @@ class Payment(models.Model):
 ### User Experience Flows
 
 #### Employer Journey
+
 ```
 1. Homepage → View platform value
-2. Sign Up → Create account with email/password  
+2. Sign Up → Create account with email/password
 3. Role Selection → Choose "Employer" with visual benefits
 4. Profile Setup → Add company info and bio
 5. Post Gig → Create detailed job posting
-6. Feature Gig → Optional $9.99 upgrade for visibility
+6. Feature Gig → Optional £9.99 upgrade for visibility
 7. Manage Gigs → Edit, activate/deactivate listings
 ```
 
 #### Freelancer Journey
+
 ```
 1. Homepage → Browse available opportunities
 2. Gig Discovery → View detailed requirements and budgets
 3. Sign Up → Create account for future features
-4. Role Selection → Choose "Freelancer" 
+4. Role Selection → Choose "Freelancer"
 5. Profile Setup → Add skills, rates, portfolio info
 6. Application Process → (Foundation implemented for future)
 ```
@@ -730,29 +780,33 @@ class Payment(models.Model):
 ### Local Development Setup
 
 1. **Clone Repository**
+
    ```bash
    git clone <repository-url>
    cd quickgigs-django
    ```
 
 2. **Virtual Environment**
+
    ```bash
    # Windows
    python -m venv venv
    venv\Scripts\activate
-   
+
    # Mac/Linux
    python3 -m venv venv
    source venv/bin/activate
    ```
 
 3. **Install Dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Environment Variables**
    Create `.env` file:
+
    ```env
    SECRET_KEY=your-django-secret-key
    DEBUG=True
@@ -762,17 +816,20 @@ class Payment(models.Model):
    ```
 
 5. **Database Setup**
+
    ```bash
    python manage.py migrate
    python manage.py createsuperuser
    ```
 
 6. **Static Files**
+
    ```bash
    python manage.py collectstatic
    ```
 
 7. **Run Development Server**
+
    ```bash
    python manage.py runserver
    ```
@@ -785,17 +842,19 @@ class Payment(models.Model):
 ### Development Workflow
 
 #### Cross-Platform Compatibility
+
 ```bash
 # Windows Commands
 python manage.py runserver
 start http://localhost:8000
 
-# Mac/Linux Commands  
+# Mac/Linux Commands
 python3 manage.py runserver
 open http://localhost:8000
 ```
 
 #### Git Workflow
+
 ```bash
 git pull                    # Get latest changes
 # ... development work ...
@@ -803,6 +862,7 @@ git add .
 git commit -m "Descriptive commit message"
 git push                    # Share changes
 ```
+
 # ♿ Accessibility Compliance Documentation
 
 ## Overview
@@ -830,20 +890,20 @@ QuickGigs has been designed and developed with accessibility as a core principle
 
 ### Compliance Checklist
 
-| WCAG Principle | Guideline | Implementation Status | Evidence |
-|----------------|-----------|----------------------|----------|
-| **Perceivable** | Color contrast 4.5:1 minimum | ✅ Compliant | [Color audit results](#color--contrast) |
-| **Perceivable** | Text alternatives for images | ✅ Compliant | Alt attributes on all images |
-| **Perceivable** | Captions and transcripts | ✅ N/A | No video/audio content |
-| **Perceivable** | Content structure | ✅ Compliant | Semantic HTML throughout |
-| **Operable** | Keyboard accessible | ✅ Compliant | [Keyboard testing](#keyboard-navigation) |
-| **Operable** | No seizure triggers | ✅ Compliant | No flashing content |
-| **Operable** | Navigation assistance | ✅ Compliant | Skip links, landmarks |
-| **Understandable** | Readable text | ✅ Compliant | Clear language, readable fonts |
-| **Understandable** | Predictable navigation | ✅ Compliant | Consistent UI patterns |
-| **Understandable** | Input assistance | ✅ Compliant | Form labels, error messages |
-| **Robust** | Compatible markup | ✅ Compliant | Valid HTML5, semantic structure |
-| **Robust** | Assistive technology | ✅ Compliant | ARIA labels, proper semantics |
+| WCAG Principle     | Guideline                    | Implementation Status | Evidence                                 |
+| ------------------ | ---------------------------- | --------------------- | ---------------------------------------- |
+| **Perceivable**    | Color contrast 4.5:1 minimum | ✅ Compliant          | [Color audit results](#color--contrast)  |
+| **Perceivable**    | Text alternatives for images | ✅ Compliant          | Alt attributes on all images             |
+| **Perceivable**    | Captions and transcripts     | ✅ N/A                | No video/audio content                   |
+| **Perceivable**    | Content structure            | ✅ Compliant          | Semantic HTML throughout                 |
+| **Operable**       | Keyboard accessible          | ✅ Compliant          | [Keyboard testing](#keyboard-navigation) |
+| **Operable**       | No seizure triggers          | ✅ Compliant          | No flashing content                      |
+| **Operable**       | Navigation assistance        | ✅ Compliant          | Skip links, landmarks                    |
+| **Understandable** | Readable text                | ✅ Compliant          | Clear language, readable fonts           |
+| **Understandable** | Predictable navigation       | ✅ Compliant          | Consistent UI patterns                   |
+| **Understandable** | Input assistance             | ✅ Compliant          | Form labels, error messages              |
+| **Robust**         | Compatible markup            | ✅ Compliant          | Valid HTML5, semantic structure          |
+| **Robust**         | Assistive technology         | ✅ Compliant          | ARIA labels, proper semantics            |
 
 ---
 
@@ -852,119 +912,124 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### 1. Semantic HTML Structure
 
 **Implementation**:
+
 ```html
 <!-- Proper document structure with landmarks -->
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuickGigs - Professional Job Board Platform</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Skip navigation link -->
-    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
-    
+    <a href="#main-content" class="sr-only focus:not-sr-only"
+      >Skip to main content</a
+    >
+
     <!-- Semantic navigation -->
     <nav role="navigation" aria-label="Main navigation">
-        <ul role="menubar">
-            <li role="none">
-                <a href="/" role="menuitem" aria-current="page">Home</a>
-            </li>
-        </ul>
+      <ul role="menubar">
+        <li role="none">
+          <a href="/" role="menuitem" aria-current="page">Home</a>
+        </li>
+      </ul>
     </nav>
-    
+
     <!-- Main content area -->
     <main id="main-content" role="main">
-        <h1>Browse Available Gigs</h1>
-        <!-- Content -->
+      <h1>Browse Available Gigs</h1>
+      <!-- Content -->
     </main>
-    
+
     <!-- Footer information -->
     <footer role="contentinfo">
-        <!-- Footer content -->
+      <!-- Footer content -->
     </footer>
-</body>
+  </body>
 </html>
 ```
 
 ### 2. Accessible Form Design
 
 **Registration Form Example**:
+
 ```html
 <form method="post" class="space-y-6" novalidate>
-    {% csrf_token %}
-    
-    <!-- Username field with proper labeling -->
-    <div class="form-group">
-        <label for="id_username" class="form-label required">
-            Username
-            <span class="required-indicator" aria-label="required">*</span>
-        </label>
-        <input 
-            type="text" 
-            id="id_username" 
-            name="username" 
-            class="form-input"
-            aria-describedby="username-help username-error"
-            aria-required="true"
-            autocomplete="username"
-        >
-        <div id="username-help" class="form-help">
-            Choose a unique username for your account
-        </div>
-        {% if form.username.errors %}
-        <div id="username-error" class="form-error" role="alert" aria-live="polite">
-            {{ form.username.errors.0 }}
-        </div>
-        {% endif %}
+  {% csrf_token %}
+
+  <!-- Username field with proper labeling -->
+  <div class="form-group">
+    <label for="id_username" class="form-label required">
+      Username
+      <span class="required-indicator" aria-label="required">*</span>
+    </label>
+    <input
+      type="text"
+      id="id_username"
+      name="username"
+      class="form-input"
+      aria-describedby="username-help username-error"
+      aria-required="true"
+      autocomplete="username"
+    />
+    <div id="username-help" class="form-help">
+      Choose a unique username for your account
     </div>
-    
-    <!-- Email field with validation -->
-    <div class="form-group">
-        <label for="id_email" class="form-label required">
-            Email Address
-            <span class="required-indicator" aria-label="required">*</span>
-        </label>
-        <input 
-            type="email" 
-            id="id_email" 
-            name="email" 
-            class="form-input"
-            aria-describedby="email-help email-error"
-            aria-required="true"
-            autocomplete="email"
-        >
-        <div id="email-help" class="form-help">
-            We'll use this to send you important account notifications
-        </div>
-        {% if form.email.errors %}
-        <div id="email-error" class="form-error" role="alert" aria-live="polite">
-            {{ form.email.errors.0 }}
-        </div>
-        {% endif %}
+    {% if form.username.errors %}
+    <div id="username-error" class="form-error" role="alert" aria-live="polite">
+      {{ form.username.errors.0 }}
     </div>
-    
-    <!-- Submit button -->
-    <button 
-        type="submit" 
-        class="btn-primary w-full"
-        aria-describedby="submit-help"
-    >
-        Create Account
-    </button>
-    <div id="submit-help" class="form-help">
-        By creating an account, you agree to our terms of service
+    {% endif %}
+  </div>
+
+  <!-- Email field with validation -->
+  <div class="form-group">
+    <label for="id_email" class="form-label required">
+      Email Address
+      <span class="required-indicator" aria-label="required">*</span>
+    </label>
+    <input
+      type="email"
+      id="id_email"
+      name="email"
+      class="form-input"
+      aria-describedby="email-help email-error"
+      aria-required="true"
+      autocomplete="email"
+    />
+    <div id="email-help" class="form-help">
+      We'll use this to send you important account notifications
     </div>
+    {% if form.email.errors %}
+    <div id="email-error" class="form-error" role="alert" aria-live="polite">
+      {{ form.email.errors.0 }}
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Submit button -->
+  <button
+    type="submit"
+    class="btn-primary w-full"
+    aria-describedby="submit-help"
+  >
+    Create Account
+  </button>
+  <div id="submit-help" class="form-help">
+    By creating an account, you agree to our terms of service
+  </div>
 </form>
 ```
 
 ### 3. Navigation Accessibility
 
 **Main Navigation**:
+
 ```html
 <nav class="main-navigation" role="navigation" aria-label="Main navigation">
     <!-- Mobile menu button -->
-    <button 
+    <button
         class="mobile-menu-button md:hidden"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -973,11 +1038,11 @@ QuickGigs has been designed and developed with accessibility as a core principle
         <span class="sr-only">Open main menu</span>
         <i class="fas fa-bars" aria-hidden="true"></i>
     </button>
-    
+
     <!-- Desktop navigation -->
     <div class="hidden md:flex space-x-8">
-        <a 
-            href="{% url 'core:home' %}" 
+        <a
+            href="{% url 'core:home' %}"
             class="nav-link"
             {% if request.resolver_match.url_name == 'home' %}
             aria-current="page"
@@ -986,9 +1051,9 @@ QuickGigs has been designed and developed with accessibility as a core principle
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Home</span>
         </a>
-        
-        <a 
-            href="{% url 'gigs:gig_list' %}" 
+
+        <a
+            href="{% url 'gigs:gig_list' %}"
             class="nav-link"
             {% if 'gigs' in request.resolver_match.url_name %}
             aria-current="page"
@@ -998,10 +1063,10 @@ QuickGigs has been designed and developed with accessibility as a core principle
             <span>Browse Gigs</span>
         </a>
     </div>
-    
+
     <!-- Mobile menu (hidden by default) -->
-    <div 
-        id="mobile-menu" 
+    <div
+        id="mobile-menu"
         class="mobile-menu hidden"
         role="menu"
         aria-labelledby="mobile-menu-button"
@@ -1014,62 +1079,68 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### 4. Card Component Accessibility
 
 **Gig Card Example**:
+
 ```html
-<article 
-    class="gig-card"
-    role="article"
-    aria-labelledby="gig-{{ gig.id }}-title"
-    aria-describedby="gig-{{ gig.id }}-meta"
+<article
+  class="gig-card"
+  role="article"
+  aria-labelledby="gig-{{ gig.id }}-title"
+  aria-describedby="gig-{{ gig.id }}-meta"
 >
-    <!-- Featured badge with proper announcement -->
-    {% if gig.is_featured %}
-    <div class="featured-badge" role="img" aria-label="Featured listing">
-        <i class="fas fa-star" aria-hidden="true"></i>
-        <span>Featured</span>
+  <!-- Featured badge with proper announcement -->
+  {% if gig.is_featured %}
+  <div class="featured-badge" role="img" aria-label="Featured listing">
+    <i class="fas fa-star" aria-hidden="true"></i>
+    <span>Featured</span>
+  </div>
+  {% endif %}
+
+  <!-- Gig title as heading -->
+  <h3 id="gig-{{ gig.id }}-title" class="gig-title">
+    <a href="{% url 'gigs:gig_detail' gig.pk %}" class="gig-link">
+      {{ gig.title }}
+    </a>
+  </h3>
+
+  <!-- Gig description -->
+  <p class="gig-description">{{ gig.description|truncatewords:25 }}</p>
+
+  <!-- Gig metadata -->
+  <div id="gig-{{ gig.id }}-meta" class="gig-meta">
+    <div class="gig-budget">
+      <span class="sr-only">Budget:</span>
+      <span class="budget-amount" aria-label="Budget {{ gig.budget|currency }}">
+        {{ gig.budget|currency }}
+      </span>
     </div>
-    {% endif %}
-    
-    <!-- Gig title as heading -->
-    <h3 id="gig-{{ gig.id }}-title" class="gig-title">
-        <a href="{% url 'gigs:gig_detail' gig.pk %}" class="gig-link">
-            {{ gig.title }}
-        </a>
-    </h3>
-    
-    <!-- Gig description -->
-    <p class="gig-description">
-        {{ gig.description|truncatewords:25 }}
-    </p>
-    
-    <!-- Gig metadata -->
-    <div id="gig-{{ gig.id }}-meta" class="gig-meta">
-        <div class="gig-budget">
-            <span class="sr-only">Budget:</span>
-            <span class="budget-amount" aria-label="Budget {{ gig.budget|currency }}">
-                {{ gig.budget|currency }}
-            </span>
-        </div>
-        
-        <div class="gig-location">
-            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span>{{ gig.location }}</span>
-        </div>
-        
-        <div class="gig-category">
-            <span class="category-badge" role="img" aria-label="Category: {{ gig.get_category_display }}">
-                {{ gig.get_category_display }}
-            </span>
-        </div>
+
+    <div class="gig-location">
+      <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+      <span>{{ gig.location }}</span>
     </div>
-    
-    <!-- Posted by information -->
-    <div class="gig-employer">
-        <span class="sr-only">Posted by:</span>
-        <span>{{ gig.employer.username }}</span>
-        <time datetime="{{ gig.created_at|date:'c' }}" aria-label="Posted {{ gig.created_at|timesince }} ago">
-            {{ gig.created_at|timesince }} ago
-        </time>
+
+    <div class="gig-category">
+      <span
+        class="category-badge"
+        role="img"
+        aria-label="Category: {{ gig.get_category_display }}"
+      >
+        {{ gig.get_category_display }}
+      </span>
     </div>
+  </div>
+
+  <!-- Posted by information -->
+  <div class="gig-employer">
+    <span class="sr-only">Posted by:</span>
+    <span>{{ gig.employer.username }}</span>
+    <time
+      datetime="{{ gig.created_at|date:'c' }}"
+      aria-label="Posted {{ gig.created_at|timesince }} ago"
+    >
+      {{ gig.created_at|timesince }} ago
+    </time>
+  </div>
 </article>
 ```
 
@@ -1080,32 +1151,34 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### Brand Color Accessibility
 
 **Primary Color Palette**:
+
 ```css
 /* Brand colors with contrast ratios */
 :root {
-    --brand-50: #f0fdf4;    /* Background - 19.1:1 ratio */
-    --brand-100: #dcfce7;   /* Light background - 16.8:1 ratio */
-    --brand-500: #10b981;   /* Primary - 4.7:1 ratio on white */
-    --brand-600: #059669;   /* Hover - 5.9:1 ratio on white */
-    --brand-700: #047857;   /* Active - 7.2:1 ratio on white */
-    --brand-900: #064e3b;   /* Text - 12.1:1 ratio on white */
+  --brand-50: #f0fdf4; /* Background - 19.1:1 ratio */
+  --brand-100: #dcfce7; /* Light background - 16.8:1 ratio */
+  --brand-500: #10b981; /* Primary - 4.7:1 ratio on white */
+  --brand-600: #059669; /* Hover - 5.9:1 ratio on white */
+  --brand-700: #047857; /* Active - 7.2:1 ratio on white */
+  --brand-900: #064e3b; /* Text - 12.1:1 ratio on white */
 }
 ```
 
 ### Contrast Audit Results
 
-| Color Combination | Contrast Ratio | WCAG AA Status | Usage |
-|-------------------|----------------|----------------|--------|
-| **Brand-900 on White** | 12.1:1 | ✅ Excellent | Body text, headings |
-| **Brand-700 on White** | 7.2:1 | ✅ Excellent | Interactive elements |
-| **Brand-600 on White** | 5.9:1 | ✅ Pass | Hover states |
-| **Brand-500 on White** | 4.7:1 | ✅ Pass | Primary buttons |
-| **Gray-600 on White** | 7.0:1 | ✅ Excellent | Secondary text |
-| **White on Brand-600** | 3.1:1 | ⚠️ Enhanced for readability | Button text (added shadow) |
+| Color Combination      | Contrast Ratio | WCAG AA Status              | Usage                      |
+| ---------------------- | -------------- | --------------------------- | -------------------------- |
+| **Brand-900 on White** | 12.1:1         | ✅ Excellent                | Body text, headings        |
+| **Brand-700 on White** | 7.2:1          | ✅ Excellent                | Interactive elements       |
+| **Brand-600 on White** | 5.9:1          | ✅ Pass                     | Hover states               |
+| **Brand-500 on White** | 4.7:1          | ✅ Pass                     | Primary buttons            |
+| **Gray-600 on White**  | 7.0:1          | ✅ Excellent                | Secondary text             |
+| **White on Brand-600** | 3.1:1          | ⚠️ Enhanced for readability | Button text (added shadow) |
 
 ### Color Independence
 
 **Implementation**:
+
 - Information never conveyed by color alone
 - Icons accompany color coding
 - Text labels support all visual indicators
@@ -1114,20 +1187,20 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ```css
 /* Example: Status indicators with multiple cues */
 .status-active {
-    color: #10b981;               /* Color cue */
-    font-weight: 600;             /* Weight cue */
+  color: #10b981; /* Color cue */
+  font-weight: 600; /* Weight cue */
 }
 .status-active::before {
-    content: "● ";                /* Symbol cue */
+  content: "● "; /* Symbol cue */
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-    .btn-primary {
-        border: 2px solid currentColor;
-        background: transparent;
-        color: #000;
-    }
+  .btn-primary {
+    border: 2px solid currentColor;
+    background: transparent;
+    color: #000;
+  }
 }
 ```
 
@@ -1138,75 +1211,86 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### Keyboard Accessibility Implementation
 
 **Focus Management**:
+
 ```css
 /* Visible focus indicators */
-.focus-visible, 
+.focus-visible,
 *:focus-visible {
-    outline: 2px solid #10b981;
-    outline-offset: 2px;
-    border-radius: 4px;
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Enhanced focus for interactive elements */
 .btn:focus-visible {
-    outline: 3px solid #10b981;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
+  outline: 3px solid #10b981;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
 }
 
 /* Skip link styling */
 .sr-only:focus {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    z-index: 9999;
-    padding: 0.5rem 1rem;
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    clip: auto;
-    width: auto;
-    height: auto;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  clip: auto;
+  width: auto;
+  height: auto;
 }
 ```
 
 ### Keyboard Navigation Patterns
 
 **Tab Order Management**:
+
 ```html
 <!-- Logical tab order maintained -->
 <div class="gig-actions">
-    <a href="{% url 'gigs:gig_detail' gig.pk %}" tabindex="0">View Details</a>
-    {% if user == gig.employer %}
-    <a href="{% url 'gigs:gig_update' gig.pk %}" tabindex="0">Edit</a>
-    <button type="button" tabindex="0" data-delete-gig="{{ gig.pk }}">Delete</button>
-    {% endif %}
+  <a href="{% url 'gigs:gig_detail' gig.pk %}" tabindex="0">View Details</a>
+  {% if user == gig.employer %}
+  <a href="{% url 'gigs:gig_update' gig.pk %}" tabindex="0">Edit</a>
+  <button type="button" tabindex="0" data-delete-gig="{{ gig.pk }}">
+    Delete
+  </button>
+  {% endif %}
 </div>
 
 <!-- Modal focus trapping -->
-<div class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
-    <div class="modal-content">
-        <h2 id="modal-title">Confirm Deletion</h2>
-        <p>Are you sure you want to delete this gig?</p>
-        <div class="modal-actions">
-            <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn-danger">Delete</button>
-        </div>
+<div
+  class="modal"
+  role="dialog"
+  aria-labelledby="modal-title"
+  aria-modal="true"
+>
+  <div class="modal-content">
+    <h2 id="modal-title">Confirm Deletion</h2>
+    <p>Are you sure you want to delete this gig?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" data-dismiss="modal">
+        Cancel
+      </button>
+      <button type="submit" class="btn-danger">Delete</button>
     </div>
+  </div>
 </div>
 ```
 
 ### Keyboard Shortcuts
 
-| Key Combination | Action | Context |
-|-----------------|--------|---------|
-| **Tab** | Navigate forward | All interactive elements |
-| **Shift + Tab** | Navigate backward | All interactive elements |
-| **Enter** | Activate button/link | Buttons, links |
-| **Space** | Activate button | Buttons, checkboxes |
-| **Escape** | Close modal/dropdown | Modal dialogs, dropdowns |
-| **Arrow Keys** | Navigate menu items | Dropdown menus |
-| **Home/End** | First/last item | Lists, menus |
+| Key Combination | Action               | Context                  |
+| --------------- | -------------------- | ------------------------ |
+| **Tab**         | Navigate forward     | All interactive elements |
+| **Shift + Tab** | Navigate backward    | All interactive elements |
+| **Enter**       | Activate button/link | Buttons, links           |
+| **Space**       | Activate button      | Buttons, checkboxes      |
+| **Escape**      | Close modal/dropdown | Modal dialogs, dropdowns |
+| **Arrow Keys**  | Navigate menu items  | Dropdown menus           |
+| **Home/End**    | First/last item      | Lists, menus             |
 
 ---
 
@@ -1215,109 +1299,102 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### ARIA Implementation
 
 **Live Regions for Dynamic Content**:
+
 ```html
 <!-- Payment status updates -->
-<div 
-    id="payment-status" 
-    aria-live="polite" 
-    aria-atomic="true"
-    class="sr-only"
->
-    <!-- Dynamically updated content -->
+<div id="payment-status" aria-live="polite" aria-atomic="true" class="sr-only">
+  <!-- Dynamically updated content -->
 </div>
 
 <!-- Form validation messages -->
-<div 
-    id="form-messages" 
-    aria-live="assertive" 
-    aria-atomic="true"
-    role="status"
->
-    <!-- Validation feedback -->
+<div id="form-messages" aria-live="assertive" aria-atomic="true" role="status">
+  <!-- Validation feedback -->
 </div>
 
 <!-- Loading states -->
-<div 
-    role="status" 
-    aria-live="polite"
-    aria-label="Loading gigs"
-    class="loading-indicator"
+<div
+  role="status"
+  aria-live="polite"
+  aria-label="Loading gigs"
+  class="loading-indicator"
 >
-    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-    <span>Loading available gigs...</span>
+  <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+  <span>Loading available gigs...</span>
 </div>
 ```
 
 ### Descriptive ARIA Labels
 
 **Complex UI Components**:
+
 ```html
 <!-- Gig filtering -->
 <form role="search" aria-label="Filter gigs">
-    <fieldset>
-        <legend>Filter Options</legend>
-        
-        <label for="category-filter">Category</label>
-        <select 
-            id="category-filter" 
-            name="category"
-            aria-describedby="category-help"
-        >
-            <option value="">All Categories</option>
-            <option value="web_dev">Web Development</option>
-            <option value="design">Design & Graphics</option>
-        </select>
-        <div id="category-help" class="sr-only">
-            Filter gigs by project category
-        </div>
-    </fieldset>
-    
-    <button type="submit" aria-label="Apply filters to gig list">
-        Filter Results
-    </button>
+  <fieldset>
+    <legend>Filter Options</legend>
+
+    <label for="category-filter">Category</label>
+    <select
+      id="category-filter"
+      name="category"
+      aria-describedby="category-help"
+    >
+      <option value="">All Categories</option>
+      <option value="web_dev">Web Development</option>
+      <option value="design">Design & Graphics</option>
+    </select>
+    <div id="category-help" class="sr-only">
+      Filter gigs by project category
+    </div>
+  </fieldset>
+
+  <button type="submit" aria-label="Apply filters to gig list">
+    Filter Results
+  </button>
 </form>
 
 <!-- Payment processing -->
 <section aria-labelledby="payment-section">
-    <h2 id="payment-section">Feature Your Gig</h2>
-    <div 
-        class="payment-card"
-        role="region"
-        aria-labelledby="feature-benefits"
-        aria-describedby="feature-cost"
-    >
-        <h3 id="feature-benefits">Benefits of Featured Placement</h3>
-        <ul role="list">
-            <li role="listitem">
-                <i class="fas fa-check" aria-hidden="true"></i>
-                Top placement in search results
-            </li>
-            <li role="listitem">
-                <i class="fas fa-check" aria-hidden="true"></i>
-                Special featured badge display
-            </li>
-        </ul>
-        
-        <div id="feature-cost" class="pricing">
-            <span class="price" aria-label="Cost: $9.99 one-time payment">$9.99</span>
-            <span class="frequency">One-time payment</span>
-        </div>
-        
-        <button 
-            type="button"
-            class="btn-primary"
-            aria-describedby="feature-cost feature-benefits"
-            data-feature-gig="{{ gig.pk }}"
-        >
-            Feature This Gig
-        </button>
+  <h2 id="payment-section">Feature Your Gig</h2>
+  <div
+    class="payment-card"
+    role="region"
+    aria-labelledby="feature-benefits"
+    aria-describedby="feature-cost"
+  >
+    <h3 id="feature-benefits">Benefits of Featured Placement</h3>
+    <ul role="list">
+      <li role="listitem">
+        <i class="fas fa-check" aria-hidden="true"></i>
+        Top placement in search results
+      </li>
+      <li role="listitem">
+        <i class="fas fa-check" aria-hidden="true"></i>
+        Special featured badge display
+      </li>
+    </ul>
+
+    <div id="feature-cost" class="pricing">
+      <span class="price" aria-label="Cost: £9.99 one-time payment">£9.99</span>
+      <span class="frequency">One-time payment</span>
     </div>
+
+    <button
+      type="button"
+      class="btn-primary"
+      aria-describedby="feature-cost feature-benefits"
+      data-feature-gig="{{ gig.pk }}"
+    >
+      Feature This Gig
+    </button>
+  </div>
 </section>
 ```
 
 ### Screen Reader Testing Results
 
 **NVDA Testing** (Windows):
+
 - ✅ All headings properly announced
 - ✅ Form labels correctly associated
 - ✅ Navigation landmarks identified
@@ -1325,6 +1402,7 @@ QuickGigs has been designed and developed with accessibility as a core principle
 - ✅ Payment flow clearly narrated
 
 **VoiceOver Testing** (macOS):
+
 - ✅ Rotor navigation working
 - ✅ Quick navigation by headings
 - ✅ Form completion guided properly
@@ -1340,51 +1418,54 @@ QuickGigs has been designed and developed with accessibility as a core principle
 **WCAG Guidelines**: Minimum 44px x 44px touch targets
 
 **Implementation**:
+
 ```css
 /* Touch-friendly button sizing */
 .btn {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 12px 16px;
-    touch-action: manipulation;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 16px;
+  touch-action: manipulation;
 }
 
 /* Form inputs optimized for touch */
 .form-input {
-    min-height: 48px;
-    padding: 12px 16px;
-    font-size: 16px; /* Prevents zoom on iOS */
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 16px; /* Prevents zoom on iOS */
 }
 
 /* Navigation touch targets */
 .nav-link {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
 }
 ```
 
 ### Mobile-Specific Accessibility
 
 **Viewport Configuration**:
+
 ```html
-<meta 
-    name="viewport" 
-    content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
->
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+/>
 ```
 
 **Touch Gesture Support**:
+
 ```css
 /* Swipe gesture accommodation */
 .swipeable {
-    touch-action: pan-x pan-y;
+  touch-action: pan-x pan-y;
 }
 
 /* Prevent accidental zooming */
 .payment-form {
-    touch-action: manipulation;
+  touch-action: manipulation;
 }
 ```
 
@@ -1395,12 +1476,13 @@ QuickGigs has been designed and developed with accessibility as a core principle
 ### Automated Testing Tools
 
 #### **Lighthouse Accessibility Score**
+
 ```
 Accessibility: 95/100
 
 ✅ Passed Audits (23):
 - Image elements have [alt] attributes
-- Form elements have associated labels  
+- Form elements have associated labels
 - Background and foreground colors have sufficient contrast ratio
 - [aria-*] attributes match their roles
 - Button elements have an accessible name
@@ -1424,10 +1506,11 @@ None - All critical accessibility requirements met
 ```
 
 #### **WAVE Web Accessibility Evaluator**
+
 ```
 Summary:
 ✅ 0 Errors
-✅ 0 Contrast Errors  
+✅ 0 Contrast Errors
 ⚠️ 2 Alerts (minor improvements)
 ✅ 47 Features (accessibility features detected)
 ✅ 15 Structural Elements
@@ -1435,6 +1518,7 @@ Summary:
 ```
 
 #### **axe DevTools Results**
+
 ```
 Accessibility Issues Found: 0 Critical, 0 Serious, 2 Moderate
 
@@ -1451,29 +1535,32 @@ Accessibility Issues Found: 0 Critical, 0 Serious, 2 Moderate
 ### Manual Testing Results
 
 #### **Keyboard Navigation Testing**
-| Workflow | Status | Notes |
-|----------|--------|-------|
-| **Site Navigation** | ✅ Pass | All pages accessible via keyboard |
-| **Form Completion** | ✅ Pass | All forms completable without mouse |
-| **Gig Creation** | ✅ Pass | Complete workflow keyboard accessible |
-| **Payment Process** | ✅ Pass | Stripe integration maintains accessibility |
-| **Profile Management** | ✅ Pass | All profile features keyboard navigable |
+
+| Workflow               | Status  | Notes                                      |
+| ---------------------- | ------- | ------------------------------------------ |
+| **Site Navigation**    | ✅ Pass | All pages accessible via keyboard          |
+| **Form Completion**    | ✅ Pass | All forms completable without mouse        |
+| **Gig Creation**       | ✅ Pass | Complete workflow keyboard accessible      |
+| **Payment Process**    | ✅ Pass | Stripe integration maintains accessibility |
+| **Profile Management** | ✅ Pass | All profile features keyboard navigable    |
 
 #### **Screen Reader Testing**
-| Test Scenario | NVDA (Windows) | VoiceOver (macOS) | Notes |
-|---------------|----------------|-------------------|-------|
-| **Homepage Navigation** | ✅ Pass | ✅ Pass | Clear structure announced |
-| **Gig Browsing** | ✅ Pass | ✅ Pass | Cards properly labeled |
-| **Form Completion** | ✅ Pass | ✅ Pass | Labels and errors clear |
-| **Payment Flow** | ✅ Pass | ✅ Pass | Process well narrated |
-| **Error Handling** | ✅ Pass | ✅ Pass | Errors announced properly |
+
+| Test Scenario           | NVDA (Windows) | VoiceOver (macOS) | Notes                     |
+| ----------------------- | -------------- | ----------------- | ------------------------- |
+| **Homepage Navigation** | ✅ Pass        | ✅ Pass           | Clear structure announced |
+| **Gig Browsing**        | ✅ Pass        | ✅ Pass           | Cards properly labeled    |
+| **Form Completion**     | ✅ Pass        | ✅ Pass           | Labels and errors clear   |
+| **Payment Flow**        | ✅ Pass        | ✅ Pass           | Process well narrated     |
+| **Error Handling**      | ✅ Pass        | ✅ Pass           | Errors announced properly |
 
 #### **Mobile Accessibility Testing**
+
 | Device Type | Touch Navigation | Voice Control | Switch Control |
-|-------------|------------------|---------------|----------------|
-| **iOS** | ✅ Pass | ✅ Pass | ✅ Pass |
-| **Android** | ✅ Pass | ✅ Pass | ✅ Pass |
-| **Tablet** | ✅ Pass | ✅ Pass | ✅ Pass |
+| ----------- | ---------------- | ------------- | -------------- |
+| **iOS**     | ✅ Pass          | ✅ Pass       | ✅ Pass        |
+| **Android** | ✅ Pass          | ✅ Pass       | ✅ Pass        |
+| **Tablet**  | ✅ Pass          | ✅ Pass       | ✅ Pass        |
 
 ---
 
@@ -1482,6 +1569,7 @@ Accessibility Issues Found: 0 Critical, 0 Serious, 2 Moderate
 ### Testing Checklist
 
 #### **Pre-Deployment Testing**
+
 - [ ] Run automated accessibility scan (Lighthouse, WAVE, axe)
 - [ ] Test complete keyboard navigation workflow
 - [ ] Verify screen reader compatibility (NVDA, VoiceOver)
@@ -1494,6 +1582,7 @@ Accessibility Issues Found: 0 Critical, 0 Serious, 2 Moderate
 - [ ] Alternative text review
 
 #### **Manual Testing Protocol**
+
 ```python
 # Accessibility testing checklist
 ACCESSIBILITY_TESTS = [
@@ -1531,6 +1620,7 @@ We are committed to ensuring digital accessibility for people with disabilities.
 **Feedback**: We welcome feedback on the accessibility of QuickGigs. If you encounter accessibility barriers, please contact us with details of the issue.
 
 **Known Limitations**:
+
 - Some third-party content (Stripe checkout) may have different accessibility features
 - We are working to address minor issues identified in testing
 
@@ -1544,6 +1634,7 @@ We are committed to ensuring digital accessibility for people with disabilities.
 ### Future Enhancements
 
 **Planned Improvements**:
+
 1. **Voice Navigation**: Enhanced voice control support
 2. **Personalization**: User preference settings for accessibility needs
 3. **Alternative Formats**: Content available in multiple formats
@@ -1553,6 +1644,7 @@ We are committed to ensuring digital accessibility for people with disabilities.
 ### Accessibility Monitoring
 
 **Ongoing Practices**:
+
 - Monthly automated accessibility scans
 - Quarterly manual testing reviews
 - Annual comprehensive accessibility audit
@@ -1570,18 +1662,21 @@ This accessibility implementation demonstrates our commitment to inclusive desig
 #### Test Categories
 
 **Unit Tests** (80 tests)
+
 - Model validation and methods
-- Form validation logic  
+- Form validation logic
 - Template tag functionality
 - Utility functions
 
 **Integration Tests** (65 tests)
+
 - View behavior with authentication
 - Database operations
 - Template rendering
 - User workflows
 
 **Security Tests** (24 tests)
+
 - Authentication requirements
 - CSRF protection
 - Permission verification
@@ -1598,7 +1693,7 @@ python manage.py test --verbosity=2
 
 # Run specific app tests
 python manage.py test accounts
-python manage.py test gigs  
+python manage.py test gigs
 python manage.py test payments
 python manage.py test core
 
@@ -1611,21 +1706,24 @@ coverage html
 ### Critical Test Scenarios
 
 #### Payment Flow Testing
+
 ```python
 # Test data for Stripe integration
 STRIPE_TEST_CARDS = {
     'success': '4242424242424242',
-    'decline': '4000000000000002', 
+    'decline': '4000000000000002',
     'auth_required': '4000002500003155'
 }
 ```
 
 #### Database Performance Testing
+
 - **Query Optimization**: Verified 700% improvement (21→3 queries)
 - **N+1 Problem Resolution**: select_related() implementation
 - **Load Testing**: Homepage performance with multiple gigs
 
-#### Security Testing  
+#### Security Testing
+
 - **Authentication Bypass**: Verified protection on all protected views
 - **CSRF Attack Prevention**: Confirmed token validation
 - **Data Access Control**: Users can only access their own data
@@ -1637,6 +1735,7 @@ STRIPE_TEST_CARDS = {
 **Result**: 169/169 tests passing with production-ready reliability
 
 **Key Fixes Implemented**:
+
 - Template syntax error resolution
 - Payment model unique constraint handling
 - Authentication redirect flow correction
@@ -1648,7 +1747,9 @@ STRIPE_TEST_CARDS = {
 ### Platform Evaluation Process
 
 #### Attempted: Railway (Challenges Encountered)
+
 **Issues Faced**:
+
 - GitHub integration consistently failed
 - CLI connection timeouts
 - Complex service architecture (separate PostgreSQL + web services)
@@ -1658,7 +1759,9 @@ STRIPE_TEST_CARDS = {
 **Lessons Learned**: Modern platforms aren't always better than established solutions
 
 #### Successful: Heroku (Production Platform)
+
 **Why Heroku Won**:
+
 - Proven Django reliability
 - Clear documentation and error messages
 - Integrated PostgreSQL addon
@@ -1670,12 +1773,13 @@ STRIPE_TEST_CARDS = {
 #### Heroku Configuration
 
 **Required Files**:
+
 ```
 # Procfile
 web: gunicorn quickgigs_project.wsgi
 release: python manage.py migrate
 
-# runtime.txt  
+# runtime.txt
 python-3.9.19
 
 # requirements.txt (production)
@@ -1687,6 +1791,7 @@ whitenoise==6.5.0
 ```
 
 **Settings Configuration**:
+
 ```python
 # Production database
 import dj_database_url
@@ -1734,7 +1839,7 @@ heroku logs --tail          # Real-time logs
 heroku ps                   # Dyno status
 heroku apps:info           # Application details
 
-# Database monitoring  
+# Database monitoring
 heroku pg:info             # Database status
 heroku pg:psql             # Database access
 ```
@@ -1744,9 +1849,10 @@ heroku pg:psql             # Database access
 **Production URL**: [https://quickgigs-9fb11f8a9dfa.herokuapp.com/](https://quickgigs-9fb11f8a9dfa.herokuapp.com/)
 
 **Production Features**:
+
 - ✅ PostgreSQL database with all migrations
 - ✅ Stripe payment processing (test mode)
-- ✅ Static file serving via WhiteNoise  
+- ✅ Static file serving via WhiteNoise
 - ✅ SSL certificate and security headers
 - ✅ Automated deployments from Git
 - ✅ Database backups and monitoring
@@ -1756,7 +1862,9 @@ heroku pg:psql             # Database access
 ### Database Query Optimization
 
 #### Problem Identified: N+1 Query Issue
+
 **Before Optimization**:
+
 ```python
 # This caused 21 database queries (1 + 20 for each gig's employer)
 gigs = Gig.objects.filter(is_active=True)
@@ -1765,6 +1873,7 @@ for gig in gigs:
 ```
 
 **After Optimization**:
+
 ```python
 # Optimized to 3 queries using select_related
 class GigListView(ListView):
@@ -1777,12 +1886,14 @@ class GigListView(ListView):
 #### Optimization Implementation
 
 **Views Optimized**:
+
 - `GigListView`: Homepage gig listings
-- `GigDetailView`: Individual gig pages  
+- `GigDetailView`: Individual gig pages
 - `HomeView`: Featured and recent gigs
 - Payment history views
 
 **Query Strategies**:
+
 - `select_related()`: For foreign key relationships
 - `prefetch_related()`: For reverse foreign key lookups (future)
 - Database indexing on frequently queried fields
@@ -1790,11 +1901,13 @@ class GigListView(ListView):
 ### Frontend Performance
 
 #### CSS Optimization
+
 - **Tailwind CSS**: Utility-first approach reduces CSS bundle size
 - **Component Reuse**: Shared classes across templates
 - **Critical CSS**: Above-the-fold styling prioritized
 
 #### JavaScript Optimization
+
 - **Minimal JS**: Focus on essential interactions only
 - **Progressive Enhancement**: Works without JavaScript
 - **Mobile Performance**: Touch-optimized interactions
@@ -1802,6 +1915,7 @@ class GigListView(ListView):
 ### Caching Strategy (Future Implementation)
 
 **Template Caching**:
+
 ```python
 # Homepage statistics caching
 from django.core.cache import cache
@@ -1823,55 +1937,67 @@ def get_platform_stats():
 ### Iterative Development Process
 
 #### Phase 1: Foundation (Days 1-2)
+
 **Focus**: Project structure and core models
 **Deliverables**:
+
 - Django project setup with proper configuration
 - Task→Gig model transformation
 - Basic CRUD operations
 - Dual functionality preservation
 
 **Key Decisions**:
+
 - Maintain backward compatibility with Task model
 - Establish Git workflow for cross-platform development
 - Focus on solid foundation over features
 
-#### Phase 2: User Experience (Days 3-4)  
+#### Phase 2: User Experience (Days 3-4)
+
 **Focus**: UI/UX and user management
 **Deliverables**:
+
 - Bootstrap→Tailwind CSS migration
 - Responsive design implementation
 - User authentication system
 - Role-based profiles
 
 **Key Achievements**:
+
 - Professional visual design
 - Complete user management workflow
 - Mobile-responsive interface
 - Security implementation
 
 #### Phase 3: Architecture (Day 5)
+
 **Focus**: Scalable structure and business features
 **Deliverables**:
+
 - Multi-app Django architecture
 - Payment system foundation
 - Professional homepage
 - Site content (about, contact)
 
 **Architectural Benefits**:
+
 - Team development readiness
 - Feature isolation
 - Maintainable codebase
 - Professional site presence
 
 #### Phase 4: Monetization (Day 6)
+
 **Focus**: E-commerce and revenue generation
 **Deliverables**:
+
 - Complete Stripe payment integration
 - Featured gig upgrade system
 - Payment history tracking
 - Business model implementation
 
 **Business Impact**:
+
 - Revenue generation capability
 - Professional payment processing
 - Trust-building features
@@ -1880,12 +2006,14 @@ def get_platform_stats():
 ### Quality Assurance Process
 
 #### Test-Driven Development
+
 - **Test Coverage**: 169 comprehensive tests
 - **Debugging Process**: Systematic error resolution
 - **Performance Testing**: Database query optimization
 - **Security Testing**: Authentication and authorization
 
 #### Code Quality Standards
+
 ```python
 # Example of clean code principles
 class GigCreateView(LoginRequiredMixin, CreateView):
@@ -1905,6 +2033,7 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 ```
 
 #### Documentation Standards
+
 - **Code Comments**: Explaining complex logic
 - **Docstrings**: Function and class documentation
 - **README**: Comprehensive project documentation
@@ -1913,10 +2042,12 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 ### Cross-Platform Development
 
 #### Development Environment Management
+
 **Challenge**: Development across Windows PC and Mac
 **Solution**: Established consistent command patterns and documentation
 
 **Windows Workflow**:
+
 ```powershell
 python manage.py runserver
 start filename.html
@@ -1924,8 +2055,9 @@ New-Item -Path "file" -ItemType File
 ```
 
 **Mac Workflow**:
+
 ```bash
-python3 manage.py runserver  
+python3 manage.py runserver
 open filename.html
 touch filename.html
 ```
@@ -1935,12 +2067,14 @@ touch filename.html
 ### Backend Stack
 
 #### Core Framework
+
 - **Django 4.2**: Web framework with MVT architecture
 - **Python 3.9+**: Modern Python with type hints support
 - **PostgreSQL**: Production database with relational integrity
 - **SQLite**: Development database for local testing
 
 #### Django Packages
+
 - **django-crispy-forms**: Enhanced form rendering
 - **dj-database-url**: Environment-based database configuration
 - **python-decouple**: Environment variable management
@@ -1949,12 +2083,14 @@ touch filename.html
 ### Frontend Stack
 
 #### Styling & UI
+
 - **Tailwind CSS 3.0**: Utility-first CSS framework
 - **Font Awesome 6**: Professional icon library
 - **Custom CSS**: Component-specific styling
 - **JavaScript (Vanilla)**: Progressive enhancement
 
 #### Template System
+
 - **Django Templates**: Server-side rendering
 - **Template Inheritance**: DRY principle implementation
 - **Custom Template Tags**: Reusable components
@@ -1963,17 +2099,20 @@ touch filename.html
 ### Third-Party Integrations
 
 #### Payment Processing
+
 - **Stripe API**: Payment processing and checkout
 - **Stripe Webhook**: Real-time payment notifications (ready)
 - **Test Environment**: Complete test card support
 
 #### Development Tools
+
 - **Git**: Version control with descriptive commits
 - **VS Code**: Primary development environment
 - **Django Debug Toolbar**: Development debugging
 - **Coverage.py**: Test coverage analysis
 
 #### Deployment & Hosting
+
 - **Heroku**: Cloud platform with PostgreSQL addon
 - **WhiteNoise**: Static file serving
 - **Gunicorn**: WSGI HTTP server
@@ -1982,9 +2121,10 @@ touch filename.html
 ### Development Utilities
 
 #### Code Quality
+
 ```python
 # Example of utility implementation
-@register.filter  
+@register.filter
 def currency(value):
     """Format decimal as currency with commas"""
     try:
@@ -1994,6 +2134,7 @@ def currency(value):
 ```
 
 #### Performance Monitoring
+
 ```python
 # Database query optimization
 def get_queryset(self):
@@ -2001,6 +2142,7 @@ def get_queryset(self):
 ```
 
 #### Security Implementation
+
 ```python
 # Authentication and ownership verification
 class GigUpdateView(LoginRequiredMixin, UpdateView):
@@ -2013,12 +2155,14 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 ### Immediate Enhancements (Month 1)
 
 #### Job Application System
+
 - **Freelancer Applications**: Allow freelancers to apply to gigs
 - **Application Management**: Employer interface for reviewing applications
 - **Communication System**: In-app messaging between users
 - **Application Tracking**: Status updates and notifications
 
 #### Enhanced Discovery
+
 - **Advanced Search**: Keyword search across gig titles and descriptions
 - **Filter System**: Budget range, location, category filtering
 - **Saved Searches**: User-defined search alerts
@@ -2027,12 +2171,14 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 ### Business Development (Month 2-3)
 
 #### Revenue Optimization
+
 - **Subscription Model**: Premium employer accounts
 - **Commission System**: Percentage-based transaction fees
 - **Freelancer Premiums**: Enhanced profile features
 - **Analytics Dashboard**: User insights and performance metrics
 
 #### Trust & Safety
+
 - **User Verification**: Identity and skill verification
 - **Rating System**: Mutual reviews for employers and freelancers
 - **Dispute Resolution**: Conflict resolution process
@@ -2041,18 +2187,21 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 ### Platform Expansion (Month 4-6)
 
 #### Mobile Applications
+
 - **React Native**: Cross-platform mobile app
 - **Push Notifications**: Real-time updates
 - **Offline Capabilities**: Core functionality without internet
 - **Mobile-Specific Features**: Location services, camera integration
 
 #### API Development
+
 - **RESTful API**: Third-party integration capabilities
 - **Authentication**: Token-based API access
 - **Rate Limiting**: API usage controls
 - **Documentation**: Comprehensive API documentation
 
 #### Advanced Features
+
 - **Video Conferencing**: Integrated client meetings
 - **File Sharing**: Project file management
 - **Time Tracking**: Hourly project monitoring
@@ -2061,12 +2210,14 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 ### Technical Scalability (Month 6+)
 
 #### Infrastructure
+
 - **Microservices**: Service-oriented architecture
 - **Container Deployment**: Docker and Kubernetes
 - **CDN Integration**: Global content delivery
 - **Database Sharding**: Horizontal scaling strategy
 
 #### Analytics & Intelligence
+
 - **Machine Learning**: Gig-freelancer matching algorithms
 - **Predictive Analytics**: Success probability modeling
 - **Business Intelligence**: Revenue and user behavior analysis
@@ -2076,34 +2227,34 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 
 ### Learning Outcome Compliance Matrix
 
-| Criterion | Evidence | Location |
-|-----------|----------|----------|
-| **LO1.1** | Multi-app Django structure | `/gigs/`, `/accounts/`, `/payments/`, `/core/` |
-| **LO1.2** | Tailwind responsive design | All templates, mobile-first approach |
-| **LO1.3** | Full-stack implementation | Complete MVC with database integration |
-| **LO1.4** | Form validation | User registration, gig creation forms |
-| **LO1.5** | Django file structure | Professional app organization |
-| **LO1.6** | Clean code | 169 passing tests, documented functions |
-| **LO1.7** | URL consistency | RESTful patterns across apps |
-| **LO1.8** | Navigation system | Base template with role-based menus |
-| **LO1.9** | Python proficiency | Complex payment processing logic |
-| **LO1.10** | Control structures | Conditional logic, loops in views |
-| **LO1.11** | Testing procedures | Comprehensive 169-test suite |
-| **LO2.1** | Database schema | User→Profile→Gig→Payment relationships |
-| **LO2.2** | Custom models | Gig, UserProfile, Payment models |
-| **LO2.3** | Form validation | Registration, profile, gig forms |
-| **LO2.4** | CRUD operations | Complete Create, Read, Update, Delete |
-| **LO3.1** | Authentication | User registration and role selection |
-| **LO3.2** | Access control | Role-based page restrictions |
-| **LO3.3** | Security | LoginRequiredMixin, ownership verification |
-| **LO4.1** | E-commerce | Stripe payment integration |
-| **LO4.2** | Payment feedback | Success/cancel pages with messaging |
-| **LO5.1** | Deployment | Live Heroku platform |
-| **LO5.2** | Code quality | Production-ready codebase |
-| **LO5.3** | Security | Environment variables, SSL |
-| **LO5.4** | Version control | Git with descriptive commits |
-| **LO5.5** | Documentation | Comprehensive README |
-| **LO5.6** | Procedures | Complete setup and testing guides |
+| Criterion  | Evidence                   | Location                                       |
+| ---------- | -------------------------- | ---------------------------------------------- |
+| **LO1.1**  | Multi-app Django structure | `/gigs/`, `/accounts/`, `/payments/`, `/core/` |
+| **LO1.2**  | Tailwind responsive design | All templates, mobile-first approach           |
+| **LO1.3**  | Full-stack implementation  | Complete MVC with database integration         |
+| **LO1.4**  | Form validation            | User registration, gig creation forms          |
+| **LO1.5**  | Django file structure      | Professional app organization                  |
+| **LO1.6**  | Clean code                 | 169 passing tests, documented functions        |
+| **LO1.7**  | URL consistency            | RESTful patterns across apps                   |
+| **LO1.8**  | Navigation system          | Base template with role-based menus            |
+| **LO1.9**  | Python proficiency         | Complex payment processing logic               |
+| **LO1.10** | Control structures         | Conditional logic, loops in views              |
+| **LO1.11** | Testing procedures         | Comprehensive 169-test suite                   |
+| **LO2.1**  | Database schema            | User→Profile→Gig→Payment relationships         |
+| **LO2.2**  | Custom models              | Gig, UserProfile, Payment models               |
+| **LO2.3**  | Form validation            | Registration, profile, gig forms               |
+| **LO2.4**  | CRUD operations            | Complete Create, Read, Update, Delete          |
+| **LO3.1**  | Authentication             | User registration and role selection           |
+| **LO3.2**  | Access control             | Role-based page restrictions                   |
+| **LO3.3**  | Security                   | LoginRequiredMixin, ownership verification     |
+| **LO4.1**  | E-commerce                 | Stripe payment integration                     |
+| **LO4.2**  | Payment feedback           | Success/cancel pages with messaging            |
+| **LO5.1**  | Deployment                 | Live Heroku platform                           |
+| **LO5.2**  | Code quality               | Production-ready codebase                      |
+| **LO5.3**  | Security                   | Environment variables, SSL                     |
+| **LO5.4**  | Version control            | Git with descriptive commits                   |
+| **LO5.5**  | Documentation              | Comprehensive README                           |
+| **LO5.6**  | Procedures                 | Complete setup and testing guides              |
 
 ### Merit Criteria Evidence
 
@@ -2134,20 +2285,25 @@ class GigUpdateView(LoginRequiredMixin, UpdateView):
 ## 📞 Contact & Support
 
 ### Developer Information
+
 - **Project Type**: L5 Diploma Assessment - Unit 4
 - **Institution**: Gateway Qualifications
 - **Course**: L5 Diploma in Web Application Development
 - **Assessment Focus**: Full Stack Frameworks with Django
 
 ### Technical Support
+
 For technical questions about this implementation:
+
 - **GitHub Issues**: Use repository issue tracker
 - **Documentation**: Refer to this comprehensive README
 - **Testing**: Follow testing procedures section
 - **Deployment**: Use deployment guide section
 
 ### Academic Context
+
 This project demonstrates mastery of:
+
 - Django full-stack development
 - Payment system integration
 - Professional deployment practices
