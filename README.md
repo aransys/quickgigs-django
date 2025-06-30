@@ -250,7 +250,7 @@ quickgigs_project/
 │   ├── forms.py      # Custom user forms
 │   └── templates/    # Auth templates
 ├── gigs/             # Core marketplace app
-│   ├── models.py     # Gig, Application models
+│   ├── models.py     # Gig and Application models
 │   ├── views.py      # CRUD operations
 │   └── templates/    # Job board templates
 ├── payments/         # E-commerce functionality
@@ -613,7 +613,7 @@ quickgigs_project/
 │   ├── templatetags/       # Currency formatting filters
 │   └── templates/core/     # About, contact, homepage
 ├── 💼 gigs/                 # Job board functionality
-│   ├── models.py           # Gig and legacy Task models
+│   ├── models.py           # Gig and Application models
 │   ├── views.py            # CRUD operations with optimization
 │   └── templates/gigs/     # Job listings and forms
 ├── 👤 accounts/             # User management
@@ -1116,7 +1116,7 @@ class Payment(models.Model):
 
 #### 🔍 **Search & Discovery**
 
-- **Category Filtering**: Browse by work type
+- **Basic Gig Browsing**: View all active gigs in chronological order
 - **Budget Transparency**: Clear pricing displayed upfront
 - **Featured Highlighting**: Premium gigs prominently displayed
 - **Responsive Listings**: Mobile-optimized job cards
