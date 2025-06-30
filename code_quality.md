@@ -567,124 +567,420 @@ def get_queryset(self):
 #### Clean Model Architecture
 
 ```python
-# Actual Task model demonstrating clean design principles
-class Task(models.Model):
-    # Field definitions with appropriate types and constraints
+# Actual QuickGigs models demonstrating clean design principles
+class Gig(models.Model):
+    """
+    Core gig model with comprehensive business logic and relationships.
+    """
+    # Primary field definitions with appropriate types and constraints
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    completed = models.BooleanField(default=False)
+    description = models.TextField()
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posted_gigs')
+    budget = models.DecimalField(max_digits=10, decimal_places=2)
+    location = models.CharField(max_length=100)
+    
+    # Choice field with proper constants
+    CATEGORY_CHOICES = [
+        ('web_dev', 'Web Development'),
+        ('mobile_dev', 'Mobile Development'),
+        ('design', 'Design'),
+        ('writing', 'Writing'),
+        ('marketing', 'Marketing'),
+        ('other', 'Other'),
+    ]
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    
+    # Status and timing fields
+    deadline = models.DateField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.employer.username}"
 
     def is_overdue(self):
         """Business logic method for deadline checking."""
-        if self.due_date and not self.completed:
-            return self.due_date < timezone.now().date()
+        if self.deadline and self.is_active:
+            return self.deadline < timezone.now().date()
         return False
 
+    @property
+    def is_available(self):
+        """Check if gig is available for applications."""
+        return self.is_active and not self.is_overdue
+
+    @property
+    def application_count(self):
+        """Get total number of applications for this gig."""
+        return self.applications.count()
+
     class Meta:
-        ordering = ['completed', 'due_date', 'created_at']
-        verbose_name = "Task"
-        verbose_name_plural = "Tasks"
+        ordering = ['-is_featured', '-created_at']
+        verbose_name = "Gig"
+        verbose_name_plural = "Gigs"
+
+
+class UserProfile(models.Model):
+    """
+    Extended user profile with role-based functionality.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    USER_TYPE_CHOICES = [
+        ('employer', 'Employer'),
+        ('freelancer', 'Freelancer'),
+    ]
+    user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
+    
+    # Profile information
+    bio = models.TextField(blank=True)
+    skills = models.TextField(blank=True)
+    hourly_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    company_name = models.CharField(max_length=100, blank=True)
+    phone = models.CharField(max_length=20, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.get_user_type_display()}"
+
+    @property
+    def is_employer(self):
+        """Check if user is an employer."""
+        return self.user_type == 'employer'
+
+    @property
+    def is_freelancer(self):
+        """Check if user is a freelancer."""
+        return self.user_type == 'freelancer'
+
+    class Meta:
+        verbose_name = "User Profile"
+        verbose_name_plural = "User Profiles"
 ```
 
 **Model Quality Achievements:**
 
-- ✅ **Single Responsibility**: Model represents one clear concept
-- ✅ **Appropriate Fields**: Each field serves specific business purpose
-- ✅ **Business Logic**: `is_overdue()` method encapsulates domain logic
-- ✅ **Database Optimization**: Smart ordering for UI performance
-- ✅ **Admin Integration**: Proper verbose names for admin interface
+- ✅ **Single Responsibility**: Each model represents one clear business concept
+- ✅ **Appropriate Fields**: Fields serve specific business purposes (budget, category, user_type)
+- ✅ **Business Logic**: Methods like `is_available()` and `is_overdue()` encapsulate domain logic
+- ✅ **Relationship Design**: Proper foreign keys with meaningful related_names
+- ✅ **Choice Fields**: Standardized choices prevent data inconsistency
+- ✅ **Database Optimization**: Smart ordering prioritizes featured gigs
+- ✅ **Admin Integration**: Proper verbose names and string representations
 
 ### View Logic Standards
 
-#### Complete CRUD Implementation
+#### Complete CRUD Implementation with Security
 
 ```python
-# Full CRUD operations with proper error handling and user feedback
+# Full CRUD operations with proper error handling, security, and user feedback
 
-# READ operations
-class TaskListView(ListView):
-    """Display all tasks with newest first."""
-    model = Task
-    ordering = ['-created_at']
+# READ operations with optimization
+class GigListView(ListView):
+    """Display all active gigs with search and filtering capabilities."""
+    model = Gig
+    template_name = 'gigs/gig_list.html'
+    context_object_name = 'gigs'
+    paginate_by = 12
+    
+    def get_queryset(self):
+        # Optimized query with select_related to prevent N+1 queries
+        queryset = Gig.objects.filter(is_active=True).select_related('employer')
+        
+        # Search functionality
+        search_query = self.request.GET.get('search')
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) | 
+                Q(description__icontains=search_query)
+            )
+        
+        return queryset.order_by('-is_featured', '-created_at')
 
-class TaskDetailView(DetailView):
-    """Display individual task details."""
-    model = Task
+class GigDetailView(DetailView):
+    """Display individual gig details with application context."""
+    model = Gig
+    template_name = 'gigs/gig_detail.html'
+    context_object_name = 'gig'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            # Check if user has already applied
+            context['user_has_applied'] = Application.objects.filter(
+                gig=self.object, 
+                applicant=self.request.user
+            ).exists()
+        return context
 
-# CREATE operation
-class TaskCreateView(CreateView):
-    """Create new task with form validation and user feedback."""
+# CREATE operation with authentication
+class GigCreateView(LoginRequiredMixin, CreateView):
+    """Create new gig with form validation and user feedback."""
+    model = Gig
+    form_class = GigForm
+    template_name = 'gigs/gig_form.html'
+    
     def form_valid(self, form):
-        messages.success(self.request, 'Task created successfully!')
+        form.instance.employer = self.request.user
+        messages.success(self.request, 'Gig posted successfully!')
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('gigs:gig_detail', kwargs={'pk': self.object.pk})
+
+# UPDATE operations with authorization
+class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Update existing gig with ownership verification."""
+    model = Gig
+    form_class = GigForm
+    template_name = 'gigs/gig_form.html'
+    
+    def test_func(self):
+        # Only allow gig owner to edit
+        gig = self.get_object()
+        return self.request.user == gig.employer
+    
+    def form_valid(self, form):
+        messages.success(self.request, 'Gig updated successfully!')
         return super().form_valid(form)
 
-# UPDATE operations
-class TaskUpdateView(UpdateView):
-    """Update existing task with form validation."""
-    def form_valid(self, form):
-        messages.success(self.request, 'Task updated successfully!')
-        return super().form_valid(form)
+@login_required
+def toggle_gig_status(request, pk):
+    """Toggle gig active status with authorization and error handling."""
+    gig = get_object_or_404(Gig, pk=pk, employer=request.user)
+    gig.is_active = not gig.is_active
+    gig.save()
 
-def toggle_complete(request, pk):
-    """Toggle task completion status with error handling."""
-    task = get_object_or_404(Task, pk=pk)
-    task.completed = not task.completed
-    task.save()
+    status = "activated" if gig.is_active else "deactivated"
+    messages.success(request, f'Gig "{gig.title}" has been {status}!')
 
-    if task.completed:
-        messages.success(request, f'Task "{task.title}" marked as complete!')
-    else:
-        messages.info(request, f'Task "{task.title}" marked as incomplete.')
+    return redirect('gigs:my_gigs')
 
-    return redirect('todo_app:task_list')
-
-# DELETE operation
-class TaskDeleteView(DeleteView):
-    """Delete task with confirmation and feedback."""
+# DELETE operation with ownership verification
+class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Delete gig with confirmation, authorization, and feedback."""
+    model = Gig
+    template_name = 'gigs/gig_confirm_delete.html'
+    success_url = reverse_lazy('gigs:my_gigs')
+    
+    def test_func(self):
+        gig = self.get_object()
+        return self.request.user == gig.employer
+    
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, 'Task deleted successfully!')
+        gig_title = self.get_object().title
+        messages.success(self.request, f'Gig "{gig_title}" deleted successfully!')
         return super().delete(request, *args, **kwargs)
+
+# Custom view for complex business logic
+@login_required
+def apply_to_gig(request, pk):
+    """Handle gig application with comprehensive validation."""
+    gig = get_object_or_404(Gig, pk=pk, is_active=True)
+    
+    # Business logic validation
+    if request.user == gig.employer:
+        messages.error(request, 'You cannot apply to your own gig.')
+        return redirect('gigs:gig_detail', pk=pk)
+    
+    # Check for existing application
+    if Application.objects.filter(gig=gig, applicant=request.user).exists():
+        messages.warning(request, 'You have already applied to this gig.')
+        return redirect('gigs:gig_detail', pk=pk)
+    
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.gig = gig
+            application.applicant = request.user
+            application.save()
+            
+            messages.success(request, 'Application submitted successfully!')
+            return redirect('gigs:gig_detail', pk=pk)
+    else:
+        form = ApplicationForm()
+    
+    return render(request, 'gigs/apply_to_gig.html', {
+        'form': form, 
+        'gig': gig
+    })
 ```
 
 **View Logic Quality:**
 
 - ✅ **Complete CRUD**: All Create, Read, Update, Delete operations implemented
+- ✅ **Security First**: Authentication and authorization on all protected operations
+- ✅ **Query Optimization**: `select_related()` prevents N+1 query problems
 - ✅ **Error Handling**: `get_object_or_404` prevents 500 errors
+- ✅ **Business Logic**: Complex validation like preventing self-application
 - ✅ **User Feedback**: Comprehensive messaging for all actions
 - ✅ **Proper Redirects**: Clean navigation flow after actions
 - ✅ **DRY Principle**: Template and form reuse across views
 
 ### Form Implementation Quality
 
-#### ModelForm with Custom Widgets
+#### ModelForm with Custom Widgets and Validation
 
 ```python
-# forms.py - Actual implementation showing clean form design
+# forms.py - Actual QuickGigs implementation showing professional form design
 from django import forms
-from .models import Task
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .models import Gig, Application, UserProfile
 
-class TaskForm(forms.ModelForm):
+class GigForm(forms.ModelForm):
+    """
+    Form for creating and updating gigs with enhanced UX.
+    """
     class Meta:
-        model = Task
-        fields = ['title', 'description', 'due_date', 'completed']
+        model = Gig
+        fields = ['title', 'description', 'category', 'budget', 'location', 'deadline']
         widgets = {
-            'due_date': forms.DateInput(attrs={'type': 'date'}),
-            'description': forms.Textarea(attrs={'rows': 4}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter gig title...'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Describe your project requirements...'
+            }),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'budget': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'step': '0.01',
+                'placeholder': '0.00'
+            }),
+            'location': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Project location...'
+            }),
+            'deadline': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
         }
+    
+    def clean_budget(self):
+        """Custom validation for budget field."""
+        budget = self.cleaned_data.get('budget')
+        if budget and budget <= 0:
+            raise forms.ValidationError("Budget must be greater than 0.")
+        return budget
+
+class ApplicationForm(forms.ModelForm):
+    """
+    Form for freelancers to apply to gigs.
+    """
+    class Meta:
+        model = Application
+        fields = ['cover_letter', 'proposed_rate']
+        widgets = {
+            'cover_letter': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 6,
+                'placeholder': 'Explain why you are the perfect fit for this project...'
+            }),
+            'proposed_rate': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'step': '0.01',
+                'placeholder': 'Your hourly rate (optional)'
+            }),
+        }
+
+class UserProfileForm(forms.ModelForm):
+    """
+    Form for users to update their profiles.
+    """
+    class Meta:
+        model = UserProfile
+        fields = ['bio', 'skills', 'hourly_rate', 'company_name', 'phone']
+        widgets = {
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Tell us about yourself...'
+            }),
+            'skills': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Your skills (e.g., Python, Django, JavaScript)'
+            }),
+            'hourly_rate': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'step': '0.01',
+                'placeholder': 'Your hourly rate'
+            }),
+            'company_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Company name (for employers)'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Phone number'
+            }),
+        }
+
+class CustomUserCreationForm(UserCreationForm):
+    """
+    Enhanced user registration form with email and role selection.
+    """
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Email address'
+        })
+    )
+    user_type = forms.ChoiceField(
+        choices=UserProfile.USER_TYPE_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', 'user_type')
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Username'
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control'})
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+            # Create user profile with selected role
+            UserProfile.objects.create(
+                user=user,
+                user_type=self.cleaned_data['user_type']
+            )
+        return user
 ```
 
 **Form Quality Assessment:**
 
-- ✅ **ModelForm Usage**: Leverages Django's form generation
-- ✅ **Widget Customization**: HTML5 date input for better UX
-- ✅ **Field Selection**: All relevant fields included
-- ✅ **Clean Implementation**: Simple, maintainable form code
-- ✅ **Accessibility Ready**: Proper form structure for styling
+- ✅ **ModelForm Usage**: Leverages Django's form generation with custom enhancements
+- ✅ **Widget Customization**: HTML5 inputs, Bootstrap classes, and helpful placeholders
+- ✅ **Custom Validation**: Business logic validation (e.g., budget > 0)
+- ✅ **User Experience**: Intuitive placeholders and proper input types
+- ✅ **Field Selection**: All relevant fields included with appropriate widgets
+- ✅ **Professional Styling**: Bootstrap-ready classes for consistent UI
+- ✅ **Extended Forms**: Custom UserCreationForm with profile integration
+- ✅ **Clean Implementation**: Well-organized, maintainable form code
 
 ## Database Code Quality
 
