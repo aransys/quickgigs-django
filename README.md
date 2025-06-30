@@ -2911,28 +2911,35 @@ class PaymentCreateView(LoginRequiredMixin, View):
 
 #### RESTful URL Design
 
-The application follows RESTful API design principles in its URL structure:
+The application follows RESTful API design principles in its URL structure, demonstrating modern web development practices:
 
 ```python
 # RESTful URL patterns across all apps
 urlpatterns = [
-    # Gig CRUD operations
+    # Gig CRUD operations - Following REST conventions
     path('gigs/', views.GigListView.as_view(), name='gig_list'),           # GET /gigs/
     path('gigs/create/', views.GigCreateView.as_view(), name='gig_create'), # POST /gigs/create/
     path('gigs/<int:pk>/', views.GigDetailView.as_view(), name='gig_detail'), # GET /gigs/{id}/
     path('gigs/<int:pk>/edit/', views.GigUpdateView.as_view(), name='gig_edit'), # PUT /gigs/{id}/edit/
     path('gigs/<int:pk>/delete/', views.GigDeleteView.as_view(), name='gig_delete'), # DELETE /gigs/{id}/delete/
     
-    # Application management
+    # Application management - Nested resources
     path('gigs/<int:pk>/apply/', views.apply_to_gig, name='apply_to_gig'), # POST /gigs/{id}/apply/
     path('gigs/<int:pk>/applications/', views.gig_applications, name='gig_applications'), # GET /gigs/{id}/applications/
     
-    # Payment processing
+    # Payment processing - E-commerce endpoints
     path('payments/create/<int:gig_id>/', views.PaymentCreateView.as_view(), name='payment_create'), # POST /payments/create/{id}/
     path('payments/success/', views.PaymentSuccessView.as_view(), name='payment_success'), # GET /payments/success/
     path('payments/cancel/', views.PaymentCancelView.as_view(), name='payment_cancel'), # GET /payments/cancel/
 ]
 ```
+
+**RESTful Design Principles Applied:**
+- **Resource-Based URLs**: `/gigs/`, `/applications/`, `/payments/`
+- **HTTP Method Semantics**: GET (read), POST (create), PUT (update), DELETE (delete)
+- **Nested Resources**: `/gigs/{id}/applications/` for related data
+- **Consistent Naming**: Plural nouns for collections, singular for specific items
+- **Stateless Operations**: Each request contains all necessary information
 
 ### Future API Development Roadmap
 
