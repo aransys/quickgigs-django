@@ -16,6 +16,7 @@
 - [Project Overview](#-project-overview)
 - [Transformation Journey](#-transformation-journey)
 - [Key Achievements](#-key-achievements)
+- [Screenshots & Visual Evidence](#-screenshots--visual-evidence)
 - [Recent Updates](#-recent-updates-june-29-2025---version-110)
 - [Assessment Criteria Compliance](#-assessment-criteria-compliance)
 - [Technical Architecture](#-technical-architecture)
@@ -97,6 +98,75 @@ This project showcases a remarkable evolution from a basic todo application to a
 - **User Experience**: Professional onboarding flow with role selection
 - **Platform Metrics**: Real-time statistics dashboard with actual platform data
 - **Trust Building**: Complete about/contact pages, professional branding
+
+## 📸 Screenshots & Visual Evidence
+
+### Platform Overview
+![QuickGigs Homepage](docs/screenshots/homepage.png)
+*Professional job board homepage showcasing featured gigs and clean design*
+
+![Gig Listings](docs/screenshots/gig-listings.png)
+*Complete gig browsing interface with responsive card layout*
+
+### User Authentication & Profiles
+![User Registration](docs/screenshots/user-registration.png)
+*Role-based registration system (Employer/Freelancer selection)*
+
+![User Profile](docs/screenshots/user-profile.png)
+*Comprehensive user profile with skills, bio, and professional information*
+
+### Employer Dashboard
+![My Gigs Dashboard](docs/screenshots/my-gigs-dashboard.png)
+*Complete employer dashboard with gig management and application tracking*
+
+![Gig Applications](docs/screenshots/gig-applications.png)
+*Application management interface showing freelancer applications*
+
+### Gig Management
+![Create Gig](docs/screenshots/create-gig.png)
+*Professional gig creation form with validation and user guidance*
+
+![Gig Detail](docs/screenshots/gig-detail.png)
+*Detailed gig view with application functionality and employer information*
+
+### Payment Integration
+![Payment Process](docs/screenshots/payment-process.png)
+*Stripe payment integration for £9.99 featured gig upgrades*
+
+![Payment Success](docs/screenshots/payment-success.png)
+*Payment confirmation page with clear success messaging*
+
+### Mobile Responsive Design
+![Mobile Homepage](docs/screenshots/mobile-homepage.png)
+*Mobile-optimized homepage demonstrating responsive design*
+
+![Mobile Navigation](docs/screenshots/mobile-navigation.png)
+*Hamburger menu navigation with streamlined mobile user experience*
+
+### Application System
+![Apply to Gig](docs/screenshots/apply-to-gig.png)
+*Freelancer application form with cover letter and proposal functionality*
+
+![My Applications](docs/screenshots/my-applications.png)
+*Freelancer dashboard showing application status and history*
+
+### Before & After Transformation
+![Before: Todo App](docs/screenshots/before-todo-app.png)
+*Original todo application before transformation*
+
+![After: Job Board](docs/screenshots/after-job-board.png)
+*Final professional job board platform*
+
+### Admin Interface
+![Django Admin](docs/screenshots/django-admin.png)
+*Professional Django admin interface for platform management*
+
+### Error Handling
+![404 Error Page](docs/screenshots/404-error.png)
+*Custom 404 error page maintaining brand consistency*
+
+![Form Validation](docs/screenshots/form-validation.png)
+*Comprehensive form validation with user-friendly error messages*
 
 ## 🆕 Recent Updates (June 29, 2025) - Version 1.1.0
 
