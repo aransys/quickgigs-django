@@ -212,8 +212,3 @@ This document complements the automated test suite with manual testing procedure
 - [ ] Recommendation 3: [Improvement suggestion]
 
 ---
-
-**Document Version**: 1.0  
-**Last Updated**: June 30, 2025  
-**Tested By**: [Your Name]  
-**Testing Environment**: [Browser/OS details] 
