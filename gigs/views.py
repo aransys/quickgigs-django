@@ -96,6 +96,14 @@ class GigListView(ListView):
         context['categories'] = Gig.CATEGORY_CHOICES
         context['current_category'] = self.request.GET.get('category', '')
         context['search_query'] = self.request.GET.get('search', '')
+        
+        # Add statistics for the homepage
+        from django.contrib.auth.models import User
+        from accounts.models import UserProfile
+        
+        context['employers_count'] = UserProfile.objects.filter(user_type='employer').count()
+        context['featured_count'] = Gig.objects.filter(is_featured=True, is_active=True).count()
+        
         return context
 
 class GigDetailView(DetailView):
