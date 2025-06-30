@@ -64,6 +64,10 @@ QuickGigs is a professional job board platform designed to connect employers wit
 
 This project showcases a remarkable evolution from a basic todo application to a professional job board platform:
 
+<!-- TODO: Add screenshot placeholder -->
+![Transformation Timeline](docs/screenshots/transformation-timeline.png)
+*Caption: Visual timeline showing key development milestones from initial todo app to production job board*
+
 ### Transformation Metrics
 
 - **Code Quality**: 169 comprehensive tests with 100% pass rate
@@ -71,6 +75,10 @@ This project showcases a remarkable evolution from a basic todo application to a
 - **Architecture**: 4 Django apps with proper separation of concerns
 - **Features**: Complete payment system with Stripe integration
 - **Deployment**: Production-ready platform on Heroku with PostgreSQL
+
+<!-- TODO: Add screenshot placeholder -->
+![Architecture Evolution](docs/screenshots/architecture-evolution.png)
+*Caption: Diagram showing the architectural evolution from single-file todo app to multi-app Django structure*
 
 ## 🏆 Key Achievements
 
@@ -103,72 +111,177 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ## 📸 Screenshots & Visual Evidence
 
-### Platform Overview
-![QuickGigs Homepage](docs/screenshots/homepage.png)
-*Professional job board homepage showcasing featured gigs and clean design*
+*Complete visual documentation of the QuickGigs platform showcasing professional design and comprehensive functionality*
 
+### Platform Overview
+
+<!-- TODO: Add screenshot placeholder -->
+![QuickGigs Homepage](docs/screenshots/homepage.png)
+*Caption: Professional job board homepage showcasing featured gigs, clear value proposition, and modern design system*
+
+<!-- TODO: Add screenshot placeholder -->
 ![Gig Listings](docs/screenshots/gig-listings.png)
-*Complete gig browsing interface with responsive card layout*
+*Caption: Complete gig browsing interface with responsive card layout, filtering options, and category organization*
+
+<!-- TODO: Add screenshot placeholder -->
+![Platform Statistics Dashboard](docs/screenshots/platform-statistics.png)
+*Caption: Real-time platform metrics showing total gigs, applications, and user engagement statistics*
 
 ### User Authentication & Profiles
-![User Registration](docs/screenshots/user-registration.png)
-*Role-based registration system (Employer/Freelancer selection)*
 
-![User Profile](docs/screenshots/user-profile.png)
-*Comprehensive user profile with skills, bio, and professional information*
+<!-- TODO: Add screenshot placeholder -->
+![User Registration Flow](docs/screenshots/user-registration-flow.png)
+*Caption: Multi-step registration process from basic info to role selection to profile completion*
 
-### Employer Dashboard
+<!-- TODO: Add screenshot placeholder -->
+![Role Selection Interface](docs/screenshots/role-selection.png)
+*Caption: Visual role selection showing employer vs freelancer options with benefit highlights*
+
+<!-- TODO: Add screenshot placeholder -->
+![User Profile Dashboard](docs/screenshots/user-profile-dashboard.png)
+*Caption: Comprehensive user profile with skills, bio, professional information, and role-specific features*
+
+<!-- TODO: Add screenshot placeholder -->
+![Profile Edit Interface](docs/screenshots/profile-edit-form.png)
+*Caption: User-friendly profile editing form with validation and success messaging*
+
+### Employer Dashboard & Management
+
+<!-- TODO: Add screenshot placeholder -->
 ![My Gigs Dashboard](docs/screenshots/my-gigs-dashboard.png)
-*Complete employer dashboard with gig management and application tracking*
+*Caption: Complete employer dashboard with gig management, application tracking, and statistics overview*
 
-![Gig Applications](docs/screenshots/gig-applications.png)
-*Application management interface showing freelancer applications*
+<!-- TODO: Add screenshot placeholder -->
+![Gig Applications Management](docs/screenshots/gig-applications.png)
+*Caption: Application management interface showing freelancer applications with cover letters and proposed rates*
 
-### Gig Management
-![Create Gig](docs/screenshots/create-gig.png)
-*Professional gig creation form with validation and user guidance*
+<!-- TODO: Add screenshot placeholder -->
+![Application Status Updates](docs/screenshots/application-status-management.png)
+*Caption: Employer tools for reviewing, accepting, or rejecting applications with status tracking*
 
-![Gig Detail](docs/screenshots/gig-detail.png)
-*Detailed gig view with application functionality and employer information*
+### Gig Management & CRUD Operations
 
-### Payment Integration
-![Payment Process](docs/screenshots/payment-process.png)
-*Stripe payment integration for £9.99 featured gig upgrades*
+<!-- TODO: Add screenshot placeholder -->
+![Create Gig Form](docs/screenshots/create-gig-form.png)
+*Caption: Professional gig creation form with category selection, budget input, and deadline management*
 
-![Payment Success](docs/screenshots/payment-success.png)
-*Payment confirmation page with clear success messaging*
+<!-- TODO: Add screenshot placeholder -->
+![Gig Detail View](docs/screenshots/gig-detail-view.png)
+*Caption: Detailed gig view with employer information, application functionality, and featured badge display*
+
+<!-- TODO: Add screenshot placeholder -->
+![Edit Gig Interface](docs/screenshots/edit-gig.png)
+*Caption: Gig editing interface with form pre-population and validation feedback*
+
+<!-- TODO: Add screenshot placeholder -->
+![Delete Gig Confirmation](docs/screenshots/delete-gig-confirmation.png)
+*Caption: Safe deletion process with confirmation modal and data preservation warnings*
+
+### Payment Integration & E-commerce
+
+<!-- TODO: Add screenshot placeholder -->
+![Feature Gig Upgrade Modal](docs/screenshots/feature-gig-modal.png)
+*Caption: Value proposition modal for £9.99 featured gig upgrade with clear benefits and pricing*
+
+<!-- TODO: Add screenshot placeholder -->
+![Stripe Checkout Integration](docs/screenshots/stripe-checkout.png)
+*Caption: Secure Stripe checkout interface with card payment processing and mobile optimization*
+
+<!-- TODO: Add screenshot placeholder -->
+![Payment Success Confirmation](docs/screenshots/payment-success.png)
+*Caption: Payment confirmation page with receipt details, next steps, and enhanced gig visibility*
+
+<!-- TODO: Add screenshot placeholder -->
+![Payment History Dashboard](docs/screenshots/payment-history.png)
+*Caption: Complete payment history with transaction details, status tracking, and receipt downloads*
 
 ### Mobile Responsive Design
+
+<!-- TODO: Add screenshot placeholder -->
 ![Mobile Homepage](docs/screenshots/mobile-homepage.png)
-*Mobile-optimized homepage demonstrating responsive design*
+*Caption: Mobile-optimized homepage demonstrating responsive grid, touch-friendly navigation, and feature hierarchy*
 
-![Mobile Navigation](docs/screenshots/mobile-navigation.png)
-*Hamburger menu navigation with streamlined mobile user experience*
+<!-- TODO: Add screenshot placeholder -->
+![Mobile Navigation Menu](docs/screenshots/mobile-navigation.png)
+*Caption: Hamburger menu navigation with role-based menu items and streamlined mobile user experience*
 
-### Application System
-![Apply to Gig](docs/screenshots/apply-to-gig.png)
-*Freelancer application form with cover letter and proposal functionality*
+<!-- TODO: Add screenshot placeholder -->
+![Mobile Gig Cards](docs/screenshots/mobile-gig-cards.png)
+*Caption: Responsive gig cards optimized for mobile viewing with touch-friendly interaction areas*
 
-![My Applications](docs/screenshots/my-applications.png)
-*Freelancer dashboard showing application status and history*
+<!-- TODO: Add screenshot placeholder -->
+![Mobile Form Experience](docs/screenshots/mobile-forms.png)
+*Caption: Mobile-optimized forms with proper input types, validation feedback, and keyboard optimization*
 
-### Before & After Transformation
-![Before: Todo App](docs/screenshots/before-todo-app.png)
-*Original todo application before transformation*
+### Freelancer Experience
 
-![After: Job Board](docs/screenshots/after-job-board.png)
-*Final professional job board platform*
+<!-- TODO: Add screenshot placeholder -->
+![Apply to Gig Form](docs/screenshots/apply-to-gig.png)
+*Caption: Freelancer application form with cover letter, proposed rate, and professional presentation*
 
-### Admin Interface
-![Django Admin](docs/screenshots/django-admin.png)
-*Professional Django admin interface for platform management*
+<!-- TODO: Add screenshot placeholder -->
+![My Applications Dashboard](docs/screenshots/my-applications.png)
+*Caption: Freelancer dashboard showing application status, history, and employer communication*
 
-### Error Handling
-![404 Error Page](docs/screenshots/404-error.png)
-*Custom 404 error page maintaining brand consistency*
+<!-- TODO: Add screenshot placeholder -->
+![Application Status Tracking](docs/screenshots/application-status.png)
+*Caption: Real-time application status updates with clear visual indicators and next steps*
 
-![Form Validation](docs/screenshots/form-validation.png)
-*Comprehensive form validation with user-friendly error messages*
+### Transformation Journey
+
+<!-- TODO: Add screenshot placeholder -->
+![Before: Basic Todo App](docs/screenshots/before-todo-app.png)
+*Caption: Original simple todo application with basic Bootstrap styling and limited functionality*
+
+<!-- TODO: Add screenshot placeholder -->
+![After: Professional Job Board](docs/screenshots/after-job-board.png)
+*Caption: Transformed QuickGigs platform with professional design, complex functionality, and business model*
+
+<!-- TODO: Add screenshot placeholder -->
+![Side-by-Side Comparison](docs/screenshots/transformation-comparison.png)
+*Caption: Direct comparison showing the dramatic evolution from todo app to professional marketplace*
+
+### Technical Implementation
+
+<!-- TODO: Add screenshot placeholder -->
+![Django Admin Interface](docs/screenshots/django-admin.png)
+*Caption: Professional Django admin interface with customized models and efficient data management*
+
+<!-- TODO: Add screenshot placeholder -->
+![Database Schema Visualization](docs/screenshots/database-schema.png)
+*Caption: Entity relationship diagram showing complex data relationships and business logic implementation*
+
+<!-- TODO: Add screenshot placeholder -->
+![Code Quality Examples](docs/screenshots/code-quality.png)
+*Caption: Clean code examples showing Django best practices, documentation, and professional structure*
+
+### Error Handling & User Experience
+
+<!-- TODO: Add screenshot placeholder -->
+![Custom 404 Error Page](docs/screenshots/404-error.png)
+*Caption: Branded 404 error page maintaining design consistency with helpful navigation options*
+
+<!-- TODO: Add screenshot placeholder -->
+![Form Validation Examples](docs/screenshots/form-validation.png)
+*Caption: Comprehensive form validation with user-friendly error messages and input guidance*
+
+<!-- TODO: Add screenshot placeholder -->
+![Success Message System](docs/screenshots/success-messages.png)
+*Caption: Modern message system with animations, progress indicators, and enhanced user feedback*
+
+### Performance & Quality Assurance
+
+<!-- TODO: Add screenshot placeholder -->
+![Lighthouse Performance Report](docs/screenshots/lighthouse-performance.png)
+*Caption: Lighthouse performance scores showing optimization achievements and Core Web Vitals compliance*
+
+<!-- TODO: Add screenshot placeholder -->
+![Cross-Browser Testing](docs/screenshots/cross-browser-testing.png)
+*Caption: Cross-browser compatibility testing across Chrome, Firefox, Safari, and Edge*
+
+<!-- TODO: Add screenshot placeholder -->
+![Accessibility Testing Results](docs/screenshots/accessibility-testing.png)
+*Caption: WCAG 2.1 AA compliance testing with WAVE and axe DevTools showing zero accessibility errors*
 
 ## 🆕 Recent Updates (June 29, 2025) - Version 1.1.0
 
@@ -676,9 +789,17 @@ This QuickGigs project demonstrates **Distinction-level achievement** across all
 
 ## 🔒 Security Implementation
 
+<!-- TODO: Add screenshot placeholder -->
+![Security Implementation Overview](docs/screenshots/security-implementation-overview.png)
+*Caption: Comprehensive security architecture showing authentication, authorization, and protection mechanisms*
+
 ### Authentication & Authorization System (LO3 Evidence)
 
 QuickGigs implements comprehensive security measures across all layers of the application, ensuring secure user authentication, proper authorization controls, and protection against common web vulnerabilities.
+
+<!-- TODO: Add screenshot placeholder -->
+![Authentication Flow Diagram](docs/screenshots/authentication-flow.png)
+*Caption: User authentication flow from registration through login to role-based access control*
 
 #### **Django Authentication Framework**
 
@@ -1049,7 +1170,15 @@ if not STRIPE_PUBLISHABLE_KEY or not STRIPE_SECRET_KEY:
 
 ## 🏗️ Technical Architecture
 
+<!-- TODO: Add screenshot placeholder -->
+![Technical Architecture Diagram](docs/screenshots/technical-architecture-overview.png)
+*Caption: High-level technical architecture showing Django apps, database relationships, and external integrations*
+
 ### Multi-App Django Structure
+
+<!-- TODO: Add screenshot placeholder -->
+![Django Apps Structure](docs/screenshots/django-apps-structure.png)
+*Caption: Visual representation of the multi-app Django structure with file organization and responsibilities*
 
 ```
 quickgigs_project/
@@ -1077,6 +1206,10 @@ quickgigs_project/
 
 ### Design Patterns Implemented
 
+<!-- TODO: Add screenshot placeholder -->
+![Design Patterns Implementation](docs/screenshots/design-patterns-implementation.png)
+*Caption: Code examples showing implementation of key design patterns including MVT, CBV, and Repository patterns*
+
 - **Model-View-Template (MVT)**: Django's core pattern with proper separation
 - **Class-Based Views (CBV)**: Consistent CRUD operations with mixins
 - **Template Inheritance**: DRY principle with base template system
@@ -1086,6 +1219,10 @@ quickgigs_project/
 
 ### Key Architectural Decisions
 
+<!-- TODO: Add screenshot placeholder -->
+![Architectural Decision Documentation](docs/screenshots/architectural-decisions.png)
+*Caption: Documentation of key architectural decisions with justifications and trade-offs analysis*
+
 1. **Multi-App Structure**: Enables team development and feature isolation
 2. **Role-Based Design**: Employer vs Freelancer distinction throughout
 3. **Payment Integration**: Centralized payment processing with audit trail
@@ -1094,7 +1231,15 @@ quickgigs_project/
 
 ## 💾 Database Design
 
+<!-- TODO: Add screenshot placeholder -->
+![Database Design Overview](docs/screenshots/database-design-overview.png)
+*Caption: Complete database design showing all models, relationships, and business logic implementation*
+
 ### Entity Relationship Diagram
+
+<!-- TODO: Add screenshot placeholder -->
+![Entity Relationship Diagram](docs/screenshots/erd-detailed.png)
+*Caption: Detailed ERD showing primary keys, foreign keys, constraints, and relationship cardinalities*
 
 ```mermaid
 erDiagram
@@ -2098,7 +2243,15 @@ QuickGigs is committed to making the platform accessible to users of all abiliti
 
 ## 🧪 Testing Strategy
 
+<!-- TODO: Add screenshot placeholder -->
+![Testing Strategy Overview](docs/screenshots/testing-strategy-overview.png)
+*Caption: Comprehensive testing strategy showing unit tests, integration tests, and manual testing procedures*
+
 ### Comprehensive Test Suite
+
+<!-- TODO: Add screenshot placeholder -->
+![Test Results Dashboard](docs/screenshots/test-results-dashboard.png)
+*Caption: Test execution results showing 169 tests with 0 failures across all Django applications*
 
 **Test Coverage**: 169 tests with 0 failures across all applications
 
@@ -2255,6 +2408,10 @@ CSRF_COOKIE_SECURE = True
 
 #### Deployment Process
 
+<!-- TODO: Add screenshot placeholder -->
+![Heroku Deployment Pipeline](docs/screenshots/heroku-deployment-pipeline.png)
+*Caption: Complete Heroku deployment pipeline showing environment setup, build process, and monitoring*
+
 ```bash
 # Initial setup
 heroku create quickgigs
@@ -2276,6 +2433,10 @@ heroku run python manage.py createsuperuser
 
 #### Production Monitoring
 
+<!-- TODO: Add screenshot placeholder -->
+![Production Monitoring Dashboard](docs/screenshots/production-monitoring.png)
+*Caption: Heroku production monitoring showing logs, dyno status, and database performance metrics*
+
 ```bash
 # Application monitoring
 heroku logs --tail          # Real-time logs
@@ -2288,6 +2449,10 @@ heroku pg:psql             # Database access
 ```
 
 ### Live Platform
+
+<!-- TODO: Add screenshot placeholder -->
+![Live Platform Screenshot](docs/screenshots/live-platform-heroku.png)
+*Caption: Live QuickGigs platform running on Heroku with full functionality and SSL security*
 
 **Production URL**: [https://quickgigs-9fb11f8a9dfa.herokuapp.com/](https://quickgigs-9fb11f8a9dfa.herokuapp.com/)
 
@@ -2302,7 +2467,15 @@ heroku pg:psql             # Database access
 
 ## ⚡ Performance Optimizations
 
+<!-- TODO: Add screenshot placeholder -->
+![Performance Optimization Results](docs/screenshots/performance-optimization-results.png)
+*Caption: Performance optimization results showing before/after database query improvements and loading time reductions*
+
 ### Database Query Optimization
+
+<!-- TODO: Add screenshot placeholder -->
+![Database Query Optimization](docs/screenshots/database-query-optimization.png)
+*Caption: Visual representation of N+1 query problem resolution and select_related implementation*
 
 #### Problem Identified: N+1 Query Issue
 
