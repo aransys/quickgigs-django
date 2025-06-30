@@ -1,0 +1,11 @@
+
+# Screenshot Placeholder: testing/lighthouse-performance-report.png
+
+This is a placeholder for the screenshot: testing/lighthouse-performance-report.png
+
+To capture this screenshot:
+1. Follow the instructions in screenshot_guide.md
+2. Use the appropriate URL or demo page
+3. Save the image to: docs/screenshots/testing/lighthouse-performance-report.png
+
+Description: Screenshot for design documentation

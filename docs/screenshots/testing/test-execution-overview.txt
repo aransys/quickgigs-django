@@ -1,0 +1,11 @@
+
+# Screenshot Placeholder: testing/test-execution-overview.png
+
+This is a placeholder for the screenshot: testing/test-execution-overview.png
+
+To capture this screenshot:
+1. Navigate to the appropriate page in the Django app
+2. Use a screenshot tool (Selenium, Playwright, or browser dev tools)
+3. Save the image to: docs/screenshots/testing/test-execution-overview.png
+
+Description: Screenshot for design documentation

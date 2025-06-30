@@ -1,0 +1,11 @@
+
+# Screenshot Placeholder: design/screen-reader-accessibility.png
+
+This is a placeholder for the screenshot: design/screen-reader-accessibility.png
+
+To capture this screenshot:
+1. Follow the instructions in screenshot_guide.md
+2. Use the appropriate URL or demo page
+3. Save the image to: docs/screenshots/design/screen-reader-accessibility.png
+
+Description: Screenshot for design documentation
