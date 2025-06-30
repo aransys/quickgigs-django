@@ -32,6 +32,7 @@
 - [Technologies & Tools](#-technologies--tools)
 - [Future Roadmap](#-future-roadmap)
 - [Assessment Evidence](#-assessment-evidence)
+- [Error Handling - Professional Development Practices](#-error-handling---professional-development-practices)
 
 ## 🎯 Project Overview
 
@@ -2669,5 +2670,26 @@ This project demonstrates mastery of:
 - Professional deployment practices
 - Software testing and quality assurance
 - Modern web development workflows
+
+## Error Handling - Professional Development Practices
+
+This project currently relies primarily on Django's built-in error handling mechanisms. Standard error pages (such as 404 and 500) are provided by Django, and form validation errors are displayed using Django's default messaging system. Some custom user-friendly error messages are implemented in forms and views, but there is limited use of advanced error handling techniques such as:
+
+- Custom error pages for all HTTP error codes
+- Centralized logging of exceptions or errors
+- Automated error reporting or alerting
+- Granular user feedback for unexpected issues
+
+**Strengths:**
+- Leverages Django's robust default error handling and validation.
+- Some user-facing error messages are present for common form and authentication issues.
+
+**Areas for Improvement:**
+- Implement custom error pages for a more branded and user-friendly experience.
+- Add centralized logging (e.g., using Python's `logging` module or Sentry) for better monitoring and debugging.
+- Provide more granular and helpful feedback to users for unexpected errors.
+- Review and handle edge cases and exceptions in views and background tasks.
+
+This project is suitable for development and basic production use, but further enhancements to error handling and monitoring are recommended for a more professional, production-grade deployment.
 
 
