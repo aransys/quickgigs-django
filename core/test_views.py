@@ -180,7 +180,7 @@ class HomepageViewTest(TestCase):
         response = self.client.get(url)
         
         # Should show employer-specific content
-        self.assertContains(response, 'Post a Gig')
+        self.assertContains(response, 'Post Your First Gig')
 
     def test_homepage_performance(self):
         """Test homepage database query efficiency"""
@@ -320,7 +320,7 @@ class NavigationTest(TestCase):
         response = self.client.get(url)
         
         # Employers should see post gig option
-        self.assertContains(response, 'Post a Gig')
+        self.assertContains(response, 'Post Your First Gig')
 
     def test_freelancer_navigation(self):
         """Test navigation for freelancers"""

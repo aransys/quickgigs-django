@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from decimal import Decimal
 from datetime import date, timedelta
-from gigs.models import Gig, Task
+from gigs.models import Gig
 from django.core.exceptions import ValidationError
 
 
