@@ -39,4 +39,5 @@ ENV/
 # Secret keys
 .env.env
 
-*.pyc
+*.pyc.DS_Store
+**/.DS_Store
