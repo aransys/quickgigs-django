@@ -1,4 +1,4 @@
-# Code Quality Documentation
+# Code Quality Documentation - QuickGigs Platform
 
 ## Table of Contents
 
@@ -27,17 +27,20 @@
 
    - [Django Security Implementation](#django-security-implementation)
    - [Input Validation](#input-validation)
-   - [CSRF Protection](#csrf-protection)
+   - [Authentication & Authorization](#authentication--authorization)
+   - [Payment Security](#payment-security)
 
 5. [Frontend Code Quality Standards](#frontend-code-quality-standards)
 
    - [CSS Architecture Standards](#css-architecture-standards)
    - [HTML Accessibility Standards](#html-accessibility-standards)
    - [Template Quality](#template-quality)
+   - [Responsive Design Implementation](#responsive-design-implementation)
 
 6. [Code Validation Tools](#code-validation-tools)
 
    - [Automated Quality Checks](#automated-quality-checks)
+   - [Testing Framework Integration](#testing-framework-integration)
    - [Quality Metrics Achieved](#quality-metrics-achieved)
 
 7. [Code Review Standards](#code-review-standards)
@@ -58,126 +61,268 @@
 
 ### PEP8 Compliance
 
-All Python code follows **PEP8 style guidelines** with consistent formatting and clear structure. The codebase demonstrates professional Python coding standards.
+All Python code follows **PEP8 style guidelines** with consistent formatting and clear structure. The QuickGigs codebase demonstrates professional Python coding standards across all applications.
 
 #### Model Implementation - PEP8 Compliant
 
 ```python
-# models.py - Actual implementation showing PEP8 compliance
+# gigs/models.py - Actual implementation showing PEP8 compliance
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
+from decimal import Decimal
 
-class Task(models.Model):
+class Gig(models.Model):
+    """
+    Represents a freelance gig posted by an employer.
+    """
     # Field definitions with clear, descriptive names
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    completed = models.BooleanField(default=False)
+    description = models.TextField()
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posted_gigs')
+    budget = models.DecimalField(max_digits=10, decimal_places=2)
+    location = models.CharField(max_length=100)
+    
+    # Choice fields with proper constants
+    CATEGORY_CHOICES = [
+        ('web_dev', 'Web Development'),
+        ('mobile_dev', 'Mobile Development'),
+        ('design', 'Design'),
+        ('writing', 'Writing'),
+        ('marketing', 'Marketing'),
+        ('other', 'Other'),
+    ]
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    
+    deadline = models.DateField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # Methods with proper spacing and naming
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.employer.username}"
 
     def is_overdue(self):
         """
-        Check if task is past its due date and not completed.
+        Check if gig deadline has passed and gig is still active.
 
         Returns:
-            bool: True if task is overdue, False otherwise
+            bool: True if gig is overdue, False otherwise
         """
-        if self.due_date and not self.completed:
-            return self.due_date < timezone.now().date()
+        if self.deadline and self.is_active:
+            return self.deadline < timezone.now().date()
         return False
+
+    @property
+    def is_available(self):
+        """
+        Check if gig is available for applications.
+
+        Returns:
+            bool: True if gig is active and not overdue
+        """
+        return self.is_active and not self.is_overdue
 
     # Meta class following Django conventions
     class Meta:
-        ordering = ['completed', 'due_date', 'created_at']
-        # Show incomplete tasks first, then by due date, then by creation
+        ordering = ['-is_featured', '-created_at']
+        verbose_name = "Gig"
+        verbose_name_plural = "Gigs"
 
-        verbose_name = "Task"
-        verbose_name_plural = "Tasks"
+
+class Application(models.Model):
+    """
+    Represents a freelancer's application to a gig.
+    """
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='applications')
+    applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications')
+    cover_letter = models.TextField()
+    proposed_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('withdrawn', 'Withdrawn'),
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    employer_notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.applicant.username} -> {self.gig.title}"
+
+    class Meta:
+        ordering = ['-created_at']
+        unique_together = ['gig', 'applicant']
+        verbose_name = "Application"
+        verbose_name_plural = "Applications"
 ```
 
 **PEP8 Quality Assessment:**
 
 - ✅ **Line Length**: All lines under 79 characters
 - ✅ **Imports**: Properly organized (Django imports, then local)
-- ✅ **Spacing**: Consistent 4-space indentation
-- ✅ **Naming**: snake_case for variables, CamelCase for classes
-- ✅ **Comments**: Clear, descriptive comments explaining logic
-- ✅ **Docstrings**: Well-formatted method documentation
+- ✅ **Spacing**: Consistent 4-space indentation throughout
+- ✅ **Naming**: snake_case for variables/methods, CamelCase for classes
+- ✅ **Comments**: Clear, descriptive comments explaining business logic
+- ✅ **Docstrings**: Well-formatted class and method documentation
+- ✅ **Constants**: Proper use of choice constants for database fields
 
 ### Django Best Practices
 
 #### Class-Based Views Implementation
 
 ```python
-# views.py - Actual implementation demonstrating Django best practices
+# gigs/views.py - Actual implementation demonstrating Django best practices
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from .models import Task
-from .forms import TaskForm
+from django.db.models import Q
+from .models import Gig, Application
+from .forms import GigForm, ApplicationForm
 
-class TaskListView(ListView):
-    model = Task
-    template_name = 'todo_app/task_list.html'
-    context_object_name = 'tasks'
-    ordering = ['-created_at']  # Show newest tasks first
+class GigListView(ListView):
+    """
+    Display list of active gigs with filtering and search capabilities.
+    """
+    model = Gig
+    template_name = 'gigs/gig_list.html'
+    context_object_name = 'gigs'
+    paginate_by = 12
+    
+    def get_queryset(self):
+        queryset = Gig.objects.filter(is_active=True).select_related('employer')
+        
+        # Search functionality
+        search_query = self.request.GET.get('search')
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) | 
+                Q(description__icontains=search_query)
+            )
+        
+        # Category filtering
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(category=category)
+            
+        return queryset.order_by('-is_featured', '-created_at')
 
-class TaskDetailView(DetailView):
-    model = Task
-    template_name = 'todo_app/task_detail.html'
-    context_object_name = 'task'
+class GigDetailView(DetailView):
+    """
+    Display detailed view of a gig with application functionality.
+    """
+    model = Gig
+    template_name = 'gigs/gig_detail.html'
+    context_object_name = 'gig'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['user_has_applied'] = Application.objects.filter(
+                gig=self.object, 
+                applicant=self.request.user
+            ).exists()
+        return context
 
-class TaskCreateView(CreateView):
-    model = Task
-    form_class = TaskForm
-    template_name = 'todo_app/task_form.html'
-    success_url = reverse_lazy('todo_app:task_list')
-
+class GigCreateView(LoginRequiredMixin, CreateView):
+    """
+    Allow authenticated users to create new gigs.
+    """
+    model = Gig
+    form_class = GigForm
+    template_name = 'gigs/gig_form.html'
+    
     def form_valid(self, form):
-        messages.success(self.request, 'Task created successfully!')
+        form.instance.employer = self.request.user
+        messages.success(self.request, 'Gig posted successfully!')
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('gigs:gig_detail', kwargs={'pk': self.object.pk})
 
-class TaskUpdateView(UpdateView):
-    model = Task
-    form_class = TaskForm
-    template_name = 'todo_app/task_form.html'
-    success_url = reverse_lazy('todo_app:task_list')
-
+class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    Allow gig owners to update their gigs.
+    """
+    model = Gig
+    form_class = GigForm
+    template_name = 'gigs/gig_form.html'
+    
+    def test_func(self):
+        # Only allow gig owner to edit
+        gig = self.get_object()
+        return self.request.user == gig.employer
+    
     def form_valid(self, form):
-        messages.success(self.request, 'Task updated successfully!')
+        messages.success(self.request, 'Gig updated successfully!')
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('gigs:gig_detail', kwargs={'pk': self.object.pk})
 
-class TaskDeleteView(DeleteView):
-    model = Task
-    template_name = 'todo_app/task_confirm_delete.html'
-    success_url = reverse_lazy('todo_app:task_list')
-
+class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """
+    Allow gig owners to delete their gigs.
+    """
+    model = Gig
+    template_name = 'gigs/gig_confirm_delete.html'
+    success_url = reverse_lazy('gigs:gig_list')
+    
+    def test_func(self):
+        gig = self.get_object()
+        return self.request.user == gig.employer
+    
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, 'Task deleted successfully!')
+        messages.success(self.request, 'Gig deleted successfully!')
         return super().delete(request, *args, **kwargs)
 
-# Function-based view for toggling task completion
-def toggle_complete(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.completed = not task.completed
-    task.save()
-
-    if task.completed:
-        messages.success(request, f'Task "{task.title}" marked as complete!')
+# Function-based view for applying to gigs
+@login_required
+def apply_to_gig(request, pk):
+    """
+    Handle gig application submission.
+    """
+    gig = get_object_or_404(Gig, pk=pk, is_active=True)
+    
+    # Check if user already applied
+    if Application.objects.filter(gig=gig, applicant=request.user).exists():
+        messages.warning(request, 'You have already applied to this gig.')
+        return redirect('gigs:gig_detail', pk=pk)
+    
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.gig = gig
+            application.applicant = request.user
+            application.save()
+            
+            messages.success(request, 'Application submitted successfully!')
+            return redirect('gigs:gig_detail', pk=pk)
     else:
-        messages.info(request, f'Task "{task.title}" marked as incomplete.')
-
-    return redirect('todo_app:task_list')
+        form = ApplicationForm()
+    
+    return render(request, 'gigs/apply_to_gig.html', {
+        'form': form, 
+        'gig': gig
+    })
 ```
 
 **Django Best Practices Demonstrated:**
 
-- ✅ **Class-Based Views**: Proper use of generic views (ListView, CreateView, UpdateView, DeleteView)
+- ✅ **Class-Based Views**: Proper use of generic views with inheritance
+- ✅ **Mixins**: Strategic use of `LoginRequiredMixin` and `UserPassesTestMixin`
+- ✅ **Authorization**: Ownership verification using `test_func()`
+- ✅ **Query Optimization**: Using `select_related()` to prevent N+1 queries
+- ✅ **Search & Filtering**: Implementing Q objects for complex queries
 - ✅ **DRY Principle**: Reusing templates and form classes
 - ✅ **Error Handling**: Using `get_object_or_404` for safe object retrieval
 - ✅ **User Feedback**: Comprehensive message system for user actions
