@@ -171,6 +171,10 @@ Transform an existing Django todo application into a professional job board plat
 
 ### Starting Point: Todo Application
 
+<!-- TODO: Add screenshot placeholder -->
+![Before - Basic Todo Application](docs/screenshots/design/todo-app-original.png)
+*Caption: Original todo application with basic Bootstrap styling and limited functionality*
+
 ```
 ┌─────────────────────────────────┐
 │        Simple Todo List         │
@@ -190,6 +194,10 @@ Issues Identified:
 
 ### Vision: Professional Job Board
 
+<!-- TODO: Add screenshot placeholder -->
+![After - QuickGigs Professional Interface](docs/screenshots/design/quickgigs-homepage-hero.png)
+*Caption: Transformed QuickGigs homepage featuring professional design, clear value proposition, and featured gigs*
+
 ```
 ┌─────────────────────────────────┐
 │    QuickGigs Marketplace        │
@@ -208,6 +216,10 @@ Goals Achieved:
 ✅ Excellent accessibility
 ✅ Professional credibility
 ```
+
+<!-- TODO: Add screenshot placeholder -->
+![Design Transformation Overview](docs/screenshots/design/before-after-comparison.png)
+*Caption: Side-by-side comparison demonstrating the complete transformation from basic todo app to professional marketplace*
 
 ### User Stories (Demonstrating Real-World Application)
 
@@ -366,6 +378,10 @@ graph LR
 
 ### Before: Flat Todo Structure
 
+<!-- TODO: Add screenshot placeholder -->
+![Before - Simple Todo Structure](docs/screenshots/design/todo-structure-simple.png)
+*Caption: Original flat information architecture with limited navigation and single user type*
+
 ```
 Todo App/
 ├── Task List (single view)
@@ -380,6 +396,10 @@ Problems:
 ```
 
 ### After: Scalable Job Board Architecture
+
+<!-- TODO: Add screenshot placeholder -->
+![After - Complex Information Architecture](docs/screenshots/design/quickgigs-information-architecture.png)
+*Caption: Sophisticated multi-level architecture supporting multiple user types and business workflows*
 
 ```
 QuickGigs Platform/
@@ -406,6 +426,10 @@ QuickGigs Platform/
     ├── Success Pages
     └── Payment History
 ```
+
+<!-- TODO: Add screenshot placeholder -->
+![Site Navigation Examples](docs/screenshots/design/navigation-role-based.png)
+*Caption: Role-based navigation showing different menu items for visitors, freelancers, and employers*
 
 ### Entity Relationship Design (ERD)
 
@@ -548,6 +572,10 @@ For Employers:    [Logo] [Post Gig] [My Gigs] [Applications] [Profile ▼]
 - Mobile-first approach
 - User control maintained throughout
 
+<!-- TODO: Add screenshot placeholder -->
+![Database Schema Visualization](docs/screenshots/design/database-erd-implementation.png)
+*Caption: Entity Relationship Diagram showing complex data relationships and constraints in production database*
+
 ---
 
 ## Visual Design Transformation
@@ -591,6 +619,10 @@ For Employers:    [Logo] [Post Gig] [My Gigs] [Applications] [Profile ▼]
 
 ### Color Psychology & Brand Identity
 
+<!-- TODO: Add screenshot placeholder -->
+![Color System Documentation](docs/screenshots/design/color-palette-system.png)
+*Caption: Complete color system showing primary, semantic, and neutral palettes with hex values and usage examples*
+
 ```scss
 // Primary Palette - Growth & Trust
 $brand-primary: #10b981; // Growth, money, success
@@ -608,6 +640,10 @@ $gray-900: #111827; // Primary text
 ```
 
 ### Typography System
+
+<!-- TODO: Add screenshot placeholder -->
+![Typography Scale Examples](docs/screenshots/design/typography-hierarchy.png)
+*Caption: Typography scale showing heading sizes, body text, and responsive behavior across devices*
 
 ```css
 /* Type Scale - Clear Hierarchy */
@@ -641,6 +677,10 @@ $gray-900: #111827; // Primary text
 
 #### Gig Card Transformation
 
+<!-- TODO: Add screenshot placeholder -->
+![Component Evolution - Todo to Gig Card](docs/screenshots/design/component-evolution-cards.png)
+*Caption: Transformation from basic todo list items to sophisticated gig cards with rich metadata*
+
 **Before: Basic List Item**
 
 ```html
@@ -651,6 +691,10 @@ $gray-900: #111827; // Primary text
 ```
 
 **After: Rich Content Card**
+
+<!-- TODO: Add screenshot placeholder -->
+![Gig Card Component Breakdown](docs/screenshots/design/gig-card-anatomy.png)
+*Caption: Detailed breakdown of gig card components showing featured badges, metadata, and employer information*
 
 ```html
 <article class="gig-card">
@@ -698,6 +742,10 @@ $gray-900: #111827; // Primary text
 
 ### Multi-Step Registration Flow
 
+<!-- TODO: Add screenshot placeholder -->
+![Registration Flow Wireframes](docs/screenshots/design/registration-flow-steps.png)
+*Caption: Multi-step registration flow showing progression from basic info to role selection to profile completion*
+
 ```yaml
 Step 1: Basic Information
   Fields: Email, Username, Password
@@ -716,7 +764,15 @@ Success: Contextual Dashboard
   Freelancer: Shown browse interface
 ```
 
+<!-- TODO: Add screenshot placeholder -->
+![Role Selection Interface](docs/screenshots/design/role-selection-cards.png)
+*Caption: Role selection step showing visual cards for employer and freelancer options with benefit highlights*
+
 ### Payment Flow Design
+
+<!-- TODO: Add screenshot placeholder -->
+![Payment Flow User Journey](docs/screenshots/design/payment-flow-journey.png)
+*Caption: Complete payment flow from trigger button through Stripe checkout to success confirmation*
 
 #### Feature Gig Upgrade Journey
 
@@ -738,6 +794,10 @@ Success: Contextual Dashboard
    - Payment receipt
 ```
 
+<!-- TODO: Add screenshot placeholder -->
+![Stripe Integration Screenshots](docs/screenshots/design/stripe-checkout-integration.png)
+*Caption: Stripe checkout interface showing mobile-optimized payment form and success states*
+
 **Design Principles:**
 
 - Minimize cognitive load
@@ -746,6 +806,10 @@ Success: Contextual Dashboard
 - Immediate gratification
 
 ### Micro-interactions
+
+<!-- TODO: Add screenshot placeholder -->
+![Interactive States Examples](docs/screenshots/design/micro-interactions-showcase.png)
+*Caption: Collection of micro-interactions showing button hover states, card animations, and loading indicators*
 
 ```css
 /* Button Hover States */
@@ -926,6 +990,10 @@ except PaymentError as e:
 
 ### Accessibility (WCAG 2.1 AA Compliance)
 
+<!-- TODO: Add screenshot placeholder -->
+![Accessibility Features Demo](docs/screenshots/design/accessibility-features.png)
+*Caption: Accessibility features including focus states, skip navigation, high contrast support, and keyboard navigation*
+
 #### Comprehensive Accessibility Features
 
 ```css
@@ -964,6 +1032,10 @@ except PaymentError as e:
 }
 ```
 
+<!-- TODO: Add screenshot placeholder -->
+![Screen Reader Testing](docs/screenshots/design/screen-reader-accessibility.png)
+*Caption: Screen reader optimization showing semantic HTML structure and ARIA label implementations*
+
 #### Screen Reader Optimization
 
 - Semantic HTML5 elements
@@ -1001,6 +1073,10 @@ When breaking conventional patterns, clear justification provided:
 
 ### Component Library
 
+<!-- TODO: Add screenshot placeholder -->
+![Component Library Overview](docs/screenshots/design/component-library-showcase.png)
+*Caption: Complete component library showing atomic design structure from atoms to templates*
+
 #### Atomic Design Structure
 
 ```
@@ -1031,6 +1107,10 @@ Templates/
 ├── Form page layout
 └── List page layout
 ```
+
+<!-- TODO: Add screenshot placeholder -->
+![Button Component States](docs/screenshots/design/button-component-states.png)
+*Caption: Button component showing all variants and states including hover, active, disabled, and loading*
 
 ### Design Tokens
 
@@ -1119,6 +1199,10 @@ Primary actions that advance the user through a flow.
 
 ## Responsive & Adaptive Design
 
+<!-- TODO: Add screenshot placeholder -->
+![Responsive Design Showcase](docs/screenshots/design/responsive-breakpoints.png)
+*Caption: Responsive design showing mobile, tablet, and desktop layouts with adaptive grid systems*
+
 ### Mobile-First Strategy
 
 ```scss
@@ -1151,6 +1235,10 @@ $breakpoints: (
 ### Adaptive Components
 
 #### Navigation Transformation
+
+<!-- TODO: Add screenshot placeholder -->
+![Navigation Responsive States](docs/screenshots/design/navigation-responsive-states.png)
+*Caption: Navigation transformation across mobile, tablet, and desktop showing progressive enhancement*
 
 **Mobile (< 768px)**
 
@@ -1258,12 +1346,20 @@ $breakpoints: (
 
 ### Performance Metrics Impact
 
+<!-- TODO: Add screenshot placeholder -->
+![Performance Metrics Dashboard](docs/screenshots/design/performance-lighthouse-scores.png)
+*Caption: Lighthouse performance metrics showing improvements in loading times and Core Web Vitals*
+
 | Metric                     | Before | After  | Improvement  |
 | -------------------------- | ------ | ------ | ------------ |
 | **First Contentful Paint** | 2.8s   | 0.8s   | 71% faster   |
 | **Time to Interactive**    | 4.2s   | 1.5s   | 64% faster   |
 | **Lighthouse Score**       | 67     | 95     | 42% increase |
 | **Core Web Vitals**        | Failed | Passed | ✅ All green |
+
+<!-- TODO: Add screenshot placeholder -->
+![Performance Optimization Examples](docs/screenshots/design/performance-optimization-techniques.png)
+*Caption: Performance optimization techniques including image lazy loading, CSS optimization, and progressive enhancement*
 
 ---
 
@@ -1286,6 +1382,10 @@ f6g7h8i Add comprehensive payment edge case tests
 ```
 
 #### Test Categories & Coverage
+
+<!-- TODO: Add screenshot placeholder -->
+![Test Execution Results](docs/screenshots/testing/test-execution-overview.png)
+*Caption: Test execution results showing 180 tests with 91% pass rate across unit, integration, and UI tests*
 
 **1. Unit Tests (Model Layer)**
 
@@ -1355,6 +1455,10 @@ class AccessibilityTest(TestCase):
 
 #### Responsive Design Testing
 
+<!-- TODO: Add screenshot placeholder -->
+![Cross-Device Testing Results](docs/screenshots/testing/responsive-device-testing.png)
+*Caption: Cross-device testing showing QuickGigs interface on iPhone, iPad, and desktop with responsive behavior*
+
 | Device     | Viewport  | Test Result | Issues Found       | Resolution       |
 | ---------- | --------- | ----------- | ------------------ | ---------------- |
 | iPhone 12  | 390x844   | ✅ Pass     | None               | -                |
@@ -1364,6 +1468,10 @@ class AccessibilityTest(TestCase):
 
 #### Cross-Browser Testing
 
+<!-- TODO: Add screenshot placeholder -->
+![Cross-Browser Testing Screenshots](docs/screenshots/testing/cross-browser-compatibility.png)
+*Caption: Cross-browser testing results showing consistent interface across Chrome, Firefox, Safari, and Edge*
+
 | Browser | Version | Test Result | Issues Found         | Resolution          |
 | ------- | ------- | ----------- | -------------------- | ------------------- |
 | Chrome  | 120     | ✅ Pass     | None                 | -                   |
@@ -1372,6 +1480,10 @@ class AccessibilityTest(TestCase):
 | Edge    | 120     | ✅ Pass     | None                 | -                   |
 
 #### Accessibility Testing
+
+<!-- TODO: Add screenshot placeholder -->
+![Accessibility Testing Tools](docs/screenshots/testing/accessibility-wave-axe-results.png)
+*Caption: Accessibility testing results using WAVE and axe DevTools showing zero errors and full compliance*
 
 ```yaml
 Tools Used:
@@ -1389,6 +1501,10 @@ Results:
 ```
 
 #### Performance Testing
+
+<!-- TODO: Add screenshot placeholder -->
+![Lighthouse Performance Report](docs/screenshots/testing/lighthouse-performance-report.png)
+*Caption: Lighthouse performance report showing scores of 95+ across all metrics with detailed timing breakdowns*
 
 ```javascript
 // Lighthouse Scores
@@ -1433,6 +1549,10 @@ class SecurityTest(TestCase):
 
 ### Test Coverage Report
 
+<!-- TODO: Add screenshot placeholder -->
+![Test Coverage Report](docs/screenshots/testing/test-coverage-report.png)
+*Caption: Comprehensive test coverage report showing 99% overall coverage across all Django apps*
+
 ```bash
 # Coverage Summary
 Name                     Stmts   Miss  Cover
@@ -1461,6 +1581,10 @@ TOTAL                     1247     10    99%
 ## Business Impact & ROI
 
 ### Design-Driven Metrics
+
+<!-- TODO: Add screenshot placeholder -->
+![Business Metrics Dashboard](docs/screenshots/design/business-metrics-analytics.png)
+*Caption: Business performance dashboard showing user engagement, conversion rates, and revenue metrics*
 
 #### User Engagement
 
@@ -1499,6 +1623,10 @@ ROI: Design improvements directly enabled
 
 ### Competitive Advantage Through Design
 
+<!-- TODO: Add screenshot placeholder -->
+![Competitive Analysis Comparison](docs/screenshots/design/competitive-advantage-comparison.png)
+*Caption: Side-by-side comparison of QuickGigs vs competitor interfaces highlighting key advantages*
+
 | Feature                  | QuickGigs         | Competitors       |
 | ------------------------ | ----------------- | ----------------- |
 | **Onboarding Time**      | 3 minutes         | 10-15 minutes     |
@@ -1513,6 +1641,10 @@ ROI: Design improvements directly enabled
 ## Clean Code & Development Standards
 
 ### Code Organization (Demonstrating Craftsmanship)
+
+<!-- TODO: Add screenshot placeholder -->
+![Code Quality Examples](docs/screenshots/design/code-quality-clean-code.png)
+*Caption: Examples of clean code principles including consistent naming, proper documentation, and separation of concerns*
 
 #### Consistent Naming Conventions
 
@@ -1650,6 +1782,10 @@ DATABASES = {
 ```
 
 #### Deployment Process
+
+<!-- TODO: Add screenshot placeholder -->
+![Deployment Pipeline Documentation](docs/screenshots/design/deployment-heroku-process.png)
+*Caption: Heroku deployment pipeline showing configuration, build process, and post-deployment verification steps*
 
 **1. Pre-Deployment Checklist**
 
