@@ -1150,24 +1150,54 @@ class Payment(models.Model):
 #### Visual Identity
 
 - **Primary Color**: Professional green (#10b981) representing growth and money
-- **Typography**: Clear hierarchy with readable fonts
-- **Iconography**: Font Awesome icons for consistent visual language
-- **Layout**: Card-based design for scannable content
+- **Color System**: CSS custom properties with Tailwind CSS integration
+- **Typography**: Inter font family with clear hierarchy
+- **Iconography**: Font Awesome 6.4.0 icons for consistent visual language
+- **Layout**: Card-based design with glassmorphism effects
+
+#### Actual Design System Implementation
+
+```css
+/* CSS Custom Properties (Variables) */
+:root {
+  --primary-color: #6366f1;        /* Indigo for CSS components */
+  --success-color: #10b981;        /* Green for success states */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --backdrop-blur: blur(12px);
+}
+
+/* Tailwind CSS Configuration */
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: "#f0fdf4",
+          500: "#10b981",    /* Primary brand green */
+          600: "#059669",
+          700: "#047857",
+        },
+      },
+    },
+  },
+};
+```
 
 #### Responsive Design Strategy
 
-```css
-/* Mobile-first approach */
-.hero-title {
-  @apply text-4xl font-bold mb-6;
-}
+```html
+<!-- Direct Tailwind classes in templates (actual approach) -->
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+  Find Your Perfect <span class="text-yellow-300">Gig</span>
+</h1>
 
-/* Progressive enhancement */
-@media (min-width: 768px) {
-  .hero-title {
-    @apply md:text-5xl lg:text-6xl;
-  }
-}
+<!-- Mobile-first responsive navigation -->
+<div class="hidden md:flex items-center">
+  <!-- Desktop navigation -->
+</div>
+<div class="md:hidden">
+  <!-- Mobile hamburger menu -->
+</div>
 ```
 
 ### User Experience Flows
@@ -1191,10 +1221,12 @@ class Payment(models.Model):
 ```
 1. Homepage → Browse available opportunities
 2. Gig Discovery → View detailed requirements and budgets
-3. Sign Up → Create account for future features
-4. Role Selection → Choose "Freelancer"
-5. Profile Setup → Add skills, rates, portfolio info
-6. Application Process → (Foundation implemented for future)
+3. Sign Up → Create account with email/password
+4. Role Selection → Choose "Freelancer" with visual benefits
+5. Profile Setup → Add skills, hourly rates, bio information
+6. 🆕 Apply to Gigs → Submit cover letter and proposed rate
+7. 🆕 My Applications → Track application status and employer responses
+8. Application Management → Withdraw applications if needed
 ```
 
 ### Accessibility Considerations
