@@ -15,6 +15,30 @@ _A comprehensive design case study documenting the transformation of a basic tod
 
 ---
 
+## Table of Contents
+
+- [From Todo App to Professional Job Board: A Complete Design Transformation](#from-todo-app-to-professional-job-board-a-complete-design-transformation)
+- [Executive Summary](#executive-summary)
+  - [Key Achievements](#key-achievements)
+- [🆕 Recent Design Updates](#-recent-design-updates)
+  - [Major UI/UX Enhancements](#major-uiux-enhancements)
+  - [Design System Evolution](#design-system-evolution)
+  - [User Experience Improvements](#user-experience-improvements)
+  - [Business Impact](#business-impact)
+- [Project Overview](#project-overview)
+- [Design Challenge & Vision](#design-challenge--vision)
+- [User Research & Discovery](#user-research--discovery)
+- [Information Architecture Evolution](#information-architecture-evolution)
+- [Visual Design Transformation](#visual-design-transformation)
+- [Interaction Design & User Flows](#interaction-design--user-flows)
+- [Distinction-Level UX Design Principles](#distinction-level-ux-design-principles)
+- [Button Component](#button-component)
+- [Responsive & Adaptive Design](#responsive--adaptive-design)
+- [Performance-Driven Design](#performance-driven-design)
+- [Testing & Quality Assurance](#testing--quality-assurance)
+
+---
+
 ## Executive Summary
 
 This case study documents the complete design transformation of QuickGigs, demonstrating how user-centered design principles, systematic UX methodology, and iterative improvement based on user feedback can transform a simple task management tool into a professional freelance marketplace platform.
@@ -28,23 +52,6 @@ This case study documents the complete design transformation of QuickGigs, demon
 - **WCAG 2.1 AA accessibility compliance** with proper semantic HTML
 - **Database optimization** reducing N+1 queries through efficient ORM usage
 - **Comprehensive testing suite** with 180+ automated test cases
-
----
-
-## Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Design Challenge & Vision](#design-challenge--vision)
-3. [User Research & Discovery](#user-research--discovery)
-4. [Information Architecture Evolution](#information-architecture-evolution)
-5. [Visual Design Transformation](#visual-design-transformation)
-6. [Interaction Design & User Flows](#interaction-design--user-flows)
-7. [Design System Development](#design-system-development)
-8. [Responsive & Adaptive Design](#responsive--adaptive-design)
-9. [Performance-Driven Design](#performance-driven-design)
-10. [Testing & Iteration](#testing--iteration)
-11. [Business Impact & ROI](#business-impact--roi)
-12. [Lessons Learned](#lessons-learned)
 
 ---
 
@@ -1154,7 +1161,7 @@ export const tokens = {
 
 ### Component Documentation
 
-````markdown
+```markdown
 ## Button Component
 
 ### Usage
@@ -1191,9 +1198,7 @@ Primary actions that advance the user through a flow.
 
 <button class="btn-danger">Delete Gig</button>
 ```
-````
-
-````
+```
 
 ---
 
@@ -1230,7 +1235,7 @@ $breakpoints: (
     gap: 1.5rem;
   }
 }
-````
+```
 
 ### Adaptive Components
 
@@ -1935,7 +1940,7 @@ Development Environment:
 
 ### README Structure (Meeting Assessment Requirements)
 
-````markdown
+```markdown
 # QuickGigs - Professional Freelance Job Board
 
 ## Table of Contents
@@ -2073,7 +2078,7 @@ python manage.py createsuperuser
 # Run development server
 python manage.py runserver
 ```
-````
+```
 
 ### Production Deployment (Heroku)
 
@@ -2116,8 +2121,7 @@ python manage.py runserver
 
 - Code Institute for project guidelines
 - Test users for valuable feedback
-
-````
+```
 
 ### Design Documentation Integration
 
@@ -2165,7 +2169,7 @@ def calculate_stripe_fee(amount):
 - **License**: MIT
 - **Documentation**: https://pypi.org/project/python-decouple/
 """
-````
+```
 
 ### Phase 1: Enhanced User Experience (Month 1-2)
 
