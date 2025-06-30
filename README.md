@@ -1241,10 +1241,10 @@ tailwind.config = {
 
 ### Prerequisites
 
-- **Python 3.9+**: Programming language
-- **PostgreSQL**: Production database (optional for local development)
+- **Python 3.12+**: Programming language (tested with 3.12.6)
 - **Git**: Version control
 - **Stripe Account**: For payment testing (free test account)
+- **PostgreSQL**: Only required for production deployment (SQLite used locally)
 
 ### Local Development Setup
 
@@ -1259,12 +1259,12 @@ tailwind.config = {
 
    ```bash
    # Windows
-   python -m venv venv
-   venv\Scripts\activate
+   python -m venv .venv
+   .venv\Scripts\activate
 
    # Mac/Linux
-   python3 -m venv venv
-   source venv/bin/activate
+   python3 -m venv .venv
+   source .venv/bin/activate
    ```
 
 3. **Install Dependencies**
@@ -1291,6 +1291,8 @@ tailwind.config = {
    python manage.py createsuperuser
    ```
 
+   > **Note**: Project uses SQLite for local development (no setup required). PostgreSQL is only used in production deployment.
+
 6. **Static Files**
 
    ```bash
@@ -1307,6 +1309,19 @@ tailwind.config = {
    - **Main Site**: http://localhost:8000
    - **Admin Panel**: http://localhost:8000/admin
    - **API Documentation**: Available through admin
+
+### Production Environment Variables
+
+For production deployment, additional environment variables are required:
+
+```bash
+# Production-specific settings
+DATABASE_URL=postgresql://user:password@host:port/database
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=31536000
+```
 
 ### Development Workflow
 
@@ -1358,21 +1373,6 @@ git push                    # Share changes
 ## Overview
 
 QuickGigs has been designed and developed with accessibility as a core principle, ensuring the platform is usable by people with diverse abilities and assistive technologies. Our implementation follows WCAG 2.1 AA standards and incorporates universal design principles throughout the user experience.
-
----
-
-## 📋 Table of Contents
-
-- [WCAG 2.1 AA Compliance](#wcag-21-aa-compliance)
-- [Accessibility Features Implemented](#accessibility-features-implemented)
-- [Testing & Validation](#testing--validation)
-- [Assistive Technology Support](#assistive-technology-support)
-- [Color & Contrast](#color--contrast)
-- [Keyboard Navigation](#keyboard-navigation)
-- [Screen Reader Optimization](#screen-reader-optimization)
-- [Form Accessibility](#form-accessibility)
-- [Mobile Accessibility](#mobile-accessibility)
-- [Accessibility Testing Results](#accessibility-testing-results)
 
 ---
 
