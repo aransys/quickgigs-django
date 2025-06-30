@@ -2067,16 +2067,16 @@ touch filename.html
 #### Core Framework
 
 - **Django 4.2**: Web framework with MVT architecture
-- **Python 3.9+**: Modern Python with type hints support
+- **Python 3.12+**: Modern Python with type hints support
 - **PostgreSQL**: Production database with relational integrity
 - **SQLite**: Development database for local testing
 
 #### Django Packages
 
-- **django-crispy-forms**: Enhanced form rendering
 - **dj-database-url**: Environment-based database configuration
-- **python-decouple**: Environment variable management
+- **python-dotenv**: Environment variable management
 - **psycopg2-binary**: PostgreSQL database adapter
+- **stripe**: Payment processing integration
 
 ### Frontend Stack
 
@@ -2126,7 +2126,7 @@ touch filename.html
 def currency(value):
     """Format decimal as currency with commas"""
     try:
-        return f"${float(value):,.2f}"
+        return f"£{float(value):,.2f}"
     except (ValueError, TypeError):
         return value
 ```
