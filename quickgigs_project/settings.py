@@ -62,7 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # For static files in production
+    # "whitenoise.middleware.WhiteNoiseMiddleware",  # Temporarily disabled for testing
     "django.middleware.gzip.GZipMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -145,10 +145,11 @@ STATICFILES_DIRS = [
 ]
 
 # WhiteNoise configuration for static files in production
-if IS_PRODUCTION:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    WHITENOISE_MAX_AGE = 31536000  # 1 year cache
-    WHITENOISE_USE_FINDERS = True
+# Temporarily disabled for testing environment
+# if IS_PRODUCTION:
+#     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#     WHITENOISE_MAX_AGE = 31536000  # 1 year cache
+#     WHITENOISE_USE_FINDERS = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

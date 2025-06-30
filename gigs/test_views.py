@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from decimal import Decimal
 from datetime import date, timedelta
-# from .models import Task
+from .models import Gig
 
 
 class GigViewTest(TestCase):

@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from datetime import date, timedelta
 from decimal import Decimal
 
-from .models import Gig, Task
+from .models import Gig
 
 
 class GigModelTest(TestCase):
