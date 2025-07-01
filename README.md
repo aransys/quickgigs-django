@@ -119,93 +119,70 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ### Platform Overview
 
-<!-- TODO: Add screenshot placeholder -->
 ![QuickGigs Homepage](docs/screenshots/homepage.png)
 *Caption: Professional job board homepage showcasing featured gigs, clear value proposition, and modern design system*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Gig Listings](docs/screenshots/gig-listings.png)
 *Caption: Complete gig browsing interface with responsive card layout, filtering options, and category organization*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Platform Statistics Dashboard](docs/screenshots/platform-statistics.png)
 *Caption: Real-time platform metrics showing total gigs, applications, and user engagement statistics*
 
 ### User Authentication & Profiles
 
-<!-- TODO: Add screenshot placeholder -->
 ![User Registration Flow](docs/screenshots/user-registration-flow.png)
 *Caption: Multi-step registration process from basic info to role selection to profile completion*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Role Selection Interface](docs/screenshots/role-selection.png)
 *Caption: Visual role selection showing employer vs freelancer options with benefit highlights*
 
-<!-- TODO: Add screenshot placeholder -->
 ![User Profile Dashboard](docs/screenshots/user-profile-dashboard.png)
 *Caption: Comprehensive user profile with skills, bio, professional information, and role-specific features*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Profile Edit Interface](docs/screenshots/profile-edit-form.png)
 *Caption: User-friendly profile editing form with validation and success messaging*
 
 ### Employer Dashboard & Management
 
-<!-- TODO: Add screenshot placeholder -->
 ![My Gigs Dashboard](docs/screenshots/my-gigs-dashboard.png)
 *Caption: Complete employer dashboard with gig management, application tracking, and statistics overview*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Gig Applications Management](docs/screenshots/gig-applications.png)
 *Caption: Application management interface showing freelancer applications with cover letters and proposed rates*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Application Status Updates](docs/screenshots/application-status-management.png)
 *Caption: Employer tools for reviewing, accepting, or rejecting applications with status tracking*
 
 ### Gig Management & CRUD Operations
 
-<!-- TODO: Add screenshot placeholder -->
 ![Create Gig Form](docs/screenshots/create-gig-form.png)
 *Caption: Professional gig creation form with category selection, budget input, and deadline management*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Gig Detail View](docs/screenshots/gig-detail-view.png)
 *Caption: Detailed gig view with employer information, application functionality, and featured badge display*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Edit Gig Interface](docs/screenshots/edit-gig.png)
 *Caption: Gig editing interface with form pre-population and validation feedback*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Delete Gig Confirmation](docs/screenshots/delete-gig-confirmation.png)
 *Caption: Safe deletion process with confirmation modal and data preservation warnings*
 
 ### Payment Integration & E-commerce
 
-<!-- TODO: Add screenshot placeholder -->
-![Feature Gig Upgrade Modal](docs/screenshots/feature-gig-modal.png)
-*Caption: Value proposition modal for £9.99 featured gig upgrade with clear benefits and pricing*
-
-<!-- TODO: Add screenshot placeholder -->
 ![Stripe Checkout Integration](docs/screenshots/stripe-checkout.png)
 *Caption: Secure Stripe checkout interface with card payment processing and mobile optimization*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Payment Success Confirmation](docs/screenshots/payment-success.png)
 *Caption: Payment confirmation page with receipt details, next steps, and enhanced gig visibility*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Payment History Dashboard](docs/screenshots/payment-history.png)
 *Caption: Complete payment history with transaction details, status tracking, and receipt downloads*
 
 ### Mobile Responsive Design
 
-<!-- TODO: Add screenshot placeholder -->
 ![Mobile Homepage](docs/screenshots/mobile-homepage.png)
 *Caption: Mobile-optimized homepage demonstrating responsive grid, touch-friendly navigation, and feature hierarchy*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Mobile Navigation Menu](docs/screenshots/mobile-navigation.png)
 *Caption: Hamburger menu navigation with role-based menu items and streamlined mobile user experience*
 
@@ -219,11 +196,9 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ### Freelancer Experience
 
-<!-- TODO: Add screenshot placeholder -->
 ![Apply to Gig Form](docs/screenshots/apply-to-gig.png)
 *Caption: Freelancer application form with cover letter, proposed rate, and professional presentation*
 
-<!-- TODO: Add screenshot placeholder -->
 ![My Applications Dashboard](docs/screenshots/my-applications.png)
 *Caption: Freelancer dashboard showing application status, history, and employer communication*
 
@@ -247,7 +222,6 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ### Technical Implementation
 
-<!-- TODO: Add screenshot placeholder -->
 ![Django Admin Interface](docs/screenshots/django-admin.png)
 *Caption: Professional Django admin interface with customized models and efficient data management*
 
@@ -261,7 +235,6 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ### Error Handling & User Experience
 
-<!-- TODO: Add screenshot placeholder -->
 ![Custom 404 Error Page](docs/screenshots/404-error.png)
 *Caption: Branded 404 error page maintaining design consistency with helpful navigation options*
 
