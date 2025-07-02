@@ -2,9 +2,13 @@
    ACCESSIBILITY FIXES - WCAG 2.1 AA COMPLIANCE
    ================================ */
 
-/* Override brand-500 (#10b981) with brand-700 (#047857) for better contrast */
+/* Override brand colors for better contrast - WCAG 2.1 AA Compliance */
 .text-brand-500 {
   color: #047857 !important; /* brand-700 instead of brand-500 */
+}
+
+.text-brand-600 {
+  color: #047857 !important; /* brand-700 for better contrast on white */
 }
 
 .hover\:text-brand-500:hover {
@@ -30,13 +34,21 @@
   background-color: rgba(4, 120, 87, 0.1) !important;
 }
 
-/* Button contrast improvements */
+/* Button and background contrast improvements */
 .bg-brand-500 {
-  background-color: #059669 !important; /* brand-600 for better contrast */
+  background-color: #047857 !important; /* brand-700 for better contrast with white text */
+}
+
+.bg-brand-600 {
+  background-color: #047857 !important; /* brand-700 for better contrast */
+}
+
+.hover\:bg-brand-500:hover {
+  background-color: #059669 !important; /* brand-600 for hover */
 }
 
 .hover\:bg-brand-600:hover {
-  background-color: #047857 !important; /* brand-700 */
+  background-color: #065f46 !important; /* brand-800 for darker hover */
 }
 
 /* Focus indicators for accessibility */
@@ -73,4 +85,35 @@ textarea:focus-visible {
 .text-brand-500.far,
 .text-brand-500.fab {
   color: #047857 !important;
+}
+
+/* Specific button combination fixes for Lighthouse failures */
+a.bg-white.text-brand-600,
+.bg-white .text-brand-600 {
+  color: #047857 !important; /* Ensure sufficient contrast on white background */
+}
+
+a.bg-brand-500,
+button.bg-brand-500,
+.bg-brand-500 {
+  background-color: #047857 !important; /* Use brand-700 for better contrast with white text */
+  color: #ffffff !important; /* Ensure white text */
+}
+
+a.bg-brand-500:hover,
+button.bg-brand-500:hover,
+.bg-brand-500:hover {
+  background-color: #059669 !important; /* brand-600 for hover state */
+}
+
+/* Ensure all brand button variants have proper contrast */
+.w-full.bg-brand-500,
+.w-full.bg-brand-600 {
+  background-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+.w-full.bg-brand-500:hover,
+.w-full.bg-brand-600:hover {
+  background-color: #059669 !important;
 } 
