@@ -70,6 +70,48 @@ textarea:focus-visible {
   }
 }
 
+/* Enhanced button accessibility */
+button:focus-visible,
+.user-menu-button:focus-visible,
+#mobileMenuButton:focus-visible {
+  outline: 2px solid #047857 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Mobile menu accessibility improvements */
+.mobile-menu {
+  /* Ensure mobile menu is properly hidden from screen readers when closed */
+}
+
+.mobile-menu:not(.show) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.mobile-menu.show {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Skip link for keyboard navigation (hidden but accessible) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #047857;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
 /* High contrast text for links */
 .text-brand-link {
   color: #047857 !important;

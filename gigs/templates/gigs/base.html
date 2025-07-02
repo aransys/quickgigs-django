@@ -123,6 +123,7 @@
                     </div>
                     <i
                       class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200"
+                      aria-hidden="true"
                     ></i>
                   </div>
                 </button>
@@ -249,20 +250,24 @@
               id="mobileMenuButton"
               onclick="toggleMobileMenu()"
               class="text-gray-600 hover:text-brand-500 p-2"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="mobileMenu"
             >
-              <i class="fas fa-bars text-xl"></i>
+              <i class="fas fa-bars text-xl" aria-hidden="true"></i>
             </button>
           </div>
         </div>
       </div>
       <!-- Mobile Navigation -->
-      <div id="mobileMenu" class="mobile-menu">
+      <div id="mobileMenu" class="mobile-menu" role="navigation" aria-label="Mobile navigation">
         <div class="mobile-menu-content p-6">
           <button
             onclick="toggleMobileMenu()"
             class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none"
+            aria-label="Close navigation menu"
           >
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times" aria-hidden="true"></i>
           </button>
           <nav class="flex flex-col gap-3 mt-8">
             <a
@@ -368,8 +373,8 @@
             {% endif %}
             <span>{{ message }}</span>
           </div>
-          <button onclick="dismissAlert(this.parentElement)" class="ml-auto hover:opacity-70 transition-opacity duration-200">
-            <i class="fas fa-times"></i>
+          <button onclick="dismissAlert(this.parentElement)" class="ml-auto hover:opacity-70 transition-opacity duration-200" aria-label="Dismiss message">
+            <i class="fas fa-times" aria-hidden="true"></i>
           </button>
         </div>
         {% endfor %}
@@ -436,10 +441,16 @@
         const button = document.getElementById("mobileMenuButton");
         if (!menu.classList.contains("show")) {
           menu.classList.add("show");
-          if (button) button.style.display = "none";
+          if (button) {
+            button.style.display = "none";
+            button.setAttribute("aria-expanded", "true");
+          }
         } else {
           menu.classList.remove("show");
-          if (button) button.style.display = "inline-flex";
+          if (button) {
+            button.style.display = "inline-flex";
+            button.setAttribute("aria-expanded", "false");
+          }
         }
       }
 
