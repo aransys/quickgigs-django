@@ -131,6 +131,9 @@ This project showcases a remarkable evolution from a basic todo application to a
 ![User Registration Flow](docs/screenshots/user-registration-flow.png)
 *Caption: Multi-step registration process from basic info to role selection to profile completion*
 
+![Login Page Interface](docs/screenshots/login-page.png)
+*Caption: Professional login form with clean design, validation feedback, and secure authentication*
+
 ![Role Selection Interface](docs/screenshots/role-selection.png)
 *Caption: Visual role selection showing employer vs freelancer options with benefit highlights*
 
@@ -139,6 +142,14 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ![Profile Edit Interface](docs/screenshots/profile-edit-form.png)
 *Caption: User-friendly profile editing form with validation and success messaging*
+
+### Navigation & User Interface
+
+![Navigation Structure](docs/screenshots/navigation-structure.png)
+*Caption: Main navigation system with role-based menus, responsive design, and intuitive user flow*
+
+![Project Structure Overview](docs/screenshots/project-structure.png)
+*Caption: Professional 4-app Django architecture showing clear separation of concerns and modular design*
 
 ### Employer Dashboard & Management
 
@@ -169,6 +180,9 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ![Stripe Checkout Integration](docs/screenshots/stripe-checkout.png)
 *Caption: Secure Stripe checkout interface with card payment processing and mobile optimization*
+
+![Featured Gig Upgrade Process](docs/screenshots/featured-gig-upgrade.png)
+*Caption: £9.99 premium upgrade flow showing featured gig placement and payment processing*
 
 ![Payment Success Confirmation](docs/screenshots/payment-success.png)
 *Caption: Payment confirmation page with receipt details, next steps, and enhanced gig visibility*
@@ -236,14 +250,23 @@ This project showcases a remarkable evolution from a basic todo application to a
 
 ### Performance & Quality Assurance
 
+![Database Query Optimization](docs/screenshots/query-optimization.png)
+*Caption: Database performance optimization showing 300% improvement from 6 queries to 2 queries using select_related()*
+
 ![Lighthouse Performance Report](docs/screenshots/lighthouse-performance.png)
 *Caption: Lighthouse performance scores showing optimization achievements and Core Web Vitals compliance*
 
 ![Cross-Browser Testing](docs/screenshots/cross-browser-testing.png)
 *Caption: Cross-browser compatibility testing across Chrome, Firefox, Safari, and Edge*
 
+![Test Results Summary](docs/screenshots/test-results.png)
+*Caption: Comprehensive test suite showing 169 passing tests with 100% coverage across all Django apps*
+
 ![Accessibility Testing Results](docs/screenshots/accessibility-testing.png)
 *Caption: WCAG 2.1 AA compliance testing with Lighthouse showing improved accessibility score and color contrast fixes*
+
+![Accessibility Compliance Evidence](docs/screenshots/accessibility-test.png)
+*Caption: Detailed accessibility testing demonstrating WCAG 2.1 AA compliance and screen reader support*
 
 ## 🆕 Recent Updates (June 29, 2025) - Version 1.1.0
 
@@ -819,6 +842,9 @@ class SignUpView(CreateView):
 ```
 
 #### **Authorization Decorators & Mixins**
+
+![Permissions Demo](docs/screenshots/permissions-demo.png)
+*Caption: Authorization controls demonstration showing users cannot access or edit gigs they do not own*
 
 **Function-Based View Protection:**
 ```python
