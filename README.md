@@ -239,7 +239,6 @@ This project showcases a remarkable evolution from a basic todo application to a
 ![Lighthouse Performance Report](docs/screenshots/lighthouse-performance.png)
 *Caption: Lighthouse performance scores showing optimization achievements and Core Web Vitals compliance*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Cross-Browser Testing](docs/screenshots/cross-browser-testing.png)
 *Caption: Cross-browser compatibility testing across Chrome, Firefox, Safari, and Edge*
 
