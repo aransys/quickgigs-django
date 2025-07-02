@@ -242,9 +242,8 @@ This project showcases a remarkable evolution from a basic todo application to a
 ![Cross-Browser Testing](docs/screenshots/cross-browser-testing.png)
 *Caption: Cross-browser compatibility testing across Chrome, Firefox, Safari, and Edge*
 
-<!-- TODO: Add screenshot placeholder -->
 ![Accessibility Testing Results](docs/screenshots/accessibility-testing.png)
-*Caption: WCAG 2.1 AA compliance testing with WAVE and axe DevTools showing zero accessibility errors*
+*Caption: WCAG 2.1 AA compliance testing with Lighthouse showing improved accessibility score and color contrast fixes*
 
 ## 🆕 Recent Updates (June 29, 2025) - Version 1.1.0
 
