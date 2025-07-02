@@ -751,17 +751,9 @@ This QuickGigs project demonstrates **Distinction-level achievement** across all
 
 ## 🔒 Security Implementation
 
-<!-- TODO: Add screenshot placeholder -->
-![Security Implementation Overview](docs/screenshots/security-implementation-overview.png)
-*Caption: Comprehensive security architecture showing authentication, authorization, and protection mechanisms*
-
 ### Authentication & Authorization System (LO3 Evidence)
 
 QuickGigs implements comprehensive security measures across all layers of the application, ensuring secure user authentication, proper authorization controls, and protection against common web vulnerabilities.
-
-<!-- TODO: Add screenshot placeholder -->
-![Authentication Flow Diagram](docs/screenshots/authentication-flow.png)
-*Caption: User authentication flow from registration through login to role-based access control*
 
 #### **Django Authentication Framework**
 
@@ -1132,15 +1124,7 @@ if not STRIPE_PUBLISHABLE_KEY or not STRIPE_SECRET_KEY:
 
 ## 🏗️ Technical Architecture
 
-<!-- TODO: Add screenshot placeholder -->
-![Technical Architecture Diagram](docs/screenshots/technical-architecture-overview.png)
-*Caption: High-level technical architecture showing Django apps, database relationships, and external integrations*
-
 ### Multi-App Django Structure
-
-<!-- TODO: Add screenshot placeholder -->
-![Django Apps Structure](docs/screenshots/django-apps-structure.png)
-*Caption: Visual representation of the multi-app Django structure with file organization and responsibilities*
 
 ```
 quickgigs_project/
@@ -1168,10 +1152,6 @@ quickgigs_project/
 
 ### Design Patterns Implemented
 
-<!-- TODO: Add screenshot placeholder -->
-![Design Patterns Implementation](docs/screenshots/design-patterns-implementation.png)
-*Caption: Code examples showing implementation of key design patterns including MVT, CBV, and Repository patterns*
-
 - **Model-View-Template (MVT)**: Django's core pattern with proper separation
 - **Class-Based Views (CBV)**: Consistent CRUD operations with mixins
 - **Template Inheritance**: DRY principle with base template system
@@ -1181,10 +1161,6 @@ quickgigs_project/
 
 ### Key Architectural Decisions
 
-<!-- TODO: Add screenshot placeholder -->
-![Architectural Decision Documentation](docs/screenshots/architectural-decisions.png)
-*Caption: Documentation of key architectural decisions with justifications and trade-offs analysis*
-
 1. **Multi-App Structure**: Enables team development and feature isolation
 2. **Role-Based Design**: Employer vs Freelancer distinction throughout
 3. **Payment Integration**: Centralized payment processing with audit trail
@@ -1193,15 +1169,7 @@ quickgigs_project/
 
 ## 💾 Database Design
 
-<!-- TODO: Add screenshot placeholder -->
-![Database Design Overview](docs/screenshots/database-design-overview.png)
-*Caption: Complete database design showing all models, relationships, and business logic implementation*
-
 ### Entity Relationship Diagram
-
-<!-- TODO: Add screenshot placeholder -->
-![Entity Relationship Diagram](docs/screenshots/erd-detailed.png)
-*Caption: Detailed ERD showing primary keys, foreign keys, constraints, and relationship cardinalities*
 
 ```mermaid
 erDiagram
@@ -2204,15 +2172,7 @@ QuickGigs is committed to making the platform accessible to users of all abiliti
 
 ## 🧪 Testing Strategy
 
-<!-- TODO: Add screenshot placeholder -->
-![Testing Strategy Overview](docs/screenshots/testing-strategy-overview.png)
-*Caption: Comprehensive testing strategy showing unit tests, integration tests, and manual testing procedures*
-
 ### Comprehensive Test Suite
-
-<!-- TODO: Add screenshot placeholder -->
-![Test Results Dashboard](docs/screenshots/test-results-dashboard.png)
-*Caption: Test execution results showing 169 tests with 0 failures across all Django applications*
 
 **Test Coverage**: 169 tests with 0 failures across all applications
 
@@ -2369,7 +2329,6 @@ CSRF_COOKIE_SECURE = True
 
 #### Deployment Process
 
-<!-- TODO: Add screenshot placeholder -->
 ![Heroku Deployment Pipeline](docs/screenshots/heroku-deployment-pipeline.png)
 *Caption: Complete Heroku deployment pipeline showing environment setup, build process, and monitoring*
 
@@ -2394,7 +2353,6 @@ heroku run python manage.py createsuperuser
 
 #### Production Monitoring
 
-<!-- TODO: Add screenshot placeholder -->
 ![Production Monitoring Dashboard](docs/screenshots/production-monitoring.png)
 *Caption: Heroku production monitoring showing logs, dyno status, and database performance metrics*
 
@@ -2411,7 +2369,6 @@ heroku pg:psql             # Database access
 
 ### Live Platform
 
-<!-- TODO: Add screenshot placeholder -->
 ![Live Platform Screenshot](docs/screenshots/live-platform-heroku.png)
 *Caption: Live QuickGigs platform running on Heroku with full functionality and SSL security*
 
@@ -2428,13 +2385,8 @@ heroku pg:psql             # Database access
 
 ## ⚡ Performance Optimizations
 
-<!-- TODO: Add screenshot placeholder -->
-![Performance Optimization Results](docs/screenshots/performance-optimization-results.png)
-*Caption: Performance optimization results showing before/after database query improvements and loading time reductions*
-
 ### Database Query Optimization
 
-<!-- TODO: Add screenshot placeholder -->
 ![Database Query Optimization](docs/screenshots/database-query-optimization.png)
 *Caption: Visual representation of N+1 query problem resolution and select_related implementation*
 
