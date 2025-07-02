@@ -28,7 +28,7 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable is required")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
 # Determine if we're in production (Heroku sets this automatically)
 IS_PRODUCTION = 'DYNO' in os.environ or not DEBUG
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "accounts",
     "payments",
     "core",
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = "quickgigs_project.urls"
@@ -197,6 +199,29 @@ if not STRIPE_PUBLISHABLE_KEY or not STRIPE_SECRET_KEY:
 # Payment Configuration
 FEATURED_GIG_PRICE = float(os.environ.get("FEATURED_GIG_PRICE", "9.99"))
 
+# Django Debug Toolbar Configuration
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
+
+# Database query logging for optimization screenshots
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
 # Logging configuration
 LOGGING = {
     "version": 1,
@@ -217,3 +242,8 @@ LOGGING = {
         },
     },
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
