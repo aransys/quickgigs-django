@@ -1277,7 +1277,6 @@ erDiagram
         text employer_notes "internal notes"
         datetime created_at
         datetime updated_at
-        unique_constraint "gig_applicant" "prevents duplicate applications"
     }
 
     Payment {
