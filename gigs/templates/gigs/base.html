@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/components.css' %}" />
     <link rel="stylesheet" href="{% static 'css/gigs.css' %}" />
+    <!-- Accessibility fixes for WCAG 2.1 AA compliance -->
+    <link rel="stylesheet" href="{% static 'css/accessibility-fixes.css' %}" />
     {% block extra_css %}{% endblock %}
     <!-- Tailwind Configuration -->
     <script>
@@ -54,10 +56,10 @@
                   class="fas fa-briefcase text-white text-lg md:text-lg lg:text-xl xl:text-2xl"
                 ></i>
               </div>
-              <span
-                class="text-lg md:text-lg lg:text-xl xl:text-2xl font-bold text-brand-500"
-                >QuickGigs</span
-              >
+                                  <span
+                      class="text-lg md:text-lg lg:text-xl xl:text-2xl font-bold text-brand-700"
+                      >QuickGigs</span
+                    >
             </a>
           </div>
           <!-- Desktop Navigation -->
