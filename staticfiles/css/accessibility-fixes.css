@@ -1,0 +1,76 @@
+/* ================================
+   ACCESSIBILITY FIXES - WCAG 2.1 AA COMPLIANCE
+   ================================ */
+
+/* Override brand-500 (#10b981) with brand-700 (#047857) for better contrast */
+.text-brand-500 {
+  color: #047857 !important; /* brand-700 instead of brand-500 */
+}
+
+.hover\:text-brand-500:hover {
+  color: #059669 !important; /* brand-600 for hover state */
+}
+
+.hover\:text-brand-600:hover {
+  color: #047857 !important; /* brand-700 for better contrast */
+}
+
+/* Navigation link improvements */
+.nav-link-improved {
+  color: #374151 !important; /* gray-700 for better contrast */
+}
+
+.nav-link-improved:hover {
+  color: #047857 !important; /* brand-700 */
+  background-color: rgba(4, 120, 87, 0.05) !important;
+}
+
+.nav-link-active {
+  color: #047857 !important; /* brand-700 */
+  background-color: rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Button contrast improvements */
+.bg-brand-500 {
+  background-color: #059669 !important; /* brand-600 for better contrast */
+}
+
+.hover\:bg-brand-600:hover {
+  background-color: #047857 !important; /* brand-700 */
+}
+
+/* Focus indicators for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #047857 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Ensure minimum touch target size for mobile accessibility */
+@media (max-width: 768px) {
+  a, button, .nav-link-improved {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* High contrast text for links */
+.text-brand-link {
+  color: #047857 !important;
+  text-decoration: underline !important;
+}
+
+.text-brand-link:hover {
+  color: #059669 !important;
+}
+
+/* Icon contrast improvements */
+.text-brand-500.fas,
+.text-brand-500.far,
+.text-brand-500.fab {
+  color: #047857 !important;
+} 
