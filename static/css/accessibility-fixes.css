@@ -1,0 +1,161 @@
+/* ================================
+   ACCESSIBILITY FIXES - WCAG 2.1 AA COMPLIANCE
+   ================================ */
+
+/* Override brand colors for better contrast - WCAG 2.1 AA Compliance */
+.text-brand-500 {
+  color: #047857 !important; /* brand-700 instead of brand-500 */
+}
+
+.text-brand-600 {
+  color: #047857 !important; /* brand-700 for better contrast on white */
+}
+
+.hover\:text-brand-500:hover {
+  color: #059669 !important; /* brand-600 for hover state */
+}
+
+.hover\:text-brand-600:hover {
+  color: #047857 !important; /* brand-700 for better contrast */
+}
+
+/* Navigation link improvements */
+.nav-link-improved {
+  color: #374151 !important; /* gray-700 for better contrast */
+}
+
+.nav-link-improved:hover {
+  color: #047857 !important; /* brand-700 */
+  background-color: rgba(4, 120, 87, 0.05) !important;
+}
+
+.nav-link-active {
+  color: #047857 !important; /* brand-700 */
+  background-color: rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Button and background contrast improvements */
+.bg-brand-500 {
+  background-color: #047857 !important; /* brand-700 for better contrast with white text */
+}
+
+.bg-brand-600 {
+  background-color: #047857 !important; /* brand-700 for better contrast */
+}
+
+.hover\:bg-brand-500:hover {
+  background-color: #059669 !important; /* brand-600 for hover */
+}
+
+.hover\:bg-brand-600:hover {
+  background-color: #065f46 !important; /* brand-800 for darker hover */
+}
+
+/* Focus indicators for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #047857 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Ensure minimum touch target size for mobile accessibility */
+@media (max-width: 768px) {
+  a, button, .nav-link-improved {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* Enhanced button accessibility */
+button:focus-visible,
+.user-menu-button:focus-visible,
+#mobileMenuButton:focus-visible {
+  outline: 2px solid #047857 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1) !important;
+}
+
+/* Mobile menu accessibility improvements */
+.mobile-menu {
+  /* Ensure mobile menu is properly hidden from screen readers when closed */
+}
+
+.mobile-menu:not(.show) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.mobile-menu.show {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Skip link for keyboard navigation (hidden but accessible) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #047857;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* High contrast text for links */
+.text-brand-link {
+  color: #047857 !important;
+  text-decoration: underline !important;
+}
+
+.text-brand-link:hover {
+  color: #059669 !important;
+}
+
+/* Icon contrast improvements */
+.text-brand-500.fas,
+.text-brand-500.far,
+.text-brand-500.fab {
+  color: #047857 !important;
+}
+
+/* Specific button combination fixes for Lighthouse failures */
+a.bg-white.text-brand-600,
+.bg-white .text-brand-600 {
+  color: #047857 !important; /* Ensure sufficient contrast on white background */
+}
+
+a.bg-brand-500,
+button.bg-brand-500,
+.bg-brand-500 {
+  background-color: #047857 !important; /* Use brand-700 for better contrast with white text */
+  color: #ffffff !important; /* Ensure white text */
+}
+
+a.bg-brand-500:hover,
+button.bg-brand-500:hover,
+.bg-brand-500:hover {
+  background-color: #059669 !important; /* brand-600 for hover state */
+}
+
+/* Ensure all brand button variants have proper contrast */
+.w-full.bg-brand-500,
+.w-full.bg-brand-600 {
+  background-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+.w-full.bg-brand-500:hover,
+.w-full.bg-brand-600:hover {
+  background-color: #059669 !important;
+} 
