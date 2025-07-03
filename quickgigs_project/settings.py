@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "accounts",
     "payments",
     "core",
-    # 'debug_toolbar',  # Temporarily disabled for testing screenshots
+    'debug_toolbar',  # Temporarily disabled for testing screenshots
 ]
 
 MIDDLEWARE = [
@@ -71,7 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',  # Temporarily disabled for testing screenshots
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # Temporarily disabled for testing screenshots
 ]
 
 ROOT_URLCONF = "quickgigs_project.urls"
