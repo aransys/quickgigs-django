@@ -172,10 +172,10 @@ quickgigs_project/
 ### **Database Performance Optimization**
 
 ![Query Optimization Results](docs/screenshots/performance-testing/query-optimization-results.png)
-*700% performance improvement: 21 queries reduced to 3 queries with before/after comparison*
+*Query count after optimization: reduced to 3 queries (N+1 problem resolved). Prior to optimization, this view executed 21 queries due to an N+1 issue. While a 'before' screenshot is not available, the current screenshot demonstrates the optimized result and significant performance improvement.*
 
 ![Database Performance Metrics](docs/screenshots/performance-testing/database-performance-metrics.png)
-*Query execution time measurements and N+1 query problem resolution*
+*Query execution time measurements and N+1 query problem resolution, as shown in the optimized state.*
 
 ### **Application Performance Metrics**
 
