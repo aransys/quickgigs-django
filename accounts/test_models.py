@@ -27,7 +27,7 @@ class UserProfileModelTest(TestCase):
         """Test default UserProfile values"""
         profile = self.user.userprofile
         
-        self.assertEqual(profile.user_type, 'freelancer')  # Default type
+        self.assertEqual(profile.user_type, 'freelancer')  # FIXED FOR GREEN PHASE
         self.assertEqual(profile.bio, '')
         self.assertEqual(profile.skills, '')
         self.assertIsNone(profile.hourly_rate)
