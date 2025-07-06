@@ -559,7 +559,6 @@ Limitations vs. Current QuickGigs:
 └────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-<!-- TODO: Add screenshot placeholder -->
 ![Site Navigation Examples](docs/screenshots/design/navigation-role-based.png)
 *Caption: Role-based navigation showing different menu items for visitors, freelancers, and employers*
 
@@ -691,9 +690,23 @@ erDiagram
 **Primary Navigation (Contextual)**
 
 ```
-For Visitors:     [Logo] [Browse Gigs] [About] [Sign Up] [Login]
-For Freelancers:  [Logo] [Browse Gigs] [My Applications] [Profile ▼]
-For Employers:    [Logo] [Post Gig] [My Gigs] [Applications] [Profile ▼]
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                           🌐 VISITOR NAVIGATION                                │
+├────────────────────────────────────────────────────────────────────────────────┤
+│ QuickGigs  [Home]  [Browse Gigs]  [About]  [Contact]  [Sign In]  [Sign Up]     │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                         🎯 FREELANCER NAVIGATION                               │
+├────────────────────────────────────────────────────────────────────────────────┤
+│ QuickGigs  [Home]  [Browse Gigs]  [About]  [Contact]  [Profile]                │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                          💼 EMPLOYER NAVIGATION                                │
+├────────────────────────────────────────────────────────────────────────────────┤
+│ QuickGigs  [Home]  [Browse Gigs]  [About]  [Contact]  [Profile]                │
+└────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **Design Principles Applied:**
