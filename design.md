@@ -183,20 +183,45 @@ Transform an existing Django todo application into a professional job board plat
 *Caption: Original todo application with basic Bootstrap styling and limited functionality*
 
 ```
-┌─────────────────────────────────┐
-│        Simple Todo List         │
-├─────────────────────────────────┤
-│  □ Task 1 - Basic styling       │
-│  □ Task 2 - Limited hierarchy   │
-│  □ Task 3 - No user context     │
-└─────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    Simple Todo Application                  │
+│                    (Basic Bootstrap Style)                  │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  📋 My Tasks                                               │
+│                                                             │
+│  ☐ Complete project proposal                               │
+│  ☐ Review client feedback                                  │
+│  ☐ Update website design                                   │
+│  ☐ Send invoice to client                                  │
+│  ☐ Schedule team meeting                                   │
+│                                                             │
+│  ┌─────────────────────┐                                   │
+│  │   + Add New Task    │                                   │
+│  └─────────────────────┘                                   │
+│                                                             │
+│  • No user authentication                                  │
+│  • No categories or filters                                │
+│  • No deadlines or priorities                              │
+│  • No business model                                       │
+│  • Single-purpose functionality                            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-Issues Identified:
-❌ Generic Bootstrap appearance
-❌ No clear business model
-❌ Limited user engagement
-❌ Poor mobile experience
-❌ No visual hierarchy
+*Caption: Original flat information architecture with limited navigation and single user type*
+
+```
+Todo App/
+├── Task List (single view)
+├── Add Task (modal)
+└── Edit Task (inline)
+
+Problems:
+- No hierarchy
+- Single user type
+- Limited scalability
+- No relational data model
 ```
 
 ### Vision: Professional Job Board
@@ -385,21 +410,50 @@ graph LR
 
 ### Before: Flat Todo Structure
 
-<!-- TODO: Add screenshot placeholder -->
-![Before - Simple Todo Structure](docs/screenshots/design/todo-structure-simple.png)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Simple Todo Application                  │
+│                    (Basic Bootstrap Style)                  │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  📋 My Tasks                                               │
+│                                                             │
+│  ☐ Complete project proposal                               │
+│  ☐ Review client feedback                                  │
+│  ☐ Update website design                                   │
+│  ☐ Send invoice to client                                  │
+│  ☐ Schedule team meeting                                   │
+│                                                             │
+│  ┌─────────────────────┐                                   │
+│  │   + Add New Task    │                                   │
+│  └─────────────────────┘                                   │
+│                                                             │
+│  • No user authentication                                  │
+│  • No categories or filters                                │
+│  • No deadlines or priorities                              │
+│  • No business model                                       │
+│  • Single-purpose functionality                            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
 *Caption: Original flat information architecture with limited navigation and single user type*
 
 ```
-Todo App/
+Todo App Structure:
 ├── Task List (single view)
 ├── Add Task (modal)
 └── Edit Task (inline)
 
-Problems:
-- No hierarchy
-- Single user type
-- Limited scalability
-- No relational data model
+Problems Identified:
+❌ Generic Bootstrap appearance
+❌ No clear business model
+❌ Limited user engagement
+❌ Poor mobile experience
+❌ No visual hierarchy
+❌ Single user type
+❌ Limited scalability
+❌ No relational data model
 ```
 
 ### After: Scalable Job Board Architecture
