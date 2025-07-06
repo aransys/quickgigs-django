@@ -178,7 +178,6 @@ Transform an existing Django todo application into a professional job board plat
 
 ### Starting Point: Todo Application
 
-<!-- TODO: Add screenshot placeholder -->
 ![Before - Basic Todo Application](docs/screenshots/design/todo-app-original.png)
 *Caption: Original todo application with basic Bootstrap styling and limited functionality*
 
@@ -226,7 +225,6 @@ Problems:
 
 ### Vision: Professional Job Board
 
-<!-- TODO: Add screenshot placeholder -->
 ![After - QuickGigs Professional Interface](docs/screenshots/design/quickgigs-homepage-hero.png)
 *Caption: Transformed QuickGigs homepage featuring professional design, clear value proposition, and featured gigs*
 
@@ -249,7 +247,6 @@ Goals Achieved:
 ✅ Professional credibility
 ```
 
-<!-- TODO: Add screenshot placeholder -->
 ![Design Transformation Overview](docs/screenshots/design/before-after-comparison.png)
 *Caption: Side-by-side comparison demonstrating the complete transformation from basic todo app to professional marketplace*
 
@@ -467,42 +464,68 @@ Limitations vs. Current QuickGigs:
 
 ### After: Scalable Job Board Architecture
 
-<!-- TODO: Add screenshot placeholder -->
-![After - Complex Information Architecture](docs/screenshots/design/quickgigs-information-architecture.png)
-*Caption: Sophisticated multi-level architecture supporting multiple user types and business workflows*
+```
+                        QuickGigs Information Architecture
+                                      │
+                    ┌─────────────────┼─────────────────┐
+                    │                                   │
+              ┌─────▼─────┐                      ┌─────▼─────┐
+              │  PUBLIC   │                      │AUTHENTICATED│
+              │  PAGES    │                      │   USERS     │
+              └─────┬─────┘                      └─────┬─────┘
+                    │                                   │
+        ┌───────────┼───────────┐                      │
+        │           │           │                      │
+    ┌───▼───┐  ┌───▼───┐  ┌───▼───┐                   │
+    │Homepage│  │Browse │  │ About │                   │
+    │        │  │ Gigs  │  │Contact│                   │
+    └───────┘  └───┬───┘  └───────┘                   │
+                   │                                   │
+              ┌────▼────┐                              │
+              │Gig Detail│                             │
+              │  Page   │                             │
+              └─────────┘                             │
+                                                      │
+                                    ┌─────────────────┼─────────────────┐
+                                    │                                   │
+                              ┌─────▼─────┐                      ┌─────▼─────┐
+                              │ EMPLOYER  │                      │FREELANCER │
+                              │DASHBOARD  │                      │DASHBOARD  │
+                              └─────┬─────┘                      └─────┬─────┘
+                                    │                                   │
+                    ┌───────────────┼───────────────┐                  │
+                    │               │               │                  │
+              ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐             │
+              │  Post Gig │  │  My Gigs  │  │View Apps  │             │
+              └───────────┘  └─────┬─────┘  └───────────┘             │
+                                   │                                   │
+                            ┌──────▼──────┐                           │
+                            │Feature Gig  │                           │
+                            │  (Payment)  │                           │
+                            └─────────────┘                           │
+                                                                      │
+                                                    ┌─────────────────┼─────────────────┐
+                                                    │                                   │
+                                              ┌─────▼─────┐                      ┌─────▼─────┐
+                                              │Browse Gigs│                      │    My     │
+                                              │& Apply    │                      │Applications│
+                                              └───────────┘                      └─────┬─────┘
+                                                                                       │
+                                                                                ┌─────▼─────┐
+                                                                                │  Profile  │
+                                                                                │Management │
+                                                                                └───────────┘
 
+            ┌─────────────────────────────────────────────────────────────────────────────────┐
+            │                              PAYMENT SYSTEM                                     │
+            │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
+            │  │   Stripe    │    │   Success   │    │   Payment   │    │    Admin    │    │
+            │  │  Checkout   │    │    Page     │    │   History   │    │   Filters   │    │
+            │  └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘    │
+            └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-QuickGigs Platform/
-├── Public Pages/
-│   ├── Homepage (dynamic content)
-│   ├── Browse Gigs (filterable grid)
-│   │   ├── Search functionality (title/description)
-│   │   ├── Category filters
-│   │   └── Pagination (12 per page)
-│   ├── Gig Details (rich information)
-│   └── About/Contact (trust building)
-├── Authentication/
-│   ├── Sign Up (multi-step)
-│   ├── Role Selection (visual)
-│   └── Login (streamlined)
-├── Employer Dashboard/
-│   ├── Post Gig (guided form)
-│   ├── Manage Gigs (CRUD)
-│   ├── Feature Upgrade (payment)
-│   └── View Applications
-├── Freelancer Dashboard/
-│   ├── Browse Opportunities
-│   ├── My Applications
-│   └── Profile Management
-├── Payment System/
-│   ├── Checkout Flow
-│   ├── Success Pages
-│   └── Payment History
-└── Admin Interface/
-    ├── Advanced Filters (category, status, featured)
-    ├── User Management
-    └── Analytics Dashboard
-```
+
+*Caption: Sophisticated multi-level architecture supporting multiple user types and business workflows*
 
 **Key Improvements from Todo App:**
 ✅ **Multi-user system** - Employers and freelancers with different permissions
