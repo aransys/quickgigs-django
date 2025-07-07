@@ -1588,24 +1588,24 @@ $breakpoints: (
 
 ```
 ┌─────────────────────────┐
-│ [☰] QuickGigs      [👤] │  ← Hamburger + Avatar
+│ [☰] QuickGigs           │  ← Hamburger menu only
 └─────────────────────────┘
 ```
 
 **Tablet (768px - 1024px)**
 
 ```
-┌─────────────────────────────────────┐
-│ QuickGigs  [Browse] [About] [👤 ▼] │  ← Key items visible
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ QuickGigs  [Browse] [Post Gig] [About] [Contact] [Profile ▼] │  ← Full menu with Contact (Same as Desktop)
+└──────────────────────────────────────────────────────────────┘
 ```
 
 **Desktop (> 1024px)**
 
 ```
-┌─────────────────────────────────────────────────────┐
-│ QuickGigs  [Browse] [Post Gig] [About] [Profile ▼] │  ← Full menu
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ QuickGigs  [Browse] [Post Gig] [About] [Contact] [Profile ▼] │  ← Full menu with Contact
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### Touch Optimization
