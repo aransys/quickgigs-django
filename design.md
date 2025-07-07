@@ -923,7 +923,6 @@ Success: Contextual Dashboard
 
 ### Micro-interactions
 
-<!-- TODO: Add screenshot placeholder -->
 ![Interactive States Examples](docs/screenshots/design/micro-interactions-showcase.png)
 *Caption: Collection of micro-interactions showing button hover states, card animations, and loading indicators*
 
@@ -1106,7 +1105,6 @@ except PaymentError as e:
 
 ### Accessibility (WCAG 2.1 AA Compliance)
 
-<!-- TODO: Add screenshot placeholder -->
 ![Accessibility Features Demo](docs/screenshots/design/accessibility-features.png)
 *Caption: Accessibility features including focus states, skip navigation, high contrast support, and keyboard navigation*
 
