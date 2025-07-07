@@ -797,7 +797,6 @@ $gray-900: #111827; // Primary text
 
 #### Gig Card Transformation
 
-<!-- TODO: Add screenshot placeholder -->
 ![Component Evolution - Todo to Gig Card](docs/screenshots/design/component-evolution-cards.png)
 *Caption: Transformation from basic todo list items to sophisticated gig cards with rich metadata*
 
@@ -812,7 +811,6 @@ $gray-900: #111827; // Primary text
 
 **After: Rich Content Card**
 
-<!-- TODO: Add screenshot placeholder -->
 ![Gig Card Component Breakdown](docs/screenshots/design/gig-card-anatomy.png)
 *Caption: Detailed breakdown of gig card components showing featured badges, metadata, and employer information*
 
