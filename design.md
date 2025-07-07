@@ -695,7 +695,6 @@ erDiagram
 - Mobile-first approach
 - User control maintained throughout
 
-<!-- TODO: Add screenshot placeholder -->
 ![Database Schema Visualization](docs/screenshots/design/database-erd-implementation.png)
 *Caption: Entity Relationship Diagram showing complex data relationships and constraints in production database*
 
@@ -742,7 +741,6 @@ erDiagram
 
 ### Color Psychology & Brand Identity
 
-<!-- TODO: Add screenshot placeholder -->
 ![Color System Documentation](docs/screenshots/design/color-palette-system.png)
 *Caption: Complete color system showing primary, semantic, and neutral palettes with hex values and usage examples*
 
@@ -764,7 +762,6 @@ $gray-900: #111827; // Primary text
 
 ### Typography System
 
-<!-- TODO: Add screenshot placeholder -->
 ![Typography Scale Examples](docs/screenshots/design/typography-hierarchy.png)
 *Caption: Typography scale showing heading sizes, body text, and responsive behavior across devices*
 
