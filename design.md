@@ -860,7 +860,6 @@ $gray-900: #111827; // Primary text
 
 ### Multi-Step Registration Flow
 
-<!-- TODO: Add screenshot placeholder -->
 ![Registration Flow Wireframes](docs/screenshots/design/registration-flow-steps.png)
 *Caption: Multi-step registration flow showing progression from basic info to role selection to profile completion*
 
@@ -912,7 +911,6 @@ Success: Contextual Dashboard
    - Payment receipt
 ```
 
-<!-- TODO: Add screenshot placeholder -->
 ![Stripe Integration Screenshots](docs/screenshots/design/stripe-checkout-integration.png)
 *Caption: Stripe checkout interface showing mobile-optimized payment form and success states*
 
