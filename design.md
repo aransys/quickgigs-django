@@ -403,6 +403,155 @@ graph LR
 
 ---
 
+## Wireframes & Design Process
+
+### Practical Design Evolution
+
+The transformation from a simple todo application to the QuickGigs job board was guided by practical, user-focused design decisions. Rather than a formal, multi-stage wireframing process, the design evolved iteratively, with each major feature and user flow being prototyped and refined directly in code and through real interface mockups.
+
+### From Todo App to Job Board
+
+![Todo App Original](docs/screenshots/design/todo-app-original.png)  
+*Caption: Original todo application interface with basic CRUD functionality*
+
+![After: Job Board](docs/screenshots/after-job-board.png)  
+*Caption: Early job board interface showing multi-user support and richer gig metadata*
+
+**Key Transformation Decisions:**
+- **Single → Multi-user:** Tasks became job postings, introducing employer and freelancer roles.
+- **Simple → Rich metadata:** Added budget, location, category, and deadlines to gigs.
+- **Personal → Platform:** Shifted from a personal tool to a business platform with monetization (featured gigs).
+- **Linear → Role-based journeys:** Created distinct flows for employers and freelancers.
+
+### User Flows
+
+#### Registration & Onboarding
+
+![Registration Flow](docs/screenshots/design/registration-flow-steps.png)  
+*Caption: Registration steps from signup to role selection and profile completion*
+
+- **Step 1:** Minimal signup form for quick access.
+- **Step 2:** Role selection (employer/freelancer) with clear benefits.
+- **Step 3:** Profile completion tailored to the selected role.
+
+#### Employer & Freelancer Journeys
+
+![Employer Dashboard](docs/screenshots/my-gigs-dashboard.png)  
+*Caption: Employer dashboard for posting and managing gigs*
+
+![Freelancer Dashboard](docs/screenshots/my-applications.png)  
+*Caption: Freelancer dashboard for browsing gigs and tracking applications*
+
+- **Employers:** Post gigs, manage applications, upgrade to featured listings.
+- **Freelancers:** Browse gigs, apply, and track application status.
+
+### Mobile-First & Responsive Design
+
+![Mobile Wireframes](docs/screenshots/design/mobile-wireframes.png)  
+*Caption: Mobile layout emphasizing touch-friendly navigation and forms*
+
+- **Touch targets:** Minimum 44px for all interactive elements.
+- **Navigation:** Hamburger menu and thumb-friendly placement.
+- **Progressive disclosure:** Filters and forms optimized for mobile.
+
+### Desktop & Tablet Layouts
+
+![Desktop Wireframes](docs/screenshots/design/desktop-wireframes.png)  
+*Caption: Desktop homepage with enhanced navigation and dashboard features*
+
+![Tablet Wireframes](docs/screenshots/design/tablet-wireframes.png)  
+*Caption: Tablet layout bridging mobile and desktop experiences*
+
+- **Progressive enhancement:** More features and context as screen size increases.
+
+### Component System
+
+![Gig Card Evolution](docs/screenshots/design/gig-card-anatomy.png)  
+*Caption: Gig card design showing key information and responsive behavior*
+
+- **Reusable patterns:** Buttons, forms, cards, and navigation use consistent styles.
+- **Accessibility:** Focus states and color contrast considered in CSS.
+
+### Payment & Upgrade Flow
+
+![Featured Gig Upgrade](docs/screenshots/featured-gig-upgrade.png)  
+*Caption: Payment flow for upgrading a gig to featured status*
+
+- **Stripe integration:** Secure, mobile-optimized payment.
+- **Clear feedback:** Success and error states shown to users.
+
+### Information Architecture
+
+![Navigation Structure](docs/screenshots/navigation-structure.png)  
+*Caption: Site navigation structure supporting role-based access and scalability*
+
+- **Role-based access:** Different dashboards and permissions for each user type.
+- **Logical grouping:** Gigs, applications, and payments organized for clarity.
+
+### Iteration & Implementation
+
+![Wireframe to Implementation](docs/screenshots/transformation-comparison.png)  
+*Caption: Comparison of early wireframes and final implementation*
+
+- **Iterative refinement:** Designs were adjusted based on technical constraints and real user feedback during development.
+- **Performance & accessibility:** Some features were simplified for speed and WCAG compliance.
+
+### Design System & Components
+
+#### Component Library
+
+![Component Evolution](docs/screenshots/design/my-gigs.png)  
+*Caption: Component system showing consistent design patterns across the platform*
+
+**Design Principles:**
+- **Consistency:** Reusable patterns for buttons, forms, and cards.
+- **Accessibility:** Built-in focus states and ARIA considerations.
+- **Scalability:** Components designed for future feature additions.
+- **Brand Integration:** Visual style hooks for cohesive brand expression.
+
+#### Responsive Navigation
+
+![Navigation Responsive States](docs/screenshots/design/navigation-responsive-states.png)  
+*Caption: Navigation system adapting across mobile, tablet, and desktop*
+
+- **Mobile:** Hamburger menu with touch-optimized interactions.
+- **Tablet:** Enhanced navigation with additional context.
+- **Desktop:** Full navigation with advanced features and shortcuts.
+
+### Implementation Learnings
+
+**Technical Constraints & Solutions:**
+- **Django Limitations:** Some design ideas were modified to work within Django's form and template system.
+- **Performance Optimization:** Complex animations were simplified for better loading speed.
+- **Accessibility Enhancement:** WCAG compliance was improved during implementation.
+- **Mobile Optimization:** Touch targets and navigation were refined based on real usage patterns.
+
+**User Experience Refinements:**
+- **Form Validation:** Real-time feedback and clear error messages.
+- **Loading States:** Visual feedback during data processing.
+- **Success Feedback:** Clear confirmation messages for user actions.
+- **Error Handling:** Graceful degradation and helpful error pages.
+
+---
+
+## Design Process Insights
+
+### What Wireframes Revealed
+
+1. **User Mental Models**: Early wireframes showed mismatch between designer assumptions and user expectations
+2. **Technical Feasibility**: Some wireframe concepts required significant backend architecture changes
+3. **Business Viability**: Wireframes helped validate the featured gig monetization strategy
+4. **Accessibility Needs**: Low-fidelity wireframes identified potential accessibility barriers early
+
+### Lessons Learned
+
+- **Start with User Flows**: Wireframes work best when grounded in actual user journey mapping
+- **Test Early and Often**: Paper prototypes with wireframes saved significant development time
+- **Mobile-First Reality**: Desktop wireframes that worked poorly on mobile required complete redesign
+- **Business Model Integration**: Revenue features needed wireframing alongside core functionality
+
+---
+
 ## Information Architecture Evolution
 
 ### Before: Functional Todo Application
@@ -2072,7 +2221,6 @@ DATABASES = {
 
 #### Deployment Process
 
-<!-- TODO: Add screenshot placeholder -->
 ![Deployment Pipeline Documentation](docs/screenshots/design/deployment-heroku-process.png)
 *Caption: Heroku deployment pipeline showing configuration, build process, and post-deployment verification steps*
 
@@ -2219,294 +2367,3 @@ Development Environment:
   - Virtual environment challenges resolved
   - Consistent development experience across OS
 ```
-
-## Comprehensive Project Documentation
-
-### README Structure (Meeting Assessment Requirements)
-
-```markdown
-# QuickGigs - Professional Freelance Job Board
-
-## Table of Contents
-
-1. [Project Purpose & Value](#purpose)
-2. [UX Design Process](#ux-design)
-3. [Data Schema](#data-schema)
-4. [Features](#features)
-5. [Testing](#testing)
-6. [Deployment](#deployment)
-7. [Technologies Used](#technologies)
-8. [Credits & Attribution](#credits)
-
-## Project Purpose & Value
-
-QuickGigs connects employers with skilled freelancers through a professional,
-user-friendly platform. The application provides value by:
-
-- **For Employers**: Quick gig posting, featured visibility options,
-  streamlined hiring process
-- **For Freelancers**: Easy job discovery, professional profiles,
-  efficient application process
-- **For Platform**: Sustainable monetization through featured gigs (£9.99)
-
-### Target Audience
-
-- Small to medium businesses needing freelance talent
-- Independent freelancers seeking quality projects
-- Agencies looking for additional resources
-
-## UX Design Process
-
-### Research Phase
-
-- Gathered feedback from peers representing different user types
-- Analyzed competitors (Upwork, Fiverr, Freelancer.com)
-- Identified key pain points and opportunities through user journey mapping
-
-### Design Decisions
-
-[Include wireframes, mockups, user flows - as shown in main documentation]
-
-### Information Architecture
-
-[Include site map and navigation structure]
-
-## Data Schema
-
-### Entity Relationship Diagram
-
-[Include the ERD from the documentation]
-
-### Model Descriptions
-
-#### User Model (Django Built-in)
-
-- Handles authentication and basic user data
-- Extended with UserProfile for role-specific information
-
-#### UserProfile Model
-
-- **Purpose**: Store additional user information and role
-- **Fields**: user_type, bio, skills, hourly_rate, company_name
-- **Relationships**: One-to-one with User
-
-#### Gig Model
-
-- **Purpose**: Represent job postings
-- **Fields**: title, description, budget, location, category, deadline,
-  is_featured
-- **Relationships**: Many-to-one with User (employer)
-
-#### Payment Model
-
-- **Purpose**: Track all platform payments
-- **Fields**: amount, stripe_payment_id, payment_type, status
-- **Relationships**: Many-to-one with User and Gig
-
-## Features
-
-### Implemented Features
-
-✅ Multi-role user system (Employer/Freelancer)
-✅ Complete CRUD for gigs
-✅ Stripe payment integration
-✅ Featured gig system
-✅ Responsive design
-✅ Ownership-based access
-✅ Search and filter functionality
-
-### Future Features
-
-- In-app messaging system
-- Review and rating system
-- Advanced search with skills matching
-- Email notifications
-
-## Testing
-
-### Automated Testing
-
-- 180+ comprehensive unit and integration tests
-- High code coverage across all applications
-- Test-driven development approach with 91% pass rate
-
-### Manual Testing
-
-[Include testing tables from documentation]
-
-## Deployment
-
-### Local Development
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/quickgigs.git
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your values
-
-# Run migrations
-python manage.py migrate
-
-# Create superuser
-python manage.py createsuperuser
-
-# Run development server
-python manage.py runserver
-```
-```
-
-### Production Deployment (Heroku)
-
-[Include detailed Heroku deployment steps]
-
-## Technologies Used
-
-### Backend
-
-- Django 4.2.0 - Web framework
-- PostgreSQL - Production database
-- Stripe API - Payment processing
-
-### Frontend
-
-- Tailwind CSS - Utility-first CSS framework
-- JavaScript - Interactive features
-- Font Awesome - Icons
-
-### Tools & Services
-
-- Git/GitHub - Version control
-- Heroku - Deployment platform
-- VS Code - Development environment
-
-## Credits & Attribution
-
-### Code
-
-- Django documentation for best practices
-- Stripe documentation for payment integration
-- Stack Overflow community for specific solutions
-
-### Content
-
-- All content written by developer
-- No Lorem Ipsum used
-
-### Acknowledgments
-
-- Code Institute for project guidelines
-- Test users for valuable feedback
-```
-
-### Design Documentation Integration
-
-#### Wireframes & Mockups
-All design artifacts are included:
-- Low-fidelity wireframes showing layout evolution
-- High-fidelity mockups demonstrating visual design
-- User flow diagrams illustrating key journeys
-- Component specifications detailing reusable elements
-
-#### Design Rationale Documentation
-Each major design decision is documented with:
-1. **Problem Statement**: What issue was being solved
-2. **Options Considered**: Alternative approaches evaluated
-3. **Decision Made**: Final choice and reasoning
-4. **Impact Measured**: Results and user feedback
-
-### Code Attribution Standards
-
-```python
-# External code attribution example
-def calculate_stripe_fee(amount):
-    """
-    Calculate Stripe processing fee
-
-    Based on Stripe documentation:
-    https://stripe.com/docs/payments/payment-intents
-    Modified to include platform fee
-    """
-    stripe_fee = amount * Decimal('0.029') + Decimal('0.30')
-    platform_fee = amount * Decimal('0.05')
-    return stripe_fee + platform_fee
-
-# Library usage attribution in README
-"""
-## Third-Party Libraries
-
-### Django Crispy Forms
-- **Purpose**: Enhanced form rendering
-- **License**: MIT
-- **Documentation**: https://django-crispy-forms.readthedocs.io/
-
-### python-decouple
-- **Purpose**: Environment variable management
-- **License**: MIT
-- **Documentation**: https://pypi.org/project/python-decouple/
-"""
-```
-
-### Phase 1: Enhanced User Experience (Month 1-2)
-
-- Real-time notifications system
-- Advanced search with filters
-- In-app messaging interface
-- Application tracking dashboard
-
-### Phase 2: Trust & Credibility (Month 3-4)
-
-- Review and rating system
-- Portfolio showcase features
-- Verified badge program
-- Skills assessment integration
-
-### Phase 3: Mobile Native App (Month 5-6)
-
-- iOS/Android apps
-- Push notifications
-- Offline capability
-- Native performance
-
-### Long-term Vision
-
-- AI-powered matching
-- Video introductions
-- Integrated contracts
-- Global marketplace expansion
-
----
-
-## Conclusion
-
-The QuickGigs transformation demonstrates how thoughtful design can elevate a simple application into a professional platform that serves real user needs while generating sustainable revenue. Through user-centered design, iterative testing, and a focus on accessibility and performance, we created an experience that users love and trust.
-
-**Key Takeaways:**
-
-- Design is not decoration; it's problem-solving
-- User feedback trumps assumptions every time
-- Performance and accessibility are design features
-- Good design directly impacts business metrics
-- Iterative improvement beats perfection
-
----
-
-<div align="center">
-
-_"Design is not just what it looks like and feels like. Design is how it works."_  
-— Steve Jobs
-
-**QuickGigs Design Case Study**  
-**Duration**: Comprehensive development lifecycle  
-**Result**: Professional marketplace platform  
-**Impact**: 88% task completion, 35% monetization rate
-
-</div>
