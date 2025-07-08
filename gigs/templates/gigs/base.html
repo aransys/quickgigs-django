@@ -573,6 +573,15 @@
 
     <!-- JavaScript -->
     <script>
+      // Immediately hide mobile menu on page load to prevent flash
+      (function() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        if (mobileMenu) {
+          mobileMenu.style.display = "none";
+          mobileMenu.style.visibility = "hidden";
+          mobileMenu.style.opacity = "0";
+        }
+      })();
       function toggleDropdown() {
         const dropdown = document.getElementById("userDropdown");
         if (dropdown.classList.contains("show")) {
