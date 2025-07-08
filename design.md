@@ -1812,20 +1812,17 @@ class AccessibilityTest(TestCase):
 
 #### Responsive Design Testing
 
-<!-- TODO: Add screenshot placeholder -->
 ![Cross-Device Testing Results](docs/screenshots/testing/responsive-device-testing.png)
 *Caption: Cross-device testing showing QuickGigs interface on iPhone, iPad, and desktop with responsive behavior*
 
-| Device     | Viewport  | Test Result | Issues Found       | Resolution       |
-| ---------- | --------- | ----------- | ------------------ | ---------------- |
-| iPhone 12  | 390x844   | ✅ Pass     | None               | -                |
-| iPad       | 768x1024  | ✅ Pass     | None               | -                |
-| Desktop    | 1920x1080 | ✅ Pass     | None               | -                |
-| Galaxy S21 | 384x854   | ✅ Pass     | Navigation cramped | Adjusted padding |
+|     Device    | Viewport  | Test Result | Issues Found |
+|---------------|---------- |-------------|--------------|
+| iPhone 12 Pro | 390x844   | ✅ Pass    | None         |
+| iPad Pro      | 1024x1366 | ✅ Pass    | None         |
+| Desktop       | 1920x1080 | ✅ Pass    | None         |
 
 #### Cross-Browser Testing
 
-<!-- TODO: Add screenshot placeholder -->
 ![Cross-Browser Testing Screenshots](docs/screenshots/testing/cross-browser-compatibility.png)
 *Caption: Cross-browser testing results showing consistent interface across Chrome, Firefox, Safari, and Edge*
 
