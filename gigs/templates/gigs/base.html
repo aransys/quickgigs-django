@@ -102,7 +102,7 @@
         opacity: 0;
         pointer-events: none;
         visibility: hidden;
-        transition: opacity 0.3s, visibility 0.3s;
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         display: none;
         transform: translateX(100%);
       }
@@ -111,6 +111,7 @@
         pointer-events: auto;
         visibility: visible;
         display: block !important;
+        transform: translateX(0);
       }
       .mobile-menu-content {
         position: fixed;
@@ -705,12 +706,11 @@
           // Show menu - Enhanced for better compatibility
           console.log("Showing mobile menu");
           menu.style.display = "block";
-          menu.style.visibility = "visible";
-          menu.style.opacity = "1";
-          menu.style.transform = "translateX(0)";
           
           // Force reflow to ensure display change takes effect
           menu.offsetHeight;
+          
+          // Add class to trigger CSS transitions
           menu.classList.add("show");
           
           if (button) {
@@ -720,9 +720,6 @@
           // Hide menu
           console.log("Hiding mobile menu");
           menu.classList.remove("show");
-          menu.style.opacity = "0";
-          menu.style.visibility = "hidden";
-          menu.style.transform = "translateX(100%)";
           
           if (button) {
             button.setAttribute("aria-expanded", "false");
@@ -744,8 +741,6 @@
         if (!menu) return;
         
         menu.classList.remove("show");
-        menu.style.opacity = "0";
-        menu.style.visibility = "hidden";
         
         if (button) {
           button.setAttribute("aria-expanded", "false");
