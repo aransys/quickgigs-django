@@ -9,20 +9,170 @@
       content="QuickGigs - Connect employers with freelancers for micro jobs and gig work."
     />
     <title>{% block title %}QuickGigs - Find Your Next Gig{% endblock %}</title>
-    <!-- Tailwind CSS -->
+    
+    <!-- Critical CSS - Inline for immediate rendering -->
+    <style>
+      /* Critical styles for above-the-fold content */
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      .bg-gray-50 { background-color: #f9fafb; }
+      .min-h-screen { min-height: 100vh; }
+      .bg-white { background-color: #ffffff; }
+      .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+      .border-b-4 { border-bottom-width: 4px; }
+      .border-brand-500 { border-color: #10b981; }
+      .navbar-container { position: relative; }
+      .md\:relative { position: relative; }
+      .sticky { position: sticky; }
+      .top-0 { top: 0; }
+      .z-50 { z-index: 50; }
+      .max-w-7xl { max-width: 80rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+      .flex { display: flex; }
+      .justify-between { justify-content: space-between; }
+      .h-20 { height: 5rem; }
+      .items-center { align-items: center; }
+      .space-x-3 > * + * { margin-left: 0.75rem; }
+      .bg-brand-500 { background-color: #10b981; }
+      .p-1 { padding: 0.25rem; }
+      .rounded-lg { border-radius: 0.5rem; }
+      .text-white { color: #ffffff; }
+      .text-lg { font-size: 1.125rem; }
+      .md\:text-lg { font-size: 1.125rem; }
+      .lg\:text-xl { font-size: 1.25rem; }
+      .xl\:text-2xl { font-size: 1.5rem; }
+      .font-bold { font-weight: 700; }
+      .text-brand-700 { color: #047857; }
+      
+      /* Navigation critical styles */
+      .nav-link-improved { 
+        color: #374151; 
+        text-decoration: none; 
+        padding: 0.5rem 1rem; 
+        border-radius: 0.375rem; 
+        transition: all 0.2s; 
+      }
+      .nav-link-improved:hover { 
+        color: #047857; 
+        background-color: rgba(4, 120, 87, 0.05); 
+      }
+      .nav-link-active { 
+        color: #047857; 
+        background-color: rgba(4, 120, 87, 0.1); 
+      }
+      
+      /* Button critical styles */
+      .btn-primary {
+        background: #047857;
+        color: #fff;
+        font-weight: 700;
+        padding: 0.75rem 2rem;
+        border-radius: 0.75rem;
+        font-size: 1.125rem;
+        box-shadow: 0 2px 8px 0 rgba(16, 185, 129, 0.08);
+        transition: background 0.15s, box-shadow 0.15s;
+        border: none;
+        outline: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus {
+        background: #059669;
+        color: #fff;
+        box-shadow: 0 4px 16px 0 rgba(16, 185, 129, 0.15);
+      }
+      
+      /* Yellow button contrast fix - High specificity */
+      .bg-yellow-500,
+      a.bg-yellow-500,
+      button.bg-yellow-500,
+      .w-full.bg-yellow-500,
+      a.w-full.bg-yellow-500,
+      button.w-full.bg-yellow-500 {
+        background-color: #d97706 !important;
+        color: #ffffff !important;
+      }
+      .hover\:bg-yellow-500:hover,
+      a.hover\:bg-yellow-500:hover,
+      button.hover\:bg-yellow-500:hover {
+        background-color: #b45309 !important;
+      }
+      .hover\:bg-yellow-600:hover,
+      a.hover\:bg-yellow-600:hover,
+      button.hover\:bg-yellow-600:hover {
+        background-color: #92400e !important;
+      }
+      
+      /* Complex class combinations from Lighthouse failures */
+      a.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center,
+      button.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center {
+        background-color: #d97706 !important;
+        color: #ffffff !important;
+      }
+      
+      /* btn-primary contrast fixes */
+      .btn-primary,
+      a.btn-primary,
+      button.btn-primary {
+        background-color: #047857 !important;
+        color: #ffffff !important;
+        border-color: #047857 !important;
+      }
+      .btn-primary:hover,
+      a.btn-primary:hover,
+      button.btn-primary:hover,
+      .btn-primary:focus,
+      a.btn-primary:focus,
+      button.btn-primary:focus {
+        background-color: #059669 !important;
+        color: #ffffff !important;
+        border-color: #059669 !important;
+      }
+      
+      .w-full { width: 100%; }
+      .text-white { color: #ffffff !important; }
+      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      .rounded-xl { border-radius: 0.75rem; }
+      .font-semibold { font-weight: 600; }
+      .transition-colors { transition-property: color, background-color, border-color; }
+      .duration-200 { transition-duration: 200ms; }
+      .inline-flex { display: inline-flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+    </style>
+    
+    <!-- Preload critical external resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Non-critical CSS - Loaded asynchronously -->
+    <link rel="preload" href="{% static 'css/base.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/components.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/gigs.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/accessibility-fixes.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+      <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/components.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/gigs.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/accessibility-fixes.css' %}" />
+    </noscript>
+    
+    <!-- Tailwind CSS - Loaded after critical styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Custom CSS Files -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/components.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/gigs.css' %}" />
-    <!-- Accessibility fixes for WCAG 2.1 AA compliance -->
-    <link rel="stylesheet" href="{% static 'css/accessibility-fixes.css' %}" />
+    
+    <!-- Font Awesome - Loaded asynchronously -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    
     {% block extra_css %}{% endblock %}
+    
     <!-- Tailwind Configuration -->
     <script>
       tailwind.config = {
