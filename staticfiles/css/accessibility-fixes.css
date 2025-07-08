@@ -51,6 +51,70 @@
   background-color: #065f46 !important; /* brand-800 for darker hover */
 }
 
+/* YELLOW BUTTON CONTRAST FIXES - WCAG 2.1 AA Compliance */
+/* High specificity selectors to override Tailwind classes */
+.bg-yellow-500,
+a.bg-yellow-500,
+button.bg-yellow-500,
+.w-full.bg-yellow-500,
+a.w-full.bg-yellow-500,
+button.w-full.bg-yellow-500 {
+  background-color: #d97706 !important; /* yellow-600 instead of yellow-500 */
+  color: #ffffff !important; /* Ensure white text */
+}
+
+/* Hover states for yellow buttons */
+.hover\:bg-yellow-500:hover,
+a.hover\:bg-yellow-500:hover,
+button.hover\:bg-yellow-500:hover,
+.w-full.hover\:bg-yellow-500:hover,
+a.w-full.hover\:bg-yellow-500:hover,
+button.w-full.hover\:bg-yellow-500:hover {
+  background-color: #b45309 !important; /* yellow-700 for hover */
+}
+
+.hover\:bg-yellow-600:hover,
+a.hover\:bg-yellow-600:hover,
+button.hover\:bg-yellow-600:hover,
+.w-full.hover\:bg-yellow-600:hover,
+a.w-full.hover\:bg-yellow-600:hover,
+button.w-full.hover\:bg-yellow-600:hover {
+  background-color: #92400e !important; /* yellow-800 for darker hover */
+}
+
+/* Specific complex class combinations from Lighthouse failures */
+a.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center,
+button.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center {
+  background-color: #d97706 !important; /* yellow-600 for sufficient contrast */
+  color: #ffffff !important; /* Ensure white text */
+}
+
+a.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center:hover,
+button.w-full.bg-yellow-500.hover\:bg-yellow-600.text-white.px-6.py-3.rounded-xl.font-semibold.transition-colors.duration-200.inline-flex.items-center.justify-center:hover {
+  background-color: #b45309 !important; /* yellow-700 for hover */
+}
+
+/* BTN-PRIMARY CONTRAST FIXES - WCAG 2.1 AA Compliance */
+/* Fix btn-primary class contrast issues */
+.btn-primary,
+a.btn-primary,
+button.btn-primary {
+  background-color: #047857 !important; /* brand-700 for better contrast */
+  color: #ffffff !important; /* Ensure white text */
+  border-color: #047857 !important;
+}
+
+.btn-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover,
+.btn-primary:focus,
+a.btn-primary:focus,
+button.btn-primary:focus {
+  background-color: #059669 !important; /* brand-600 for hover/focus */
+  color: #ffffff !important;
+  border-color: #059669 !important;
+}
+
 /* Focus indicators for accessibility */
 a:focus-visible,
 button:focus-visible,

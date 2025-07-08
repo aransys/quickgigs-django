@@ -274,8 +274,8 @@
   pointer-events: none;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
-  /* Prevent flash on page load - more aggressive */
-  display: none !important;
+  /* Prevent flash on page load */
+  display: none;
   transform: translateX(100%);
 }
 .mobile-menu.show {
