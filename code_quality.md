@@ -657,10 +657,6 @@ _Figure 21: Method documentation showing clear purpose and return values_
 
 ![Business Logic Documentation](/docs/screenshots/code_quality/code-quality-business-logic-docs.png)
 _Figure 22: Complex business logic with explanatory comments_
-    if self.due_date and not self.completed:
-        return self.due_date < timezone.now().date()
-    return False
-```
 
 **Documentation Quality:**
 
