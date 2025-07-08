@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "accounts",
     "payments",
     "core",
-    "django_extensions",  # For model visualization
+
     # 'debug_toolbar',  # Temporarily disabled for testing screenshots
 ]
 
