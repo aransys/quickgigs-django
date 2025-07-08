@@ -13,58 +13,6 @@ from django.db.models import Q
 from django.http import Http404
 from .forms import GigForm, ApplicationForm, ApplicationStatusForm
 
-# ==================== EXISTING TASK VIEWS (Keep working) ====================
-
-# class TaskListView(ListView):
-#     model = Task
-#     template_name = "gigs/task_list.html"  # Updated path
-#     context_object_name = "tasks"
-#     ordering = ["-created_at"]
-
-# class TaskDetailView(DetailView):
-#     model = Task
-#     template_name = "gigs/task_detail.html"  # Updated path
-#     context_object_name = "task"
-
-# class TaskCreateView(CreateView):
-#     model = Task
-#     form_class = TaskForm
-#     template_name = "gigs/task_form.html"  # Updated path
-#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
-
-#     def form_valid(self, form):
-#         messages.success(self.request, "Task created successfully!")
-#         return super().form_valid(form)
-
-# class TaskUpdateView(UpdateView):
-#     model = Task
-#     form_class = TaskForm
-#     template_name = "gigs/task_form.html"  # Updated path
-#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
-
-#     def form_valid(self, form):
-#         messages.success(self.request, "Task updated successfully!")
-#         return super().form_valid(form)
-
-# class TaskDeleteView(DeleteView):
-#     model = Task
-#     template_name = "gigs/task_confirm_delete.html"  # Updated path
-#     success_url = reverse_lazy("gigs:task_list")  # Updated namespace
-
-#     def delete(self, request, *args, **kwargs):
-#         messages.success(self.request, "Task deleted successfully!")
-#         return super().delete(request, *args, **kwargs)
-
-# def toggle_complete(request, pk):
-#     task = get_object_or_404(Task, pk=pk)
-#     task.completed = not task.completed
-#     task.save()
-#     if task.completed:
-#         messages.success(request, f'Task "{task.title}" marked as complete!')
-#     else:
-#         messages.info(request, f'Task "{task.title}" marked as incomplete.')
-#     return redirect("gigs:task_list")  # Updated namespace
-
 # ==================== NEW GIG VIEWS (Job Board) ====================
 
 class GigListView(ListView):
