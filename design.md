@@ -1932,7 +1932,6 @@ TOTAL                     2390    406    83%
 
 ### Code Organization (Demonstrating Craftsmanship)
 
-<!-- TODO: Add screenshot placeholder -->
 ![Code Quality Examples](docs/screenshots/design/code-quality-clean-code.png)
 *Caption: Examples of clean code principles including consistent naming, proper documentation, and separation of concerns*
 
