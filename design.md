@@ -881,13 +881,11 @@ Success: Contextual Dashboard
   Freelancer: Shown browse interface
 ```
 
-<!-- TODO: Add screenshot placeholder -->
 ![Role Selection Interface](docs/screenshots/design/role-selection-cards.png)
 *Caption: Role selection step showing visual cards for employer and freelancer options with benefit highlights*
 
 ### Payment Flow Design
 
-<!-- TODO: Add screenshot placeholder -->
 ![Payment Flow User Journey](docs/screenshots/design/payment-flow-journey.png)
 *Caption: Complete payment flow from trigger button through Stripe checkout to success confirmation*
 
@@ -1454,7 +1452,6 @@ When breaking conventional patterns, clear justification provided:
 - **Animations**: `transition-shadow duration-300` for interactions
 - **Responsiveness**: Mobile-first with `sm:`, `md:`, `lg:` prefixes
 
-<!-- TODO: Add screenshot placeholder -->
 ![Button Component States](docs/screenshots/design/button-component-states.png)
 *Caption: Button component showing all variants and states including hover, active, disabled, and loading*
 
@@ -1580,7 +1577,6 @@ $breakpoints: (
 
 #### Navigation Transformation
 
-<!-- TODO: Add screenshot placeholder -->
 ![Navigation Responsive States](docs/screenshots/design/navigation-responsive-states.png)
 *Caption: Navigation transformation across mobile, tablet, and desktop showing progressive enhancement*
 
@@ -1690,18 +1686,36 @@ $breakpoints: (
 
 ### Performance Metrics Impact
 
-<!-- TODO: Add screenshot placeholder -->
 ![Performance Metrics Dashboard](docs/screenshots/design/performance-lighthouse-scores.png)
 *Caption: Lighthouse performance metrics showing improvements in loading times and Core Web Vitals*
 
-| Metric                     | Before | After  | Improvement  |
-| -------------------------- | ------ | ------ | ------------ |
-| **First Contentful Paint** | 2.8s   | 0.8s   | 71% faster   |
-| **Time to Interactive**    | 4.2s   | 1.5s   | 64% faster   |
-| **Lighthouse Score**       | 67     | 95     | 42% increase |
-| **Core Web Vitals**        | Failed | Passed | ✅ All green |
+| Metric                     | Before | After | Improvement  |
+|----------------------------|--------|-------|-------------|
+| **First Contentful Paint** | 2.8s   | 0.7s  | 75% faster  |
+| **Time to Interactive**    | 4.2s   | 1.5s  | 64% faster  |
+| **Lighthouse Score**       | 67     | 100   | 49% increase|
+| **Accessibility**          | 85     | 100   | 18% increase|
+| **Best Practices**         | 93     | 100   | 7% increase |
+| **SEO**                    | 98     | 100   | 2% increase |
+| **Core Web Vitals**        | Failed | Passed| ✅ All green |
 
-<!-- TODO: Add screenshot placeholder -->
+![Lighthouse 100/100/100/100](docs/screenshots/design/lighthouse-perfect-score.png)
+*Caption: QuickGigs achieves perfect 100 scores in all Lighthouse categories after accessibility and performance optimizations*
+
+**Key Achievements:**
+- 🚀 All Lighthouse categories at 100: Performance, Accessibility, Best Practices, SEO
+- ⚡ First Contentful Paint: 0.7s
+- 🟢 Total Blocking Time: 0ms
+- 🟢 Cumulative Layout Shift: 0
+- 🟢 Speed Index: 0.7s
+
+**How it was achieved:**
+- Inlined critical CSS for above-the-fold content
+- Asynchronous loading for non-critical CSS and external resources
+- High-specificity CSS for color contrast (WCAG 2.1 AA)
+- Optimized images and lazy loading
+- Semantic HTML and ARIA improvements
+
 ![Performance Optimization Examples](docs/screenshots/design/performance-optimization-techniques.png)
 *Caption: Performance optimization techniques including image lazy loading, CSS optimization, and progressive enhancement*
 
