@@ -128,7 +128,7 @@
 }
 
 .btn-warning {
-  @apply bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
+  @apply bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 inline-flex items-center;
 }
 
 .btn-danger {
@@ -274,6 +274,9 @@
   pointer-events: none;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
+  /* Prevent flash on page load */
+  display: none;
+  transform: translateX(100%);
 }
 .mobile-menu.show {
   opacity: 1;
@@ -304,9 +307,15 @@
 @media (min-width: 768px) {
   .mobile-menu {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   .mobile-menu.show {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 
