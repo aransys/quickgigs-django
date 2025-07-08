@@ -590,17 +590,28 @@
         const menu = document.getElementById("mobileMenu");
         const button = document.getElementById("mobileMenuButton");
         if (!menu.classList.contains("show")) {
+          // Show menu
+          menu.style.display = "block";
+          // Force reflow to ensure display change takes effect
+          menu.offsetHeight;
           menu.classList.add("show");
           if (button) {
             button.style.display = "none";
             button.setAttribute("aria-expanded", "true");
           }
         } else {
+          // Hide menu
           menu.classList.remove("show");
           if (button) {
             button.style.display = "inline-flex";
             button.setAttribute("aria-expanded", "false");
           }
+          // Hide menu after transition
+          setTimeout(() => {
+            if (!menu.classList.contains("show")) {
+              menu.style.display = "none";
+            }
+          }, 300);
         }
       }
 
@@ -609,6 +620,12 @@
         const button = document.getElementById("mobileMenuButton");
         menu.classList.remove("show");
         if (button) button.style.display = "inline-flex";
+        // Hide menu after transition
+        setTimeout(() => {
+          if (!menu.classList.contains("show")) {
+            menu.style.display = "none";
+          }
+        }, 300);
       }
 
       // Close dropdown when clicking outside
