@@ -11,6 +11,8 @@
 
 **🚀 Live Demo**: [https://quickgigs-9fb11f8a9dfa.herokuapp.com/](https://quickgigs-9fb11f8a9dfa.herokuapp.com/)
 
+**📁 GitHub Repository**: [https://github.com/aransys/quickgigs-django](https://github.com/aransys/quickgigs-django)
+
 ## 📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
