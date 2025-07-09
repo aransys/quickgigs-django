@@ -41,20 +41,6 @@ QuickGigs is a Django web application that demonstrates professional code qualit
 | Security Score      | High            | Medium+           |
 | Maintainability     | Excellent       | Good+             |
 
-![Code Quality Metrics Overview](/docs/screenshots/code_quality/code-quality-metrics-overview.png)
-_Figure 1: Comprehensive overview of code quality metrics and achievements_
-
-![Project Architecture Overview](/docs/screenshots/code_quality/code-quality-architecture-overview.png)
-_Figure 2: High-level project architecture showing modular design and separation of concerns_
-
-![Security Implementation Overview](/docs/screenshots/code_quality/code-quality-security-overview.png)
-_Figure 3: Security measures and authentication flow implementation_
-
-![Database Design Overview](/docs/screenshots/code_quality/code-quality-database-overview.png)
-_Figure 4: Database schema and relationship design showing optimized structure_
-
-![Frontend Quality Overview](/docs/screenshots/code_quality/code-quality-frontend-overview.png)
-_Figure 5: Frontend implementation showing responsive design and accessibility features_
 
 ### Assessment Readiness
 This codebase demonstrates:
