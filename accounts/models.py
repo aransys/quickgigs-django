@@ -23,7 +23,7 @@ class UserProfile(models.Model):
         decimal_places=2, 
         null=True, 
         blank=True,
-        help_text="Your hourly rate in USD"
+        help_text="Your hourly rate in GBP"
     )
     company_name = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=20, blank=True)

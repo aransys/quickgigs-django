@@ -29,7 +29,7 @@ def feature_gig_checkout(request, gig_id):
             payment_method_types=['card'],
             line_items=[{
                 'price_data': {
-                    'currency': 'usd',
+                    'currency': 'gbp',
                     'product_data': {
                         'name': f'Feature Gig: {gig.title}',
                         'description': 'Make your gig stand out with featured placement',
