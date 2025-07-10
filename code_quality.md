@@ -1672,9 +1672,6 @@ _Figure 9: Terminal showing successful execution of all code quality validation 
 ![Black Code Formatting](/docs/screenshots/code_quality/code-quality-black-formatting.png)
 _Figure 10: Black code formatter results showing consistent code formatting_
 
-![Database Query Optimization](/docs/screenshots/code_quality/code-quality-database-queries.png)
-_Figure 11: Django debug toolbar showing optimized queries with select_related()_
-
 ![Query Performance Analysis](/docs/screenshots/code_quality/code-quality-query-performance.png)
 _Figure 12: Database query analysis showing N+1 query prevention_
 
@@ -1708,29 +1705,7 @@ _Figure 21: Git commit history showing descriptive commit messages and clean his
 ![Deployment Configuration](/docs/screenshots/code_quality/code-quality-deployment-config.png)
 _Figure 22: Production settings and deployment configuration showing security measures_
 
-![Performance Monitoring](/docs/screenshots/code_quality/code-quality-performance-monitoring.png)
-_Figure 23: Performance metrics and optimization results_
 
-![Accessibility Testing](/docs/screenshots/code_quality/code-quality-accessibility-testing.png)
-_Figure 24: WCAG compliance testing results and accessibility features_
-
-![Mobile Responsiveness](/docs/screenshots/code_quality/code-quality-mobile-responsive.png)
-_Figure 25: Mobile-first design implementation across different screen sizes_
-
-![Browser Compatibility](/docs/screenshots/code_quality/code-quality-browser-compatibility.png)
-_Figure 26: Cross-browser testing results showing consistent functionality_
-
-![Error Handling](/docs/screenshots/code_quality/code-quality-error-handling-detail.png)
-_Figure 27: Comprehensive error handling and user-friendly error messages_
-
-![User Experience Flow](/docs/screenshots/code_quality/code-quality-user-experience.png)
-_Figure 28: User journey showing intuitive navigation and feedback systems_
-
-![Code Review Process](/docs/screenshots/code_quality/code-quality-review-process.png)
-_Figure 29: Code review workflow and quality assurance procedures_
-
-![Quality Metrics Dashboard](/docs/screenshots/code_quality/code-quality-metrics-dashboard.png)
-_Figure 30: Comprehensive quality metrics and performance indicators_
 
 ### Quality Metrics Achieved
 
