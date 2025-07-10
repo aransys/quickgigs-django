@@ -16,6 +16,9 @@
       body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
       .bg-gray-50 { background-color: #f9fafb; }
       .min-h-screen { min-height: 100vh; }
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .flex-1 { flex: 1 1 0%; }
       .bg-white { background-color: #ffffff; }
       .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
       .border-b-4 { border-bottom-width: 4px; }
@@ -297,7 +300,7 @@
       };
     </script>
   </head>
-  <body class="bg-gray-50 min-h-screen">
+  <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Navigation -->
     <nav
       class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container md:relative sticky top-0 z-50"
@@ -626,7 +629,7 @@
       {% endif %}
     </nav>
     <!-- Main Content -->
-    <main>{% block content %}{% endblock %}</main>
+    <main class="flex-1">{% block content %}{% endblock %}</main>
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 mt-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
