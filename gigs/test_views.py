@@ -48,7 +48,7 @@ class GigViewTest(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test Web Development Gig')
-        self.assertContains(response, '$1,500.00')
+        self.assertContains(response, '£1,500.00')
         self.assertContains(response, 'Remote')
 
     def test_gig_list_shows_only_active_gigs(self):
@@ -94,7 +94,7 @@ class GigViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test Web Development Gig')
         self.assertContains(response, 'Build a Django application')
-        self.assertContains(response, '$1,500.00')
+        self.assertContains(response, '£1,500.00')
         self.assertContains(response, 'Remote')
         self.assertContains(response, 'Web Development')
 
