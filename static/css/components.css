@@ -180,26 +180,76 @@
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
 }
 
-/* Message alert specific animations */
-.message-alert {
-  transform-origin: top center;
-  will-change: transform, opacity, max-height;
+/* Modern toast notification styles */
+.toast-notification {
+  background: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+  will-change: transform, opacity;
+  z-index: 9999;
+  color: #1f2937;
+  font-weight: 500;
 }
 
-.message-alert i {
-  font-size: 1.125rem;
-  opacity: 0.8;
+.toast-success {
+  border-left-color: #10b981;
+  background: #ffffff;
+  color: #065f46;
 }
 
-.message-alert button {
+.toast-error {
+  border-left-color: #ef4444;
+  background: #ffffff;
+  color: #991b1b;
+}
+
+.toast-warning {
+  border-left-color: #f59e0b;
+  background: #ffffff;
+  color: #92400e;
+}
+
+.toast-info {
+  border-left-color: #3b82f6;
+  background: #ffffff;
+  color: #1e40af;
+}
+
+/* Toast notification animations */
+.toast-notification {
+  transform-origin: top right;
+  will-change: transform, opacity;
+}
+
+.toast-notification i {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.toast-notification button {
   padding: 0.25rem;
   border-radius: 0.375rem;
   transition: all 0.2s ease;
 }
 
-.message-alert button:hover {
+.toast-notification button:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
+}
+
+/* Mobile responsiveness for toasts */
+@media (max-width: 640px) {
+  #messagesContainer {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+  
+  .toast-notification {
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* Card Components */

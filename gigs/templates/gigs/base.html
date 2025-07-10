@@ -607,22 +607,24 @@
       </div>
       <!-- Messages -->
       {% if messages %}
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4" id="messagesContainer">
+      <div class="fixed top-4 right-4 z-50 space-y-3 max-w-sm w-full" id="messagesContainer">
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} message-alert" style="transform: translateY(-20px); opacity: 0;">
-          <div class="flex items-center">
+        <div class="toast-notification toast-{{ message.tags }}" style="transform: translateX(100%); opacity: 0;">
+          <div class="flex items-center p-4 rounded-lg shadow-lg border-l-4">
             {% if message.tags == 'success' %}
-            <i class="fas fa-check-circle mr-3"></i>
+            <i class="fas fa-check-circle mr-3 text-green-500"></i>
             {% elif message.tags == 'error' %}
-            <i class="fas fa-exclamation-circle mr-3"></i>
+            <i class="fas fa-exclamation-circle mr-3 text-red-500"></i>
+            {% elif message.tags == 'warning' %}
+            <i class="fas fa-exclamation-triangle mr-3 text-yellow-500"></i>
             {% else %}
-            <i class="fas fa-info-circle mr-3"></i>
+            <i class="fas fa-info-circle mr-3 text-blue-500"></i>
             {% endif %}
-            <span>{{ message }}</span>
+            <span class="flex-1 text-sm font-medium">{{ message }}</span>
+            <button onclick="dismissToast(this.parentElement.parentElement)" class="ml-3 text-gray-400 hover:text-gray-600 transition-colors duration-200" aria-label="Dismiss message">
+              <i class="fas fa-times text-xs"></i>
+            </button>
           </div>
-          <button onclick="dismissAlert(this.parentElement)" class="ml-auto hover:opacity-70 transition-opacity duration-200" aria-label="Dismiss message">
-            <i class="fas fa-times" aria-hidden="true"></i>
-          </button>
         </div>
         {% endfor %}
       </div>
@@ -854,67 +856,64 @@
         }
       });
 
-      // Smooth message animations and auto-dismiss
+      // Modern toast notification animations and auto-dismiss
       document.addEventListener("DOMContentLoaded", function () {
-        const alerts = document.querySelectorAll(".message-alert");
+        const toasts = document.querySelectorAll(".toast-notification");
         
-        // Animate messages in smoothly
-        alerts.forEach(function (alert, index) {
-          // Stagger the animations slightly for multiple messages
+        // Animate toasts in smoothly
+        toasts.forEach(function (toast, index) {
+          // Stagger the animations slightly for multiple toasts
           setTimeout(function() {
-            alert.style.transition = "opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
-            alert.style.opacity = "1";
-            alert.style.transform = "translateY(0)";
-          }, index * 100); // 100ms delay between each message
+            toast.style.transition = "opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+            toast.style.opacity = "1";
+            toast.style.transform = "translateX(0)";
+          }, index * 150); // 150ms delay between each toast
           
           // Add progress bar for visual countdown
           const progressBar = document.createElement("div");
-          progressBar.className =
-            "absolute bottom-0 left-0 h-1 bg-current opacity-30 transition-all duration-[7000ms] ease-linear";
+          progressBar.className = "absolute bottom-0 left-0 h-1 transition-all duration-[5000ms] ease-linear";
           progressBar.style.width = "100%";
-          alert.style.position = "relative";
-          alert.style.overflow = "hidden";
-          alert.appendChild(progressBar);
+          
+          // Set progress bar color based on toast type
+          const toastType = toast.classList.contains('toast-success') ? 'bg-green-500' :
+                           toast.classList.contains('toast-error') ? 'bg-red-500' :
+                           toast.classList.contains('toast-warning') ? 'bg-yellow-500' : 'bg-blue-500';
+          progressBar.className += ' ' + toastType;
+          
+          toast.style.position = "relative";
+          toast.style.overflow = "hidden";
+          toast.appendChild(progressBar);
 
           // Start countdown after entrance animation
           setTimeout(function () {
             progressBar.style.width = "0%";
-          }, 500 + (index * 100)); // Start after entrance animation
+          }, 600 + (index * 150)); // Start after entrance animation
 
-          // Auto-dismiss after 7 seconds (longer for better UX)
+          // Auto-dismiss after 5 seconds
           setTimeout(function () {
-            dismissAlert(alert);
-          }, 7500 + (index * 100));
+            dismissToast(toast);
+          }, 5600 + (index * 150));
         });
       });
       
-      // Smooth alert dismissal function
-      function dismissAlert(alert) {
-        if (alert && alert.parentElement) {
-          alert.style.transition = "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
-          alert.style.opacity = "0";
-          alert.style.transform = "translateY(-10px)";
-          alert.style.maxHeight = alert.offsetHeight + "px";
-          
-          // Collapse the alert smoothly
-          setTimeout(function () {
-            alert.style.maxHeight = "0";
-            alert.style.marginBottom = "0";
-            alert.style.paddingTop = "0";
-            alert.style.paddingBottom = "0";
-          }, 100);
+      // Smooth toast dismissal function
+      function dismissToast(toast) {
+        if (toast) {
+          toast.style.transition = "opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
           
           // Remove from DOM after animation
           setTimeout(function () {
-            if (alert.parentElement) {
-              alert.remove();
+            if (toast.parentElement) {
+              toast.remove();
               
-              // Check if this was the last message and hide container
+              // Check if this was the last toast and hide container
               const container = document.getElementById("messagesContainer");
-              if (container && container.querySelectorAll(".message-alert").length === 0) {
-                container.style.transition = "opacity 0.2s ease-out";
+              if (container && container.querySelectorAll(".toast-notification").length === 0) {
+                container.style.transition = "opacity 0.3s ease-out";
                 container.style.opacity = "0";
-                setTimeout(() => container.remove(), 200);
+                setTimeout(() => container.remove(), 300);
               }
             }
           }, 400);
