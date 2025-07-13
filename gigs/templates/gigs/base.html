@@ -303,14 +303,14 @@
   <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Navigation -->
     <nav
-      class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container md:relative sticky top-0 z-50"
+      class="bg-white shadow-lg border-b-4 border-brand-500 navbar-container md:relative sticky top-0 z-50 navbar-enhanced"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
           <!-- Logo Section -->
           <div class="flex items-center">
-            <a href="{% url 'core:home' %}" class="flex items-center space-x-3">
-              <div class="bg-brand-500 p-1 rounded-lg">
+            <a href="{% url 'core:home' %}" class="flex items-center space-x-3 logo-container">
+              <div class="bg-brand-500 p-1 rounded-lg logo-icon">
                 <i
                   class="fas fa-briefcase text-white text-lg md:text-lg lg:text-xl xl:text-2xl"
                 ></i>
@@ -326,33 +326,33 @@
             <div class="flex space-x-2 mr-6">
               <a
                 href="{% url 'core:home' %}"
-                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/' %} nav-link-active{% endif %}"
+                class="nav-link-improved nav-link-enhanced text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/' %} nav-link-active{% endif %}"
               >
                 <i class="fas fa-home mr-2"></i>Home
               </a>
               <a
                 href="{% url 'gigs:gig_list' %}"
-                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/' %} nav-link-active{% endif %}"
+                class="nav-link-improved nav-link-enhanced text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/' %} nav-link-active{% endif %}"
               >
                 <i class="fas fa-search mr-2"></i>Browse Gigs
               </a>
               {% if user.is_authenticated %}
               <a
                 href="{% url 'gigs:gig_create' %}"
-                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}"
+                class="nav-link-improved nav-link-enhanced text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/post/' %} nav-link-active{% endif %}"
               >
                 <i class="fas fa-plus mr-2"></i>Post Gig
               </a>
               {% endif %}
               <a
                 href="{% url 'core:about' %}"
-                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/about/' %} nav-link-active{% endif %}"
+                class="nav-link-improved nav-link-enhanced text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/about/' %} nav-link-active{% endif %}"
               >
                 <i class="fas fa-info-circle mr-2"></i>About
               </a>
               <a
                 href="{% url 'core:contact' %}"
-                class="nav-link-improved text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/contact/' %} nav-link-active{% endif %}"
+                class="nav-link-improved nav-link-enhanced text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/contact/' %} nav-link-active{% endif %}"
               >
                 <i class="fas fa-envelope mr-2"></i>Contact
               </a>
