@@ -112,7 +112,7 @@ def payment_cancel(request, gig_id):
     except Payment.DoesNotExist:
         pass
     
-    messages.info(request, 'Payment was cancelled. Your gig remains active but not featured.')
+    messages.warning(request, 'Payment was cancelled. Your gig remains active but not featured.')
     
     return render(request, 'payments/cancel.html', {'gig': gig})
 
