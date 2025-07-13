@@ -66,18 +66,18 @@
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center">
         <div
-          class="bg-brand-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+          class="bg-brand-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg hover:shadow-xl hover:ring-2 hover:ring-white/80 transition-all duration-200 ease-out cursor-pointer"
         >
-          <i class="fas fa-briefcase text-brand-500 text-3xl"></i>
+          <i class="fas fa-briefcase text-white text-3xl"></i>
         </div>
-                    <div class="text-4xl font-bold text-gray-800 mb-2">{{ total_gigs }}</div>
+        <div class="text-4xl font-bold text-gray-800 mb-2">{{ total_gigs }}</div>
         <p class="text-gray-600 font-medium">Active Gigs</p>
       </div>
       <div class="text-center">
         <div
-          class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+          class="bg-blue-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg hover:shadow-xl hover:ring-2 hover:ring-white/80 transition-all duration-200 ease-out cursor-pointer"
         >
-          <i class="fas fa-building text-blue-500 text-3xl"></i>
+          <i class="fas fa-building text-white text-3xl"></i>
         </div>
         <div class="text-4xl font-bold text-gray-800 mb-2">
           {{ total_employers }}
@@ -86,9 +86,9 @@
       </div>
       <div class="text-center">
         <div
-          class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+          class="bg-green-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg hover:shadow-xl hover:ring-2 hover:ring-white/80 transition-all duration-200 ease-out cursor-pointer"
         >
-          <i class="fas fa-users text-green-500 text-3xl"></i>
+          <i class="fas fa-users text-white text-3xl"></i>
         </div>
         <div class="text-4xl font-bold text-gray-800 mb-2">
           {{ total_freelancers }}
@@ -277,4 +277,6 @@
     </div>
   </div>
 </section>
+
+
 {% endblock %}
