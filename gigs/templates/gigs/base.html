@@ -97,11 +97,11 @@
       }
       
       /* CRITICAL: Mobile menu styles to prevent flash and ensure functionality */
-      .mobile-menu {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 40;
+      #mobileMenu.mobile-menu {
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 9999 !important;
         opacity: 0;
         pointer-events: none;
         visibility: hidden;
@@ -109,45 +109,54 @@
         display: none;
         transform: translateX(100%);
       }
-      .mobile-menu.show {
-        opacity: 1;
-        pointer-events: auto;
-        visibility: visible;
+      #mobileMenu.mobile-menu.show {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        visibility: visible !important;
         display: block !important;
-        transform: translateX(0);
+        transform: translateX(0) !important;
       }
-      .mobile-menu-content {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 18rem;
-        background: #fff;
-        border-radius: 0 0 0 2rem;
-        box-shadow: 0 8px 32px 0 rgba(60, 72, 88, 0.18), 0 2px 8px 0 rgba(60, 72, 88, 0.1);
+      #mobileMenu .mobile-menu-content {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        height: 100% !important;
+        width: 18rem !important;
+        background: #ffffff !important;
+        border-radius: 0 0 0 2rem !important;
+        box-shadow: 0 8px 32px 0 rgba(60, 72, 88, 0.18), 0 2px 8px 0 rgba(60, 72, 88, 0.1) !important;
         transform: translateX(100%);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+        z-index: 10000 !important;
+        border: 1px solid #e5e7eb !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
       }
-      .mobile-menu.show .mobile-menu-content {
-        transform: translateX(0);
+      #mobileMenu.mobile-menu.show .mobile-menu-content {
+        transform: translateX(0) !important;
       }
       
       /* Ensure mobile menu is never shown on desktop */
       @media (min-width: 768px) {
-        .mobile-menu {
+        #mobileMenu.mobile-menu {
           display: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
           pointer-events: none !important;
+          transform: translateX(100%) !important;
         }
-        .mobile-menu.show {
+        #mobileMenu.mobile-menu.show {
           display: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
           pointer-events: none !important;
+          transform: translateX(100%) !important;
+        }
+        #mobileMenu .mobile-menu-content {
+          transform: translateX(100%) !important;
         }
       }
       
@@ -519,7 +528,7 @@
       </div>
       <!-- Mobile Navigation -->
       <div id="mobileMenu" class="mobile-menu" role="navigation" aria-label="Mobile navigation">
-        <div class="mobile-menu-content p-6">
+        <div class="mobile-menu-content" style="background: #ffffff !important; height: 100vh !important; padding: 1.5rem;">
           <button
             id="mobileMenuCloseButton"
             class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none"
@@ -583,7 +592,7 @@
             <div class="border-t border-gray-200 my-4"></div>
             <a
               href="{% url 'accounts:logout' %}"
-              class="nav-link-improved text-red-600 mobile-menu-link"
+              class="nav-link-improved mobile-menu-link"
             >
               <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
             </a>
@@ -597,7 +606,7 @@
             </a>
             <a
               href="{% url 'accounts:signup' %}"
-              class="nav-link-improved bg-brand-500 text-white mobile-menu-link"
+              class="nav-link-improved mobile-menu-link"
             >
               <i class="fas fa-user-plus mr-2"></i>Sign Up
             </a>
@@ -718,6 +727,13 @@
           // Add class to trigger CSS transitions
           menu.classList.add("show");
           
+          // Remove any inline transform styles to let CSS handle the animation
+          const menuContent = menu.querySelector(".mobile-menu-content");
+          if (menuContent) {
+            console.log("Menu content found:", menuContent);
+            menuContent.style.removeProperty("transform");
+          }
+          
           if (button) {
             button.setAttribute("aria-expanded", "true");
           }
@@ -734,6 +750,11 @@
           setTimeout(() => {
             if (!menu.classList.contains("show")) {
               menu.style.display = "none";
+              // Reset transform to initial state
+              const menuContent = menu.querySelector(".mobile-menu-content");
+              if (menuContent) {
+                menuContent.style.transform = "translateX(100%)";
+              }
             }
           }, 300);
         }
@@ -755,6 +776,11 @@
         setTimeout(() => {
           if (!menu.classList.contains("show")) {
             menu.style.display = "none";
+            // Reset transform to initial state
+            const menuContent = menu.querySelector(".mobile-menu-content");
+            if (menuContent) {
+              menuContent.style.transform = "translateX(100%)";
+            }
           }
         }, 300);
       }
@@ -789,7 +815,6 @@
           mobileMenuButton.addEventListener("click", function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log("Mobile menu button clicked via event listener");
             toggleMobileMenu();
           });
           
@@ -799,7 +824,6 @@
             closeButton.addEventListener("click", function(e) {
               e.preventDefault();
               e.stopPropagation();
-              console.log("Mobile menu close button clicked");
               closeMobileMenu();
             });
           }
@@ -826,7 +850,6 @@
           const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
           mobileMenuLinks.forEach(function(link) {
             link.addEventListener("click", function() {
-              console.log("Mobile menu link clicked, closing menu");
               closeMobileMenu();
             });
           });
