@@ -759,11 +759,11 @@ footer .text-left {
 }
 
 .stat-card.employers .stat-icon {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #047857, #065f46);
 }
 
 .stat-card.freelancers .stat-icon {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #eab308, #ca8a04);
 }
 
 /* Responsive adjustments */
@@ -832,4 +832,15 @@ footer .text-left {
 .how-it-works-icon .how-it-works-number {
   color: #fff !important;
   transition: color 0.2s;
+}
+
+/* Stat number color on hover matches icon color */
+.stat-card.gigs:hover .stat-number {
+  color: #10b981 !important;
+}
+.stat-card.employers:hover .stat-number {
+  color: #047857 !important;
+}
+.stat-card.freelancers:hover .stat-number {
+  color: #eab308 !important;
 }
