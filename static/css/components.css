@@ -133,8 +133,7 @@
   max-height: 80vh;
   overflow-y: auto;
   padding: 1rem 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  overflow-x: hidden;
 }
 .dropdown-menu.show {
   opacity: 1 !important;
@@ -153,7 +152,6 @@
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0.25rem;
-  transition: all 0.15s ease;
   cursor: pointer;
   gap: 1rem;
   position: relative;
@@ -162,22 +160,9 @@
 .dropdown-item:last-child {
   margin-bottom: 0;
 }
-.dropdown-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
-  transition: width 0.3s ease;
-}
-.dropdown-item:hover::before {
-  width: 100%;
-}
 .dropdown-item:hover {
-  background: #f0fdf4;
-  transform: translateX(4px);
+  background: #d1fae5;
+  color: #047857;
 }
 .dropdown-item-icon {
   width: 2.5rem;
@@ -843,4 +828,17 @@ footer .text-left {
 }
 .stat-card.freelancers:hover .stat-number {
   color: #eab308 !important;
+}
+
+/* Header laptop icon styling */
+.hero-section .fas.fa-laptop-code {
+  font-size: 12rem !important;
+  padding: 4rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+  height: 20rem;
 }
