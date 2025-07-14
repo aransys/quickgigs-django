@@ -822,3 +822,8 @@ footer .text-left {
 .how-it-works-icon:hover span, .how-it-works-icon:focus span {
   color: #fff;
 }
+.how-it-works-icon:hover .how-it-works-number,
+.how-it-works-icon:focus .how-it-works-number {
+  color: #047857 !important;
+  transition: color 0.2s;
+}
