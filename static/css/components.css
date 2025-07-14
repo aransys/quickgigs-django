@@ -804,3 +804,21 @@ footer .text-left {
 .stat-number {
   animation: fadeInUp 0.6s ease-out;
 }
+
+.how-it-works-icon {
+  background: linear-gradient(135deg, #10b981, #059669);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.10);
+}
+.how-it-works-icon:hover, .how-it-works-icon:focus {
+  background: linear-gradient(135deg, #059669, #10b981);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.18);
+  outline: none;
+}
+.how-it-works-icon span {
+  transition: color 0.2s;
+}
+.how-it-works-icon:hover span, .how-it-works-icon:focus span {
+  color: #fff;
+}
