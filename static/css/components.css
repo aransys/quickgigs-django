@@ -675,6 +675,9 @@ footer .text-left {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  --icon-bg: linear-gradient(135deg, #10b981, #059669);
+  --icon-shadow: 0 4px 12px rgba(16, 185, 129, 0.10);
+  --icon-transform: none;
 }
 
 .stat-card::before {
@@ -697,6 +700,9 @@ footer .text-left {
   transform: translateY(-4px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: #10b981;
+  --icon-bg: #047857;
+  --icon-shadow: 0 8px 24px rgba(16, 185, 129, 0.18);
+  --icon-transform: translateY(-4px) scale(1.05);
 }
 
 .stat-icon {
@@ -767,10 +773,6 @@ footer .text-left {
     gap: 1.5rem;
   }
   
-  .stat-card {
-    padding: 2rem 1.5rem;
-  }
-  
   .stats-title {
     font-size: 2rem;
   }
@@ -805,17 +807,28 @@ footer .text-left {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* How It Works Section - Classic Approach */
 .how-it-works-icon {
-  background: linear-gradient(135deg, #10b981, #059669);
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  background: #047857;
+  border-radius: 1rem;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  color: #fff;
+  font-size: 1.75rem;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.10);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-.how-it-works-icon:hover, .how-it-works-icon:focus {
-  background: #047857 !important;
+
+.stat-card:hover .how-it-works-icon {
+  background: #10b981;
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 8px 24px rgba(16, 185, 129, 0.18);
-  outline: none;
 }
+
 .how-it-works-icon .how-it-works-number {
   color: #fff !important;
   transition: color 0.2s;
