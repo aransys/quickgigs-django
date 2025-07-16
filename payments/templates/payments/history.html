@@ -48,8 +48,8 @@
 
             <!-- Payment Type -->
             {% if payment.payment_type == 'featured_gig' %}
-            <span class="text-purple-600 font-medium">
-              <i class="fas fa-star mr-1"></i>Featured Gig
+            <span class="font-medium" style="color: #eab308;">
+              <i class="fas fa-star mr-1" style="color: #eab308;"></i>Featured Gig
             </span>
             {% else %}
             <span class="text-gray-600 font-medium">
@@ -94,8 +94,8 @@
               <i class="fas fa-external-link-alt mr-1"></i>View Gig
             </a>
             {% if payment.status == 'completed' and payment.gig.is_featured %}
-            <span class="text-green-600 font-medium text-sm">
-              <i class="fas fa-star mr-1"></i>Currently Featured
+            <span class="font-medium text-sm" style="color: #eab308;">
+              <i class="fas fa-star mr-1" style="color: #eab308;"></i>Currently Featured
             </span>
             {% endif %}
           </div>

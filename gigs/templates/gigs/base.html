@@ -618,8 +618,8 @@
       {% if messages %}
       <div class="fixed top-4 right-4 z-50 space-y-3 max-w-sm w-full" id="messagesContainer">
         {% for message in messages %}
-        <div class="toast-notification toast-{{ message.tags }}" style="transform: translateX(100%); opacity: 0;">
-          <div class="flex items-center p-4 rounded-lg shadow-lg border-l-4">
+        <div class="toast-notification toast-{{ message.tags }} border-0" style="transform: translateX(100%); opacity: 0;">
+          <div class="flex items-center p-4 rounded-xl shadow-lg border-0 border-l-4 border-t-0 {% if message.tags == 'success' %}border-l-green-500{% elif message.tags == 'error' %}border-l-red-500{% elif message.tags == 'warning' %}border-l-yellow-400{% else %}border-l-blue-500{% endif %}">
             {% if message.tags == 'success' %}
             <i class="fas fa-check-circle mr-3 text-green-500"></i>
             {% elif message.tags == 'error' %}
