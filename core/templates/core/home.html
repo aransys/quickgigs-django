@@ -23,21 +23,21 @@
           {% if user.is_authenticated %} {% if user.userprofile.is_employer %}
           <a
             href="{% url 'gigs:gig_create' %}"
-            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
           >
             <i class="fas fa-plus mr-2"></i>Post Your First Gig
           </a>
           {% else %}
           <a
             href="{% url 'gigs:gig_list' %}"
-            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
           >
             <i class="fas fa-search mr-2"></i>Browse Available Gigs
           </a>
           {% endif %} {% else %}
           <a
             href="{% url 'accounts:signup' %}"
-            class="bg-white text-brand-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
+            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
           >
             <i class="fas fa-rocket mr-2"></i>Get Started Free
           </a>
