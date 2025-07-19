@@ -23,21 +23,21 @@
           {% if user.is_authenticated %} {% if user.userprofile.is_employer %}
           <a
             href="{% url 'gigs:gig_create' %}"
-            class="btn btn--primary btn--lg"
+            class="btn btn--hero"
           >
             <i class="fas fa-plus mr-2"></i>Post Your First Gig
           </a>
           {% else %}
           <a
             href="{% url 'gigs:gig_list' %}"
-            class="btn btn--primary btn--lg"
+            class="btn btn--hero"
           >
             <i class="fas fa-search mr-2"></i>Browse Available Gigs
           </a>
           {% endif %} {% else %}
           <a
             href="{% url 'accounts:signup' %}"
-            class="btn btn--primary btn--lg"
+            class="btn btn--hero"
           >
             <i class="fas fa-rocket mr-2"></i>Get Started Free
           </a>
