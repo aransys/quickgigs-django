@@ -329,6 +329,79 @@ body {
   min-height: 52px;
 }
 
+/* Hero Button - Special styling for homepage hero section */
+.btn--hero {
+  background: var(--brand-primary-dark);
+  color: var(--color-white);
+  border: 2px solid var(--brand-primary);
+  box-shadow: 0 4px 12px rgba(4, 107, 78, 0.2);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  min-height: 60px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn--hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--brand-primary-hover) 0%, 
+    var(--brand-primary) 50%, 
+    var(--brand-primary-hover) 100%);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.btn--hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn--hero:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary-hover);
+  box-shadow: 0 6px 20px rgba(4, 107, 78, 0.3), 0 0 0 3px rgba(5, 150, 105, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn--hero:hover::before {
+  width: 80%;
+}
+
+.btn--hero:hover::after {
+  opacity: 1;
+}
+
+.btn--hero:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(4, 107, 78, 0.2);
+}
+
+.btn--hero:active::before {
+  width: 60%;
+}
+
 /* ================================
    FORM COMPONENTS
    ================================ */
