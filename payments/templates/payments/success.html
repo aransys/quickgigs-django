@@ -75,22 +75,21 @@
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a
         href="{% url 'gigs:gig_detail' gig.pk %}"
-        class="btn-primary text-center whitespace-nowrap text-sm"
-        style="font-weight: 600 !important"
+        class="btn btn--primary"
       >
         <i class="fas fa-eye mr-2"></i>
         View Featured Gig
       </a>
       <a
         href="{% url 'gigs:gig_list' %}"
-        class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-semibold transition-colors duration-200 text-center whitespace-nowrap text-sm"
+        class="btn btn--outline"
       >
         <i class="fas fa-list mr-2"></i>
         Browse Gigs
       </a>
       <a
         href="{% url 'payments:payment_history' %}"
-        class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-3 rounded-lg font-semibold transition-colors duration-200 text-center whitespace-nowrap text-sm"
+        class="btn btn--outline"
       >
         <i class="fas fa-history mr-2"></i>
         Payment History

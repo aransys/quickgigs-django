@@ -81,13 +81,13 @@
       <div class="flex gap-4 justify-center">
         <button
           type="submit"
-          class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"
+          class="btn btn--danger"
         >
           <i class="fas fa-times mr-2"></i>Yes, Withdraw Application
         </button>
         <a
           href="{% url 'gigs:application_detail' application.pk %}"
-          class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"
+          class="btn btn--outline"
         >
           <i class="fas fa-arrow-left mr-2"></i>Cancel
         </a>
