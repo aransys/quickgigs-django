@@ -23,27 +23,27 @@
           {% if user.is_authenticated %} {% if user.userprofile.is_employer %}
           <a
             href="{% url 'gigs:gig_create' %}"
-            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
+            class="btn btn--primary btn--lg"
           >
             <i class="fas fa-plus mr-2"></i>Post Your First Gig
           </a>
           {% else %}
           <a
             href="{% url 'gigs:gig_list' %}"
-            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
+            class="btn btn--primary btn--lg"
           >
             <i class="fas fa-search mr-2"></i>Browse Available Gigs
           </a>
           {% endif %} {% else %}
           <a
             href="{% url 'accounts:signup' %}"
-            class="bg-brand-700 text-white font-bold border-2 border-brand-700 hover:bg-brand-500 hover:text-white hover:border-white px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-md text-center"
+            class="btn btn--primary btn--lg"
           >
             <i class="fas fa-rocket mr-2"></i>Get Started Free
           </a>
           <a
             href="{% url 'accounts:login' %}"
-            class="border-2 border-white text-white hover:bg-white hover:text-brand-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 text-center"
+            class="btn btn--outline btn--lg"
           >
             <i class="fas fa-sign-in-alt mr-2"></i>Login
           </a>
@@ -61,35 +61,35 @@
 </section>
 
 <!-- Platform Stats -->
-<section class="stats-section">
-  <div class="stats-container">
-    <div class="stats-header">
-      <h2 class="stats-title">Platform Statistics</h2>
-      <p class="stats-subtitle">
+<section class="stats">
+  <div class="container">
+    <div class="text-center mb-12">
+      <h2 class="text-heading-2 mb-4">Platform Statistics</h2>
+      <p class="text-body">
         Real-time metrics showing the growth of our freelance marketplace
       </p>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card gigs">
-        <div class="stat-icon">
+    <div class="stats__grid">
+      <div class="stats__card">
+        <div class="stats__icon">
           <i class="fas fa-briefcase"></i>
         </div>
-        <div class="stat-number">{{ total_gigs }}</div>
-        <div class="stat-label">Active Gigs</div>
+        <div class="stats__number">{{ total_gigs }}</div>
+        <div class="stats__label">Active Gigs</div>
       </div>
-      <div class="stat-card employers">
-        <div class="stat-icon">
+      <div class="stats__card">
+        <div class="stats__icon">
           <i class="fas fa-building"></i>
         </div>
-        <div class="stat-number">{{ total_employers }}</div>
-        <div class="stat-label">Employers</div>
+        <div class="stats__number">{{ total_employers }}</div>
+        <div class="stats__label">Employers</div>
       </div>
-      <div class="stat-card freelancers">
-        <div class="stat-icon">
+      <div class="stats__card">
+        <div class="stats__icon">
           <i class="fas fa-users"></i>
         </div>
-        <div class="stat-number">{{ total_freelancers }}</div>
-        <div class="stat-label">Freelancers</div>
+        <div class="stats__number">{{ total_freelancers }}</div>
+        <div class="stats__label">Freelancers</div>
       </div>
     </div>
   </div>
@@ -138,7 +138,7 @@
             </div>
             <a
               href="{% url 'gigs:gig_detail' gig.pk %}"
-              class="w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center block"
+              class="btn btn--primary w-full"
             >
               View Details
             </a>
@@ -211,7 +211,7 @@
     <div class="text-center mt-12">
       <a
         href="{% url 'gigs:gig_list' %}"
-        class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+        class="btn btn--primary"
       >
         <i class="fas fa-eye mr-2"></i>View All Gigs
       </a>

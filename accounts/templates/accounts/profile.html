@@ -95,9 +95,9 @@
             <!-- Quick Actions -->
             <div class="mt-8 space-y-3">
               {% if user.userprofile.is_employer %}
-              <a href="{% url 'gigs:gig_create' %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-4 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center"> <i class="fas fa-plus mr-2"></i>Post a New Gig </a>
+              <a href="{% url 'gigs:gig_create' %}" class="btn btn--primary w-full flex items-center justify-center"> <i class="fas fa-plus mr-2"></i>Post a New Gig </a>
               {% else %}
-              <a href="{% url 'gigs:gig_list' %}" class="w-full bg-brand-500 hover:bg-brand-600 text-white px-4 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center"> <i class="fas fa-search mr-2"></i>Browse Gigs </a>
+              <a href="{% url 'gigs:gig_list' %}" class="btn btn--primary w-full flex items-center justify-center"> <i class="fas fa-search mr-2"></i>Browse Gigs </a>
               {% endif %}
             </div>
           </div>

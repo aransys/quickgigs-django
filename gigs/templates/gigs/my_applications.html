@@ -123,14 +123,14 @@
         <div class="lg:ml-6 mt-4 lg:mt-0 flex flex-col gap-2 lg:min-w-[200px]">
           <a
             href="{% url 'gigs:application_detail' application.pk %}"
-            class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+            class="btn btn--primary"
           >
             <i class="fas fa-eye mr-2"></i>View Details
           </a>
 
           <a
             href="{% url 'gigs:gig_detail' application.gig.pk %}"
-            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+            class="btn btn--outline"
           >
             <i class="fas fa-external-link-alt mr-2"></i>View Gig
           </a>
@@ -138,7 +138,7 @@
           {% if application.status == 'pending' %}
           <a
             href="{% url 'gigs:withdraw_application' application.pk %}"
-            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200"
+            class="btn btn--danger"
           >
             <i class="fas fa-times mr-2"></i>Withdraw
           </a>
@@ -220,7 +220,7 @@
       start applying to find your next project.
     </p>
 
-    <a href="{% url 'gigs:gig_list' %}" class="btn-primary">
+    <a href="{% url 'gigs:gig_list' %}" class="btn btn--primary">
       <i class="fas fa-search mr-2"></i>Browse Gigs
     </a>
   </div>
