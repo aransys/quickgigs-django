@@ -342,7 +342,7 @@
               {% if user.is_authenticated %}
               <a
                 href="{% url 'gigs:gig_create' %}"
-                class="navbar__link text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/post/' %} navbar__link--active{% endif %}"
+                class="navbar__link navbar__link--post-gig text-sm md:text-sm lg:text-base xl:text-lg px-2 md:px-3 lg:px-4 xl:px-5 py-1 whitespace-nowrap{% if request.path == '/gigs/post/' %} navbar__link--active{% endif %}"
               >
                 <i class="fas fa-plus mr-2"></i>Post Gig
               </a>
