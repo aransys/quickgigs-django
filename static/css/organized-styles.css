@@ -336,7 +336,7 @@ body {
   border: 2px solid var(--color-white);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.5rem !important;
   padding: 1rem 2.5rem;
   min-height: 60px;
   border-radius: 8px;
@@ -873,7 +873,7 @@ body {
   align-items: center !important;
   text-decoration: none !important;
   font-weight: 500 !important;
-  font-size: 1rem !important;
+  font-size: 0.65rem !important;
 }
 
 .mobile-menu .nav-link-improved::before {
@@ -900,6 +900,13 @@ body {
 .mobile-menu .nav-link-improved.nav-link-active {
   color: #047857 !important;
   background: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Target actual hamburger menu links */
+.mobile-menu .navbar__link,
+.mobile-menu .navbar__link:hover,
+.mobile-menu .navbar__link.navbar__link--active {
+  font-size: 1.32rem !important;
 }
 
 /* Ensure mobile menu is never shown on desktop */
@@ -1153,6 +1160,13 @@ body {
   }
   
   .navbar__nav {
+    display: none;
+  }
+}
+
+/* Hide Post Gig navlink on tablets and smaller screens */
+@media (max-width: 1024px) {
+  .navbar__link--post-gig {
     display: none;
   }
 }

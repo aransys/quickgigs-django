@@ -481,7 +481,7 @@
   align-items: center !important;
   text-decoration: none !important;
   font-weight: 500 !important;
-  font-size: 1rem !important;
+  font-size: 0.65rem !important;
 }
 
 .mobile-menu .nav-link-improved::before {
@@ -508,6 +508,20 @@
 .mobile-menu .nav-link-improved.nav-link-active {
   color: #047857 !important;
   background: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Force smaller font size for mobile menu links */
+.mobile-menu .nav-link-improved,
+.mobile-menu .nav-link-improved:hover,
+.mobile-menu .nav-link-improved.nav-link-active {
+  font-size: 0.65rem !important;
+}
+
+/* Target actual hamburger menu links */
+.mobile-menu .navbar__link,
+.mobile-menu .navbar__link:hover,
+.mobile-menu .navbar__link.navbar__link--active {
+  font-size: 1.32rem !important;
 }
 
 /* Ensure mobile menu is never shown on desktop */
