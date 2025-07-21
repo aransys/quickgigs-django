@@ -339,6 +339,7 @@ h6 {
   background: var(--primary-color);
   color: var(--white);
   box-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.15);
+  padding: 0.95rem 1.9rem !important;
 }
 
 .navbar__link--active:hover {

@@ -523,6 +523,27 @@ body {
   padding: var(--space-4) 0;
 }
 
+/* Force even distribution of all navbar elements */
+.navbar .flex.justify-between,
+.navbar-container .flex.justify-between,
+nav .flex.justify-between {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  gap: 0 !important;
+}
+
+/* Ensure nav links container takes up space */
+.navbar .flex.justify-between .hidden.md\\:flex.items-center > div:first-child,
+.navbar-container .flex.justify-between .hidden.md\\:flex.items-center > div:first-child,
+nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  gap: 0 !important;
+  margin-right: 0 !important;
+}
+
 .navbar__container {
   display: flex;
   align-items: center;
@@ -548,12 +569,22 @@ body {
   gap: var(--space-6);
 }
 
+/* Target the actual nav container in the HTML */
+.hidden.md\\:flex.items-center .flex.space-x-2,
+.hidden.md\\:flex.items-center > div:first-child {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  gap: 0 !important;
+  margin-right: 0 !important;
+}
+
 .navbar__link {
   position: relative;
   overflow: hidden;
   transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   color: var(--brand-primary-dark);
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.7rem;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
@@ -561,7 +592,7 @@ body {
   align-items: center;
   background: transparent;
   margin-right: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.45rem !important;
 }
 
 .navbar__link::before {
@@ -597,7 +628,7 @@ body {
   background: var(--brand-primary-dark);
   color: var(--color-white);
   box-shadow: 0 2px 8px 0 rgba(5, 120, 87, 0.15);
-  padding: 1rem 2rem;
+  padding: 0.95rem 1.9rem !important;
 }
 
 .navbar__link--active:hover {
@@ -907,6 +938,14 @@ body {
 .mobile-menu .navbar__link:hover,
 .mobile-menu .navbar__link.navbar__link--active {
   font-size: 1.32rem !important;
+}
+
+/* Smaller text for hamburger menu links */
+.mobile-menu .navbar__link,
+.mobile-menu .navbar__link:hover,
+.mobile-menu .navbar__link.navbar__link--active,
+.mobile-menu-link {
+  font-size: 0.95rem !important;
 }
 
 /* Ensure mobile menu is never shown on desktop */
@@ -1243,4 +1282,10 @@ body {
 
 .text-yellow-300 {
   color: #eab409 !important;
+} 
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hide-on-tablet {
+    display: none !important;
+  }
 } 
