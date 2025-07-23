@@ -132,7 +132,7 @@ body {
    ================================ */
 
 .logo-container {
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -142,6 +142,7 @@ body {
 
 .logo-container:hover {
   transform: scale(1.02);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .logo-icon {
@@ -150,6 +151,7 @@ body {
   border-radius: var(--radius-md);
   overflow: hidden;
   will-change: transform, background-color, box-shadow;
+  background: linear-gradient(135deg, var(--brand-primary-dark), var(--brand-primary-dark));
 }
 
 .logo-icon::before {
@@ -172,11 +174,12 @@ body {
   background: linear-gradient(135deg, var(--brand-primary-dark), var(--brand-primary-hover));
   transform: scale(1.08);
   box-shadow: 0 6px 20px rgba(5, 120, 87, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .logo-container:hover .logo-icon i {
   color: var(--color-white);
-  transition: color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .logo-container span {
@@ -189,6 +192,7 @@ body {
 .logo-container:hover span {
   color: var(--brand-primary-dark);
   transform: translateX(3px);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ================================
@@ -1290,4 +1294,36 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   .hide-on-tablet {
     display: none !important;
   }
+} 
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  background: var(--brand-primary-dark);
+  color: var(--color-white);
+  border: 4px solid #046b4e;
+  border-radius: 1rem;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(4, 107, 78, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  font-size: 1.7rem;
+}
+.scroll-to-top.opacity-100.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.scroll-to-top:hover {
+  background: var(--brand-primary);
+  color: var(--color-white);
+  box-shadow: 0 8px 24px rgba(4, 107, 78, 0.25);
+  border-color: var(--brand-primary);
 } 
