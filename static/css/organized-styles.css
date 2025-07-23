@@ -1261,6 +1261,12 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   .grid.md\:grid-cols-3 {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+  /* How It Works section: always 3 per line on tablets */
+  .how-it-works-section .grid,
+  .how-it-works-grid,
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
 }
 
 /* Hide Post Gig navlink on tablets and smaller screens */
