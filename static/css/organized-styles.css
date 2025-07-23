@@ -1303,7 +1303,7 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   z-index: 100;
   background: var(--brand-primary-dark);
   color: var(--color-white);
-  border: 4px solid #046b4e;
+  border: none;
   border-radius: 1rem;
   width: 4rem;
   height: 4rem;
@@ -1325,7 +1325,6 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   background: var(--brand-primary);
   color: var(--color-white);
   box-shadow: 0 8px 24px rgba(4, 107, 78, 0.25);
-  border-color: var(--brand-primary);
 } 
 
 .btn--view-details {
