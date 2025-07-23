@@ -125,7 +125,7 @@
           </p>
           <div class="mt-auto">
             <div class="space-y-2 mb-4">
-              <div class="text-2xl font-bold text-green-600">
+              <div class="text-2xl font-bold price--brand mb-4">
                 {{ gig.budget|currency }}
               </div>
               <div>
@@ -138,7 +138,7 @@
             </div>
             <a
               href="{% url 'gigs:gig_detail' gig.pk %}"
-              class="btn btn--primary w-full"
+              class="btn btn--view-details w-full"
             >
               View Details
             </a>
@@ -175,9 +175,9 @@
         </p>
         <div class="mt-auto">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xl font-bold text-green-600"
-              >{{ gig.budget|currency }}</span
-            >
+            <span class="font-bold price--brand">
+              {{ gig.budget|currency }}
+            </span>
             <span class="text-sm text-gray-500"
               >{{ gig.created_at|timesince }} ago</span
             >
@@ -211,7 +211,7 @@
     <div class="text-center mt-12">
       <a
         href="{% url 'gigs:gig_list' %}"
-        class="btn btn--primary"
+        class="btn btn--view-details"
       >
         <i class="fas fa-eye mr-2"></i>View All Gigs
       </a>

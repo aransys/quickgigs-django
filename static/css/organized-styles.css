@@ -1327,3 +1327,20 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   box-shadow: 0 8px 24px rgba(4, 107, 78, 0.25);
   border-color: var(--brand-primary);
 } 
+
+.btn--view-details {
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  padding: 1.1rem 2.4rem !important;
+}
+.btn--view-details:hover,
+.btn--view-details:focus {
+  background: var(--brand-primary) !important;
+  color: var(--color-white) !important;
+}
+
+.price--brand {
+  color: var(--brand-primary-dark) !important;
+} 
