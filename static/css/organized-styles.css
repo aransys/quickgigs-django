@@ -1423,3 +1423,62 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 .stats__card:hover::after, .stat-card:hover::after {
   width: 100%;
 } 
+
+.btn--edit-gig {
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
+}
+.btn--edit-gig:hover,
+.btn--edit-gig:focus {
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
+} 
+
+.btn--post-gig {
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
+}
+.btn--post-gig:hover,
+.btn--post-gig:focus {
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
+} 
+
+.btn--post-gig-listing {
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
+}
+.btn--post-gig-listing:hover,
+.btn--post-gig-listing:focus {
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
+} 
+
+.gig-listing-card:hover,
+.gig-listing-card:focus {
+  box-shadow: 0 8px 32px rgba(4, 107, 78, 0.18), 0 8px 24px rgba(16, 185, 129, 0.18) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.gig-listing-card.ring-2.ring-yellow-400:hover,
+.gig-listing-card.ring-2.ring-yellow-400:focus {
+  box-shadow: 0 8px 32px rgba(234, 179, 8, 0.18), 0 8px 24px rgba(245, 158, 11, 0.18) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+} 
+
+/* Homepage Featured Gigs Shadow */
+.border-yellow-200:hover,
+.border-yellow-200:focus {
+  box-shadow: 0 8px 32px rgba(234, 179, 8, 0.18), 0 8px 24px rgba(245, 158, 11, 0.18) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+} 
+
+/* Homepage Recent Gigs Shadow */
+.border-gray-100:hover,
+.border-gray-100:focus {
+  box-shadow: 0 8px 32px rgba(4, 107, 78, 0.18), 0 8px 24px rgba(16, 185, 129, 0.18) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+} 
