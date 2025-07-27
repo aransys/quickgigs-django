@@ -22,13 +22,13 @@
         <div class="flex flex-col sm:flex-row gap-4">
           <a
             href="#gigs"
-            class="btn btn--primary btn--lg"
+            class="btn btn--hero"
           >
             <i class="fas fa-search mr-3"></i>Browse Gigs
           </a>
           <a
             href="{% url 'gigs:gig_create' %}"
-            class="btn btn--primary btn--lg"
+            class="btn btn--hero"
           >
             <i class="fas fa-plus mr-2"></i>Post a Gig
           </a>
@@ -60,7 +60,7 @@
       </div>
       <a
         href="{% url 'gigs:gig_create' %}"
-        class="btn btn--primary"
+        class="btn btn--primary btn--post-gig-listing"
       >
         <i class="fas fa-plus mr-2"></i>Post a Gig
       </a>
@@ -69,7 +69,7 @@
     <div class="space-y-6">
       {% for gig in gigs %}
       <div
-        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden {% if gig.is_featured %}ring-2 ring-yellow-400{% endif %}"
+        class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden gig-listing-card {% if gig.is_featured %}ring-2 ring-yellow-400{% endif %}"
       >
         {% if gig.is_featured %}
         <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3">
@@ -145,7 +145,7 @@
                 {% if user == gig.employer %}
                 <a
                   href="{% url 'gigs:gig_update' gig.pk %}"
-                  class="btn btn--warning w-full"
+                  class="btn btn--edit-gig w-full"
                 >
                   <i class="fas fa-edit mr-2"></i>Edit
                 </a>
