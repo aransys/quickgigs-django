@@ -1035,9 +1035,10 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   color: var(--color-warning-hover);
 }
 
-.gig-card__badge--category {
-  background-color: var(--brand-primary-light);
-  color: var(--brand-primary-dark);
+/* Category badge styling for gig listings */
+.bg-blue-100.text-blue-800 {
+  background-color: var(--brand-primary-dark, #046b4e) !important;
+  color: var(--color-white) !important;
 }
 
 /* ================================
@@ -1390,14 +1391,16 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 .btn--view-details {
   background: var(--brand-primary-dark) !important;
   color: var(--color-white) !important;
-  border: none !important;
+  border: 2px solid var(--brand-primary-dark) !important;
   font-size: 1.2rem !important;
   padding: 1.1rem 2.4rem !important;
+  border-radius: 0.75rem !important;
 }
 .btn--view-details:hover,
 .btn--view-details:focus {
-  background: var(--brand-primary) !important;
-  color: var(--color-white) !important;
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
 }
 
 .price--brand {
@@ -1425,14 +1428,18 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 } 
 
 .btn--edit-gig {
-  background: transparent !important;
-  color: var(--brand-primary-dark) !important;
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
   border: 2px solid var(--brand-primary-dark) !important;
+  font-size: 1.2rem !important;
+  padding: 1.1rem 2.4rem !important;
+  border-radius: 0.75rem !important;
 }
 .btn--edit-gig:hover,
 .btn--edit-gig:focus {
-  background: var(--brand-primary-dark) !important;
-  color: var(--color-white) !important;
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
 } 
 
 .btn--post-gig {
@@ -1447,14 +1454,15 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 } 
 
 .btn--post-gig-listing {
-  background: transparent !important;
-  color: var(--brand-primary-dark) !important;
+  background: var(--brand-primary-dark) !important;
+  color: var(--color-white) !important;
   border: 2px solid var(--brand-primary-dark) !important;
 }
 .btn--post-gig-listing:hover,
 .btn--post-gig-listing:focus {
-  background: var(--brand-primary-dark) !important;
-  color: var(--color-white) !important;
+  background: transparent !important;
+  color: var(--brand-primary-dark) !important;
+  border: 2px solid var(--brand-primary-dark) !important;
 } 
 
 .gig-listing-card:hover,
