@@ -1355,6 +1355,82 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   .hide-on-tablet {
     display: none !important;
   }
+  
+  /* Make navlinks smaller on tablet view to match logo and user menu size */
+  .navbar__link {
+    font-size: 1.1rem !important;
+    padding: 0.7rem 1.4rem !important;
+  }
+  
+  .navbar__link--active {
+    padding: 0.8rem 1.6rem !important;
+  }
+}
+
+/* Smaller tablets (iPad mini, iPad Air) - make navlinks even smaller */
+@media (min-width: 768px) and (max-width: 900px) {
+  .navbar__link {
+    font-size: 0.95rem !important;
+    padding: 0.6rem 1.2rem !important;
+  }
+  
+  .navbar__link--active {
+    padding: 0.7rem 1.4rem !important;
+  }
+  
+  /* Hide "QuickGigs" text on smaller tablets to save space */
+  .logo-container span {
+    display: none !important;
+  }
+  
+  /* Make "How It Works" section elements smaller on smaller tablets */
+  .stat-card {
+    padding: 1.5rem !important;
+  }
+  
+  .stat-card h3 {
+    font-size: 1.1rem !important;
+  }
+  
+  .stat-card p {
+    font-size: 0.9rem !important;
+  }
+  
+  .how-it-works-icon {
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+  
+  .how-it-works-number {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Tablet view - show 2 cards per row instead of 3 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Override grid columns for featured gigs and latest opportunities */
+  .grid.md\\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* Additional selector for featured gigs section */
+  .grid.md\\:grid-cols-3.gap-8 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* More specific selectors for featured gigs */
+  .bg-white.py-16 .grid.md\\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* Target any grid with md:grid-cols-3 */
+  [class*="md:grid-cols-3"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
 } 
 
 .scroll-to-top {
