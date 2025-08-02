@@ -6,7 +6,7 @@
 <div class="bg-gray-50 min-h-screen py-16">
   <div class="max-w-md mx-auto px-4">
     <!-- Signup Card -->
-    <div class="bg-white rounded-2xl shadow-xl p-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8" style="box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2), 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
       <div class="text-center mb-8">
         <div
           class="bg-brand-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -65,7 +65,7 @@
 
         <button
           type="submit"
-          class="btn btn--primary w-full mb-4"
+          class="btn btn--view-details w-full mb-4"
         >
           <i class="fas fa-user-plus mr-2"></i>Create Account
         </button>
@@ -75,7 +75,7 @@
             Already have an account?
             <a
               href="{% url 'accounts:login' %}"
-              class="text-brand-500 hover:text-brand-600 font-medium"
+              class="text-green-700 hover:text-green-600 font-medium"
               >Sign in</a
             >
           </p>
@@ -84,11 +84,11 @@
     </div>
 
     <!-- Benefits Section -->
-    <div class="bg-blue-50 rounded-lg p-4 mt-6">
-      <h3 class="text-blue-800 font-medium mb-2">
+    <div class="bg-green-50 rounded-lg p-4 mt-6" style="box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2), 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+      <h3 class="text-green-800 font-medium mb-2">
         <i class="fas fa-star mr-2"></i>Why Join QuickGigs?
       </h3>
-      <ul class="text-blue-700 text-sm space-y-1">
+      <ul class="text-green-700 text-sm space-y-1">
         <li>• Post unlimited gigs as an employer</li>
         <li>• Apply to jobs as a freelancer</li>
         <li>• Build your professional profile</li>
@@ -97,4 +97,28 @@
     </div>
   </div>
 </div>
+
+<style>
+.signup-form-input:focus {
+  border-color: #046b4e !important;
+  border-width: 1px !important;
+  box-shadow: 0 0 0 1px #046b4e !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+  outline-style: none !important;
+  outline-width: 0 !important;
+  outline-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 1px #046b4e !important;
+  -moz-box-shadow: 0 0 0 1px #046b4e !important;
+  -ms-box-shadow: 0 0 0 1px #046b4e !important;
+}
+
+.signup-form-input:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+  outline-style: none !important;
+  outline-width: 0 !important;
+  outline-color: transparent !important;
+}
+</style>
 {% endblock %}
