@@ -514,7 +514,7 @@ body {
 .navbar-container .flex.justify-between,
 nav .flex.justify-between {
   display: flex !important;
-  justify-content: space-evenly !important;
+  justify-content: space-between !important;
   width: 100% !important;
   gap: 0 !important;
 }
@@ -524,8 +524,8 @@ nav .flex.justify-between {
 .navbar-container .flex.justify-between .hidden.md\\:flex.items-center > div:first-child,
 nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   display: flex !important;
-  justify-content: space-evenly !important;
-  width: 100% !important;
+  justify-content: center !important;
+  width: auto !important;
   gap: 0 !important;
   margin-right: 0 !important;
 }
@@ -559,8 +559,8 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 .hidden.md\\:flex.items-center .flex.space-x-2,
 .hidden.md\\:flex.items-center > div:first-child {
   display: flex !important;
-  justify-content: space-evenly !important;
-  width: 100% !important;
+  justify-content: center !important;
+  width: auto !important;
   gap: 0 !important;
   margin-right: 0 !important;
 }
