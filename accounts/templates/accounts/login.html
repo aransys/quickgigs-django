@@ -70,7 +70,7 @@
             Don't have an account?
             <a
               href="{% url 'accounts:signup' %}"
-              class="text-green-700 hover:text-green-600 font-medium"
+              class="font-medium signup-link-color"
               >Sign up</a
             >
           </p>
@@ -101,6 +101,14 @@
   outline-style: none !important;
   outline-width: 0 !important;
   outline-color: transparent !important;
+}
+
+.signup-link-color {
+  color: #0a6b4d !important;
+}
+
+.signup-link-color:hover {
+  color: #085a3f !important;
 }
 </style>
 {% endblock %}

@@ -75,7 +75,7 @@
             Already have an account?
             <a
               href="{% url 'accounts:login' %}"
-              class="text-green-700 hover:text-green-600 font-medium"
+              class="font-medium signin-link-color"
               >Sign in</a
             >
           </p>
@@ -84,11 +84,11 @@
     </div>
 
     <!-- Benefits Section -->
-    <div class="bg-green-50 rounded-lg p-4 mt-6" style="box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2), 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-      <h3 class="text-green-800 font-medium mb-2">
+    <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-4 mt-6" style="box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2), 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+      <h3 class="text-gray-800 font-medium mb-2">
         <i class="fas fa-star mr-2"></i>Why Join QuickGigs?
       </h3>
-      <ul class="text-green-700 text-sm space-y-1">
+      <ul class="text-gray-700 text-sm space-y-1">
         <li>• Post unlimited gigs as an employer</li>
         <li>• Apply to jobs as a freelancer</li>
         <li>• Build your professional profile</li>
@@ -119,6 +119,14 @@
   outline-style: none !important;
   outline-width: 0 !important;
   outline-color: transparent !important;
+}
+
+.signin-link-color {
+  color: #0a6b4d !important;
+}
+
+.signin-link-color:hover {
+  color: #085a3f !important;
 }
 </style>
 {% endblock %}
