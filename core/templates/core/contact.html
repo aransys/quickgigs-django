@@ -84,13 +84,13 @@
         <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 shadow-xl" style="box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2), 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
           <h3 class="text-xl font-semibold text-gray-800 mb-4">Quick Help</h3>
           <div class="space-y-3">
-            <button onclick="openModal('faq-modal')" class="block text-green-700 hover:text-green-600 font-medium w-full text-left cursor-pointer transition-colors duration-200">
+            <button onclick="openModal('faq-modal')" class="block quick-help-button font-medium w-full text-left cursor-pointer transition-colors duration-200">
               <i class="fas fa-question-circle mr-2"></i>Frequently Asked Questions
             </button>
-            <button onclick="openModal('guide-modal')" class="block text-green-700 hover:text-green-600 font-medium w-full text-left cursor-pointer transition-colors duration-200">
+            <button onclick="openModal('guide-modal')" class="block quick-help-button font-medium w-full text-left cursor-pointer transition-colors duration-200">
               <i class="fas fa-book mr-2"></i>User Guide
             </button>
-            <button onclick="openModal('help-modal')" class="block text-green-700 hover:text-green-600 font-medium w-full text-left cursor-pointer transition-colors duration-200">
+            <button onclick="openModal('help-modal')" class="block quick-help-button font-medium w-full text-left cursor-pointer transition-colors duration-200">
               <i class="fas fa-life-ring mr-2"></i>Help Center
             </button>
           </div>
@@ -147,27 +147,27 @@
       </div>
       
       <div class="space-y-3">
-        <div class="bg-green-100 p-3 rounded-lg">
-          <h4 class="font-semibold text-green-800 mb-2">Getting Started</h4>
-          <ol class="list-decimal list-inside text-green-700 text-sm space-y-1">
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-gray-800 mb-2">Getting Started</h4>
+          <ol class="list-decimal list-inside text-gray-700 text-sm space-y-1">
             <li>Create account and profile</li>
             <li>Choose user type</li>
             <li>Add skills and payment info</li>
           </ol>
         </div>
         
-        <div class="bg-green-100 p-3 rounded-lg">
-          <h4 class="font-semibold text-green-800 mb-2">For Clients</h4>
-          <ul class="list-disc list-inside text-green-700 text-sm space-y-1">
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-gray-800 mb-2">For Clients</h4>
+          <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
             <li>Browse or post gigs</li>
             <li>Review freelancer profiles</li>
             <li>Release payment when done</li>
           </ul>
         </div>
         
-        <div class="bg-green-100 p-3 rounded-lg">
-          <h4 class="font-semibold text-green-800 mb-2">For Freelancers</h4>
-          <ul class="list-disc list-inside text-green-700 text-sm space-y-1">
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-gray-800 mb-2">For Freelancers</h4>
+          <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
             <li>Create compelling gigs</li>
             <li>Set competitive pricing</li>
             <li>Deliver quality work on time</li>
@@ -208,7 +208,7 @@
           </a>
         </div>
         
-        <div class="bg-green-100 p-3 rounded-lg">
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-3 rounded-lg">
           <h4 class="font-semibold text-gray-800 mb-2">Contact Info</h4>
           <div class="space-y-1 text-sm text-gray-600">
             <p><i class="fas fa-clock mr-2"></i>Mon-Fri, 9AM-5PM EST</p>
@@ -338,6 +338,15 @@ textarea:focus-visible {
 body.modal-open {
   padding-right: var(--scrollbar-width, 0px);
   overflow: hidden;
+}
+
+/* Quick Help button styling */
+.quick-help-button {
+  color: #0a6b4d !important;
+}
+
+.quick-help-button:hover {
+  color: #085a3f !important;
 }
 </style>
 
