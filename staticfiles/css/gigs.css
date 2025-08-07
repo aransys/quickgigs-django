@@ -42,7 +42,7 @@
 
 /* Stats Cards - Better Alignment */
 .stat-card {
-  @apply bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col justify-center items-center;
+  @apply bg-white rounded-xl p-8 text-center shadow-lg h-full flex flex-col justify-center items-center;
 }
 
 .stat-number {

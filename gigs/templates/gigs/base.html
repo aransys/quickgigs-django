@@ -270,11 +270,11 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     
     <!-- Organized CSS - Loaded asynchronously -->
-    <link rel="preload" href="{% static 'css/organized-styles.css' %}?v=2.4" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/organized-styles.css' %}?v=5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for browsers that don't support preload -->
     <noscript>
-      <link rel="stylesheet" href="{% static 'css/organized-styles.css' %}?v=2.4" />
+      <link rel="stylesheet" href="{% static 'css/organized-styles.css' %}?v=5.0" />
     </noscript>
     
     <!-- Tailwind CSS - Loaded after critical styles -->
@@ -587,13 +587,13 @@
             <div class="border-t border-gray-200 my-4"></div>
             <a
               href="{% url 'accounts:login' %}"
-              class="navbar__link mobile-menu-link"
+              class="navbar__link mobile-menu-link navbar-size"
             >
               <i class="fas fa-sign-in-alt mr-2"></i>Sign In
             </a>
             <a
               href="{% url 'accounts:signup' %}"
-              class="navbar__link mobile-menu-link"
+              class="navbar__link mobile-menu-link navbar-size"
             >
               <i class="fas fa-user-plus mr-2"></i>Sign Up
             </a>
