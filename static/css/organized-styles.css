@@ -1464,33 +1464,42 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   }
 }
 
- 
-
 .scroll-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 100;
-  background: var(--brand-primary-dark);
-  color: var(--color-white);
-  border: none;
-  border-radius: 1rem;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(4, 107, 78, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s, background 0.2s, box-shadow 0.2s;
+  position: absolute !important;
+  bottom: 2rem !important;
+  right: 2rem !important;
+  z-index: 2147483647 !important;
+  background: #ff0000 !important;
+  color: white !important;
+  border: 5px solid yellow !important;
+  border-radius: 1rem !important;
+  width: 6rem !important;
+  height: 6rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.8) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
   cursor: pointer;
-  font-size: 1.7rem;
+  font-size: 2rem !important;
+  pointer-events: auto !important;
+  transform: none !important;
 }
+
+/* Ensure the button is visible when these classes are present */
 .scroll-to-top.opacity-100.visible {
-  opacity: 1;
-  visibility: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
+
+/* Ensure the button is hidden by default */
+.scroll-to-top.opacity-0.invisible {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 .scroll-to-top:hover {
   background: var(--brand-primary);
   color: var(--color-white);

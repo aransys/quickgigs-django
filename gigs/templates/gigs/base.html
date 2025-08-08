@@ -658,12 +658,14 @@
 
     <!-- Scroll to Top Button -->
     <button
-      id="scrollToTop"
-      class="scroll-to-top"
+      id="scrollToTopNew"
       onclick="scrollToTop()"
       aria-label="Scroll to top"
+      style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; background: var(--brand-primary-dark); color: var(--color-white); border: none; border-radius: 1rem; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); font-weight: 600;"
+      onmouseover="this.style.background='var(--brand-primary)'; this.style.boxShadow='0 8px 25px rgba(5, 120, 87, 0.3)'"
+      onmouseout="this.style.background='var(--brand-primary-dark)'; this.style.boxShadow='0 4px 15px rgba(0, 0, 0, 0.2)'"
     >
-      <i class="fas fa-chevron-up text-lg"></i>
+      <i class="fas fa-chevron-up"></i>
     </button>
 
     <!-- JavaScript -->
@@ -717,10 +719,10 @@
           // Remove any inline transform styles to let CSS handle the animation
           const menuContent = menu.querySelector(".mobile-menu-content");
           if (menuContent) {
-            console.log("Menu content found:", menuContent);
-            menuContent.style.removeProperty("transform");
+            menuContent.style.transform = "";
           }
           
+          // Update button state
           if (button) {
             button.setAttribute("aria-expanded", "true");
           }
@@ -729,19 +731,15 @@
           console.log("Hiding mobile menu");
           menu.classList.remove("show");
           
+          // Update button state
           if (button) {
             button.setAttribute("aria-expanded", "false");
           }
           
-          // Hide menu after transition
+          // Hide after transition
           setTimeout(() => {
             if (!menu.classList.contains("show")) {
               menu.style.display = "none";
-              // Reset transform to initial state
-              const menuContent = menu.querySelector(".mobile-menu-content");
-              if (menuContent) {
-                menuContent.style.transform = "translateX(100%)";
-              }
             }
           }, 300);
         }
@@ -751,89 +749,60 @@
         const menu = document.getElementById("mobileMenu");
         const button = document.getElementById("mobileMenuButton");
         
-        if (!menu) return;
-        
-        menu.classList.remove("show");
-        
-        if (button) {
-          button.setAttribute("aria-expanded", "false");
-        }
-        
-        // Hide menu after transition
-        setTimeout(() => {
-          if (!menu.classList.contains("show")) {
-            menu.style.display = "none";
-            // Reset transform to initial state
-            const menuContent = menu.querySelector(".mobile-menu-content");
-            if (menuContent) {
-              menuContent.style.transform = "translateX(100%)";
-            }
+        if (menu) {
+          menu.classList.remove("show");
+          if (button) {
+            button.setAttribute("aria-expanded", "false");
           }
-        }, 300);
+          setTimeout(() => {
+            if (!menu.classList.contains("show")) {
+              menu.style.display = "none";
+            }
+          }, 300);
+        }
       }
 
       // Close dropdown when clicking outside
       document.addEventListener("click", function (event) {
-        const dropdown = document.getElementById("userDropdown");
-        const button = document.querySelector(".user-menu-button");
-        if (
-          dropdown &&
-          !dropdown.contains(event.target) &&
-          !button.contains(event.target)
-        ) {
-          dropdown.classList.remove("show");
+        const dropdowns = document.querySelectorAll(".dropdown-menu.show");
+        dropdowns.forEach((dropdown) => {
+          if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("show");
+          }
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const mobileMenu = document.getElementById("mobileMenu");
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+        
+        if (mobileMenu && mobileMenu.classList.contains("show")) {
+          if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+            closeMobileMenu();
+          }
         }
       });
-      
-      // Ensure mobile menu functionality works on all devices
-      document.addEventListener("DOMContentLoaded", function() {
-        const mobileMenuButton = document.getElementById("mobileMenuButton");
+
+      // Enhanced mobile menu setup
+      document.addEventListener("DOMContentLoaded", function () {
         const mobileMenu = document.getElementById("mobileMenu");
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
         
-        console.log("DOMContentLoaded - Mobile menu setup");
-        console.log("Button found:", !!mobileMenuButton);
-        console.log("Menu found:", !!mobileMenu);
-        
-        if (mobileMenuButton && mobileMenu) {
-          // Remove existing onclick to prevent conflicts
-          mobileMenuButton.removeAttribute("onclick");
+        if (mobileMenu && mobileMenuButton) {
+          // Ensure mobile menu is hidden by default
+          mobileMenu.style.display = "none";
+          mobileMenu.style.visibility = "hidden";
+          mobileMenu.style.opacity = "0";
           
-          // Add event listener as primary method
-          mobileMenuButton.addEventListener("click", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+          // Add click event to mobile menu button
+          mobileMenuButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
             toggleMobileMenu();
           });
           
-          // Add close button event listener
-          const closeButton = document.getElementById("mobileMenuCloseButton");
-          if (closeButton) {
-            closeButton.addEventListener("click", function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              closeMobileMenu();
-            });
-          }
-          
-          // Close menu when clicking outside
-          document.addEventListener("click", function(event) {
-            if (mobileMenu.classList.contains("show") && 
-                !mobileMenu.contains(event.target) && 
-                !mobileMenuButton.contains(event.target)) {
-              closeMobileMenu();
-            }
-          });
-          
-          // Close menu on escape key
-          document.addEventListener("keydown", function(event) {
-            if (event.key === "Escape" && mobileMenu.classList.contains("show")) {
-              closeMobileMenu();
-            }
-          });
-          
-          console.log("Mobile menu event listeners attached successfully");
-          
-          // Add event listeners for mobile menu links
+          // Close mobile menu when clicking on links
           const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
           mobileMenuLinks.forEach(function(link) {
             link.addEventListener("click", function() {
@@ -854,15 +823,27 @@
         });
       }
 
-      // Show/hide scroll to top button based on scroll position
-      window.addEventListener("scroll", function () {
-        const scrollButton = document.getElementById("scrollToTop");
-        if (window.pageYOffset > 300) {
-          scrollButton.classList.remove("opacity-0", "invisible");
-          scrollButton.classList.add("opacity-100", "visible");
-        } else {
+      // Initialize scroll to top button state
+      document.addEventListener("DOMContentLoaded", function() {
+        const scrollButton = document.getElementById("scrollToTopNew");
+        if (scrollButton) {
+          // Ensure button starts hidden
           scrollButton.classList.add("opacity-0", "invisible");
           scrollButton.classList.remove("opacity-100", "visible");
+        }
+      });
+
+      // Show/hide scroll to top button based on scroll position
+      window.addEventListener("scroll", function () {
+        const scrollButton = document.getElementById("scrollToTopNew");
+        if (scrollButton) {
+          if (window.pageYOffset > 100) {
+            scrollButton.style.opacity = "1";
+            scrollButton.style.visibility = "visible";
+          } else {
+            scrollButton.style.opacity = "0";
+            scrollButton.style.visibility = "hidden";
+          }
         }
       });
 
@@ -931,5 +912,17 @@
       }
     </script>
     {% block extra_js %} {% endblock %}
+    
+    <!-- Scroll to Top Button -->
+    <button
+      id="scrollToTopNew"
+      onclick="scrollToTop()"
+      aria-label="Scroll to top"
+      style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; background: var(--brand-primary-dark); color: var(--color-white); border: none; border-radius: 1rem; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); font-weight: 600;"
+      onmouseover="this.style.background='var(--brand-primary)'; this.style.boxShadow='0 8px 25px rgba(5, 120, 87, 0.3)'"
+      onmouseout="this.style.background='var(--brand-primary-dark)'; this.style.boxShadow='0 4px 15px rgba(0, 0, 0, 0.2)'"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
   </body>
 </html>
