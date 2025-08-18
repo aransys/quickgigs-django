@@ -661,6 +661,8 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   visibility: visible !important;
   pointer-events: auto !important;
   transform: scale(1) !important;
+  z-index: 9999 !important;
+  background: red !important;
 }
 
 .dropdown-item {
