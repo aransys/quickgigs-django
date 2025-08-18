@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Build script for Render deployment
+
+# Exit on any error
+set -o errexit
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Collect static files
+python manage.py collectstatic --noinput
+
+# Run migrations
+python manage.py migrate
