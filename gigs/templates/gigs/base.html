@@ -325,6 +325,7 @@
           <div class="md:hidden flex items-center flex-shrink-0">
             <button
               id="mobileMenuButton"
+              onclick="toggleMobileMenu();"
               class="text-gray-600 hover:text-brand-500 p-2"
               aria-label="Open navigation menu"
               aria-expanded="false"
@@ -373,7 +374,7 @@
               <div class="relative flex items-center" style="height: 100%">
                 <button
                   class="user-menu-button"
-                  onclick="toggleDropdown()"
+                  onclick="toggleDropdown();"
                   aria-label="User menu"
                 >
                   <div class="flex items-center space-x-3">
@@ -518,6 +519,7 @@
         <div class="mobile-menu-content" style="background: #ffffff !important; height: 100vh !important; padding: 1.5rem;">
           <button
             id="mobileMenuCloseButton"
+            onclick="closeMobileMenu()"
             class="absolute top-4 right-4 text-gray-500 hover:text-brand-500 text-2xl focus:outline-none"
             aria-label="Close navigation menu"
           >
@@ -668,6 +670,8 @@
       <i class="fas fa-chevron-up"></i>
     </button>
 
+
+
     <!-- JavaScript -->
     <script>
       // Immediately hide mobile menu on page load to prevent flash
@@ -680,15 +684,28 @@
         }
       })();
       
+
+
       function toggleDropdown() {
+        alert("toggleDropdown called!");
+        console.log("toggleDropdown called");
         const dropdown = document.getElementById("userDropdown");
-        if (dropdown.classList.contains("show")) {
-          dropdown.classList.remove("show");
+        if (dropdown) {
+          console.log("Dropdown element found:", dropdown);
+          console.log("Current classes:", dropdown.className);
+          if (dropdown.classList.contains("show")) {
+            console.log("Hiding dropdown");
+            dropdown.classList.remove("show");
+          } else {
+            console.log("Showing dropdown");
+            document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
+              menu.classList.remove("show");
+            });
+            dropdown.classList.add("show");
+            console.log("Added show class. New classes:", dropdown.className);
+          }
         } else {
-          document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
-            menu.classList.remove("show");
-          });
-          dropdown.classList.add("show");
+          console.error("User dropdown element not found");
         }
       }
 
