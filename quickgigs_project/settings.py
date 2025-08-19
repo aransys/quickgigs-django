@@ -42,9 +42,16 @@ if IS_PRODUCTION:
         if app_name:
             ALLOWED_HOSTS = [f"{app_name}.herokuapp.com"]
         else:
-            raise ValueError("ALLOWED_HOSTS must be set in production")
+            # For Render deployment, include the default hostname
+            ALLOWED_HOSTS = ["quickgigs-django.onrender.com"]
 else:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+    # Development hosts plus Render hostname for testing
+    ALLOWED_HOSTS = [
+        "localhost", 
+        "127.0.0.1", 
+        "0.0.0.0",
+        "quickgigs-django.onrender.com"  # Include Render hostname
+    ]
 
 # Application definition
 INSTALLED_APPS = [
@@ -178,6 +185,10 @@ if IS_PRODUCTION:
     if not CSRF_TRUSTED_ORIGINS or CSRF_TRUSTED_ORIGINS == [""]:
         # Auto-generate from ALLOWED_HOSTS for Heroku
         CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host]
+    
+    # Ensure Render domain is included in CSRF trusted origins
+    if "quickgigs-django.onrender.com" not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append("https://quickgigs-django.onrender.com")
 
 # Authentication settings
 LOGIN_URL = "/accounts/login/"
