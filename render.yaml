@@ -2,7 +2,10 @@ services:
   - type: web
     name: quickgigs-django
     env: python
-    buildCommand: chmod +x build.sh && ./build.sh
+    buildCommand: |
+      chmod +x build.sh
+      ./build.sh
+      python manage.py migrate --noinput
     startCommand: gunicorn quickgigs_project.wsgi:application
     envVars:
       - key: PYTHON_VERSION
