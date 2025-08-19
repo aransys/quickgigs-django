@@ -21,7 +21,13 @@ if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
     if render_service_url:
         ALLOWED_HOSTS = [render_service_url, 'localhost', '127.0.0.1']
     else:
-        ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+        # Default to common Render hostnames
+        ALLOWED_HOSTS = [
+            'quickgigs-django.onrender.com',
+            'localhost', 
+            '127.0.0.1',
+            '0.0.0.0'
+        ]
 
 # Database configuration for Render
 DATABASES = {
@@ -64,6 +70,10 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
 if not CSRF_TRUSTED_ORIGINS or CSRF_TRUSTED_ORIGINS == [""]:
     # Auto-generate from ALLOWED_HOSTS for Render
     CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host]
+    
+# Ensure the main Render domain is included
+if 'quickgigs-django.onrender.com' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://quickgigs-django.onrender.com')
 
 # Logging configuration for production
 LOGGING = {
