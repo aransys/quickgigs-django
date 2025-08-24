@@ -374,7 +374,7 @@
               <div class="relative flex items-center" style="height: 100%">
                 <button
                   class="user-menu-button"
-                  onclick="toggleDropdown();"
+                  onclick="toggleDropdown(event);"
                   aria-label="User menu"
                 >
                   <div class="flex items-center space-x-3">
@@ -398,99 +398,58 @@
                   </div>
                 </button>
                 <!-- Dropdown Menu -->
-                <div id="userDropdown" class="dropdown-menu">
+                <div id="userDropdown" class="custom-dropdown">
                   <!-- User Header -->
-                  <div class="px-4 py-3 border-b border-gray-100">
-                    <p class="text-sm font-medium text-gray-900">
-                      {{ user.username }}
-                    </p>
-                    <p class="text-xs text-gray-500">{{ user.email }}</p>
+                  <div class="dropdown-header">
+                    <p class="username">{{ user.username }}</p>
+                    <p class="email">{{ user.email }}</p>
                   </div>
                   <!-- Menu Items -->
-                  <div class="py-2">
-                    <a
-                      href="{% url 'accounts:profile' %}"
-                      class="dropdown-item"
-                    >
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-user text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">View Profile</div>
-                        <div class="dropdown-item-description">
-                          See your public profile
-                        </div>
+                  <div class="dropdown-items">
+                    <a href="{% url 'accounts:profile' %}" class="dropdown-link">
+                      <i class="fas fa-user"></i>
+                      <div class="link-content">
+                        <div class="link-title">View Profile</div>
+                        <div class="link-desc">See your public profile</div>
                       </div>
                     </a>
-                    <a
-                      href="{% url 'accounts:profile_edit' %}"
-                      class="dropdown-item"
-                    >
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-edit text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">Edit Profile</div>
-                        <div class="dropdown-item-description">
-                          Update your information
-                        </div>
+                    <a href="{% url 'accounts:profile_edit' %}" class="dropdown-link">
+                      <i class="fas fa-edit"></i>
+                      <div class="link-content">
+                        <div class="link-title">Edit Profile</div>
+                        <div class="link-desc">Update your information</div>
                       </div>
                     </a>
-                    <a
-                      href="{% url 'gigs:my_applications' %}"
-                      class="dropdown-item"
-                    >
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-file-alt text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">My Applications</div>
-                        <div class="dropdown-item-description">
-                          Track your job applications
-                        </div>
+                    <a href="{% url 'gigs:my_applications' %}" class="dropdown-link">
+                      <i class="fas fa-file-alt"></i>
+                      <div class="link-content">
+                        <div class="link-title">My Applications</div>
+                        <div class="link-desc">Track your job applications</div>
                       </div>
                     </a>
-                    <a
-                      href="{% url 'gigs:my_gigs' %}"
-                      class="dropdown-item"
-                    >
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-briefcase text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">My Gigs</div>
-                        <div class="dropdown-item-description">
-                          Manage your posted gigs
-                        </div>
+                    <a href="{% url 'gigs:my_gigs' %}" class="dropdown-link">
+                      <i class="fas fa-briefcase"></i>
+                      <div class="link-content">
+                        <div class="link-title">My Gigs</div>
+                        <div class="link-desc">Manage your posted gigs</div>
                       </div>
                     </a>
-                    <a
-                      href="{% url 'payments:payment_history' %}"
-                      class="dropdown-item"
-                    >
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-history text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">Payment History</div>
-                        <div class="dropdown-item-description">
-                          View transaction history
-                        </div>
+                    <a href="{% url 'payments:payment_history' %}" class="dropdown-link">
+                      <i class="fas fa-history"></i>
+                      <div class="link-content">
+                        <div class="link-title">Payment History</div>
+                        <div class="link-desc">View transaction history</div>
                       </div>
                     </a>
                   </div>
                   <!-- Logout Section -->
                   <div class="dropdown-divider"></div>
-                  <div class="py-2">
-                    <a href="{% url 'accounts:logout' %}" class="dropdown-item">
-                      <div class="dropdown-item-icon">
-                        <i class="fas fa-sign-out-alt text-sm"></i>
-                      </div>
-                      <div class="dropdown-item-content">
-                        <div class="dropdown-item-title">Sign Out</div>
-                        <div class="dropdown-item-description">
-                          Log out of your account
-                        </div>
+                  <div class="dropdown-items">
+                    <a href="{% url 'accounts:logout' %}" class="dropdown-link">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <div class="link-content">
+                        <div class="link-title">Sign Out</div>
+                        <div class="link-desc">Log out of your account</div>
                       </div>
                     </a>
                   </div>
@@ -686,19 +645,34 @@
       
 
 
-      function toggleDropdown() {
+      function toggleDropdown(event) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        
         const dropdown = document.getElementById("userDropdown");
         if (dropdown) {
-          if (dropdown.classList.contains("show")) {
-            dropdown.classList.remove("show");
+          if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
           } else {
-            document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
-              menu.classList.remove("show");
-            });
-            dropdown.classList.add("show");
+            dropdown.style.display = "block";
           }
         }
       }
+      
+      // Debug: Check if elements exist when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Page loaded, checking elements...");
+        const dropdown = document.getElementById("userDropdown");
+        const button = document.querySelector('.user-menu-button');
+        console.log("Dropdown element on load:", dropdown);
+        console.log("Button element on load:", button);
+        
+        if (button) {
+          console.log("Button onclick attribute:", button.getAttribute('onclick'));
+        }
+      });
 
       function toggleMobileMenu() {
         console.log("toggleMobileMenu called");
@@ -772,9 +746,10 @@
 
       // Close dropdown when clicking outside
       document.addEventListener("click", function (event) {
-        const dropdowns = document.querySelectorAll(".dropdown-menu.show");
+        const dropdowns = document.querySelectorAll("[id$='Dropdown']");
         dropdowns.forEach((dropdown) => {
-          if (!dropdown.contains(event.target)) {
+          if (dropdown.style.display === "block" && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
             dropdown.classList.remove("show");
           }
         });
@@ -934,3 +909,4 @@
     </button>
   </body>
 </html>
+
