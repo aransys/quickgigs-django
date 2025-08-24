@@ -1,2 +1,2 @@
-web: gunicorn quickgigs_project.wsgi:application
+web: gunicorn app:app
 release: python manage.py migrate --noinput
