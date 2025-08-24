@@ -642,7 +642,7 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   border-radius: 1rem;
   box-shadow: 0 12px 32px 0 rgba(60, 72, 88, 0.18),
     0 2px 8px 0 rgba(60, 72, 88, 0.1);
-  z-index: 50;
+  z-index: 9999;
   border: 1px solid #e5e7eb;
   opacity: 0;
   visibility: hidden;
@@ -656,11 +656,17 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   overflow-x: hidden;
 }
 
+
+
 .dropdown-menu.show {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
   transform: scale(1) !important;
+  display: block !important;
+  /* Temporary debug styling */
+  background: red !important;
+  border: 5px solid yellow !important;
 }
 
 .dropdown-item {
@@ -767,6 +773,113 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   color: white;
 }
 
+/* Custom Dropdown Menu - Clean and Simple */
+.custom-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  min-width: 240px;
+  width: 320px;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px 0 rgba(0,0,0,0.18);
+  z-index: 9999;
+  border: 1px solid #e5e7eb;
+  display: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  padding: 1.75rem 1.25rem;
+  background: var(--brand-primary-dark);
+  border-bottom: none;
+  color: white;
+}
+
+.dropdown-header .username {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.25rem 0;
+}
+
+.dropdown-header .email {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.dropdown-items {
+  padding: 0.5rem 0;
+}
+
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-primary-dark), var(--brand-primary-hover));
+  transition: width 0.2s ease;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.dropdown-link:hover::before {
+  width: 100%;
+}
+
+.dropdown-link:hover {
+  background-color: rgba(5, 120, 87, 0.1);
+  color: var(--brand-primary-dark);
+  box-shadow: 0 2px 8px rgba(5, 120, 87, 0.1);
+}
+
+.dropdown-link i {
+  width: 1rem;
+  margin-right: 0.75rem;
+  color: var(--brand-primary-dark);
+  transition: color 0.2s ease;
+}
+
+.dropdown-link:hover i {
+  color: var(--brand-primary-dark);
+}
+
+.link-content {
+  flex: 1;
+}
+
+.link-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.125rem;
+}
+
+.link-desc {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 0.5rem 0;
+}
+
 .dropdown-menu .px-4.py-3 .text-sm {
   font-weight: 700;
   color: white;
@@ -781,6 +894,8 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   font-size: 0.875rem;
   padding-left: 1rem;
 }
+
+
 
 /* ================================
    USER MENU BUTTON
