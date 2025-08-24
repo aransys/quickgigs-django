@@ -661,8 +661,6 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
   visibility: visible !important;
   pointer-events: auto !important;
   transform: scale(1) !important;
-  z-index: 9999 !important;
-  background: red !important;
 }
 
 .dropdown-item {
@@ -1418,30 +1416,12 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
     padding: 0.7rem 1.4rem !important;
   }
   
-
-    border-radius: 8px !important;
-    margin-right: 0.5rem !important;
-    font-weight: 600 !important;
-    background: var(--brand-primary-dark) !important;
-    color: var(--color-white) !important;
-    border: none !important;
-    box-shadow: 0 2px 8px 0 rgba(5, 120, 87, 0.15) !important;
-  }
-  
-
-  
-
-  
   /* Also target mobile menu sign up button */
   .mobile-menu .navbar__link.navbar-size {
     font-size: 0.95rem !important;
     padding: 0.7rem 1.4rem !important;
     font-weight: 600 !important;
   }
-  
-
-  
-
   
   /* Make "How It Works" section elements smaller on smaller tablets */
   .stat-card {
@@ -1467,27 +1447,25 @@ nav .flex.justify-between .hidden.md\\:flex.items-center > div:first-child {
 }
 
 .scroll-to-top {
-  position: absolute !important;
-  bottom: 2rem !important;
-  right: 2rem !important;
-  z-index: 2147483647 !important;
-  background: #ff0000 !important;
-  color: white !important;
-  border: 5px solid yellow !important;
-  border-radius: 1rem !important;
-  width: 6rem !important;
-  height: 6rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.8) !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition: none !important;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: var(--brand-primary-dark);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 2rem !important;
-  pointer-events: auto !important;
-  transform: none !important;
+  font-size: 1.2rem;
 }
 
 /* Ensure the button is visible when these classes are present */

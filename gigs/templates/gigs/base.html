@@ -687,25 +687,16 @@
 
 
       function toggleDropdown() {
-        alert("toggleDropdown called!");
-        console.log("toggleDropdown called");
         const dropdown = document.getElementById("userDropdown");
         if (dropdown) {
-          console.log("Dropdown element found:", dropdown);
-          console.log("Current classes:", dropdown.className);
           if (dropdown.classList.contains("show")) {
-            console.log("Hiding dropdown");
             dropdown.classList.remove("show");
           } else {
-            console.log("Showing dropdown");
             document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
               menu.classList.remove("show");
             });
             dropdown.classList.add("show");
-            console.log("Added show class. New classes:", dropdown.className);
           }
-        } else {
-          console.error("User dropdown element not found");
         }
       }
 
