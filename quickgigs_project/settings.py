@@ -216,23 +216,6 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-# Database query logging for optimization screenshots
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-    },
-}
-
 # Logging configuration
 LOGGING = {
     "version": 1,
@@ -251,10 +234,10 @@ LOGGING = {
             "level": "INFO" if IS_PRODUCTION else "DEBUG",
             "propagate": False,
         },
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG" if not IS_PRODUCTION else "INFO",
+            "propagate": False,
+        },
     },
 }
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-    'localhost',
-]

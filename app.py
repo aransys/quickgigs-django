@@ -5,6 +5,7 @@ This file serves as a fallback if render.yaml is not recognized.
 
 import os
 import sys
+import logging
 
 # Add the project directory to Python path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -24,6 +25,9 @@ from django.core.wsgi import get_wsgi_application
 import django
 django.setup()
 
+# Configure logging
+logger = logging.getLogger(__name__)
+
 # Run migrations if needed
 try:
     from django.db import connection
@@ -32,17 +36,17 @@ try:
         migrations_table_exists = cursor.fetchone() is not None
     
     if not migrations_table_exists:
-        print("Migrations table not found. Running migrations...")
+        logger.info("Migrations table not found. Running migrations...")
         import subprocess
         subprocess.run([sys.executable, 'manage.py', 'migrate', '--noinput'], check=True)
-        print("Migrations completed successfully!")
+        logger.info("Migrations completed successfully!")
     else:
-        print("Migrations table exists. Checking for pending migrations...")
+        logger.info("Migrations table exists. Checking for pending migrations...")
         import subprocess
         subprocess.run([sys.executable, 'manage.py', 'migrate', '--noinput'], check=True)
-        print("All migrations are up to date!")
+        logger.info("All migrations are up to date!")
 except Exception as e:
-    print(f"Error running migrations: {e}")
+    logger.error(f"Error running migrations: {e}")
     # Don't exit - let the app continue
 
 # Create the WSGI application

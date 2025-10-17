@@ -40,6 +40,11 @@ class Gig(models.Model):
         ordering = ['-is_featured', '-created_at']
         verbose_name = "Gig"
         verbose_name_plural = "Gigs"
+        indexes = [
+            models.Index(fields=['employer', '-created_at']),
+            models.Index(fields=['is_active', 'is_featured']),
+            models.Index(fields=['category']),
+        ]
     
     def __str__(self):
         return self.title
@@ -67,6 +72,8 @@ class Gig(models.Model):
     @property
     def is_overdue(self):
         """Check if gig is overdue"""
+        if not self.is_active:
+            return False
         if self.deadline and self.deadline < timezone.now().date():
             return True
         return False

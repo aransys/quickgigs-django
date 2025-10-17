@@ -11,12 +11,16 @@ import os
 import sys
 import django
 import subprocess
+import logging
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quickgigs_project.settings')
 
 # Setup Django
 django.setup()
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Run migrations if needed
 try:
@@ -26,15 +30,15 @@ try:
         migrations_table_exists = cursor.fetchone() is not None
     
     if not migrations_table_exists:
-        print("Migrations table not found. Running migrations...")
+        logger.info("Migrations table not found. Running migrations...")
         subprocess.run([sys.executable, 'manage.py', 'migrate', '--noinput'], check=True)
-        print("Migrations completed successfully!")
+        logger.info("Migrations completed successfully!")
     else:
-        print("Migrations table exists. Checking for pending migrations...")
+        logger.info("Migrations table exists. Checking for pending migrations...")
         subprocess.run([sys.executable, 'manage.py', 'migrate', '--noinput'], check=True)
-        print("All migrations are up to date!")
+        logger.info("All migrations are up to date!")
 except Exception as e:
-    print(f"Error running migrations: {e}")
+    logger.error(f"Error running migrations: {e}")
     # Don't exit - let the app continue
 
 # Get the WSGI application

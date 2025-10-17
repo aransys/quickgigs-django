@@ -48,36 +48,36 @@ class GigModelTest(TestCase):
         """Test is_overdue business logic"""
         # Future deadline - not overdue
         future_gig = Gig.objects.create(**self.gig_data)
-        self.assertFalse(future_gig.is_overdue())
+        self.assertFalse(future_gig.is_overdue)
         
         # Past deadline and active - overdue
         past_deadline = self.gig_data.copy()
         past_deadline['deadline'] = date.today() - timedelta(days=1)
         past_gig = Gig.objects.create(**past_deadline)
-        self.assertTrue(past_gig.is_overdue())
+        self.assertTrue(past_gig.is_overdue)
         
         # Past deadline but inactive - not overdue
         past_gig.is_active = False
         past_gig.save()
-        self.assertFalse(past_gig.is_overdue())
+        self.assertFalse(past_gig.is_overdue)
     
     def test_gig_is_available_method(self):
         """Test is_available business logic"""
         gig = Gig.objects.create(**self.gig_data)
         
         # Active gig should be available
-        self.assertTrue(gig.is_available())
+        self.assertTrue(gig.is_available)
         
         # Inactive gig should not be available
         gig.is_active = False
         gig.save()
-        self.assertFalse(gig.is_available())
+        self.assertFalse(gig.is_available)
         
         # Past deadline gig should not be available
         gig.is_active = True
         gig.deadline = date.today() - timedelta(days=1)
         gig.save()
-        self.assertFalse(gig.is_available())
+        self.assertFalse(gig.is_available)
     
     def test_gig_category_choices(self):
         """Test category validation"""
