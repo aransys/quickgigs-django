@@ -1,0 +1,43 @@
+<footer class="mt-16 border-t border-ink-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="grid gap-8 md:grid-cols-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+              <path d="m13 2-3 7h4l-3 7"/><path d="M14 17H6a2 2 0 0 1-2-2v-3"/><path d="M10 7H6"/>
+            </svg>
+          </span>
+          <span class="text-lg font-bold tracking-tight text-ink-900">{{ SITE_NAME }}</span>
+        </div>
+        <p class="mt-3 text-sm text-ink-500">{{ SITE_TAGLINE }} A modern freelance gig marketplace built with Django.</p>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-ink-500">Explore</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="{% url 'gigs:gig_list' %}" class="text-ink-700 hover:text-brand-700">Browse gigs</a></li>
+          <li><a href="{% url 'core:about' %}" class="text-ink-700 hover:text-brand-700">About</a></li>
+          <li><a href="{% url 'core:contact' %}" class="text-ink-700 hover:text-brand-700">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-ink-500">Account</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'accounts:profile' %}" class="text-ink-700 hover:text-brand-700">Your profile</a></li>
+            {% if PAYMENTS_ENABLED %}
+              <li><a href="{% url 'payments:payment_history' %}" class="text-ink-700 hover:text-brand-700">Payment history</a></li>
+            {% endif %}
+          {% else %}
+            <li><a href="{% url 'accounts:login' %}" class="text-ink-700 hover:text-brand-700">Sign in</a></li>
+            <li><a href="{% url 'accounts:signup' %}" class="text-ink-700 hover:text-brand-700">Create account</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="mt-10 flex flex-col items-start justify-between gap-3 border-t border-ink-200 pt-6 sm:flex-row sm:items-center">
+      <p class="text-xs text-ink-500">© {% now "Y" %} {{ SITE_NAME }}. Built for learning, open-sourced under the MIT license.</p>
+      <p class="text-xs text-ink-400">Made with Django · Tailwind · HTMX</p>
+    </div>
+  </div>
+</footer>

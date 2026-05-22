@@ -1,0 +1,50 @@
+# Local development stack for QuickGigs.
+#
+# Usage:
+#   cp .env.example .env
+#   docker compose up --build
+#
+# The web container mounts the source tree so edits hot-reload Django's
+# runserver. Postgres data persists in a named volume.
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: quickgigs
+      POSTGRES_USER: quickgigs
+      POSTGRES_PASSWORD: quickgigs
+    volumes:
+      - quickgigs_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quickgigs -d quickgigs"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["web-dev"]
+    environment:
+      DJANGO_SETTINGS_MODULE: quickgigs_project.settings
+      DJANGO_DEBUG: "True"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-change-me}
+      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1,web
+      DATABASE_URL: postgres://quickgigs:quickgigs@db:5432/quickgigs
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      FEATURED_GIG_PRICE: ${FEATURED_GIG_PRICE:-9.99}
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  quickgigs_pgdata:

@@ -1,147 +1,42 @@
-{% extends 'gigs/base.html' %}
-<!-- -->
-{% block title %}
-  {% if view.object %}Edit Gig{% else %}Post a New Gig{% endif %} - QuickGigs
-{% endblock %}
-<!-- -->
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit gig{% else %}Post a gig{% endif %} · {{ SITE_NAME }}{% endblock %}
+
 {% block content %}
-<div class="bg-white min-h-screen py-8">
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Header -->
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-800 mb-2">
-        {% if view.object %}Edit Your Gig{% else %}Post a New Gig{% endif %}
-      </h1>
-      <p class="text-gray-600">Fill out the details below to create your gig posting</p>
-    </div>
+<section class="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+  <div class="rounded-2xl border border-ink-200 bg-white p-6 shadow-sm sm:p-10">
+    <h1 class="text-2xl font-bold text-ink-900">
+      {% if object %}Edit your gig{% else %}Post a new gig{% endif %}
+    </h1>
+    <p class="mt-1 text-sm text-ink-500">
+      A clear title and detailed brief will get you better applications. Take your time on the description.
+    </p>
 
-    <!-- Form Card -->
-    <div class="bg-white rounded-xl shadow-lg p-8">
-      
-      <!-- Show Form Errors -->
-      {% if form.errors %}
-        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <h3 class="text-red-800 font-medium mb-2">Please fix the following errors:</h3>
-          {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-              <p class="text-red-600 text-sm">{{ field }}: {{ error }}</p>
-            {% endfor %}
-          {% endfor %}
-        </div>
+    <form method="post" novalidate class="mt-8 space-y-5">
+      {% csrf_token %}
+      {% include "partials/_form_field.html" with field=form.title %}
+      {% include "partials/_form_field.html" with field=form.description %}
+      <div class="grid gap-5 sm:grid-cols-2">
+        {% include "partials/_form_field.html" with field=form.budget %}
+        {% include "partials/_form_field.html" with field=form.deadline %}
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {% include "partials/_form_field.html" with field=form.category %}
+        {% include "partials/_form_field.html" with field=form.location %}
+      </div>
+      {% if form.non_field_errors %}
+        <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700">{{ form.non_field_errors }}</div>
       {% endif %}
-      
-      <form method="post">
-        {% csrf_token %}
-        
-        <!-- Title -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Gig Title <span class="text-red-500">*</span>
-          </label>
-          <input type="text" 
-                 name="title" 
-                 value="{{ form.title.value|default:'' }}"
-                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500" 
-                 placeholder="e.g., Design a Logo for My Startup"
-                 required>
-        </div>
-
-        <!-- Description -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Description <span class="text-red-500">*</span>
-          </label>
-          <textarea name="description" 
-                    rows="4"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
-                    placeholder="Describe what you need done..."
-                    required>{{ form.description.value|default:'' }}</textarea>
-        </div>
-
-        <!-- Budget and Category -->
-        <div class="grid md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Budget (GBP) <span class="text-red-500">*</span>
-            </label>
-            <input type="number" 
-                   name="budget" 
-                   value="{{ form.budget.value|default:'' }}"
-                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500" 
-                   placeholder="500"
-                   step="0.01"
-                   min="1"
-                   required>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Category <span class="text-red-500">*</span>
-            </label>
-            <select name="category" 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
-                    required>
-              <option value="">Select a category</option>
-              <option value="web_dev" {% if form.category.value == 'web_dev' %}selected{% endif %}>Web Development</option>
-              <option value="design" {% if form.category.value == 'design' %}selected{% endif %}>Design & Graphics</option>
-              <option value="writing" {% if form.category.value == 'writing' %}selected{% endif %}>Writing & Content</option>
-              <option value="marketing" {% if form.category.value == 'marketing' %}selected{% endif %}>Marketing & Social Media</option>
-              <option value="data_entry" {% if form.category.value == 'data_entry' %}selected{% endif %}>Data Entry</option>
-              <option value="admin" {% if form.category.value == 'admin' %}selected{% endif %}>Administrative</option>
-              <option value="tech_support" {% if form.category.value == 'tech_support' %}selected{% endif %}>Tech Support</option>
-              <option value="other" {% if form.category.value == 'other' %}selected{% endif %}>Other</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Location and Deadline -->
-        <div class="grid md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-            <input type="text" 
-                   name="location" 
-                   value="{{ form.location.value|default:'Remote' }}"
-                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500" 
-                   placeholder="Remote">
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Deadline (Optional)</label>
-            <input type="date" 
-                   name="deadline" 
-                   value="{{ form.deadline.value|default:'' }}"
-                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
-          </div>
-        </div>
-
-        <!-- Active Status (for editing only) -->
-        {% if view.object %}
-          <div class="mb-6">
-            <label class="flex items-center">
-              <input type="checkbox" 
-                     name="is_active" 
-                     class="w-4 h-4 text-brand-500 border-gray-300 rounded"
-                     {% if form.is_active.value %}checked{% endif %}>
-              <span class="ml-2 text-sm text-gray-700">Keep this gig active and visible</span>
-            </label>
-          </div>
-        {% endif %}
-
-        <!-- Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
-          <a href="{% url 'gigs:gig_list' %}" 
-             class="btn btn--outline flex-1 text-center">
-            Cancel
-          </a>
-          <button type="submit" 
-                  class="btn btn--primary flex-1">
-            {% if view.object %}Update Gig{% else %}Post Gig{% endif %}
-          </button>
-        </div>
-
-      </form>
-    </div>
+      <div class="flex flex-wrap items-center justify-end gap-3 border-t border-ink-100 pt-6">
+        <a href="{% if object %}{{ object.get_absolute_url }}{% else %}{% url 'gigs:gig_list' %}{% endif %}"
+           class="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 ring-1 ring-ink-200 hover:bg-ink-50">
+          Cancel
+        </a>
+        <button type="submit" class="rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-700">
+          {% if object %}Save changes{% else %}Publish gig{% endif %}
+        </button>
+      </div>
+    </form>
   </div>
-</div>
+</section>
 {% endblock %}

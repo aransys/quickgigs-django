@@ -1,63 +1,75 @@
+"""Models for the accounts app."""
+
+from __future__ import annotations
+
+from decimal import Decimal
+
+from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 class UserProfile(models.Model):
-    """Simple user profile"""
-    
-    USER_TYPE_CHOICES = [
-        ('employer', 'Employer'),
-        ('freelancer', 'Freelancer'),
-    ]
-    
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES, default='freelancer')
-    bio = models.TextField(blank=True, help_text="Tell us about yourself")
+    """Extra profile fields hanging off the built-in User."""
+
+    class Role(models.TextChoices):
+        EMPLOYER = "employer", "Employer"
+        FREELANCER = "freelancer", "Freelancer"
+        UNSET = "unset", "Not chosen yet"
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="userprofile",
+    )
+    user_type = models.CharField(
+        max_length=20, choices=Role.choices, default=Role.UNSET
+    )
+    bio = models.TextField(blank=True, help_text="A short introduction.")
     skills = models.TextField(
-        blank=True, 
-        help_text="Your skills (e.g., Python, Django, JavaScript)"
+        blank=True,
+        help_text="Comma-separated, e.g. Python, Django, JavaScript",
     )
     hourly_rate = models.DecimalField(
-        max_digits=6, 
-        decimal_places=2, 
-        null=True, 
+        max_digits=6,
+        decimal_places=2,
+        null=True,
         blank=True,
-        help_text="Your hourly rate in GBP"
+        validators=[MinValueValidator(Decimal("0.01"))],
+        help_text="Hourly rate in GBP.",
     )
     company_name = models.CharField(max_length=100, blank=True)
-    phone = models.CharField(max_length=20, blank=True)
+    phone = models.CharField(max_length=32, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
-        verbose_name = "User Profile"
-        verbose_name_plural = "User Profiles"
-    
-    def __str__(self):
-        return f"{self.user.username} - {self.get_user_type_display()}"
-    
+        verbose_name = "User profile"
+        verbose_name_plural = "User profiles"
+
+    def __str__(self) -> str:
+        return f"{self.user.username} ({self.get_user_type_display()})"
+
+    # -- Convenience accessors ---------------------------------------------
+
     @property
-    def is_employer(self):
-        return self.user_type == 'employer'
-    
+    def is_employer(self) -> bool:
+        return self.user_type == self.Role.EMPLOYER
+
     @property
-    def is_freelancer(self):
-        return self.user_type == 'freelancer'
-    
+    def is_freelancer(self) -> bool:
+        return self.user_type == self.Role.FREELANCER
+
     @property
-    def display_name(self):
-        if self.user.first_name and self.user.last_name:
-            return f"{self.user.first_name} {self.user.last_name}"
+    def has_chosen_role(self) -> bool:
+        return self.user_type in (self.Role.EMPLOYER, self.Role.FREELANCER)
+
+    @property
+    def display_name(self) -> str:
+        if self.user.first_name or self.user.last_name:
+            return f"{self.user.first_name} {self.user.last_name}".strip()
         return self.user.username
 
-
-# Auto-create profile when user registers
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    if hasattr(instance, 'userprofile'):
-        instance.userprofile.save()
+    @property
+    def skill_list(self) -> list[str]:
+        return [s.strip() for s in self.skills.split(",") if s.strip()]

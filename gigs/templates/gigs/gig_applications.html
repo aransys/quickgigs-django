@@ -1,200 +1,59 @@
-<!-- -->
-{% extends 'gigs/base.html' %}
-<!-- -->
-{% load currency_filters %}
-<!-- -->
-{% block title %}Applications for {{ gig.title }} - QuickGigs{% endblock %}
-<!-- -->
-{% block content %}
-<div class="max-w-6xl mx-auto px-4 py-8">
-  <!-- Back Button -->
-  <a
-    href="{% url 'gigs:gig_detail' gig.pk %}"
-    class="inline-flex items-center text-brand-500 hover:text-brand-600 mb-6"
-  >
-    <i class="fas fa-arrow-left mr-2"></i>Back to Gig
-  </a>
+{% extends "base.html" %}
 
-  <!-- Header -->
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">
-      Applications for "{{ gig.title }}"
-    </h1>
-    <p class="text-gray-600">
-      {{ applications.count }} application{{ applications.count|pluralize }}
-      received
-    </p>
+{% block title %}Applications · {{ gig.title }} · {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+  <div class="text-sm text-ink-500">
+    <a href="{{ gig.get_absolute_url }}" class="hover:text-brand-700">← Back to “{{ gig.title }}”</a>
+  </div>
+
+  <div class="mt-4">
+    <h1 class="text-3xl font-bold text-ink-900">Applications for “{{ gig.title }}”</h1>
+    <p class="mt-1 text-sm text-ink-500">{{ applications|length }} application{{ applications|length|pluralize }} received.</p>
   </div>
 
   {% if applications %}
-  <div class="space-y-6">
-    {% for application in applications %}
-    <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between">
-        <!-- Applicant Info -->
-        <div class="flex-1">
-          <div class="flex items-start justify-between mb-4">
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800">
-                {{ application.applicant.get_full_name|default:application.applicant.username }}
-              </h3>
-              <p class="text-gray-600 text-sm">
-                @{{ application.applicant.username }}
-              </p>
+    <ul class="mt-8 space-y-3">
+      {% for application in applications %}
+        <li class="overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm">
+          <div class="flex flex-wrap items-start gap-4 p-6">
+            <span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-brand-500 text-sm font-bold text-white">
+              {{ application.applicant.username|first|upper }}
+            </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <p class="font-semibold text-ink-900">{{ application.applicant.username }}</p>
+                {% with s=application.status %}
+                <span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold
+                  {% if s == 'pending' %}bg-amber-100 text-amber-800
+                  {% elif s == 'accepted' %}bg-emerald-100 text-emerald-800
+                  {% elif s == 'rejected' %}bg-red-100 text-red-800
+                  {% elif s == 'withdrawn' %}bg-ink-200 text-ink-700
+                  {% else %}bg-sky-100 text-sky-800{% endif %}">
+                  {{ application.get_status_display }}
+                </span>
+                {% endwith %}
+                {% if application.proposed_rate %}
+                  <span class="text-sm font-semibold text-ink-700">£{{ application.proposed_rate|floatformat:2 }}</span>
+                {% endif %}
+              </div>
+              <p class="mt-2 line-clamp-3 text-sm text-ink-600">{{ application.cover_letter|linebreaksbr }}</p>
+              <p class="mt-2 text-xs text-ink-400">applied {{ application.created_at|timesince }} ago</p>
             </div>
-
-            <!-- Status Badge -->
-            <div class="ml-4">
-              {% if application.status == 'pending' %}
-              <span
-                class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-clock mr-1"></i>Pending
-              </span>
-              {% elif application.status == 'reviewed' %}
-              <span
-                class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-eye mr-1"></i>Reviewed
-              </span>
-              {% elif application.status == 'accepted' %}
-              <span
-                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-check mr-1"></i>Accepted
-              </span>
-              {% elif application.status == 'rejected' %}
-              <span
-                class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-times mr-1"></i>Rejected
-              </span>
-              {% elif application.status == 'withdrawn' %}
-              <span
-                class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-undo mr-1"></i>Withdrawn
-              </span>
-              {% endif %}
+            <div class="flex flex-col gap-2">
+              <a href="{% url 'gigs:application_detail' application.pk %}" class="rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-ink-700 ring-1 ring-ink-200 hover:bg-ink-50">View</a>
+              <a href="{% url 'gigs:update_application_status' application.pk %}" class="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-700">Update status</a>
             </div>
           </div>
-
-          <!-- Application Details -->
-          <div class="grid md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <p class="text-sm text-gray-600">Applied</p>
-              <p class="font-medium">
-                {{ application.created_at|date:"M d, Y" }} ({{ application.created_at|timesince }} ago)
-              </p>
-            </div>
-            {% if application.proposed_rate %}
-            <div>
-              <p class="text-sm text-gray-600">Proposed Rate</p>
-              <p class="font-medium text-green-600">
-                {{ application.proposed_rate|currency }}
-              </p>
-            </div>
-            {% endif %}
-          </div>
-
-          <!-- Cover Letter Preview -->
-          <div class="bg-gray-50 rounded-lg p-4 mb-4">
-            <h4 class="font-medium text-gray-800 mb-2">Cover Letter</h4>
-            <p class="text-gray-700 text-sm leading-relaxed">
-              {{ application.cover_letter|truncatewords:50|linebreaks }}
-            </p>
-            {% if application.cover_letter|wordcount > 50 %}
-            <a
-              href="{% url 'gigs:application_detail' application.pk %}"
-              class="text-brand-500 hover:text-brand-600 text-sm font-medium mt-2 inline-block"
-            >
-              Read full cover letter →
-            </a>
-            {% endif %}
-          </div>
-
-          <!-- Employer Notes -->
-          {% if application.employer_notes %}
-          <div class="bg-purple-50 rounded-lg p-4 mb-4">
-            <h4 class="font-medium text-purple-800 mb-2">Your Notes</h4>
-            <p class="text-purple-700 text-sm">
-              {{ application.employer_notes|linebreaks }}
-            </p>
-          </div>
-          {% endif %}
-        </div>
-
-        <!-- Actions -->
-        <div class="lg:ml-6 mt-4 lg:mt-0 flex flex-col gap-2 lg:min-w-[200px]">
-          <a
-            href="{% url 'gigs:application_detail' application.pk %}"
-            class="btn btn--primary"
-          >
-            <i class="fas fa-eye mr-2"></i>View Full Application
-          </a>
-
-          {% if application.status == 'pending' or application.status == 'reviewed' %}
-          <a
-            href="{% url 'gigs:update_application_status' application.pk %}"
-            class="btn btn--warning"
-          >
-            <i class="fas fa-edit mr-2"></i>Update Status
-          </a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-
-  <!-- Summary Stats -->
-  <div class="mt-8 bg-gray-50 rounded-xl p-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4">
-      Application Summary
-    </h3>
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {% regroup applications by status as status_groups %}
-      {% for status_group in status_groups %}
-      <div class="text-center">
-        <div class="text-2xl font-bold text-gray-800">
-          {{ status_group.list|length }}
-        </div>
-        <div class="text-sm text-gray-600 capitalize">
-          {{ status_group.grouper|title }}
-        </div>
-      </div>
+        </li>
       {% endfor %}
-    </div>
-  </div>
-
+    </ul>
   {% else %}
-  <!-- Empty State -->
-  <div class="text-center py-12">
-    <div
-      class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
-    >
-      <i class="fas fa-inbox text-gray-400 text-3xl"></i>
+    <div class="mt-10 rounded-2xl border border-dashed border-ink-300 bg-white p-12 text-center">
+      <h3 class="text-lg font-semibold text-ink-900">No applications yet.</h3>
+      <p class="mt-1 text-sm text-ink-500">When freelancers apply, they'll appear here.</p>
     </div>
-    <h2 class="text-2xl font-bold text-gray-600 mb-4">No Applications Yet</h2>
-    <p class="text-gray-500 mb-8 max-w-md mx-auto">
-      Your gig hasn't received any applications yet. Make sure your gig is
-      active and consider featuring it for more visibility.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="{% url 'gigs:gig_update' gig.pk %}" class="btn btn--primary">
-        <i class="fas fa-edit mr-2"></i>Edit Gig
-      </a>
-      {% if not gig.is_featured %}
-      <a
-        href="{% url 'payments:feature_gig_checkout' gig.pk %}"
-        class="btn btn--warning"
-      >
-        <i class="fas fa-star mr-2"></i>Feature This Gig
-      </a>
-      {% endif %}
-    </div>
-  </div>
   {% endif %}
-</div>
+</section>
 {% endblock %}

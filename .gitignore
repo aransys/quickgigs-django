@@ -18,6 +18,13 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
 
 # Django
 *.log
@@ -25,19 +32,33 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
+staticfiles/
 
-# Virtual Environment
+# Virtual Environments
+.venv/
 venv/
+venv_local/
 ENV/
+env/
 
-# IDE files
+# Secrets — NEVER commit
+.env
+.env.local
+.env.production
+!.env.example
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
 
-# Secret keys
-.env.env
-
-*.pyc.DS_Store
+# OS
+.DS_Store
 **/.DS_Store
+Thumbs.db
+
+# Node (Tailwind build)
+node_modules/
+package-lock.json

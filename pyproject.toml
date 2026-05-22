@@ -1,0 +1,74 @@
+[project]
+name = "quickgigs"
+version = "2.0.0"
+description = "A modern Django freelance gig marketplace."
+requires-python = ">=3.11"
+
+# Runtime deps live in requirements.txt so pip-based environments and
+# Docker stay simple. This file is for tool configuration only.
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [
+    "**/migrations/**",
+    "staticfiles/**",
+    "venv*/**",
+    ".venv/**",
+    # Legacy files scheduled for removal by scripts/cleanup-legacy.sh
+    "docs/**",
+    "quickgigs_project/test_settings.py",
+    "core/templatetags/**",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "DJ",  # flake8-django
+    "C4",  # comprehensions
+    "SIM", # simplify
+]
+ignore = [
+    "E501",   # line too long — handled by formatter
+    "DJ001",  # null-on-charfield: opinionated, we override per-model
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/test_*.py" = ["B011", "SIM117"]
+"**/settings.py" = ["F405", "F403"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "quickgigs_project.settings"
+python_files = ["test_*.py", "tests.py"]
+addopts = "-ra --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning:django.*",
+]
+
+[tool.coverage.run]
+source = ["accounts", "core", "gigs", "payments", "quickgigs_project"]
+omit = [
+    "*/migrations/*",
+    "*/test_*.py",
+    "manage.py",
+    "*/wsgi.py",
+    "*/asgi.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

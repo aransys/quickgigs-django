@@ -1,33 +1,22 @@
-{% extends 'gigs/base.html' %}
-<!-- -->
-{% block title %}Delete Gig - QuickGigs{% endblock %}
-<!-- -->
-{% block content %}
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          <h3>Delete Gig</h3>
-          <p>
-            Are you sure you want to delete "<strong>{{ gig.title }}</strong>"?
-          </p>
-          <p class="text-muted">This action cannot be undone.</p>
+{% extends "base.html" %}
 
-          <form method="post">
-            {% csrf_token %}
-            <div class="btn-group">
-              <button type="submit" class="btn btn-danger">Yes, Delete</button>
-              <a
-                href="{% url 'gigs:gig_detail' gig.pk %}"
-                class="btn btn-secondary"
-                >Cancel</a
-              >
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+{% block title %}Delete gig · {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+  <div class="rounded-2xl border border-red-200 bg-red-50 p-6 sm:p-10">
+    <h1 class="text-2xl font-bold text-red-900">Delete this gig?</h1>
+    <p class="mt-2 text-sm text-red-800">
+      You're about to permanently delete <strong>“{{ object.title }}”</strong> and all of its
+      {{ object.applications.count }} application{{ object.applications.count|pluralize }}.
+      This can't be undone.
+    </p>
+
+    <form method="post" class="mt-8 flex flex-wrap items-center justify-end gap-3">
+      {% csrf_token %}
+      <a href="{{ object.get_absolute_url }}" class="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 ring-1 ring-ink-200 hover:bg-ink-50">Cancel</a>
+      <button type="submit" class="rounded-lg bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-700">Yes, delete it</button>
+    </form>
   </div>
-</div>
+</section>
 {% endblock %}
