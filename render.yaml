@@ -16,11 +16,17 @@ services:
     plan: free
     region: frankfurt   # change if you prefer oregon, ohio, singapore, etc.
     branch: main
+    # Build: install deps and bake static assets into the image.
+    # Migrations are deliberately NOT here — they need the DB which isn't
+    # always reachable from the build container on Render's free tier.
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-      python manage.py migrate --noinput
-    startCommand: gunicorn quickgigs_project.wsgi:application
+    # Start: migrate first (idempotent, fast), then serve.
+    # $PORT is injected by Render at runtime.
+    startCommand: |
+      python manage.py migrate --noinput && \
+      gunicorn quickgigs_project.wsgi:application --bind 0.0.0.0:$PORT
     healthCheckPath: /
     envVars:
       - key: PYTHON_VERSION
