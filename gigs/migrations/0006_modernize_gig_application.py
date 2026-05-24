@@ -72,6 +72,15 @@ class Migration(migrations.Migration):
         # Defensive cleanup — see module docstring. No-op on a clean DB
         # and a no-op on sqlite.
         migrations.RunPython(drop_leftover_slug_indexes, noop),
+        # Split the slug transition into TWO AlterField steps so we never
+        # change null AND unique in a single Postgres ALTER, which has
+        # been observed to attempt to create the auto-generated `_like`
+        # operator-class index twice in the same statement.
+        migrations.AlterField(
+            model_name="gig",
+            name="slug",
+            field=models.SlugField(blank=True, max_length=240, unique=False),
+        ),
         migrations.AlterField(
             model_name="gig",
             name="slug",
