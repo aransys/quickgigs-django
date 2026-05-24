@@ -4,6 +4,11 @@
 * Backfill slugs for existing rows.
 * Replace Application.unique_together with a named UniqueConstraint.
 * Add a few helpful indexes.
+
+This migration is idempotent on Postgres — if a previous attempt
+created the slug's auto-generated ``_like`` operator-class index and
+then failed, the RunSQL guard below drops it before AlterField tries
+to re-create it.
 """
 
 from __future__ import annotations
@@ -34,6 +39,19 @@ def noop(apps, schema_editor):
     """Reverse migration: leave slugs in place — they're harmless."""
 
 
+def drop_leftover_slug_indexes(apps, schema_editor):
+    """Drop slug indexes left behind by a previously failed migration run.
+
+    Only runs on PostgreSQL — sqlite (used by the test suite) starts every
+    test with a fresh in-memory database, so there's nothing to clean up.
+    """
+    if schema_editor.connection.vendor != "postgresql":
+        return
+    with schema_editor.connection.cursor() as cursor:
+        cursor.execute("DROP INDEX IF EXISTS gigs_gig_slug_1caada1b_like")
+        cursor.execute("DROP INDEX IF EXISTS gigs_gig_slug_idx")
+
+
 class Migration(migrations.Migration):
     dependencies = [
         ("gigs", "0005_gig_gigs_gig_employe_460f0b_idx_and_more"),
@@ -51,14 +69,13 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.RunPython(backfill_slugs, noop),
+        # Defensive cleanup — see module docstring. No-op on a clean DB
+        # and a no-op on sqlite.
+        migrations.RunPython(drop_leftover_slug_indexes, noop),
         migrations.AlterField(
             model_name="gig",
             name="slug",
             field=models.SlugField(blank=True, max_length=240, unique=True),
-        ),
-        migrations.AddIndex(
-            model_name="gig",
-            index=models.Index(fields=["slug"], name="gigs_gig_slug_idx"),
         ),
         # Replace unique_together with a named UniqueConstraint.
         migrations.AlterUniqueTogether(

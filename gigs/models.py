@@ -59,7 +59,8 @@ class Gig(models.Model):
             models.Index(fields=["employer", "-created_at"]),
             models.Index(fields=["is_active", "is_featured"]),
             models.Index(fields=["category"]),
-            models.Index(fields=["slug"]),
+            # No explicit index on slug — the unique=True constraint above
+            # already creates a B-tree index for lookups.
         ]
 
     def __str__(self) -> str:
