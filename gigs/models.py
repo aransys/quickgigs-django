@@ -9,7 +9,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.text import slugify
 
 
 class Gig(models.Model):
@@ -26,7 +25,6 @@ class Gig(models.Model):
         OTHER = "other", "Other"
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=240, unique=True, blank=True)
     description = models.TextField()
     employer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -59,29 +57,13 @@ class Gig(models.Model):
             models.Index(fields=["employer", "-created_at"]),
             models.Index(fields=["is_active", "is_featured"]),
             models.Index(fields=["category"]),
-            # No explicit index on slug — the unique=True constraint above
-            # already creates a B-tree index for lookups.
         ]
 
     def __str__(self) -> str:
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self._generate_unique_slug()
-        super().save(*args, **kwargs)
-
     def get_absolute_url(self) -> str:
         return reverse("gigs:gig_detail", kwargs={"pk": self.pk})
-
-    def _generate_unique_slug(self) -> str:
-        base = slugify(self.title)[:200] or "gig"
-        slug = base
-        n = 2
-        while Gig.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-            slug = f"{base}-{n}"
-            n += 1
-        return slug
 
     @property
     def is_available(self) -> bool:
