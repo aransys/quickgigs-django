@@ -22,9 +22,7 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE,
         related_name="userprofile",
     )
-    user_type = models.CharField(
-        max_length=20, choices=Role.choices, default=Role.UNSET
-    )
+    user_type = models.CharField(max_length=20, choices=Role.choices, default=Role.UNSET)
     bio = models.TextField(blank=True, help_text="A short introduction.")
     skills = models.TextField(
         blank=True,

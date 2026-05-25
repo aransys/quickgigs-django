@@ -12,7 +12,6 @@ urlpatterns = [
     path("post/", views.GigCreateView.as_view(), name="gig_create"),
     path("my-gigs/", views.my_gigs, name="my_gigs"),
     path("my-applications/", views.my_applications, name="my_applications"),
-
     # Single gig
     path("<int:pk>/", views.GigDetailView.as_view(), name="gig_detail"),
     path("<int:pk>/edit/", views.GigUpdateView.as_view(), name="gig_update"),
@@ -20,7 +19,6 @@ urlpatterns = [
     path("<int:pk>/toggle/", views.toggle_gig_status, name="toggle_gig_status"),
     path("<int:pk>/apply/", views.apply_to_gig, name="apply_to_gig"),
     path("<int:pk>/applications/", views.gig_applications, name="gig_applications"),
-
     # Single application
     path(
         "application/<int:pk>/",

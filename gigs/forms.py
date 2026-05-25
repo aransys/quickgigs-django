@@ -35,8 +35,7 @@ class GigForm(forms.ModelForm):
                     "class": INPUT_CLASSES,
                     "rows": 6,
                     "placeholder": (
-                        "Describe the project, requirements, "
-                        "and what success looks like."
+                        "Describe the project, requirements, " "and what success looks like."
                     ),
                 }
             ),
@@ -56,9 +55,7 @@ class GigForm(forms.ModelForm):
                 }
             ),
             "category": forms.Select(attrs={"class": INPUT_CLASSES}),
-            "deadline": forms.DateInput(
-                attrs={"class": INPUT_CLASSES, "type": "date"}
-            ),
+            "deadline": forms.DateInput(attrs={"class": INPUT_CLASSES, "type": "date"}),
         }
 
     def clean_budget(self):

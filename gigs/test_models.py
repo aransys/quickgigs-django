@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 import datetime as dt
-from decimal import Decimal
 
 import pytest
 from django.db import IntegrityError
 from django.utils import timezone
 
-from gigs.models import Application, Gig
+from gigs.models import Application
 
 
 @pytest.mark.django_db
@@ -57,9 +56,13 @@ class TestApplicationModel:
 
     def test_unique_constraint_per_gig_per_applicant(self, gig, freelancer):
         Application.objects.create(
-            gig=gig, applicant=freelancer, cover_letter="x" * 60,
+            gig=gig,
+            applicant=freelancer,
+            cover_letter="x" * 60,
         )
         with pytest.raises(IntegrityError):
             Application.objects.create(
-                gig=gig, applicant=freelancer, cover_letter="y" * 60,
+                gig=gig,
+                applicant=freelancer,
+                cover_letter="y" * 60,
             )

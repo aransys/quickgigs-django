@@ -15,9 +15,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(
         max_length=254,
         required=True,
-        widget=forms.EmailInput(
-            attrs={"class": INPUT_CLASSES, "placeholder": "you@example.com"}
-        ),
+        widget=forms.EmailInput(attrs={"class": INPUT_CLASSES, "placeholder": "you@example.com"}),
     )
 
     class Meta:
@@ -41,9 +39,7 @@ class SignUpForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data["email"].strip().lower()
         if User.objects.filter(email__iexact=email).exists():
-            raise forms.ValidationError(
-                "An account with this email already exists."
-            )
+            raise forms.ValidationError("An account with this email already exists.")
         return email
 
 

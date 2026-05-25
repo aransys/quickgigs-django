@@ -26,9 +26,6 @@ class Migration(migrations.Migration):
             new_name='gigs_applic_gig_id_067a79_idx',
             old_name='apps_appl_gig_status_idx',
         ),
-        # Slug index rename removed — the underlying slug index was
-        # dropped from 0006 (the unique=True constraint already provides
-        # a B-tree index for lookups).
         migrations.AlterField(
             model_name='application',
             name='cover_letter',

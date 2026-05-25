@@ -32,9 +32,7 @@ class TestGigList:
         assert b"landing page" not in resp.content.lower()
 
     def test_category_filter(self, client, gig):
-        resp = client.get(
-            reverse("gigs:gig_list"), {"category": Gig.Category.DESIGN}
-        )
+        resp = client.get(reverse("gigs:gig_list"), {"category": Gig.Category.DESIGN})
         assert resp.status_code == 200
         assert gig.title.encode() not in resp.content
 
@@ -123,16 +121,12 @@ class TestApplyFlow:
 
     def test_double_apply_redirects_to_existing(self, client, application):
         client.force_login(application.applicant)
-        resp = client.get(
-            reverse("gigs:apply_to_gig", kwargs={"pk": application.gig.pk})
-        )
+        resp = client.get(reverse("gigs:apply_to_gig", kwargs={"pk": application.gig.pk}))
         assert resp.status_code == 302
 
     def test_withdraw_only_by_applicant(self, client, application, employer):
         client.force_login(employer)
-        resp = client.post(
-            reverse("gigs:withdraw_application", kwargs={"pk": application.pk})
-        )
+        resp = client.post(reverse("gigs:withdraw_application", kwargs={"pk": application.pk}))
         assert resp.status_code == 403
 
 
@@ -140,21 +134,15 @@ class TestApplyFlow:
 class TestApplicationDetail:
     def test_unrelated_user_404s(self, client, application, user):
         client.force_login(user)
-        resp = client.get(
-            reverse("gigs:application_detail", kwargs={"pk": application.pk})
-        )
+        resp = client.get(reverse("gigs:application_detail", kwargs={"pk": application.pk}))
         assert resp.status_code == 404
 
     def test_applicant_can_view(self, client, application):
         client.force_login(application.applicant)
-        resp = client.get(
-            reverse("gigs:application_detail", kwargs={"pk": application.pk})
-        )
+        resp = client.get(reverse("gigs:application_detail", kwargs={"pk": application.pk}))
         assert resp.status_code == 200
 
     def test_employer_can_view(self, client, application):
         client.force_login(application.gig.employer)
-        resp = client.get(
-            reverse("gigs:application_detail", kwargs={"pk": application.pk})
-        )
+        resp = client.get(reverse("gigs:application_detail", kwargs={"pk": application.pk}))
         assert resp.status_code == 200

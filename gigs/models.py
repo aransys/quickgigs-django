@@ -73,11 +73,7 @@ class Gig(models.Model):
 
     @property
     def is_overdue(self) -> bool:
-        return bool(
-            self.is_active
-            and self.deadline
-            and self.deadline < timezone.now().date()
-        )
+        return bool(self.is_active and self.deadline and self.deadline < timezone.now().date())
 
     @property
     def days_remaining(self) -> int | None:
@@ -97,9 +93,7 @@ class Application(models.Model):
         REJECTED = "rejected", "Rejected"
         WITHDRAWN = "withdrawn", "Withdrawn"
 
-    gig = models.ForeignKey(
-        Gig, on_delete=models.CASCADE, related_name="applications"
-    )
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name="applications")
     applicant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -116,9 +110,7 @@ class Application(models.Model):
         validators=[MinValueValidator(Decimal("0.01"))],
         help_text="Your proposed rate for this project (optional).",
     )
-    status = models.CharField(
-        max_length=20, choices=Status.choices, default=Status.PENDING
-    )
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     employer_notes = models.TextField(
         blank=True,
         help_text="Private notes visible only to the employer.",

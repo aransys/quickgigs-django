@@ -15,10 +15,6 @@ extend-exclude = [
     "staticfiles/**",
     "venv*/**",
     ".venv/**",
-    # Legacy files scheduled for removal by scripts/cleanup-legacy.sh
-    "docs/**",
-    "quickgigs_project/test_settings.py",
-    "core/templatetags/**",
 ]
 
 [tool.ruff.lint]

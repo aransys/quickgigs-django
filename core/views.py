@@ -16,9 +16,7 @@ class HomeView(TemplateView):
         ctx = super().get_context_data(**kwargs)
 
         active = Gig.objects.filter(is_active=True).select_related("employer")
-        ctx["featured_gigs"] = list(
-            active.filter(is_featured=True).order_by("-created_at")[:3]
-        )
+        ctx["featured_gigs"] = list(active.filter(is_featured=True).order_by("-created_at")[:3])
         ctx["recent_gigs"] = list(active.order_by("-created_at")[:6])
 
         profile_counts = UserProfile.objects.aggregate(

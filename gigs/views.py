@@ -250,9 +250,7 @@ def gig_applications(request, pk: int):
 
 @login_required
 def update_application_status(request, pk: int):
-    application = get_object_or_404(
-        Application.objects.select_related("gig"), pk=pk
-    )
+    application = get_object_or_404(Application.objects.select_related("gig"), pk=pk)
     if request.user != application.gig.employer:
         return HttpResponseForbidden(
             "You can only manage applications for your own gigs.",
@@ -289,6 +287,4 @@ def withdraw_application(request, pk: int):
         messages.success(request, "Application withdrawn.")
         return redirect("gigs:my_applications")
 
-    return render(
-        request, "gigs/withdraw_application.html", {"application": application}
-    )
+    return render(request, "gigs/withdraw_application.html", {"application": application})

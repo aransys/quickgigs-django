@@ -128,9 +128,7 @@ def payment_cancel(request, gig_id: int):
 @login_required
 def payment_history(request):
     payments = (
-        Payment.objects.filter(user=request.user)
-        .select_related("gig")
-        .order_by("-created_at")
+        Payment.objects.filter(user=request.user).select_related("gig").order_by("-created_at")
     )
     return render(request, "payments/history.html", {"payments": payments})
 
@@ -188,9 +186,7 @@ def _handle_checkout_completed(event: dict) -> None:
         if payment.status != Payment.Status.COMPLETED:
             payment.status = Payment.Status.COMPLETED
             payment.stripe_payment_intent = payment_intent_id
-            payment.save(
-                update_fields=["status", "stripe_payment_intent", "updated_at"]
-            )
+            payment.save(update_fields=["status", "stripe_payment_intent", "updated_at"])
 
             if (
                 payment.payment_type == Payment.Type.FEATURED_GIG

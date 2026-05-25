@@ -10,7 +10,6 @@ from django.contrib.auth import get_user_model
 from accounts.models import UserProfile
 from gigs.models import Application, Gig
 
-
 User = get_user_model()
 
 

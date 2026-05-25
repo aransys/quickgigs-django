@@ -1,6 +1,12 @@
+# Deprecated. No templates reference this any more — all currency
+# rendering uses the inline ``£{{ value|floatformat:0 }}`` idiom
+# directly. Safe to delete this file (and the parent ``templatetags/``
+# directory if it ends up empty afterwards).
+
 from django import template
 
 register = template.Library()
+
 
 @register.filter
 def currency(value):
@@ -10,7 +16,8 @@ def currency(value):
     except (ValueError, TypeError):
         return value
 
-@register.filter  
+
+@register.filter
 def currency_simple(value):
     """Simple currency format without decimals if whole number"""
     try:
@@ -19,4 +26,4 @@ def currency_simple(value):
         else:
             return f"£{float(value):,.2f}"
     except (ValueError, TypeError):
-        return value 
+        return value

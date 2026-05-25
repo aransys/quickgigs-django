@@ -70,9 +70,7 @@ class Payment(models.Model):
 class PaymentEvent(models.Model):
     """Audit trail of Stripe events processed against a payment."""
 
-    payment = models.ForeignKey(
-        Payment, on_delete=models.CASCADE, related_name="events"
-    )
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name="events")
     event_type = models.CharField(max_length=80)
     stripe_event_id = models.CharField(max_length=255, unique=True)
     raw = models.JSONField(default=dict)

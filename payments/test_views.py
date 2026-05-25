@@ -24,12 +24,15 @@ class TestPaymentHistory:
 
     def test_only_shows_users_own_payments(self, client, employer, freelancer, gig):
         Payment.objects.create(
-            user=employer, gig=gig, amount=Decimal("9.99"),
+            user=employer,
+            gig=gig,
+            amount=Decimal("9.99"),
             payment_type=Payment.Type.FEATURED_GIG,
             description="My payment",
         )
         Payment.objects.create(
-            user=freelancer, amount=Decimal("4.99"),
+            user=freelancer,
+            amount=Decimal("4.99"),
             payment_type=Payment.Type.APPLICATION_BOOST,
             description="Other person's payment",
         )
@@ -44,9 +47,7 @@ class TestPaymentHistory:
 class TestFeatureGigCheckout:
     def test_only_owner_can_checkout(self, client, gig, freelancer):
         client.force_login(freelancer)
-        resp = client.get(
-            reverse("payments:feature_gig_checkout", kwargs={"gig_id": gig.pk})
-        )
+        resp = client.get(reverse("payments:feature_gig_checkout", kwargs={"gig_id": gig.pk}))
         # get_object_or_404 with employer filter → 404
         assert resp.status_code == 404
 
@@ -56,7 +57,8 @@ class TestStripeWebhook:
     def test_no_secret_returns_500(self, client, settings):
         settings.STRIPE_WEBHOOK_SECRET = ""
         resp = client.post(
-            reverse("payments:stripe_webhook"), data=b"{}",
+            reverse("payments:stripe_webhook"),
+            data=b"{}",
             content_type="application/json",
         )
         assert resp.status_code == 500
@@ -69,7 +71,8 @@ class TestStripeWebhook:
         mock_construct.side_effect = SignatureVerificationError("bad", "sig")
         resp = client.post(
             reverse("payments:stripe_webhook"),
-            data=b"{}", content_type="application/json",
+            data=b"{}",
+            content_type="application/json",
             HTTP_STRIPE_SIGNATURE="sig",
         )
         assert resp.status_code == 400
@@ -80,7 +83,9 @@ class TestStripeWebhook:
     ):
         settings.STRIPE_WEBHOOK_SECRET = "whsec_test"
         payment = Payment.objects.create(
-            user=employer, gig=gig, amount=Decimal("9.99"),
+            user=employer,
+            gig=gig,
+            amount=Decimal("9.99"),
             payment_type=Payment.Type.FEATURED_GIG,
             stripe_session_id="cs_test_123",
         )
@@ -91,7 +96,8 @@ class TestStripeWebhook:
         }
         resp = client.post(
             reverse("payments:stripe_webhook"),
-            data=b"{}", content_type="application/json",
+            data=b"{}",
+            content_type="application/json",
             HTTP_STRIPE_SIGNATURE="sig",
         )
         assert resp.status_code == 200
@@ -103,12 +109,12 @@ class TestStripeWebhook:
         assert PaymentEvent.objects.filter(stripe_event_id="evt_test_1").count() == 1
 
     @patch("stripe.Webhook.construct_event")
-    def test_duplicate_event_is_idempotent(
-        self, mock_construct, client, settings, employer, gig
-    ):
+    def test_duplicate_event_is_idempotent(self, mock_construct, client, settings, employer, gig):
         settings.STRIPE_WEBHOOK_SECRET = "whsec_test"
         payment = Payment.objects.create(
-            user=employer, gig=gig, amount=Decimal("9.99"),
+            user=employer,
+            gig=gig,
+            amount=Decimal("9.99"),
             payment_type=Payment.Type.FEATURED_GIG,
             stripe_session_id="cs_test_999",
         )
@@ -125,7 +131,8 @@ class TestStripeWebhook:
         }
         resp = client.post(
             reverse("payments:stripe_webhook"),
-            data=b"{}", content_type="application/json",
+            data=b"{}",
+            content_type="application/json",
             HTTP_STRIPE_SIGNATURE="sig",
         )
         assert resp.status_code == 200
