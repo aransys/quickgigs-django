@@ -18,7 +18,7 @@ class GigAdmin(admin.ModelAdmin):
     )
     list_filter = ("category", "is_active", "is_featured", "created_at")
     search_fields = ("title", "description", "employer__username")
-    readonly_fields = ("created_at", "updated_at", "slug")
+    readonly_fields = ("created_at", "updated_at")
     list_editable = ("is_active", "is_featured")
     ordering = ("-created_at",)
     autocomplete_fields = ("employer",)
